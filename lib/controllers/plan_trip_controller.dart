@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
@@ -9,71 +9,71 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/models/base_route.dart';
-import 'package:winbrother_hr_app/models/daytrip_advance_expense_category.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/plan_trip_product.dart';
-import 'package:winbrother_hr_app/models/plantrip_fuel_consumption.dart';
-import 'package:winbrother_hr_app/models/plantrip_product_expense_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill_expense_line.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/pages/plantrip_waybill_details.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
+import '../models/base_route.dart';
+import '../models/daytrip_advance_expense_category.dart';
+import '../models/daytrip_expense.dart';
+import '../models/plan_trip_product.dart';
+import '../models/plantrip_fuel_consumption.dart';
+import '../models/plantrip_product_expense_line.dart';
+import '../models/plantrip_waybill.dart';
+import '../models/plantrip_waybill_expense_line.dart';
+import '../models/stock_location.dart';
+import '../pages/plantrip_waybill_details.dart';
+import '../routes/app_pages.dart';
+import '../services/master_service.dart';
 
-import 'package:winbrother_hr_app/services/plan_trip_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
-import 'package:winbrother_hr_app/widgets/alert_widget.dart';
+import '../services/plan_trip_service.dart';
+import '../utils/app_utils.dart';
+import '../widgets/alert_widget.dart';
 
 class PlanTripController extends GetxController {
-  PlanTripServie planTripServie;
-  MasterService masterService;
-  TextEditingController actualAmountTextController;
-  TextEditingController descriptionTextController;
-  TextEditingController expenseActualTextController;
-  TextEditingController expenseDescriptionTextController;
-  TextEditingController wayBillexpenseActualTextController;
-  String  routeName;
-  TextEditingController wayBillexpenseDescriptionTextController;
-  TextEditingController productQtyController;
+  PlanTripServie? planTripServie;
+  MasterService? masterService;
+  TextEditingController actualAmountTextController = TextEditingController();
+  TextEditingController descriptionTextController = TextEditingController();
+  TextEditingController expenseActualTextController = TextEditingController();
+  TextEditingController expenseDescriptionTextController = TextEditingController();
+  TextEditingController wayBillexpenseActualTextController = TextEditingController();
+  String routeName = '';
+  TextEditingController wayBillexpenseDescriptionTextController = TextEditingController();
+  TextEditingController productQtyController = TextEditingController();
   final box = GetStorage();
-  var plantrip_with_product_list = List<Plan_trip_product>().obs;
-  var plantrip_with_waybill_list = List<Plantrip_waybill>().obs;
-  var plantrip_with_product_toapprove_list = List<Plan_trip_product>().obs;
-  var plantrip_with_waybill_topprove_list = List<Plantrip_waybill>().obs;
+  var plantrip_with_product_list = <Plan_trip_product>[].obs;
+  var plantrip_with_waybill_list = <Plantrip_waybill>[].obs;
+  var plantrip_with_product_toapprove_list = <Plan_trip_product>[].obs;
+  var plantrip_with_waybill_topprove_list = <Plantrip_waybill>[].obs;
   var showDetails = true.obs;
   var arg_index = 0.obs;
 //plantrip product
-  Plan_trip_product planTripModel;
-  var expense_list = List<Expense_ids>().obs;
-  var fuel_list = List<Fuelin_ids>().obs;
-  var product_ids_list = List<Product_ids>().obs;
-  var advance_allowance_ids_list = List<Request_allowance_lines>().obs;
-  var route_ids_list = List<PlanTrip_Consumption_ids>().obs;
+  Plan_trip_product? planTripModel;
+  var expense_list = <Expense_ids>[].obs;
+  var fuel_list = <Fuelin_ids>[].obs;
+  var product_ids_list = <Product_ids>[].obs;
+  var advance_allowance_ids_list = <Request_allowance_lines>[].obs;
+  var route_ids_list = <PlanTrip_Consumption_ids>[].obs;
   var plantrip_id = 0;
 //plantrip waybill
-  Plantrip_waybill planTripWayBillModel;
-  var waybill_expense_list = List<WayBill_Expense_ids>().obs;
-  var waybill_fuel_list = List<WayBill_Fuelin_ids>().obs;
-  var waybill_product_ids_list = List<Commission_ids>().obs;
+  Plantrip_waybill? planTripWayBillModel;
+  var waybill_expense_list = <WayBill_Expense_ids>[].obs;
+  var waybill_fuel_list = <WayBill_Fuelin_ids>[].obs;
+  var waybill_product_ids_list = <Commission_ids>[].obs;
   var waybill_advance_allowance_ids_list =
-      List<WayBill_Request_allowance_lines>().obs;
-  var waybill_route_plan_ids_list = List<WayBill_Route_plan_ids>().obs;
-  var route_plan_ids_list = List<Route_plan_ids>().obs;
-  var waybill_ids_list = List<Waybill_ids>().obs;
-  var waybill_route_ids_list = List<Consumption_ids>().obs;
+      <WayBill_Request_allowance_lines>[].obs;
+  var waybill_route_plan_ids_list = <WayBill_Route_plan_ids>[].obs;
+  var route_plan_ids_list = <Route_plan_ids>[].obs;
+  var waybill_ids_list = <Waybill_ids>[].obs;
+  var waybill_route_ids_list = <Consumption_ids>[].obs;
   var plantrip_waybill_id = 0;
 
   Rx<Stock_location> _selectedLocation = Stock_location().obs;
   Stock_location get selectedLocation => _selectedLocation.value;
   set selectedLocation(Stock_location type) => _selectedLocation.value = type;
-  var location_list = List<Stock_location>().obs;
+  var location_list = <Stock_location>[].obs;
 
   Rx<Daytrip_expense> _selectedProduct = Daytrip_expense().obs;
   Daytrip_expense get selectedProduct => _selectedProduct.value;
   set selectedProduct(Daytrip_expense type) => _selectedProduct.value = type;
-  var product_list = List<Daytrip_expense>().obs;
+  var product_list = <Daytrip_expense>[].obs;
   var isLoading = false.obs;
   var offset = 0.obs;
   var waybill_isLoading = false.obs;
@@ -103,7 +103,7 @@ class PlanTripController extends GetxController {
       _selectedExpenseCategory.value;
   set selectedExpenseCategory(Daytrip_advance_expense_category type) =>
       _selectedExpenseCategory.value = type;
-  var exp_category_list = List<Daytrip_advance_expense_category>().obs;
+  var exp_category_list = <Daytrip_advance_expense_category>[].obs;
 
   //plantrip expense route dropdown
   Rx<Expense_ids> _selectedExpenseRouteCategory = Expense_ids().obs;
@@ -121,14 +121,14 @@ class PlanTripController extends GetxController {
 
   var show_standard_liter = true.obs;
   var show_standard_amount = true.obs;
-  var consumption_ids_list = List<PlanTrip_Consumption_ids>().obs;
-  TextEditingController fromDateTextController;
-  TextEditingController toDateTextController;
+  var consumption_ids_list = <PlanTrip_Consumption_ids>[].obs;
+  TextEditingController fromDateTextController = TextEditingController();
+  TextEditingController toDateTextController = TextEditingController();
 
   Rx<BaseRoute> _selectedBaseRoute = BaseRoute().obs;
   BaseRoute get selectedBaseRoute => _selectedBaseRoute.value;
   set selectedBaseRoute(BaseRoute type) => _selectedBaseRoute.value = type;
-  var base_route_list = List<BaseRoute>().obs;
+  var base_route_list = <BaseRoute>[].obs;
   var expense_status = ''.obs;
   var expenseStandardAmount = 0.0.obs;
   var expenseActualAmount = 0.0.obs;
@@ -173,8 +173,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie
-        .fetchExpenseStatusDayTipPlantrip(tripID, state)
+    await planTripServie?.fetchExpenseStatusDayTipPlantrip(tripID, state)
         .then((data) {
       print('fetchExpenseStatusData##');
       print(data);
@@ -196,17 +195,19 @@ class PlanTripController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await planTripServie
-        .getPlanTripWithProductList(
+    await planTripServie?.getPlanTripWithProductList(
             int.tryParse(employee_id), offset.toString(), state)
         .then((data) {
       if (offset != 0) {
         // update data and loading status
         isLoading.value = false;
         //plantrip_with_product_list.addAll(data);
-        data.forEach((element) {
-          plantrip_with_product_list.add(element);
-        });
+        // data.forEach((element) {
+        //   plantrip_with_product_list.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          plantrip_with_product_list.add(data[i]);
+        }
       } else {
         plantrip_with_product_list.value = data;
       }
@@ -229,8 +230,7 @@ class PlanTripController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
 
-    await planTripServie
-        .getPlanTripWithWayBillList(
+    await planTripServie?.getPlanTripWithWayBillList(
             int.tryParse(employee_id), waybill_offset.toString(), state)
         .then((data) {
       plantrip_with_waybill_list.value.clear();
@@ -240,9 +240,12 @@ class PlanTripController extends GetxController {
         //plantrip_with_waybill_list.addAll(data);
         print("Data: ${waybill_offset.toString()}");
 
-        data.forEach((element) {
-          plantrip_with_waybill_list.add(element);
-        });
+        // data.forEach((element) {
+        //   plantrip_with_waybill_list.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          plantrip_with_waybill_list.add(data[i]);
+        }
       } else {
         plantrip_with_waybill_list.value = data;
         //plantrip_with_waybill_list.addAll(data);
@@ -264,8 +267,7 @@ class PlanTripController extends GetxController {
 
   getAdvanceExpenseCategoryList() async {
     var company_id = box.read('emp_company');
-    await planTripServie
-        .getDayTripAdvanceExpenseCategory(int.tryParse(company_id))
+    await planTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id))
         .then((data) {
       data.insert(
           0,
@@ -277,7 +279,7 @@ class PlanTripController extends GetxController {
   }
 
   getAddFuelLocation() async {
-    await planTripServie.getStockLocationList().then((data) {
+    await planTripServie?.getStockLocationList().then((data) {
       data.insert(0, Stock_location(id: 0, name: 'Location'));
       this.selectedLocation = data[0];
       location_list.value = data;
@@ -286,8 +288,7 @@ class PlanTripController extends GetxController {
 
   getProductForFuelTab() async {
     var company_id = box.read('emp_company');
-    await planTripServie
-        .getDayTripProductListForFuelTab(company_id.toString())
+    await planTripServie?.getDayTripProductListForFuelTab(company_id.toString())
         .then((data) {
       data.insert(0, Daytrip_expense(id: 0, name: 'Product'));
       this.selectedProduct = data[0];
@@ -302,8 +303,8 @@ class PlanTripController extends GetxController {
       Get.snackbar('Warning', "Fill Required Data!",
           snackPosition: SnackPosition.BOTTOM);
       valid = false;
-    } else if (double.tryParse(actualAmountTextController.text) >
-        this.selectedBaseRoute.fuel_liter) {
+    } else if (double.tryParse(actualAmountTextController.text)! >
+        this.selectedBaseRoute.fuel_liter!) {
       if (descriptionTextController.text.isEmpty) {
         Get.snackbar('Warning', "Please Fill Description!",
             snackPosition: SnackPosition.BOTTOM);
@@ -347,7 +348,7 @@ class PlanTripController extends GetxController {
                   size: 30.0,
                 )),
                 barrierDismissible: false));
-        await planTripServie.addPlanTripFuelConsumption(endTrip).then((data) {
+        await planTripServie?.addPlanTripFuelConsumption(endTrip).then((data) {
           if (data != 0) {
             Get.defaultDialog(
                 title: 'Information',
@@ -376,8 +377,8 @@ class PlanTripController extends GetxController {
       Get.snackbar('Warning', "Fill Required Data!",
           snackPosition: SnackPosition.BOTTOM);
       valid = false;
-    } else if (double.tryParse(actualAmountTextController.text) >
-        this.selectedBaseRoute.fuel_liter) {
+    } else if (double.tryParse(actualAmountTextController.text)! >
+        this.selectedBaseRoute.fuel_liter!) {
       if (descriptionTextController.text.isEmpty) {
         Get.snackbar('Warning', "Please Fill Description!",
             snackPosition: SnackPosition.BOTTOM);
@@ -414,8 +415,7 @@ class PlanTripController extends GetxController {
         print("DateTime");
         print(DateFormat("yyyy-MM-dd").format(DateTime.now()));
 
-        await planTripServie
-            .addPlanTripWaybillFuelConsumption(endTrip)
+        await planTripServie?.addPlanTripWaybillFuelConsumption(endTrip)
             .then((data) {
           if (data != 0) {
             Get.defaultDialog(
@@ -441,8 +441,8 @@ class PlanTripController extends GetxController {
         Get.snackbar('Warning', "Fill Required Data!",
             snackPosition: SnackPosition.BOTTOM);
         valid = false;
-      } else if (double.tryParse(expenseActualTextController.text) >
-          this.selectedExpenseRouteCategory.standardAmount) {
+      } else if (double.tryParse(expenseActualTextController.text)! >
+          this.selectedExpenseRouteCategory.standardAmount!) {
         if (expenseDescriptionTextController.text.isEmpty) {
           Get.snackbar('Warning', "Please Fill Description!",
               snackPosition: SnackPosition.BOTTOM);
@@ -467,8 +467,7 @@ class PlanTripController extends GetxController {
                     expenseActualTextController.text.toString()),
                 description: expenseDescriptionTextController.text.toString(),
                 image: selectedExpensePlanTripProductImage);
-        planTripServie
-            .addPlanTripProductExpense(plantrip_product_expense_line, lineID,
+        planTripServie?.addPlanTripProductExpense(plantrip_product_expense_line, lineID,
                 int.tryParse(employee_id), "edit")
             .then((data) {
           if (data != 0) {
@@ -490,8 +489,8 @@ class PlanTripController extends GetxController {
             snackPosition: SnackPosition.BOTTOM);
         valid = false;
       } else if (double.tryParse(
-              wayBillexpenseActualTextController.text.toString()) >
-          this.selectedWayBillExpenseRouteCategory.standardAmount) {
+              wayBillexpenseActualTextController.text.toString())! >
+          this.selectedWayBillExpenseRouteCategory.standardAmount!) {
         if (wayBillexpenseDescriptionTextController.text.isEmpty) {
           Get.snackbar('Warning', "Please Fill Description!",
               snackPosition: SnackPosition.BOTTOM);
@@ -518,8 +517,7 @@ class PlanTripController extends GetxController {
                 description:
                     wayBillexpenseDescriptionTextController.text.toString(),
                 image: selectedExpensePlanTripWayBillImage);
-        planTripServie
-            .addPlanTripWayBillExpense(plantrip_waybill_expense_line,
+        planTripServie?.addPlanTripWayBillExpense(plantrip_waybill_expense_line,
                 lineID.toString(), employee_id, "edit")
             .then((data) {
           if (data != 0) {
@@ -577,8 +575,7 @@ class PlanTripController extends GetxController {
 
   endPlanTripWayBill() async {
     //var data  = Daytrip_fuel_consumption(dayTripId: daytrip_id,consumedLiter: double.parse(actualFuelLiterTextController.text),description:totalAmountController.text);
-    await planTripServie
-        .endPlanTripWaybillTrip(plantrip_waybill_id.toString())
+    await planTripServie?.endPlanTripWaybillTrip(plantrip_waybill_id.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Ended!', () {
@@ -591,12 +588,11 @@ class PlanTripController extends GetxController {
   }
 
   showAlertDialog(BuildContext context, String title, String name) {
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.pop(context, true);
-        planTripServie
-            .endPlanTripProductTrip(plantrip_id.toString())
+        planTripServie?.endPlanTripProductTrip(plantrip_id.toString())
             .then((data) {
           if (data != 0) {
             AppUtils.showConfirmDialog('Information', 'Successfully Ended!',
@@ -610,7 +606,7 @@ class PlanTripController extends GetxController {
       },
     );
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -642,8 +638,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie
-        .updateQty(pID, productQtyController.text.toString())
+    await planTripServie?.updateQty(pID, productQtyController.text.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Updated!', () {
@@ -668,8 +663,7 @@ class PlanTripController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await planTripServie
-        .getPlanTripProductListToApprove(int.tryParse(employee_id))
+    await planTripServie?.getPlanTripProductListToApprove(int.tryParse(employee_id))
         .then((data) {
       plantrip_with_product_toapprove_list.value = data;
 
@@ -690,8 +684,7 @@ class PlanTripController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await planTripServie
-        .getPlanTripWaybillListToApprove(int.tryParse(employee_id))
+    await planTripServie?.getPlanTripWaybillListToApprove(int.tryParse(employee_id))
         .then((data) {
       plantrip_with_waybill_topprove_list.value = data;
 
@@ -710,7 +703,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.approvePlanTipProduct(plantrip_id).then((data) {
+    await planTripServie?.approvePlanTipProduct(plantrip_id).then((data) {
       Get.back();
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Approved!', () {
@@ -731,7 +724,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.declinePlanTipProduct(plantrip_id).then((data) {
+    await planTripServie?.declinePlanTipProduct(plantrip_id).then((data) {
       Get.back();
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Declined!', () {
@@ -752,7 +745,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.approvePlanTipWyBill(plantrip_waybill_id).then((data) {
+    await planTripServie?.approvePlanTipWyBill(plantrip_waybill_id).then((data) {
       Get.back();
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Approved!', () {
@@ -773,7 +766,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.declinePlanTipWyBill(plantrip_waybill_id).then((data) {
+    await planTripServie?.declinePlanTipWyBill(plantrip_waybill_id).then((data) {
       Get.back();
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Declined!', () {
@@ -806,7 +799,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteAdvance(lineID).then((data) {
+    await planTripServie?.deleteAdvance(lineID).then((data) {
       getPlantripList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -831,7 +824,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteAdvance(lineID).then((data) {
+    await planTripServie?.deleteAdvance(lineID).then((data) {
       getPlantripWithWayBillList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -863,8 +856,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie
-        .deletePlantripProductExpense(
+    await planTripServie?.deletePlantripProductExpense(
             plantrip_product_expense_line, expenseId.id)
         .then((data) {
       getPlantripList(current_page.value);
@@ -898,8 +890,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie
-        .deleteExpense(plantrip_waybill_expense_line, expenseId.id)
+    await planTripServie?.deleteExpense(plantrip_waybill_expense_line, expenseId.id)
         .then((data) {
       getPlantripWithWayBillList(current_page.value);
       Get.back();
@@ -925,7 +916,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteFuelConsumption(lineID,trip_id).then((data) {
+    await planTripServie?.deleteFuelConsumption(lineID,trip_id).then((data) {
       getPlantripList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -950,7 +941,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteFuelConsumption(lineID,trip_id).then((data) {
+    await planTripServie?.deleteFuelConsumption(lineID,trip_id).then((data) {
       getPlantripWithWayBillList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -975,7 +966,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteFuelIn(lineID).then((data) {
+    await planTripServie?.deleteFuelIn(lineID).then((data) {
       getPlantripList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -1000,7 +991,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie.deleteFuelIn(lineID).then((data) {
+    await planTripServie?.deleteFuelIn(lineID).then((data) {
       getPlantripWithWayBillList(current_page.value);
       Get.back();
       if (data != 0) {
@@ -1021,7 +1012,7 @@ class PlanTripController extends GetxController {
     print('getRouteList');
     print(emp_company);
     print(branch_id);
-    await masterService.getRouteList(tripID, tripType).then((data) {
+    await masterService?.getRouteList(tripID, tripType).then((data) {
       if (data.length != 0) {
         this.selectedBaseRoute = data[0];
       }
@@ -1075,8 +1066,7 @@ class PlanTripController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await planTripServie
-        .updateRouteDate(pID, fromDateTextController.text.toString(), toDateTextController.text.toString())
+    await planTripServie?.updateRouteDate(pID, fromDateTextController.text.toString(), toDateTextController.text.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Updated!', () {
@@ -1119,8 +1109,7 @@ class PlanTripController extends GetxController {
             )),
             barrierDismissible: false));
     var created = 0;
-    await planTripServie
-        .clickWayBillRouteLineTrip(first_route, trip_id,route_id,next_route_id,previous_route_id)
+    await planTripServie?.clickWayBillRouteLineTrip(first_route, trip_id,route_id,next_route_id,previous_route_id)
         .then((data) {
       if (data != 0) {
         Get.back();
@@ -1141,8 +1130,7 @@ class PlanTripController extends GetxController {
             )),
             barrierDismissible: false));
     var created = 0;
-    await planTripServie
-        .clickProductRouteLineTrip(first_route, trip_id,route_id,next_route_id,previous_route_id)
+    await planTripServie?.clickProductRouteLineTrip(first_route, trip_id,route_id,next_route_id,previous_route_id)
         .then((data) {
       if (data != 0) {
         Get.back();
@@ -1166,8 +1154,7 @@ class PlanTripController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
 
-    await planTripServie
-        .getPlanTripWithProductList(
+    await planTripServie?.getPlanTripWithProductList(
             int.tryParse(employee_id), product_offset.toString(), state)
         .then((data) {
       plantrip_with_product_list.value.clear();
@@ -1177,9 +1164,12 @@ class PlanTripController extends GetxController {
         //plantrip_with_waybill_list.addAll(data);
         print("Data: ${product_offset.toString()}");
 
-        data.forEach((element) {
-          plantrip_with_product_list.add(element);
-        });
+        // data.forEach((element) {
+        //   plantrip_with_product_list.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          plantrip_with_product_list.add(data[i]);
+        }
       } else {
         plantrip_with_product_list.value = data;
         //plantrip_with_waybill_list.addAll(data);
@@ -1210,8 +1200,7 @@ class PlanTripController extends GetxController {
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await planTripServie
-        .startPlanTripProductTrip(id.toString())
+  await planTripServie?.startPlanTripProductTrip(id.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Started!', () {
@@ -1234,8 +1223,7 @@ class PlanTripController extends GetxController {
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await planTripServie
-        .endPlanTripProductTrip(id.toString())
+  await planTripServie?.endPlanTripProductTrip(id.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Ended!', () {
@@ -1258,8 +1246,7 @@ class PlanTripController extends GetxController {
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await planTripServie
-        .startPlanTripWaybillTrip(id.toString())
+  await planTripServie?.startPlanTripWaybillTrip(id.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Started!', () {
@@ -1282,8 +1269,7 @@ class PlanTripController extends GetxController {
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await planTripServie
-        .endPlanTripWaybillTrip(id.toString())
+  await planTripServie?.endPlanTripWaybillTrip(id.toString())
         .then((data) {
       if (data != 0) {
         AppUtils.showConfirmDialog('Information', 'Successfully Ended!', () {

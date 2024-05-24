@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/employee_benefit_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../constants/globals.dart';
+import '../../controllers/employee_benefit_controller.dart';
+import '../../localization.dart';
+import '../../my_class/my_style.dart';
+import '../../routes/app_pages.dart';
+import '../../utils/app_utils.dart';
 
 class EmployeeBenefitListPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class EmployeeBenefitListPage extends StatefulWidget {
 class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
   final EmployeeBenefitController controller = Get.put(EmployeeBenefitController());
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels?.employee_benefit_list,
+          labels.employee_benefit_list,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -87,7 +87,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 5),
                                 child: Text(
-                                  labels?.description,
+                                  labels.description,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -110,7 +110,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 5),
                                 child: Text(
-                                  labels?.benefit,
+                                  labels.benefit,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -133,7 +133,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 5),
                                 child: Text(
-                                  labels?.quantity,
+                                  labels.quantity,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -156,7 +156,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 5),
                                 child: Text(
-                                  labels?.status,
+                                  labels.status,
                                   style: datalistStyle(),
                                 ),
                               ),

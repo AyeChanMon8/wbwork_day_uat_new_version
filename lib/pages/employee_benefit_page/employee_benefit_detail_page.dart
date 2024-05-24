@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:io';
@@ -9,16 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:winbrother_hr_app/controllers/employee_benefit_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../../controllers/employee_benefit_controller.dart';
+import '../../localization.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../my_class/my_style.dart';
 
 class EmployeeBenefitDetailsPage extends StatelessWidget {
-  int dindex;
+  int dindex = 0;
   final box = GetStorage();
-  String image;
+  String image = '';
   final EmployeeBenefitController controller = Get.put(EmployeeBenefitController());
   ScrollController scrollController = ScrollController();
   Future<String> _createFileFromString(String encodedStr,String name) async {
@@ -36,9 +36,11 @@ class EmployeeBenefitDetailsPage extends StatelessWidget {
     dindex = Get.arguments;
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels.employee_benefit_details,image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.employee_benefit_details,image)),
       body: Scrollbar(
-        isAlwaysShown: true,
+        // isAlwaysShown: true,
         controller: scrollController,
         thickness: 5,
         radius: Radius.circular(10),
@@ -331,7 +333,7 @@ class EmployeeBenefitDetailsPage extends StatelessWidget {
 
   class ImageDialog extends StatelessWidget {
   Uint8List bytes;
-  ImageDialog({this.bytes});
+  ImageDialog({required this.bytes});
   @override
   Widget build(BuildContext context) {
     return Dialog(

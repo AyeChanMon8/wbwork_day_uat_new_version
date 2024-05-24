@@ -1,11 +1,11 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/hr_rule.dart';
-import 'package:winbrother_hr_app/models/loan.dart';
-import 'package:winbrother_hr_app/models/payslip.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/hr_rule.dart';
+import '../models/loan.dart';
+import '../models/payslip.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../routes/app_pages.dart';
@@ -13,9 +13,9 @@ import '../utils/app_utils.dart';
 
 class PayslipController extends GetxController {
   static PayslipController to = Get.find();
-  EmployeeService employeeService;
-  var paySlips = List<PaySlips>().obs;
-  var rulesList = List<Hr_rule>().obs;
+  EmployeeService? employeeService;
+  var paySlips = <PaySlips>[].obs;
+  var rulesList = <Hr_rule>[].obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
@@ -46,14 +46,17 @@ class PayslipController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.fetchPayslip(employee_id,offset.toString()).then((data) {
+    await employeeService?.fetchPayslip(employee_id,offset.toString()).then((data) {
       print("payslipLength");
       print(data.length);
       if(offset!=0){
         isLoading.value = false;
-        data.forEach((element) {
-          paySlips.add(element);
-        });
+        // data.forEach((element) {
+        //   paySlips.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          paySlips.add(data[i]);
+        }
       }else{
         paySlips.value = data;
       }

@@ -1,18 +1,18 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/notification_msg.dart';
-import 'package:winbrother_hr_app/models/reminder.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/services/reminder_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/notification_msg.dart';
+import '../models/reminder.dart';
+import '../services/employee_service.dart';
+import '../services/reminder_service.dart';
+import '../utils/app_utils.dart';
 
 class ReindersNotiController extends GetxController {
 final ScrollController scrollController = ScrollController();
-ReminderNotiService reminderNotiService;
-var reminderList = List<Reminder>().obs;
+ReminderNotiService? reminderNotiService;
+var reminderList = <Reminder>[].obs;
 final box = GetStorage();
 var isLoading = false.obs;
 var offset = 0.obs;
@@ -39,17 +39,19 @@ var unReadMsgCount = 0.obs;
       }
       String partnerId = store.read('emp_id');
 
-      await this.reminderNotiService.retrieveAllReminders(partnerId).then((data){
+      await this.reminderNotiService?.retrieveAllReminders(partnerId).then((data){
         unReadMsgCount.value = data;
         print("unReadMsgCount");
         print(data);
-        this.reminderNotiService
-            .reminder(partnerId,offset.toString()).then((data){
+        this.reminderNotiService?.reminder(partnerId,offset.toString()).then((data){
           isLoading.value = false;
           if(offset!=0){
-            data.forEach((element) {
-              reminderList.add(element);
-            });
+            // data.forEach((element) {
+            //   reminderList.add(element);
+            // });
+            for(var i=0;i<data.length;i++){
+              reminderList.add(data[i]);
+            }
           }else{
             reminderList.value = data;
           }
@@ -100,11 +102,11 @@ var unReadMsgCount = 0.obs;
 
   readMsg(Reminder msg, int index) async {
     String partnerId = store.read('emp_id');
-    msg = await this.reminderNotiService.updateNotificationMsg(msg);
+    msg = await this.reminderNotiService!.updateNotificationMsg(msg);
     msg.has_read = true;
     msg.selected = false;
     this.reminderList[index] = msg;
-    this.reminderNotiService.retrieveAllReminders(partnerId).then((data){
+    this.reminderNotiService?.retrieveAllReminders(partnerId).then((data){
       unReadMsgCount.value = data;
     });
     update();
@@ -170,14 +172,14 @@ var unReadMsgCount = 0.obs;
 
   void deleteReminderListMsg(List<int> deleteData) async{
     String partnerId = store.read('emp_id');
-    bool status = await this.reminderNotiService.deleteReminderNotificationMsg(deleteData);
+    bool status = await this.reminderNotiService!.deleteReminderNotificationMsg(deleteData);
     if (status) {
       // reminderList.removeAt(index);
       for(var i=0;i<deleteData.length;i++){
         reminderList.removeWhere((item) => item.noti_id == deleteData[i]);
       }
       countMsg.value = reminderList.length;
-      this.reminderNotiService.retrieveAllReminders(partnerId).then((data){
+      this.reminderNotiService?.retrieveAllReminders(partnerId).then((data){
         Get.back();
         unReadMsgCount.value = data;
       });
@@ -187,12 +189,12 @@ var unReadMsgCount = 0.obs;
 
   void deleteMsg(Reminder msg, int index) async {
     String partnerId = store.read('emp_id');
-    bool status = await this.reminderNotiService.deleteNotificationMsg(msg);
+    bool status = await this.reminderNotiService!.deleteNotificationMsg(msg);
     if (status) {
       // reminderList.removeAt(index);
       reminderList.removeWhere((item) => item.noti_id == msg.noti_id);
       countMsg.value = reminderList.length;
-      this.reminderNotiService.retrieveAllReminders(partnerId).then((data){
+      this.reminderNotiService?.retrieveAllReminders(partnerId).then((data){
         Get.back();
         unReadMsgCount.value = data;
       });

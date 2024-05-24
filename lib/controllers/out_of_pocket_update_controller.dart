@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -6,74 +5,74 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/leave.dart';
-import 'package:winbrother_hr_app/models/leave_line.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/models/outof_pocket_update.dart';
-import 'package:winbrother_hr_app/models/travel_expense/category_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/out_of_pocket_expnese_line.dart';
-import 'package:winbrother_hr_app/models/travel_expense/edit_pocketModle.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_response.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_expense_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/pages/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/fleet_service.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
-import 'package:winbrother_hr_app/services/travel_request_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/expense_travel_list/out_of_pocket_list.dart';
+import '../models/fleet_model.dart';
+import '../models/leave.dart';
+import '../models/leave_line.dart';
+import '../models/leave_type.dart';
+import '../models/outof_pocket_update.dart';
+import '../models/travel_expense/category_model.dart';
+import '../models/travel_expense/create/out_of_pocket_expnese_line.dart';
+import '../models/travel_expense/edit_pocketModle.dart';
+import '../models/travel_expense/out_of_pocket_model.dart';
+import '../models/travel_expense/out_of_pocket_response.dart';
+import '../models/travel_expense/pocket_model.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/create/travel_expense_model.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../pages/out_of_pocket_list.dart';
+import '../routes/app_pages.dart';
+import '../services/fleet_service.dart';
+import '../services/leave_service.dart';
+import '../services/master_service.dart';
+import '../services/travel_request_service.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OutOfPocketUpdateController extends GetxController {
   var formatter = new NumberFormat("###,###", "en_US");
   var amount = 0.0.obs;
-  TravelRequestService travelRequestService;
-  MasterService masterService;
-  FleetService fleetService;
-  TextEditingController fromDateTextController;
-  TextEditingController toDateTextController;
-  TextEditingController purposeTextController;
-  TextEditingController durationController;
-  TextEditingController descriptionController;
+  TravelRequestService? travelRequestService;
+  MasterService? masterService;
+  FleetService? fleetService;
+  TextEditingController fromDateTextController = TextEditingController();
+  TextEditingController toDateTextController = TextEditingController();
+  TextEditingController purposeTextController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   final is_show_expense = true.obs;
-  TextEditingController dateController;
+  TextEditingController dateController = TextEditingController();
   TextEditingController qtyController = TextEditingController(text: "1");
-  TextEditingController priceController;
-  TextEditingController expenseproductController;
-  TextEditingController totalAmountController;
+  TextEditingController priceController = TextEditingController();
+  TextEditingController expenseproductController = TextEditingController();
+  TextEditingController totalAmountController = TextEditingController();
   TextEditingController quantityTextController =
   TextEditingController(text: "1");
-  TextEditingController totalAmount;
-  TextEditingController unitPriceController;
-  TextEditingController amountController;
-  TextEditingController remarkTextController;
-  var leavelLineList = List<LeaveLine>().obs;
-  var leavetype_list = List<LeaveType>().obs;
-  var category_ids = List<CategoryModel>();
+  TextEditingController totalAmount = TextEditingController();
+  TextEditingController unitPriceController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController remarkTextController = TextEditingController();
+  var leavelLineList = <LeaveLine>[].obs;
+  var leavetype_list = <LeaveType>[].obs;
+  var category_ids = <CategoryModel>[];
   final is_add_leavelist = false.obs;
-  final Rx<File> selectedImage = File('').obs;
-  var travel_expense_category_list = List<TravelExpenseCategory>().obs;
-  var travel_expense_product_list = List<TravelExpenseProduct>().obs;
+  final Rx<File?> selectedImage = File('').obs;
+  var travel_expense_category_list = <TravelExpenseCategory>[].obs;
+  var travel_expense_product_list = <TravelExpenseProduct>[].obs;
   final RxBool isShowImage = false.obs;
-  TravelRequestService _travelRequestService;
-  var travelExpenseList = List<OutofPocketResponse>().obs;
+  TravelRequestService? _travelRequestService;
+  var travelExpenseList = <OutofPocketResponse>[].obs;
   Rx<OutofPocketModel> _selectedLeaveType = OutofPocketModel().obs;
   final OutofPocketList outofpocketlistController = Get.find();
   OutofPocketModel get selectedLeaveType => _selectedLeaveType.value;
   set selectedLeaveType(OutofPocketModel type) =>
       _selectedLeaveType.value = type;
-  dynamic outofpocketList = List<PockectModel>().obs;
-  dynamic pocketList = List<PockectModel>().obs;
+  dynamic outofpocketList = <PockectModel>[].obs;
+  dynamic pocketList = <PockectModel>[].obs;
   var indexnumber = 0.obs;
   Rx<TravelExpenseModel> travelExpenseModel = TravelExpenseModel().obs;
   TravelExpenseModel get selectedtravelExpense => travelExpenseModel.value;
-  var outofpocketExpenseList = List<OutofPocketResponse>().obs;
+  var outofpocketExpenseList = <OutofPocketResponse>[].obs;
   set selectedtravelExpense(TravelExpenseModel type) =>
       travelExpenseModel.value = type;
   final RxBool save_btn_show = true.obs;
@@ -96,11 +95,11 @@ class OutOfPocketUpdateController extends GetxController {
       _selectedExpenseProduct.value = type;
   final box = GetStorage();
   final leaveInterval = 1.obs;
-  String image_base64;
+  String? image_base64;
   var totalExpenseAmount = 0.0.obs;
   var isLoading = false.obs;
   var offset = 0.obs;
-  var fleetList = List<Fleet_model>().obs;
+  var fleetList = <Fleet_model>[].obs;
   var fleetModel = Fleet_model().obs;
   var price_value = 0.0;
   var amount_value = 0.0;
@@ -128,12 +127,10 @@ class OutOfPocketUpdateController extends GetxController {
     if ((this.selectedExpenseCategory.fuel != null &&
             this.selectedExpenseCategory.fuel) &&
         (this.selectedVehicle != null || this.selectedVehicle != "")) {
-      await masterService
-          .getVehicleProduct(this.selectedVehicle.id, this.selectedExpenseCategory.id, company_id.toString())
+      await masterService?.getVehicleProduct(this.selectedVehicle.id, this.selectedExpenseCategory.id, company_id.toString())
           .then((data) async {
         if (data != 0) {
-          await masterService
-              .getOutOfPocketExpenseProduct(data)
+          await masterService?.getOutOfPocketExpenseProduct(data)
               .then((productID) async {
             if (productID != 0) {
               this.selectedExpenseProduct = productID[0];
@@ -172,13 +169,13 @@ class OutOfPocketUpdateController extends GetxController {
   void calculateAmount() {
 
     if(qtyController.text.isNotEmpty&&priceController.text.isNotEmpty){
-      amount.value = double.tryParse(qtyController.text) * double.tryParse(priceController.text);
+      amount.value = double.tryParse(qtyController.text)! * double.tryParse(priceController.text)!;
       amount_value = amount.value;
       totalAmountController.text = amount.value.toString();
       totalAmount = totalAmountController;
       update();
     }else if(qtyController.text.isNotEmpty&&totalAmountController.text.isNotEmpty){
-      amount.value = double.tryParse(totalAmountController.text)/double.tryParse(qtyController.text);
+      amount.value = double.tryParse(totalAmountController.text)!/double.tryParse(qtyController.text)!;
       priceController.text = amount.value.toStringAsFixed(2);
       update();
     }else{
@@ -189,7 +186,7 @@ class OutOfPocketUpdateController extends GetxController {
   void calculateUnitAmount() {
 
     if(totalAmountController.text.isNotEmpty&&qtyController.text.isNotEmpty){
-      amount.value = double.tryParse(totalAmountController.text)/double.tryParse(qtyController.text);
+      amount.value = double.tryParse(totalAmountController.text)!/double.tryParse(qtyController.text)!;
       priceController.text = amount.value.toStringAsFixed(2);
       update();
     }else{
@@ -211,7 +208,7 @@ class OutOfPocketUpdateController extends GetxController {
     }
     if(valid){
       var attach_include = false;
-      if(image_base64!=null&&image_base64.isNotEmpty){
+      if(image_base64!=null&&image_base64!.isNotEmpty){
          attach_include = true;
       }
       var vehicleID = 0;
@@ -283,7 +280,7 @@ class OutOfPocketUpdateController extends GetxController {
 
   void removeRow(int index,int id){
     if(id!=null){
-      travelRequestService.deleteExpenseLine(id);
+      travelRequestService?.deleteExpenseLine(id);
     }
     outofpocketList.removeAt(index);
     getTotalAmount();
@@ -292,7 +289,7 @@ class OutOfPocketUpdateController extends GetxController {
 
   getTravelExpenseCategory() async {
     var company_id = box.read('emp_company');
-    await masterService.getOutofPocketExpenseCategory(int.tryParse(company_id)).then((data) {
+    await masterService?.getOutofPocketExpenseCategory(int.tryParse(company_id)).then((data) {
       this.selectedExpenseCategory = data[0];
       travel_expense_category_list.value = data;
       int id = selectedExpenseCategory.id;
@@ -311,7 +308,7 @@ class OutOfPocketUpdateController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await masterService.getTravelExpenseProduct(id,company_id.toString()).then((data) {
+    await masterService?.getTravelExpenseProduct(id,company_id.toString()).then((data) {
       Get.back();
       if(data.length!=0){
         this.selectedExpenseProduct = data[0];
@@ -329,12 +326,10 @@ class OutOfPocketUpdateController extends GetxController {
     if ((this.selectedExpenseCategory.fuel != null &&
             this.selectedExpenseCategory.fuel) &&
         (this.selectedVehicle != null || this.selectedVehicle != "")) {
-      await masterService
-          .getVehicleProduct(this.selectedVehicle.id, id, company_id.toString())
+      await masterService?.getVehicleProduct(this.selectedVehicle.id, id, company_id.toString())
           .then((data) async {
         if (data != 0) {
-          await masterService
-              .getOutOfPocketExpenseProduct(data)
+          await masterService?.getOutOfPocketExpenseProduct(data)
               .then((productID) async {
             if (productID != 0) {
               this.selectedExpenseProduct = productID[0];
@@ -372,14 +367,17 @@ class OutOfPocketUpdateController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await travelRequestService.getOutofPocketModel(employee_id,offset.toString()).then((data) {
+    await travelRequestService?.getOutofPocketModel(employee_id,offset.toString()).then((data) {
 
       if(offset!=0){
         isLoading.value = false;
         //outofpocketExpenseList.addAll(data);
-        data.forEach((element) {
-          outofpocketExpenseList.add(element);
-        });
+        // data.forEach((element) {
+        //   outofpocketExpenseList.add(element);
+        // });
+        for(var i=0;i<outofpocketExpenseList.length;i++){
+          outofpocketExpenseList.add(outofpocketExpenseList[i]);
+        }
       }else{
         outofpocketExpenseList.value = data;
       }
@@ -400,13 +398,16 @@ class OutOfPocketUpdateController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await _travelRequestService.getOutofPocketModel(employee_id,offset.toString()).then((data) {
+    await _travelRequestService?.getOutofPocketModel(employee_id,offset.toString()).then((data) {
       if(offset!=0){
         isLoading.value = false;
         //outofpocketExpenseList.addAll(data);
-        data.forEach((element) {
-          outofpocketExpenseList.add(element);
-        });
+        // data.forEach((element) {
+        //   outofpocketExpenseList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          outofpocketExpenseList.add(data[i]);
+        }
       }else{
         outofpocketExpenseList.value = data;
       }
@@ -437,7 +438,7 @@ class OutOfPocketUpdateController extends GetxController {
         id: id,
         pocket_line: outofpocketList
     );
-    await travelRequestService.updateOutOfPocket(id,outRequest).then((data) async{
+    await travelRequestService?.updateOutOfPocket(id,outRequest).then((data) async{
       Get.back();
 
       if (data != 0) {
@@ -516,7 +517,7 @@ class OutOfPocketUpdateController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    fleetList.value = await fleetService.getFleetList(empId);
+    fleetList.value = await fleetService!.getFleetList(empId);
     if(fleetList.value.length>0){
       selectedVehicle = fleetList[0];
 

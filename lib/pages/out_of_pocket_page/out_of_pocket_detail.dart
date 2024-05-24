@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -7,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/pages/pre_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/expense_travel_list/out_of_pocket_list.dart';
+import '../../controllers/leave_list_controller.dart';
+import '../../localization.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../pages/pre_page.dart';
+import '../../routes/app_pages.dart';
+import '../../utils/app_utils.dart';
 import '../../my_class/my_style.dart';
 import 'package:get/get.dart';
 
@@ -21,10 +20,10 @@ import '../leave_detail.dart';
 
 class OutOfPocketDetails extends StatelessWidget {
   OutofPocketList controller = Get.put(OutofPocketList());
-  int index;
-  String role_category;
+  int index = 0;
+  String role_category = '';
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -53,7 +52,9 @@ class OutOfPocketDetails extends StatelessWidget {
 
     }
     return Scaffold(
-      appBar: appbar(context,labels.outofpocketDetails, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context,labels.outofpocketDetails, image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,7 +368,7 @@ class OutOfPocketDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.date + " :"),
+                  (labels.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -390,7 +391,7 @@ class OutOfPocketDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -425,7 +426,7 @@ class OutOfPocketDetails extends StatelessWidget {
                 // controller.approveLeave(
                 //     controller.outofpocketExpenseList.value[index].id);
               },
-              text: labels?.approve,
+              text: labels.approve,
               blockButton: true,
               size: GFSize.LARGE,
             ),
@@ -456,15 +457,18 @@ class OutOfPocketDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
+                  // color: textFieldTapColor,
                   onPressed: () {
                     // controller.approveLeave(
                     //   controller.outofpocketExpenseList.value[index].id,
                     // );
                   },
                   child: Text(
-                    labels?.approve,
+                    labels.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -476,14 +480,16 @@ class OutOfPocketDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     // controller.declinedLeave(
                     //     controller.outofpocketExpenseList.value[index].id);
                   },
                   child: Text(
-                    labels?.cancel,
+                    labels.cancel,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -503,8 +509,10 @@ class OutOfPocketDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                     onPressed: () {
                       if (controller
                               .outofpocketExpenseList.value[index].state ==
@@ -528,8 +536,10 @@ class OutOfPocketDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     confirmDialog(
                         controller.outofpocketExpenseList.value[index].id,
@@ -548,7 +558,7 @@ class OutOfPocketDetails extends StatelessWidget {
   }
 
   confirmDialog(int id, BuildContext context) {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.black),
@@ -557,7 +567,7 @@ class OutOfPocketDetails extends StatelessWidget {
         Navigator.pop(context);
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "Yes",
         style: TextStyle(color: Colors.black),
@@ -594,15 +604,17 @@ class OutOfPocketDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                     onPressed: () {
                       controller.submitRequest(
                           controller.outofpocketExpenseList.value[index].id,
                           context);
                     },
                     child: Text(
-                      labels?.submit,
+                      labels.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

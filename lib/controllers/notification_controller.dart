@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,18 +5,18 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/notification_msg.dart';
-import 'package:winbrother_hr_app/services/notification_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/notification_msg.dart';
+import '../services/notification_service.dart';
+import '../utils/app_utils.dart';
 
 class NotificationController extends GetxController {
   final ScrollController scrollController = ScrollController();
   var formatter = new NumberFormat("#,###");
   static NotificationController to = Get.find();
   TextEditingController searchTxt = new TextEditingController();
-  final RxList<NotificationMsg> notificationList = List<NotificationMsg>().obs;
-  NotificationService notificationService;
+  final RxList<NotificationMsg> notificationList = <NotificationMsg>[].obs;
+  NotificationService? notificationService;
   final store = GetStorage();
   var countMsg = 0.obs;
   var unReadMsgCount = 0.obs;
@@ -26,28 +25,30 @@ class NotificationController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    this.notificationService = await NotificationService().init();
+    this.notificationService = await NotificationService().init() as NotificationService;
   }
 
   void retrieveMsgs() async {
     try {
       if (this.notificationService == null) {
-        this.notificationService = await NotificationService().init();
+        this.notificationService = await NotificationService().init() as NotificationService;
       }
       String partnerId = store.read('emp_id');
 
-      await this.notificationService.retrieveAllNotification(partnerId).then((data){
+      await this.notificationService?.retrieveAllNotification(partnerId).then((data){
         unReadMsgCount.value = data;
         print("unReadMsgCount");
         print(data);
-        this.notificationService
-            .retrieveNotificationMessages(partnerId,offset.toString()).then((data){
+        this.notificationService?.retrieveNotificationMessages(partnerId,offset.toString()).then((data){
           isLoading.value = false;
           if(offset!=0){
             //this.notificationList.addAll(data);
-            data.forEach((element) {
-              notificationList.add(element);
-            });
+            // data.forEach((element) {
+            //   notificationList.add(element);
+            // });
+            for(var i=0;i<data.length;i++){
+              notificationList.add(data[i]);
+            }
           }else{
             this.notificationList.value = data;
           }
@@ -70,7 +71,7 @@ class NotificationController extends GetxController {
 
     } catch (error) {
       // Get.snackbar("Error ", "Error , $error");
-      Get.snackbar('Alert', 'Network connection fail ${error.response?.statusCode}!\nPlease, try again');
+      Get.snackbar('Alert', 'Network connection fail ${error.response.statusCode}!\nPlease, try again');
     }
   }
 
@@ -89,11 +90,11 @@ class NotificationController extends GetxController {
 
   readMsg(NotificationMsg msg, int index) async {
     String partnerId = store.read('emp_id');
-    msg = await this.notificationService.updateNotificationMsg(msg);
+    msg = await this.notificationService!.updateNotificationMsg(msg);
     msg.has_read = true;
     msg.selected = false;
     this.notificationList[index] = msg;
-    this.notificationService.retrieveAllNotification(partnerId).then((data){
+    this.notificationService?.retrieveAllNotification(partnerId).then((data){
       unReadMsgCount.value = data;
     });
     //countUnReadMessage();
@@ -133,11 +134,11 @@ class NotificationController extends GetxController {
   void deleteMsg(NotificationMsg msg, int index) async {
     String partnerId = store.read('emp_id');
 
-    bool status = await this.notificationService.deleteNotificationMsg(msg);
+    bool status = await this.notificationService!.deleteNotificationMsg(msg);
     if (status) {
       notificationList.removeAt(index);
       countMsg.value = notificationList.length;
-      this.notificationService.retrieveAllNotification(partnerId).then((data){
+      this.notificationService?.retrieveAllNotification(partnerId).then((data){
         Get.back();
         unReadMsgCount.value = data;
       });

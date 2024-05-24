@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -6,32 +6,32 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/pms_list_controller.dart';
-import 'package:winbrother_hr_app/models/pms_attach.dart';
-import 'package:winbrother_hr_app/models/pms_attachment.dart';
-import 'package:winbrother_hr_app/models/pms_attachments.dart';
-import 'package:winbrother_hr_app/models/pms_detail_model.dart';
-import 'package:winbrother_hr_app/models/rating_config.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
-import 'package:winbrother_hr_app/services/pms_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/pms_list_controller.dart';
+import '../models/pms_attach.dart';
+import '../models/pms_attachment.dart';
+import '../models/pms_attachments.dart';
+import '../models/pms_detail_model.dart';
+import '../models/rating_config.dart';
+import '../services/master_service.dart';
+import '../services/pms_service.dart';
+import '../utils/app_utils.dart';
 
 class PMSEmployeeDetailController extends GetxController{
 var detailModel= PMSDetailModel.name().obs;
 var showAcknowledge = true.obs;
 var showApprove = false.obs;
-PmsListController pmsListController;
+PmsListController? pmsListController;
 var totalFinalRate = 0.0.obs;
 var totalEmployeeRate = 0.0.obs;
 var totalScoreAverage = 0.0.obs;
-TextEditingController managerRateTextController;
-TextEditingController empRateTextController;
-MasterService masterService;
+TextEditingController managerRateTextController = TextEditingController();
+TextEditingController empRateTextController = TextEditingController();
+MasterService? masterService;
 final RxBool isShowAttachment = false.obs;
 final RxBool isShowImageAttachment = false.obs;
-final RxList<PlatformFile> imageList = List<PlatformFile>().obs;
-var ratingConfig_list = List<RatingConfig>().obs;
-final RxList<PMSattachment> attachment_list = List<PMSattachment>().obs;
+final RxList<PlatformFile> imageList = <PlatformFile>[].obs;
+var ratingConfig_list = <RatingConfig>[].obs;
+final RxList<PMSattachment> attachment_list = <PMSattachment>[].obs;
 Rx<RatingConfig> _selectedRatingConfig = RatingConfig().obs;
 RatingConfig get selectedRatingConfig => _selectedRatingConfig.value;
 set selectedRatingConfig(RatingConfig type) => _selectedRatingConfig.value = type;
@@ -39,7 +39,7 @@ Rx<RatingConfig> _selectedCompetenciesRatingConfig = RatingConfig().obs;
 RatingConfig get selectedCompetenciesRatingConfig => _selectedCompetenciesRatingConfig.value;
 set selectedCompetenciesRatingConfig(RatingConfig type) => _selectedCompetenciesRatingConfig.value = type;
 List<PMSAttach> image_base64_list =[];
-PMSService pmsService;
+PMSService? pmsService;
 var approve_or_not = 0.obs;
 @override
   void onInit() {
@@ -58,9 +58,9 @@ void onReady() async {
 
 }
 
-  Future<int> checkApproveOrNote(PMSDetailModel value) async{
+  Future<int?> checkApproveOrNote(PMSDetailModel value) async{
     this.pmsService = await PMSService().init();
-    await pmsService.pmsApproveorNot(value.employeeId.id.toString(),value.state).then((value){
+    await pmsService?.pmsApproveorNot(value.employeeId.id.toString(),value.state).then((value){
       print("Status#");
       print(value);
       approve_or_not.value = value;
@@ -70,7 +70,7 @@ void onReady() async {
   }
 
   getRatingConfig() async {
-    await masterService.getRatingConfig().then((data) {
+    await masterService?.getRatingConfig().then((data) {
       if(data.length > 0){
         this.selectedRatingConfig = data[0];
         this.selectedCompetenciesRatingConfig = data[0];
@@ -118,10 +118,10 @@ void selectImage(List<PlatformFile> files){
               size: 30.0,
             )),
             barrierDismissible: false));
-    String message = await pmsService.sendAcknowledge(pmsId);
+    String message = await pmsService!.sendAcknowledge(pmsId);
     if(message == 'Success'){
       Get.back();
-      var pmsList =  await pmsListController.getPmsList();
+      var pmsList =  await pmsListController!.getPmsList();
       detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
       AppUtils.showConfirmDialog('Information', message, (){
         showAcknowledge.value = false;
@@ -151,11 +151,11 @@ clickDone(String pmsId,String status) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-    message = await pmsService.pmsManagerApprove(pmsId,status);
+    message = await pmsService!.pmsManagerApprove(pmsId,status);
     if(message == 'Success'){
       Get.back();
       AppUtils.showConfirmDialog('Information', message, (){
-        pmsListController.getPmsApprovalList();
+        pmsListController?.getPmsApprovalList();
         // Get.back();
         Get.back();
         Get.back();
@@ -183,11 +183,11 @@ clickSubmit(String pmsId) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-    String message =detailModel.value.state == 'acknowledge'? await pmsService.sendMidYearSelfAssessment(pmsId) : await pmsService.sendYearEndSelfAssessment(pmsId);
+    String message =detailModel.value.state == 'acknowledge'? await pmsService!.sendMidYearSelfAssessment(pmsId) : await pmsService!.sendYearEndSelfAssessment(pmsId);
     if (message == 'Success') {
       Get.back();
       AppUtils.showConfirmDialog('Information', message, () {
-        pmsListController.getPmsList();
+        pmsListController?.getPmsList();
         showAcknowledge.value = false;
         // Get.back();
         Get.back();
@@ -202,13 +202,13 @@ clickSubmit(String pmsId) async{
 
 }
   refreshData(int index) async{
-    var pmsList =await pmsListController.getPmsList();
+    var pmsList =await pmsListController!.getPmsList();
     detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
     //calculateTotalEmployeeRate();
     //calculateTotalFinalRate();
   }
 refreshToApproveData(int index) async{
-  var pmsList =await pmsListController.getPmsApprovalList();
+  var pmsList =await pmsListController!.getPmsApprovalList();
   detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
   //calculateTotalEmployeeRate();
   //calculateTotalFinalRate();
@@ -218,7 +218,7 @@ editEmployeeRateAndRate(int index) async{
   if(selectedRatingConfig.id==0){
     AppUtils.showDialog("Information", 'Please fill Employee Rating');
   }else{
-    var pmsAttach = List<PMSAttach>();
+    var pmsAttach = <PMSAttach>[];
   if(attachment_list.value.length > 0){
     for(var i=0;i<attachment_list.value.length;i++){
       pmsAttach.add(PMSAttach(name: attachment_list[i].name,attachment_file: attachment_list[i].attach_file));
@@ -238,11 +238,11 @@ editEmployeeRateAndRate(int index) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-  String message= await pmsService.editEmployeeRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].employeeRemark,pmsAttach);
+  String message= await pmsService!.editEmployeeRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].employeeRemark,pmsAttach);
   if(message == 'Success'){
     Get.back();
     AppUtils.showConfirmDialog('Information', message, () async{
-      var pmsList =await pmsListController.getPmsList();
+      var pmsList =await pmsListController!.getPmsList();
       detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
       if(ratingConfig_list.length>0){
         selectedRatingConfig = ratingConfig_list.value[0];
@@ -271,7 +271,7 @@ editManagerRateAndRate(int index) async{
   }else{
     print('editManagerRateAndRate');
   print(detailModel.value.keyPerformanceIds[index].managerRate.toString());
-  var pmsAttach = List<PMSAttach>();
+  var pmsAttach = <PMSAttach>[];
   if(attachment_list.value.length > 0){
     for(var i=0;i<attachment_list.value.length;i++){
       pmsAttach.add(PMSAttach(name: attachment_list[i].name,attachment_file: attachment_list[i].attach_file));
@@ -291,11 +291,11 @@ editManagerRateAndRate(int index) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-  String message= await pmsService.editManagerRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].managerRemark,pmsAttach);
+  String message= await pmsService!.editManagerRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].managerRemark,pmsAttach);
   if(message == 'Success'){
     Get.back();
     AppUtils.showConfirmDialog('Information', message, () async{
-      var pmsList =await pmsListController.getPmsApprovalList();
+      var pmsList =await pmsListController!.getPmsApprovalList();
       detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
       if(ratingConfig_list.value.length > 0){
         selectedRatingConfig = ratingConfig_list.value[0];
@@ -321,10 +321,10 @@ editCompetenciesScore(int index) async{
   }else{
     print("editCompetenciesScore");
   print(detailModel.value.competenciesIds[index].score);
-  String message= await pmsService.editCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
+  String message= await pmsService!.editCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
   if(message == 'Success'){
     AppUtils.showConfirmDialog('Information', message, () async{
-      var pmsList =await pmsListController.getPmsApprovalList();
+      var pmsList =await pmsListController!.getPmsApprovalList();
       detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
       if(ratingConfig_list.value.length>0){
         selectedCompetenciesRatingConfig = ratingConfig_list.value[0];
@@ -345,10 +345,10 @@ editEmployeeCompetenciesScore(int index) async{
   }else{
     print("editCompetenciesScore");
   print(detailModel.value.competenciesIds[index].score);
-  String message= await pmsService.editEmployeeCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
+  String message= await pmsService!.editEmployeeCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
   if(message == 'Success'){
     AppUtils.showConfirmDialog('Information', message, () async{
-      var pmsList =await pmsListController.getPmsList();
+      var pmsList =await pmsListController!.getPmsList();
       detailModel.value = pmsList.where((element) => element.id == detailModel.value.id).toList()[0];
       if(ratingConfig_list.value.length>0){
         selectedCompetenciesRatingConfig = ratingConfig_list.value[0];
@@ -439,7 +439,7 @@ bool checkYearEndDate(){
   }
   return false;
 }
-bool showSubmitOrNot(){
+bool? showSubmitOrNot(){
   if(detailModel.value.state=='acknowledge'){
     return checkMidDate();
   }else if(detailModel.value.state=='mid_year_hr_approve'){

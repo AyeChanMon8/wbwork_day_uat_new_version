@@ -1,13 +1,13 @@
-// @dart=2.9
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/models/reward.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/reward.dart';
+import '../pages/pdf_view.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../routes/app_pages.dart';
@@ -15,8 +15,8 @@ import '../utils/app_utils.dart';
 
 class ReminderController extends GetxController {
   static ReminderController to = Get.find();
-  EmployeeService employeeService;
-  var reminders = List<Reward>().obs;
+  EmployeeService? employeeService;
+  var reminders = <Reward>[].obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
@@ -46,7 +46,7 @@ class ReminderController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardList(employee_id,offset.toString()).then((data) {
       if(data.length!=0){
         reminders.value = data;
       }
@@ -67,14 +67,17 @@ class ReminderController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardApprovalList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardApprovalList(employee_id,offset.toString()).then((data) {
       if(data.length!=0){
         if(offset!=0){
           isLoading.value = false;
           //reminders.value.addAll(data);
-          data.forEach((element) {
-            reminders.add(element);
-          });
+          // data.forEach((element) {
+          //   reminders.add(element);
+          // });
+          for(int i=0;i<data.length;i++){
+            reminders.add(data[i]);
+          }
         }else{
           reminders.value = data;
         }
@@ -97,14 +100,17 @@ class ReminderController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardApproveList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardApproveList(employee_id,offset.toString()).then((data) {
       if(data.length!=0){
         if(offset != 0){
           isLoading.value = false;
           //reminders.value.addAll(data);
-          data.forEach((element) {
-            reminders.add(element);
-          });
+          // data.forEach((element) {
+          //   reminders.add(element);
+          // });
+          for(int i=0;i<data.length;i++){
+            reminders.add(data[i]);
+          }
         }else{
           reminders.value = data;
         }
@@ -123,7 +129,7 @@ class ReminderController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.approveReward(id).then((data) {
+    await employeeService?.approveReward(id).then((data) {
       //travel_approve_show.value = false;
       Get.back();
       AppUtils.showConfirmDialog('Information', 'Successfully Approved!',(){
@@ -135,7 +141,7 @@ class ReminderController extends GetxController {
   }
 
   declinedReward(int id) async {
-    await employeeService.cancelReward(id).then((data) {
+    await employeeService?.cancelReward(id).then((data) {
       AppUtils.showConfirmDialog('Information', 'Successfully Declined!',(){
         getReminderApproval();
         Get.back();
@@ -153,7 +159,7 @@ class ReminderController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    File file = await employeeService.downloadReward(reward.id, 'reward${reward.id}');
+    File file = await employeeService!.downloadReward(reward.id, 'reward${reward.id}');
      await OpenFile.open(file.path);
     Get.back();
     //Get.to(PdfView(file.path,'reward${reward.id}'));

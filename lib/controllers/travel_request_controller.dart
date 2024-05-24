@@ -1,41 +1,41 @@
-// @dart=2.9
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/travel_list_controller.dart';
-import 'package:winbrother_hr_app/models/travel_expense.dart';
-import 'package:winbrother_hr_app/models/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_line.dart';
-import 'package:winbrother_hr_app/models/travel_request.dart';
-import 'package:winbrother_hr_app/models/travel_type.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
-import 'package:winbrother_hr_app/services/travel_request_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/travel_list_controller.dart';
+import '../models/travel_expense.dart';
+import '../models/travel_expense_category.dart';
+import '../models/travel_line.dart';
+import '../models/travel_request.dart';
+import '../models/travel_type.dart';
+import '../routes/app_pages.dart';
+import '../services/master_service.dart';
+import '../services/travel_request_service.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class TravelRequestController extends GetxController {
-  TravelRequestService _travelRequestService;
-  MasterService masterService;
-  TextEditingController fromDateTextController;
-  TextEditingController toDateTextController;
-  TextEditingController traveldateController;
-  TextEditingController destinationTextController;
-  TextEditingController purposeTextController;
-  TextEditingController fromPlaceTextController;
-  TextEditingController toPlaceController;
-  TextEditingController durationController;
-  TextEditingController destinationController;
-  var traveltype_list = List<TravelType>().obs;
+  TravelRequestService? _travelRequestService;
+  MasterService? masterService;
+  TextEditingController fromDateTextController = TextEditingController();
+  TextEditingController toDateTextController = TextEditingController();
+  TextEditingController traveldateController = TextEditingController();
+  TextEditingController destinationTextController = TextEditingController();
+  TextEditingController purposeTextController = TextEditingController();
+  TextEditingController fromPlaceTextController = TextEditingController();
+  TextEditingController toPlaceController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+  TextEditingController destinationController = TextEditingController();
+  var traveltype_list = <TravelType>[].obs;
   final TravelListController travelListController = Get.find();
   Rx<TravelType> _selectedTravelType = TravelType().obs;
   TravelType get selectedTravelType => _selectedTravelType.value;
   set selectedTravelType(TravelType type) => _selectedTravelType.value = type;
   var totalAmount = 0.0.obs;
-  var travelLineList = List<TravelLine>().obs;
+  var travelLineList = <TravelLine>[].obs;
 
   final RxString duration = "".obs;
   final is_add_travel = false.obs;
@@ -50,12 +50,12 @@ class TravelRequestController extends GetxController {
   set selectedExpenseType(TravelExpenseCategory type) =>
       _selectedExpenseType.value = type;
 
-  List<TravelExpense> expenseList = List<TravelExpense>().obs;
-  var expenseCategoryList = List<TravelExpenseCategory>().obs;
-  TextEditingController quantityTextController;
-  TextEditingController unitPriceController;
-  TextEditingController amountController;
-  TextEditingController remarkTextController;
+  List<TravelExpense> expenseList = <TravelExpense>[].obs;
+  var expenseCategoryList = <TravelExpenseCategory>[].obs;
+  TextEditingController quantityTextController = TextEditingController();
+  TextEditingController unitPriceController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+  TextEditingController remarkTextController = TextEditingController();
   @override
   void onInit() {
     fromDateTextController = TextEditingController();
@@ -112,7 +112,7 @@ clearTravelLine();
 
   getExpenseCategory() async {
     var company_id = box.read('emp_company');
-    await _travelRequestService.getExpenseCategory(int.tryParse(company_id)).then((data) {
+    await _travelRequestService?.getExpenseCategory(int.tryParse(company_id)).then((data) {
       this.selectedExpenseType = data[0];
       expenseCategoryList.value = data;
     });
@@ -198,7 +198,7 @@ clearTravelLine();
           travel_line: travelLineList,
           request_allowance_lines: expenseList);
 
-      await _travelRequestService.travelRequest(travelRequest,0).then((value) {
+      await _travelRequestService?.travelRequest(travelRequest,0).then((value) {
         if (value != 0) {
           Get.back();
           save_btn_show.value = false;
@@ -250,7 +250,7 @@ clearTravelLine();
           duration: durationValue,
           travel_line: travelLineList,
           request_allowance_lines: expenseList);
-      await _travelRequestService.travelRequestUpdate(travelRequest,id).then((value) {
+      await _travelRequestService?.travelRequestUpdate(travelRequest,id).then((value) {
         //Get.back();
         if (value != 0) {
           save_btn_show.value = false;
@@ -308,7 +308,7 @@ clearTravelLine();
       });
     });*/
 
-    dynamic travelLineListUpdate = List<TravelLine>();
+    dynamic travelLineListUpdate = <TravelLine>[];
 
     travelLineList.forEach((val){
       val.destination =
@@ -353,7 +353,7 @@ clearTravelLine();
       end_date: formattedToDate,
     );
 
-    await _travelRequestService.getTravelLine(travel).then((value) {
+    await _travelRequestService?.getTravelLine(travel).then((value) {
       travelLineList.value = value;
       var num = 0;
       double days = 0;
@@ -416,11 +416,10 @@ clearTravelLine();
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
     travelLineList.value[index].employee_id = employee_id;
-    await _travelRequestService
-        .updateTravelLine(travelLineList.value[index])
+    await _travelRequestService?.updateTravelLine(travelLineList.value[index])
         .then((value) {
       travelLineList.removeAt(index);
-      travelLineList.insert(index, value);
+      travelLineList.insert(index, value as TravelLine);
       var num = 0;
       double days = 0;
 
@@ -465,7 +464,7 @@ clearTravelLine();
   void calculateAmount() {
     var qty = quantityTextController.text;
     var unit_price = unitPriceController.text;
-    amount = int.tryParse(qty) * int.tryParse(unit_price);
+    amount = int.tryParse(qty)! * int.tryParse(unit_price)!;
     amountController.text = NumberFormat.currency(name:'',decimalDigits: 0).format(amount);
    // amountController.text = amount.toString();
   }

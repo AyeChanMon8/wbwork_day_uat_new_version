@@ -1,19 +1,19 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/OrganizationChart.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/OrganizationChart.dart';
+import '../models/employee.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OrganizationalChartController extends GetxController {
   static OrganizationalChartController to = Get.find();
   final box = GetStorage();
-  EmployeeService employeeService;
+  EmployeeService? employeeService;
   var empData = Employee().obs;
   RxString orgList = "".obs;
-  var array = List().obs;
+  var array = [].obs;
 
   @override
   void onReady() async {
@@ -40,8 +40,8 @@ class OrganizationalChartController extends GetxController {
     //fetch emp_id from GetX Storage
     final box = GetStorage();
     var employee_id = box.read('emp_id');
-    await employeeService.getEmployeeProfile(employee_id).then((data) {
-      empData.value = data;
+    await employeeService?.getEmployeeProfile(employee_id).then((data) {
+      empData.value = data as Employee;
       //fetchChildEmp(data);
       Get.back();
     });
@@ -57,7 +57,7 @@ class OrganizationalChartController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));*/
-    return await employeeService.getEmployeeProfile(employee_id);
+    return await employeeService?.getEmployeeProfile(employee_id);
   }
 
   @override
@@ -66,8 +66,8 @@ class OrganizationalChartController extends GetxController {
   }
 
   void fetchChildEmp(Employee data) {
-    List<String> emp_name_list = List<String>();
-    List<String> parent_name_list = List<String>();
+    List<String> emp_name_list = <String>[];
+    List<String> parent_name_list = <String>[];
     parent_name_list.add(data.name);
 
     for (int i = 0; i < data.child_ids.length; i++) {

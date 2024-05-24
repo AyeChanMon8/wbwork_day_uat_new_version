@@ -1,10 +1,10 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/insurance_page/approved_insurance_list.dart';
+import '../../my_class/my_style.dart';
 
 import '../../localization.dart';
+import 'approved_insurance_list.dart';
 import 'toapprove_insurance_list.dart';
 
 class InsuranceApprovalTabar extends StatefulWidget {

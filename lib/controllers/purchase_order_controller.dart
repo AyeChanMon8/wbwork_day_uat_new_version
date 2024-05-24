@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
@@ -8,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/purchase_order_approval_response.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/purchase_order_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/purchase_order_approval_response.dart';
+import '../routes/app_pages.dart';
+import '../services/purchase_order_service.dart';
+import '../utils/app_utils.dart';
 
 class PurchaseOrderController extends GetxController {
   final box = GetStorage();
-  PurchaseOrderService purchaseOrderService;
-  var purchaseOrderApprovalList = List<PurchaseOrderApprovalResponse>().obs;
+  PurchaseOrderService? purchaseOrderService;
+  var purchaseOrderApprovalList = <PurchaseOrderApprovalResponse>[].obs;
   var button_approve_show = false.obs;
   @override
   void onReady() async {
@@ -41,7 +40,7 @@ class PurchaseOrderController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await purchaseOrderService.getEmployeePurchaseOrderList(employee_id).then((data) {
+    await purchaseOrderService?.getEmployeePurchaseOrderList(employee_id).then((data) {
       purchaseOrderApprovalList.value = data;
       Get.back();
     });
@@ -58,7 +57,7 @@ class PurchaseOrderController extends GetxController {
             )),
             barrierDismissible: false));
     var employee_id = box.read('emp_id');
-    await purchaseOrderService.approvePurchaseOrder(id,employee_id).then((data) {
+    await purchaseOrderService?.approvePurchaseOrder(id,employee_id).then((data) {
       Get.back();
       if(data){
         AppUtils.showConfirmDialog('Information', 'Successfully Approved!',(){
@@ -82,7 +81,7 @@ class PurchaseOrderController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await purchaseOrderService.cancelPurchaseOrder(id, reason.toString()).then((data) {
+    await purchaseOrderService?.cancelPurchaseOrder(id, reason.toString()).then((data) {
       Get.back();
       if(data){
         AppUtils.showConfirmDialog('Information', 'Successfully Declined!',(){

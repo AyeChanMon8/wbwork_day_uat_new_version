@@ -1,21 +1,21 @@
-// @dart=2.9
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:winbrother_hr_app/models/home_function.dart';
-import 'package:winbrother_hr_app/pages/bottom_navigation.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/home_function.dart';
+import '../pages/bottom_navigation.dart';
+import '../routes/app_pages.dart';
+import '../services/employee_service.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
 class SplashController extends GetxController{
-  EmployeeService employeeService;
-  String emp_id;
+  EmployeeService? employeeService;
+  String emp_id = '';
   final box = GetStorage();
   @override
   void onReady() async {
@@ -27,8 +27,7 @@ class SplashController extends GetxController{
     this.employeeService = await EmployeeService().init();
     String username = box.read('username');
     String password = box.read('password');
-    await employeeService
-        .checkLogin(username, password)
+    await employeeService?.checkLogin(username, password)
         .then((data) {
       if (!data.isNull) {
         emp_id = data.toString();
@@ -44,7 +43,7 @@ class SplashController extends GetxController{
   }
   void checkRole(String emp_id) async {
     this.employeeService = await EmployeeService().init();
-    await employeeService.checkRole(int.tryParse(emp_id)).then((data) async {
+    await employeeService?.checkRole(int.tryParse(emp_id)).then((data) async {
       final labels = AppLocalizations.of(Get.context);
       var storage = LocalStorage('storefunction');
       bool value  = await storage.ready;

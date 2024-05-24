@@ -1,29 +1,29 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/overtime_request_response.dart';
-import 'package:winbrother_hr_app/models/overtime_response.dart';
-import 'package:winbrother_hr_app/models/remark.dart';
-import 'package:winbrother_hr_app/pages/over_time.dart';
-import 'package:winbrother_hr_app/pages/overtime_list.dart';
-import 'package:winbrother_hr_app/pages/overtime_list_tabbar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/services/overtime_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../localization.dart';
+import '../models/overtime_request_response.dart';
+import '../models/overtime_response.dart';
+import '../models/remark.dart';
+import '../pages/over_time.dart';
+import '../pages/overtime_list.dart';
+import '../pages/overtime_list_tabbar.dart';
+import '../routes/app_pages.dart';
+import '../services/employee_service.dart';
+import '../services/overtime_service.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OverTimeResponseListController extends GetxController {
-  TextEditingController remarkController;
+  TextEditingController remarkController = TextEditingController();
 
   static OverTimeResponseListController to = Get.find();
-  OvertimeService overtimeService;
-  var otcList = List<OvertimeResponse>().obs;
-  var otAcceptedList = List<OvertimeResponse>().obs;
-  var otDeclinedList = List<OvertimeResponse>().obs;
-  var otDraftList = List<OvertimeResponse>().obs;
+  OvertimeService? overtimeService;
+  var otcList = <OvertimeResponse>[].obs;
+  var otAcceptedList = <OvertimeResponse>[].obs;
+  var otDeclinedList = <OvertimeResponse>[].obs;
+  var otDraftList = <OvertimeResponse>[].obs;
   var button_show = false.obs;
   final box = GetStorage();
 
@@ -56,8 +56,7 @@ class OverTimeResponseListController extends GetxController {
     //if (role == 'employee') {
     if(this.overtimeService == null)
     this.overtimeService = await OvertimeService().init();
-      await overtimeService
-          .getEmployeeOvertimeResponseList(employee_id)
+      await overtimeService?.getEmployeeOvertimeResponseList(employee_id)
           .then((data) {
               otcList.value = data;
               _getOtAcceptedList(otcList.value);
@@ -88,7 +87,7 @@ class OverTimeResponseListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await overtimeService.overtimeAccept(id).then((value) {
+    await overtimeService?.overtimeAccept(id).then((value) {
       Get.back();
       if (value == "true") {
         button_show.value = false;
@@ -117,7 +116,7 @@ class OverTimeResponseListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await overtimeService.overtimeDecline(id, remark).then((value) {
+    await overtimeService?.overtimeDecline(id, remark).then((value) {
       getOtResponseList();
       Get.back();
       Get.back();
@@ -127,7 +126,7 @@ class OverTimeResponseListController extends GetxController {
   }
 
   _getOtAcceptedList(List<OvertimeResponse> data) async {
-    var list = List<OvertimeResponse>();
+    var list = <OvertimeResponse>[];
     for (int i = 0; i < data.length; i++) {
       if (data[i].state == 'accept') {
         list.add(data[i]);
@@ -137,7 +136,7 @@ class OverTimeResponseListController extends GetxController {
   }
 
   _getOtDeclinedList(List<OvertimeResponse> data) async {
-    var list = List<OvertimeResponse>();
+    var list = <OvertimeResponse>[];
     for (int i = 0; i < data.length; i++) {
       if (data[i].state == 'cancel') {
         list.add(data[i]);
@@ -147,7 +146,7 @@ class OverTimeResponseListController extends GetxController {
   }
 
   _getOtDraftList(List<OvertimeResponse> data) async {
-    var list = List<OvertimeResponse>();
+    var list = <OvertimeResponse>[];
     for (int i = 0; i < data.length; i++) {
       if (data[i].state == 'draft') {
         list.add(data[i]);

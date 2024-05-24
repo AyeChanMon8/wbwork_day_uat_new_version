@@ -1,13 +1,13 @@
-// @dart=2.9
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/models/reward.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/reward.dart';
+import '../pages/pdf_view.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../routes/app_pages.dart';
@@ -15,8 +15,8 @@ import '../utils/app_utils.dart';
 
 class RewardController extends GetxController {
   static RewardController to = Get.find();
-  EmployeeService employeeService;
-  var rewards = List<Reward>().obs;
+  EmployeeService? employeeService;
+  var rewards = <Reward>[].obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
@@ -28,7 +28,7 @@ class RewardController extends GetxController {
     // _getloanList();
     getRewards();
     var employee_id = box.read('emp_id');
-    reward_approval_count.value = await employeeService.getRewardsToApproveCount(employee_id);
+    reward_approval_count.value = await employeeService!.getRewardsToApproveCount(employee_id);
   }
 
   @override
@@ -49,13 +49,15 @@ class RewardController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardList(employee_id,offset.toString()).then((data) {
       if(offset!=0){
         isLoading.value = false;
-        data.forEach((element) {
-          rewards.add(element);
-        });
-
+        // data.forEach((element) {
+        //   rewards.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          rewards.add(data[i]);
+        }
       }else{
         rewards.value = data;
       }
@@ -77,13 +79,16 @@ class RewardController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardApprovalList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardApprovalList(employee_id,offset.toString()).then((data) {
         if(offset!=0){
           isLoading.value = false;
           //rewards.value.addAll(data);
-          data.forEach((element) {
-            rewards.add(element);
-          });
+          // data.forEach((element) {
+          //   rewards.add(element);
+          // });
+          for(var i=0;i<data.length;i++){
+            rewards.add(data[i]);
+          }
         }else{
           rewards.value = data;
         }
@@ -105,14 +110,15 @@ class RewardController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.rewardApproveList(employee_id,offset.toString()).then((data) {
+    await employeeService?.rewardApproveList(employee_id,offset.toString()).then((data) {
       if(data.length!=0){
         if(offset != 0){
           isLoading.value = false;
          // rewards.value.addAll(data);
-          data.forEach((element) {
-            rewards.add(element);
-          });
+          
+          for(var i=0;i<data.length;i++){
+            rewards.add(data[i]);
+          }
           update();
         }else{
           rewards.value = data;
@@ -134,12 +140,12 @@ class RewardController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.approveReward(id).then((data) {
+    await employeeService?.approveReward(id).then((data) {
       //travel_approve_show.value = false;
       Get.back();
       AppUtils.showConfirmDialog('Information', 'Successfully Approved!',() async {
         var employee_id = box.read('emp_id');
-        reward_approval_count.value = await employeeService.getRewardsToApproveCount(employee_id);
+        reward_approval_count.value = await employeeService!.getRewardsToApproveCount(employee_id);
         getRewardsApproval();
         Get.back();
         Get.back();
@@ -148,7 +154,7 @@ class RewardController extends GetxController {
   }
 
   declinedReward(int id) async {
-    await employeeService.cancelReward(id).then((data) {
+    await employeeService?.cancelReward(id).then((data) {
       AppUtils.showConfirmDialog('Information', 'Successfully Declined!',(){
         getRewardsApproval();
         Get.back();
@@ -166,7 +172,7 @@ class RewardController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    File file = await employeeService.downloadReward(reward.id, 'reward${reward.id}');
+    File file = await employeeService!.downloadReward(reward.id, 'reward${reward.id}');
      await OpenFile.open(file.path);
     Get.back();
     //Get.to(PdfView(file.path,'reward${reward.id}'));

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 Widget appbar(BuildContext context, title, String image) {
   return AppBar(

@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../../constants/globals.dart';
+import '../../controllers/approval_controller.dart';
+import '../../my_class/my_style.dart';
+import '../../routes/app_pages.dart';
 class ApprovedOutOfPocketList extends StatefulWidget {
   @override
   _ApprovedOutOfPocketListState createState() => _ApprovedOutOfPocketListState();
@@ -14,7 +14,7 @@ class ApprovedOutOfPocketList extends StatefulWidget {
 class _ApprovedOutOfPocketListState extends State<ApprovedOutOfPocketList> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   void initState() {
     super.initState();

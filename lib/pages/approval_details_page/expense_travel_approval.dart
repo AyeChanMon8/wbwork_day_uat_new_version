@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -9,12 +9,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/leave_detail.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/approval_controller.dart';
+import '../../localization.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../my_class/my_style.dart';
+import '../../pages/leave_detail.dart';
+import '../../utils/app_utils.dart';
 
 class TravelExpenseApproval extends StatefulWidget {
   @override
@@ -24,8 +24,8 @@ class TravelExpenseApproval extends StatefulWidget {
 class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -102,12 +102,12 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
                     alignment: Alignment.centerRight,
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 18),
-                        child:Text('${labels?.total} Advance Amount : ${NumberFormat('#,###.#').format(controller.getTotalExpenseTravelAdvanceAmount(index))}',style: TextStyle(fontSize: 16,color: Colors.deepPurple),))),
+                        child:Text('${labels.total} Advance Amount : ${NumberFormat('#,###.#').format(controller.getTotalExpenseTravelAdvanceAmount(index))}',style: TextStyle(fontSize: 16,color: Colors.deepPurple),))),
                 Align(
                     alignment: Alignment.centerRight,
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 18),
-                        child:Text('${labels?.total} Amount : ${NumberFormat('#,###.#').format(controller.getTotalExpenseTravelAmount(index))}',style: TextStyle(fontSize: 16,color: Colors.deepPurple),))),
+                        child:Text('${labels.total} Amount : ${NumberFormat('#,###.#').format(controller.getTotalExpenseTravelAmount(index))}',style: TextStyle(fontSize: 16,color: Colors.deepPurple),))),
                 Divider(height: 2,color:textFieldTapColor,),
                 Align(
                     alignment: Alignment.centerRight,
@@ -136,7 +136,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
                 controller.approveTravelExpense(
                     controller.travelExpenseList.value[index].id);
               },
-              text: labels?.approve,
+              text: labels.approve,
               blockButton: true,
               size: GFSize.LARGE,
               color: textFieldTapColor,
@@ -393,7 +393,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.date + " :"),
+                  (labels.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -413,7 +413,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -496,7 +496,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
       shrinkWrap: true,
       crossAxisCount: 2,
       children: List.generate(value.length, (index) {
-        Uint8List bytes1;
+        late Uint8List bytes1;
         if(value[index]!=null){
           bytes1 = base64Decode(value[index]);
         }

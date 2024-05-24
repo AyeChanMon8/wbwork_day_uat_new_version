@@ -1,10 +1,10 @@
-// @dart=2.9
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../routes/app_pages.dart';
 
 import '../services/employee_service.dart';
 
@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 import '../utils/app_utils.dart';
 
 class OtpController extends GetxController {
-  EmployeeService employeeService;
-  TextEditingController userOtpController;
+  EmployeeService? employeeService;
+  TextEditingController userOtpController = TextEditingController();
 
   final box = GetStorage();
 
@@ -46,8 +46,7 @@ class OtpController extends GetxController {
                     size: 30.0,
                   )),
                   barrierDismissible: false));
-          await employeeService
-              .compareotpcode(otpCode, user_otp)
+          await employeeService?.compareotpcode(otpCode, user_otp)
               .then((value) {
             if (value) {
               Get.back();

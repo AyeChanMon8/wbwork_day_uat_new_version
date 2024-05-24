@@ -1,23 +1,23 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_response.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_list.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/travel_request_service.dart';
+import '../models/leave_list_response.dart';
+import '../models/travel_expense/out_of_pocket_model.dart';
+import '../models/travel_expense/out_of_pocket_response.dart';
+import '../models/travel_expense/travel_expense_list.dart';
+import '../models/travel_request_list_response.dart';
+import '../routes/app_pages.dart';
+import '../services/travel_request_service.dart';
 import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class TravelListController extends GetxController {
   static TravelListController to = Get.find();
-  TravelRequestService _travelRequestService;
-  var travelLineList = List<TravelRequestListResponse>().obs;
-  var travelExpenseList = List<TravelExpenseListModel>().obs;
-  var outofpocketExpenseList = List<OutofPocketResponse>().obs;
+  TravelRequestService? _travelRequestService;
+  var travelLineList = <TravelRequestListResponse>[].obs;
+  var travelExpenseList = <TravelExpenseListModel>[].obs;
+  var outofpocketExpenseList = <OutofPocketResponse>[].obs;
   final box = GetStorage();
   var button_submit_show = false.obs;
   var button_approve_show = false.obs;
@@ -91,7 +91,7 @@ class TravelListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await _travelRequestService.deleteTravel(id).then((data) {
+    await _travelRequestService?.deleteTravel(id).then((data) {
       button_approve_show.value = false;
       //getTravelList();
       Get.back();
@@ -111,7 +111,7 @@ class TravelListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await _travelRequestService.approveTravel(id).then((data) {
+    await _travelRequestService?.approveTravel(id).then((data) {
       Get.offNamed(Routes.LEAVE_TRIP_TAB_BAR,arguments: "travel");
       getTravelList();
       // AppUtils.showDialog('Result Box', 'Successfully Click Cancel');
@@ -128,7 +128,7 @@ class TravelListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await _travelRequestService.requestAdvanceTravel(id).then((data) {
+    await _travelRequestService?.requestAdvanceTravel(id).then((data) {
       if(data){
         Get.back();
         Get.back(result: true);
@@ -147,7 +147,7 @@ class TravelListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await _travelRequestService.submitTravel(id).then((data) {
+    await _travelRequestService?.submitTravel(id).then((data) {
       if(data.runtimeType == bool) {
        if(data)
          {
@@ -174,15 +174,17 @@ class TravelListController extends GetxController {
   //total amount
   double getTotalAmount(int index){
     double totalAmount = 0.0;
-    travelLineList.value[index].request_allowance_lines.forEach((element) {
-      totalAmount += element.total_amount;
-    });
-
+    // travelLineList.value[index].request_allowance_lines.forEach((element) {
+    //   totalAmount += element.total_amount;
+    // });
+    for(var i=0;i<travelLineList.value[index].request_allowance_lines.length;i++){
+      totalAmount += travelLineList.value[index].request_allowance_lines[i].total_amount;
+    }
     return totalAmount;
   }
 
   declinedTravel(int id) async {
-    await _travelRequestService.cancelTravel(id).then((data) {
+    await _travelRequestService?.cancelTravel(id).then((data) {
 
       Get.defaultDialog(title:'Result Box',content: Text('Successfully Click Cancel'),confirmTextColor: Colors.white,onConfirm: (){
         Get.back();
@@ -204,14 +206,16 @@ class TravelListController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
    if(_travelRequestService !=null)
-    await _travelRequestService
-        .getTravelRequestListForEmp(employee_id,offset.toString())
+    await _travelRequestService?.getTravelRequestListForEmp(employee_id,offset.toString())
         .then((data) {
       if(offset!=0){
         isLoading.value = false;
-        data.forEach((element) {
-          travelLineList.add(element);
-        });
+        // data.forEach((element) {
+        //   travelLineList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          travelLineList.add(data[i]);
+        }
        // travelLineList.addAll(data);
       }else{
         travelLineList.value = data;
@@ -221,14 +225,16 @@ class TravelListController extends GetxController {
     });
     else{
       this._travelRequestService = await TravelRequestService().init();
-      await _travelRequestService
-          .getTravelRequestListForEmp(employee_id,offset.toString())
+      await _travelRequestService?.getTravelRequestListForEmp(employee_id,offset.toString())
           .then((data) {
         if(offset!=0){
           isLoading.value = false;
-          data.forEach((element) {
-            travelLineList.add(element);
-          });
+          // data.forEach((element) {
+          //   travelLineList.add(element);
+          // });
+          for(var i=0;i<data.length;i++){
+            travelLineList.add(data[i]);
+          }
           //travelLineList.addAll(data);
         }else{
           travelLineList.value = data;

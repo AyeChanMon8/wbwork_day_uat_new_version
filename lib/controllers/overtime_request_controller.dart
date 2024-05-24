@@ -1,60 +1,60 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/components/toast/gf_toast.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/overtime_list_controller.dart';
-import 'package:winbrother_hr_app/models/category_id.dart';
-import 'package:winbrother_hr_app/models/depart_empids.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/emp_dept_tag.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_category.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/ot_department.dart';
-import 'package:winbrother_hr_app/models/overtime_category.dart';
-import 'package:winbrother_hr_app/models/overtime_request.dart';
-import 'package:winbrother_hr_app/models/overtime_request_line.dart';
-import 'package:winbrother_hr_app/models/request_line.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
-import 'package:winbrother_hr_app/services/overtime_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/overtime_list_controller.dart';
+import '../models/category_id.dart';
+import '../models/depart_empids.dart';
+import '../models/department.dart';
+import '../models/emp_dept_tag.dart';
+import '../models/employee.dart';
+import '../models/employee_category.dart';
+import '../models/employee_id.dart';
+import '../models/ot_department.dart';
+import '../models/overtime_category.dart';
+import '../models/overtime_request.dart';
+import '../models/overtime_request_line.dart';
+import '../models/request_line.dart';
+import '../routes/app_pages.dart';
+import '../services/employee_service.dart';
+import '../services/master_service.dart';
+import '../services/overtime_service.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OvertimeRequestController extends GetxController {
-  OvertimeService overtimeService;
-  MasterService masterService;
-  TextEditingController fromDateTimeTextController;
-  TextEditingController toDateTimeTextController;
-  TextEditingController reasonTextController;
-  TextEditingController durationController;
-  var requestLineList = List<OvertimeRequestLine>().obs;
-  var requestLineTempList = List<OvertimeRequestLine>().obs;
-  var employeeDeptTagRequestLineList = List<EmployeeDeptTag>().obs;
-  var empIdsByDept = List<int>();
-  var empIdsByTag = List<int>();
-  var empListByDept = List<EmployeeID>();
-  var empListByTag = List<EmployeeID>();
+  OvertimeService? overtimeService;
+  MasterService? masterService;
+  TextEditingController fromDateTimeTextController = TextEditingController();
+  TextEditingController toDateTimeTextController = TextEditingController();
+  TextEditingController reasonTextController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+  var requestLineList = <OvertimeRequestLine>[].obs;
+  var requestLineTempList = <OvertimeRequestLine>[].obs;
+  var employeeDeptTagRequestLineList = <EmployeeDeptTag>[].obs;
+  var empIdsByDept = <int>[];
+  var empIdsByTag = <int>[];
+  var empListByDept = <EmployeeID>[];
+  var empListByTag = <EmployeeID>[];
   final RxString duration = "".obs;
   final RxBool is_add_request_line = false.obs;
   final box = GetStorage();
   var from_date_time = "";
   var to_date_time = "";
-  var category_ids = List<CategoryID>();
-  var dept_ids = List<OTDepartment>();
-  var otcategory_ids = List<OvertimeCategory>();
-  var employee_tag_list = List<EmployeeCategory>().obs;
+  var category_ids = <CategoryID>[];
+  var dept_ids = <OTDepartment>[];
+  var otcategory_ids = <OvertimeCategory>[];
+  var employee_tag_list = <EmployeeCategory>[].obs;
   var enableDropdown = false.obs;
-  var categ_id = 0;
+  int categ_id = 0;
   Rx<EmployeeCategory> _selectedEmployeeTag = EmployeeCategory().obs;
   EmployeeCategory get selectedEmployeeTag => _selectedEmployeeTag.value;
   set selectedEmployeeTag(EmployeeCategory state) =>
       _selectedEmployeeTag.value = state;
-  var department_list = List<OTDepartment>().obs;
-  var category_list = List<OvertimeCategory>().obs;
+  var department_list = <OTDepartment>[].obs;
+  var category_list = <OvertimeCategory>[].obs;
   Rx<OTDepartment> _selectedDepartment = OTDepartment().obs;
   OTDepartment get selectedDepartment => _selectedDepartment.value;
   set selectedDepartment(OTDepartment department) =>
@@ -69,8 +69,8 @@ class OvertimeRequestController extends GetxController {
   // var chipValues = List<EmployeeCategory>().obs;
   // var selectedChip = List<bool>().obs;
 
-  var deptChipValues = List<OTDepartment>().obs;
-  var selectedDeptChip = List<bool>().obs;
+  var deptChipValues = <OTDepartment>[].obs;
+  var selectedDeptChip = <bool>[].obs;
   DateTime selectedFromDate = DateTime.now();
   DateTime selectedEndDate = DateTime.now();
   @override
@@ -121,8 +121,7 @@ class OvertimeRequestController extends GetxController {
                   size: 30.0,
                 )),
                 barrierDismissible: false));
-        await overtimeService
-            .getEmployeeByDept(department.id, employee_id)
+        await overtimeService?.getEmployeeByDept(department.id, employee_id)
             .then((data) {
           Get.back();
           for (int i = 0; i < data.length; i++) {
@@ -176,7 +175,7 @@ class OvertimeRequestController extends GetxController {
 
   getDepartments() async {
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService.getDepartmentList(employee_id).then((data) {
+    await masterService?.getDepartmentList(employee_id).then((data) {
       print("deptSize");
       print(data.length);
       data.insert(0, OTDepartment(id: 0, name: 'Department', branch_id: Branch_id(id: 0, name: 'Branch')));
@@ -187,7 +186,7 @@ class OvertimeRequestController extends GetxController {
 
   getOvertimeCategories() async{
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService.getOvertimeCategoryList(employee_id).then((data) {
+    await masterService?.getOvertimeCategoryList(employee_id).then((data) {
       print("deptSize");
       print(data.length);
       data.insert(0, OvertimeCategory(id: 0, name: 'Overtime Category'));
@@ -206,7 +205,7 @@ class OvertimeRequestController extends GetxController {
 
     var to_date = DateFormat('yyyy-MM-dd HH:mm').parse(selectedEndDate.toString().split('.')[0]).subtract(Duration(hours: 6,minutes: 30)).toString().split('.')[0];
     if(categ_id == 0){
-      categ_id = null;
+      categ_id = 0;
     }
     if (from_date.isNotEmpty &&
         to_date.isNotEmpty &&
@@ -244,8 +243,7 @@ class OvertimeRequestController extends GetxController {
       );
       print(overtime_request.toJson());
 
-      await overtimeService
-          .overtimeRequest(employee_id, overtime_request)
+      await overtimeService?.overtimeRequest(employee_id, overtime_request)
           .then((data) {
         Get.back();
         if (data.contains("ERROR")) {

@@ -1,18 +1,18 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/overtime_request_response.dart';
-import 'package:winbrother_hr_app/services/overtime_service.dart';
+import '../models/overtime_request_response.dart';
+import '../services/overtime_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class OverTimeListController extends GetxController {
   static OverTimeListController to = Get.find();
-  OvertimeService overtimeService;
-  var otList = List<OvertimeRequestResponse>().obs;
-  var otAcceptedList = List<OvertimeRequestResponse>().obs;
-  var otDeclinedList = List<OvertimeRequestResponse>().obs;
+  OvertimeService? overtimeService;
+  var otList = <OvertimeRequestResponse>[].obs;
+  var otAcceptedList = <OvertimeRequestResponse>[].obs;
+  var otDeclinedList = <OvertimeRequestResponse>[].obs;
   final box = GetStorage();
   var button_submit_show = true.obs;
   var isLoading = false.obs;
@@ -42,15 +42,19 @@ class OverTimeListController extends GetxController {
             )),
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
-    await overtimeService.getOvertimeRequestList(emp_id.toString(),offset.toString()).then((data) {
-      data.sort(
+    await overtimeService?.getOvertimeRequestList(emp_id.toString(),offset.toString()).then((data) {
+      List<OvertimeRequestResponse> otData = data;
+      otData.sort(
           (name1, name2) => name2.start_date.compareTo(name1.start_date));
       if(offset!=0){
         isLoading.value = false;
         //otList.addAll(data);
-        data.forEach((element) {
-          otList.add(element);
-        });
+        // data.forEach((element) {
+        //   otList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          otList.add(data[i]);
+        }
       }else{
         otList.value = data;
       }
@@ -69,7 +73,7 @@ class OverTimeListController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await overtimeService.submitOvertime(id).then((data) {
+    await overtimeService?.submitOvertime(id).then((data) {
       Get.back();
 
       if (data == 'true') {
@@ -97,7 +101,7 @@ class OverTimeListController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await overtimeService.cancelOvertime(id).then((data) {
+    await overtimeService?.cancelOvertime(id).then((data) {
       Get.back();
       if (data == 'true') {
         button_submit_show.value = true;

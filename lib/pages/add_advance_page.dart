@@ -1,15 +1,15 @@
-// @dart=2.9
+
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_expense_controller.dart';
-import 'package:winbrother_hr_app/controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import 'package:winbrother_hr_app/models/daytrip_advance_expense_category.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/day_trip_expense_controller.dart';
+import '../../controllers/daytrip_plantrip_fuel_advance_controller.dart';
+import '../../models/daytrip_advance_expense_category.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../my_class/my_style.dart';
+import '../../utils/app_utils.dart';
 
 class AddAdvancePage extends StatelessWidget {
 //final DayTripExpenseController day_trip_controller = Get.find();
@@ -33,7 +33,9 @@ AddAdvancePage(String from,int daytrip_id , double advanceTotal,double advanceLi
 Widget build(BuildContext context) {
   //arg = Get.arguments;
   return Scaffold(
-    appBar: appbar(context, 'Add Advance', ''),
+    appBar: PreferredSize(
+      preferredSize: const Size.fromHeight(8.0),
+      child: appbar(context, 'Add Advance', '')),
     body: SingleChildScrollView(
       child: Container(
         child: Column(
@@ -133,7 +135,7 @@ Widget build(BuildContext context) {
               child:  GFButton(
                 color: textFieldTapColor,
                 onPressed: day_trip_controller.isAdvanceButton.value ? null :() {
-                  advanceLineTotal = double.tryParse(day_trip_controller.totalAmountController.text.toString());
+                  advanceLineTotal = double.tryParse(day_trip_controller.totalAmountController.text.toString())!;
                   if(advanceTotal>=advanceLineTotal)
                   day_trip_controller.addAdvance(from_where,arg_id);
                   else
@@ -189,8 +191,8 @@ Widget expenseCategoryDropDown() {
                         icon: Icon(Icons.keyboard_arrow_down),
                         iconSize: 30,
                         isExpanded: true,
-                        onChanged: (Daytrip_advance_expense_category value) {
-                          day_trip_controller.onChangeExpenseCategoryForAdvanceDropdown(value);
+                        onChanged: (Daytrip_advance_expense_category? value) {
+                          day_trip_controller.onChangeExpenseCategoryForAdvanceDropdown(value!);
                         },
                         items: day_trip_controller.exp_category_list
                             .map((Daytrip_advance_expense_category category) {

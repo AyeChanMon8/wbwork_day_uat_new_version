@@ -1,11 +1,11 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/out_of_pocket_page/approved_outofpocket_list.dart';
-import 'package:winbrother_hr_app/pages/out_of_pocket_page/toapprove_outofpocket_list.dart';
+import '../../localization.dart';
+import '../../my_class/my_style.dart';
+import '../../pages/out_of_pocket_page/approved_outofpocket_list.dart';
+import '../../pages/out_of_pocket_page/toapprove_outofpocket_list.dart';
 class OutOfPocketApprovalTabar extends StatefulWidget {
   @override
   _OutOfPocketApprovalTabarState createState() => _OutOfPocketApprovalTabarState();
@@ -20,7 +20,7 @@ class _OutOfPocketApprovalTabarState extends State<OutOfPocketApprovalTabar> {
       child: Scaffold(
           appBar: AppBar(
             shadowColor: Colors.white,
-              title: Text(labels?.outOfPocket, style: appbarTextStyle()),
+              title: Text(labels.outOfPocket, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/approval_controller.dart';
+import '../../my_class/my_style.dart';
+import '../../utils/app_utils.dart';
 
 import '../../localization.dart';
 
@@ -20,8 +19,8 @@ class InsuranceApproval extends StatefulWidget {
 class _InsuranceApprovalState extends State<InsuranceApproval> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {

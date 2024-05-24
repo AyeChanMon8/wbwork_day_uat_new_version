@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/approval_controller.dart';
+import '../../localization.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../my_class/my_style.dart';
+import '../../utils/app_utils.dart';
 
 import '../leave_detail.dart';
 
@@ -24,8 +24,8 @@ class TravelExpenseApprovedDetails extends StatefulWidget {
 class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -128,7 +128,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
                 controller.approveTravelExpense(
                     controller.travelExpenseApprovedList.value[index].id);
               },
-              text: labels?.approve,
+              text: labels.approve,
               blockButton: true,
               size: GFSize.LARGE,
               color: textFieldTapColor,
@@ -144,7 +144,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
                     controller.travelExpenseApprovedList.value[index].id);
               },
               type: GFButtonType.outline,
-              text: labels?.decline,
+              text: labels.decline,
               textColor: textFieldTapColor,
               blockButton: true,
               size: GFSize.LARGE,
@@ -422,7 +422,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels?.date + " :"),
+                  (labels.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -446,7 +446,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -512,7 +512,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
       shrinkWrap: true,
       crossAxisCount: 2,
       children: List.generate(value.length, (index) {
-        Uint8List bytes1;
+        late Uint8List bytes1;
         if(value[index]!=null){
           bytes1 = base64Decode(value[index]);
         }

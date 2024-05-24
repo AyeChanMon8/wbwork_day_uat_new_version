@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:io';
 
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
@@ -6,24 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/models/warning.dart';
-import 'package:winbrother_hr_app/models/warning_model.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../controllers/approval_controller.dart';
+import '../models/warning.dart';
+import '../models/warning_model.dart';
+import '../pages/pdf_view.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class WarningController extends GetxController {
   static WarningController to = Get.find();
-  EmployeeService employeeService;
+  EmployeeService? employeeService;
   /*var warnings = List<Warning>().obs;*/
-  var warnings = List<Warning_model>().obs;
+  var warnings = <Warning_model>[].obs;
   var warning_approval_count = 0.obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
-  String flag;
+  String flag = '';
   @override
   void onReady() async {
     super.onReady();
@@ -35,7 +35,7 @@ class WarningController extends GetxController {
     this.employeeService = await EmployeeService().init();
     var employee_id = box.read('emp_id');
     warning_approval_count.value =
-        await employeeService.getWarningToApproveCount(employee_id);
+        await employeeService!.getWarningToApproveCount(employee_id);
   }
   void downloadWarning(Warning_model warning) async {
     Future.delayed(
@@ -47,7 +47,7 @@ class WarningController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    File file = await employeeService.downloadWarning(warning.id, 'warning${warning.id}');
+    File file = await employeeService!.downloadWarning(warning.id, 'warning${warning.id}');
     await OpenFile.open(file.path);
     Get.back();
     //Get.to(PdfView(file.path,'warning${warning.id}'));
@@ -70,12 +70,15 @@ class WarningController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.warningList(employee_id,offset.toString()).then((data) {
+    await employeeService?.warningList(employee_id,offset.toString()).then((data) {
       if (offset != 0) {
         isLoading.value = false;
-        data.forEach((element) {
-          warnings.add(element);
-        });
+        // data.forEach((element) {
+        //   warnings.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          warnings.add(data[i]);
+        }
       } else {
         warnings.value = data;
       }
@@ -96,12 +99,15 @@ class WarningController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService.warningApprovalList(employee_id, offset.toString()).then((data) {
+    await employeeService?.warningApprovalList(employee_id, offset.toString()).then((data) {
       if (offset != 0) {
         isLoading.value = false;
-        data.forEach((element) {
-          warnings.add(element);
-        });
+        // data.forEach((element) {
+        //   warnings.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          warnings.add(data[i]);
+        }
       } else {
         warnings.value = data;
       }
@@ -123,15 +129,17 @@ class WarningController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await employeeService
-        .warningApproveList(employee_id, offset.toString())
+    await employeeService?.warningApproveList(employee_id, offset.toString())
         .then((data) {
       if (offset != 0) {
         isLoading.value = false;
         //warnings.value.addAll(data);
-        data.forEach((element) {
-          warnings.add(element);
-        });
+        // data.forEach((element) {
+        //   warnings.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          warnings.add(data[i]);
+        }
       } else {
         if (data.length != 0) {
           warnings.value = data;
@@ -155,10 +163,10 @@ class WarningController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await employeeService.approveWarning(id).then((data) async {
+    await employeeService?.approveWarning(id).then((data) async {
       var employee_id = box.read('emp_id');
       warning_approval_count.value =
-          await employeeService.getWarningToApproveCount(employee_id);
+          await employeeService!.getWarningToApproveCount(employee_id);
       //travel_approve_show.value = false;
       Get.back();
       AppUtils.showConfirmDialog('Information', 'Successfully Approved!', () {
@@ -171,7 +179,7 @@ class WarningController extends GetxController {
   }
 
   declinedWarning(int id) async {
-    await employeeService.cancelWarning(id).then((data) {
+    await employeeService?.cancelWarning(id).then((data) {
       AppUtils.showConfirmDialog('Information', 'Successfully Declined!', () {
         offset.value = 0;
         getWarningApproval();

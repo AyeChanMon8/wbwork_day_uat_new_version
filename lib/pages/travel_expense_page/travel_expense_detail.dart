@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -8,16 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/expense_travel_list_controller.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/travel_expense.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_list_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/pages/pre_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../../controllers/expense_travel_list/expense_travel_list_controller.dart';
+import '../../controllers/expense_travel_list/out_of_pocket_list.dart';
+import '../../controllers/leave_list_controller.dart';
+import '../../localization.dart';
+import '../../models/travel_expense.dart';
+import '../../models/travel_expense/list/travel_list_model.dart';
+import '../../my_class/my_app_bar.dart';
+import '../../pages/pre_page.dart';
+import '../../routes/app_pages.dart';
+import '../../utils/app_utils.dart';
 import '../../my_class/my_style.dart';
 import 'package:get/get.dart';
 
@@ -26,10 +26,10 @@ import '../leave_detail.dart';
 class ExpenseTravelDetails extends StatelessWidget {
   final ExpensetravelListController controller =
       Get.put(ExpensetravelListController());
-  int index;
-  String role_category;
+  int index = 0;
+  String role_category = '';
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -56,7 +56,9 @@ class ExpenseTravelDetails extends StatelessWidget {
       }
     }
     return Scaffold(
-     appBar: appbar(context, "Travel Expense Details", image),
+     appBar: PreferredSize(
+      preferredSize: const Size.fromHeight(8.0),
+      child: appbar(context, "Travel Expense Details", image)),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         padding: EdgeInsets.only(right: 10,left: 10,top: 10),
@@ -418,7 +420,7 @@ class ExpenseTravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.date + " :"),
+                  (labels.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -440,7 +442,7 @@ class ExpenseTravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -460,7 +462,7 @@ class ExpenseTravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.travelRequest + " :"),
+                  (labels.travelRequest + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -522,15 +524,17 @@ class ExpenseTravelDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     // controller.approveLeave(
                     //   controller.travelExpenseList.value[index].id,
                     // );
                   },
                   child: Text(
-                    labels?.approve,
+                    labels.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -542,14 +546,16 @@ class ExpenseTravelDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     // controller.declinedLeave(
                     //     controller.travelExpenseList.value[index].id);
                   },
                   child: Text(
-                    labels?.cancel,
+                    labels.cancel,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -569,8 +575,10 @@ class ExpenseTravelDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                     onPressed: () {
                       Get.toNamed(Routes.EXPENSE_TRAVEL_UPDATE,
                           arguments: index);
@@ -590,8 +598,10 @@ class ExpenseTravelDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                     onPressed: () {
                       controller.submitTravelExpense(
                           controller.travelExpenseList.value[index].id,
@@ -601,7 +611,7 @@ class ExpenseTravelDetails extends StatelessWidget {
                           controller.travelExpenseList.value[index].number);
                     },
                     child: Text(
-                      labels?.submit,
+                      labels.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),
@@ -611,7 +621,7 @@ class ExpenseTravelDetails extends StatelessWidget {
   }
 
   confirmDialog(int id, BuildContext context) {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.black),
@@ -620,7 +630,7 @@ class ExpenseTravelDetails extends StatelessWidget {
         Navigator.pop(context);
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "Yes",
         style: TextStyle(color: Colors.black),
@@ -735,7 +745,7 @@ class ExpenseTravelDetails extends StatelessWidget {
       shrinkWrap: true,
       crossAxisCount: 2,
       children: List.generate(value.length, (index) {
-        Uint8List bytes1;
+        late Uint8List bytes1;
         if(value[index]!=null){
           bytes1 = base64Decode(value[index]);
         }
