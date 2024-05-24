@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/models/loan.dart';
-import 'package:winbrother_hr_app/models/overtime_request_response.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/leave_list_response.dart';
+import '../models/loan.dart';
+import '../models/overtime_request_response.dart';
+import '../services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoanController extends GetxController {
   static LoanController to = Get.find();
-  EmployeeService employeeService;
-  var loanList = List<Loan>().obs;
+  EmployeeService? employeeService;
+  var loanList = <Loan>[].obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
@@ -41,16 +40,18 @@ class LoanController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
     this.employeeService = await EmployeeService().init();
-    await employeeService.fetchLoan(employee_id,offset.toString()).then((data) {
+    await employeeService?.fetchLoan(employee_id,offset.toString()).then((data) {
       if(offset!=0){
         print("offsetnotzero");
         print(data.length);
         isLoading.value = false;
         //loanList.value.addAll(data);
-        data.forEach((element) {
-          loanList.add(element);
-        });
-
+        // data.forEach((element) {
+        //   loanList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          loanList.add(data[i]);
+        }
       }else{
         loanList.value = data;
       }

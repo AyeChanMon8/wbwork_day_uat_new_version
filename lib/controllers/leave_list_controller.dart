@@ -1,19 +1,18 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
+import '../models/leave_list_response.dart';
+import '../routes/app_pages.dart';
+import '../services/leave_service.dart';
 import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LeaveListController extends GetxController {
   static LeaveListController to = Get.find();
-  LeaveService leaveService;
-  var leaveList = List<LeaveListResponse>().obs;
-  var leaveAcceptedList = List<LeaveListResponse>().obs;
-  var leaveDeclinedList = List<LeaveListResponse>().obs;
+  LeaveService? leaveService;
+  var leaveList = <LeaveListResponse>[].obs;
+  var leaveAcceptedList = <LeaveListResponse>[].obs;
+  var leaveDeclinedList = <LeaveListResponse>[].obs;
   final box = GetStorage();
   var button_submit_show = false.obs;
   var button_approve_show = false.obs;
@@ -54,15 +53,18 @@ class LeaveListController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await leaveService.getLeaveList(employee_id,offset.toString()).then((data) {
+    await leaveService?.getLeaveList(employee_id,offset.toString()).then((data) {
       // data.sort((a, b) =>
       //     a.create_date.toString().compareTo(b.create_date.toString()));
       if(offset!=0){
         // update data and loading status
         isLoading.value = false;
-        data.forEach((element) {
-          leaveList.add(element);
-        });
+        // data.forEach((element) {
+        //   leaveList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          leaveList.add(data[i]);
+        }
       }else{
         leaveList.value = data;
       }
@@ -82,8 +84,7 @@ class LeaveListController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await leaveService
-        .getLeaveListForManager(int.tryParse(employee_id))
+    await leaveService?.getLeaveListForManager(int.tryParse(employee_id))
         .then((data) {
           leaveList.value = data;
           update();
@@ -101,7 +102,7 @@ class LeaveListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await leaveService.approveLeave(id).then((data) {
+    await leaveService?.approveLeave(id).then((data) {
       if(data){
         Get.back();
         button_approve_show.value = false;
@@ -123,7 +124,7 @@ class LeaveListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await leaveService.submitLeave(id).then((data) {
+    await leaveService?.submitLeave(id).then((data) {
       Get.back();
       button_submit_show.value = false;
       if (data == 'false') {
@@ -161,7 +162,7 @@ class LeaveListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await leaveService.deleteLeave(id).then((data) {
+    await leaveService?.deleteLeave(id).then((data) {
       if(data){
       Get.back();
       Get.back(result: true);
@@ -179,7 +180,7 @@ class LeaveListController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await leaveService.cancelLeave(id).then((data) {
+    await leaveService?.cancelLeave(id).then((data) {
       if(data){
         Get.back();
         button_approve_show.value = false;

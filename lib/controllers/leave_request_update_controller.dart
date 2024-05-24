@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,28 +6,28 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/models/leave.dart';
-import 'package:winbrother_hr_app/models/leave_line.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
-import 'package:winbrother_hr_app/services/master_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/leave_list_controller.dart';
+import '../models/leave.dart';
+import '../models/leave_line.dart';
+import '../models/leave_type.dart';
+import '../routes/app_pages.dart';
+import '../services/leave_service.dart';
+import '../services/master_service.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LeaveRequestUpdateController extends GetxController {
-  LeaveService leaveService;
-  MasterService masterService;
-  TextEditingController fromDateTextController;
-  TextEditingController toDateTextController;
-  TextEditingController purposeTextController;
-  TextEditingController durationController;
-  TextEditingController descriptionController;
-  var leavelLineList = List<LeaveLine>().obs;
-  var leavetype_list = List<LeaveType>().obs;
+  LeaveService? leaveService;
+  MasterService? masterService;
+  TextEditingController fromDateTextController = TextEditingController();
+  TextEditingController toDateTextController = TextEditingController();
+  TextEditingController purposeTextController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  var leavelLineList = <LeaveLine>[].obs;
+  var leavetype_list = <LeaveType>[].obs;
   final is_add_leavelist = false.obs;
-  final Rx<File> selectedImage = File('').obs;
+  final Rx<File?> selectedImage = File('').obs;
   final RxBool isShowImage = false.obs;
   final RxBool save_btn_show = true.obs;
   final RxBool submit_btn_show = false.obs;
@@ -100,7 +99,7 @@ class LeaveRequestUpdateController extends GetxController {
       start_date: formattedFromDate,
       end_date: formattedToDate,
     );
-    await leaveService.getLeaveLine(leave).then((value) {
+    await leaveService?.getLeaveLine(leave).then((value) {
       Get.back();
       if (value != null && value.length>0) {
         if (value[0].message == null) {
@@ -225,9 +224,9 @@ class LeaveRequestUpdateController extends GetxController {
           attachment: image_base64,
           leave_line: leavelLineList);
 
-      await leaveService.deleteLeave(int.tryParse(id)).then((data) async{
+      await leaveService?.deleteLeave(int.tryParse(id)).then((data) async{
         if(data){
-        await leaveService.createLeave(leaveRequest,1).then((data) {
+        await leaveService?.createLeave(leaveRequest,1).then((data) {
           Get.back();
           if (data.contains("ERROR")) {
             AppUtils.showDialog('Information', data);
@@ -313,7 +312,7 @@ class LeaveRequestUpdateController extends GetxController {
           attachment: image_base64,
           leave_line: leavelLineList);
 
-      await leaveService.createLeave(leaveRequest,0).then((data) {
+      await leaveService?.createLeave(leaveRequest,0).then((data) {
         
         if (data.contains("ERROR")) {
           AppUtils.showDialog('Information', data);
@@ -331,7 +330,7 @@ class LeaveRequestUpdateController extends GetxController {
   }
 
   getLeaveType() async {
-    await masterService.getLeaveType().then((data) {
+    await masterService?.getLeaveType().then((data) {
       //this.selectedLeaveType = LeaveType(id: 0,name:"Leave Type");
      // this.selectedLeaveType = data[0];
       leavetype_list.value = data;
@@ -381,13 +380,12 @@ class LeaveRequestUpdateController extends GetxController {
               barrierDismissible: false));
                var employee_id = int.tryParse(box.read('emp_id'));
       leavelLineList.value[index].employee_id = employee_id;
-      await leaveService
-          .updateLeaveLine(leavelLineList.value[index])
+      await leaveService?.updateLeaveLine(leavelLineList.value[index])
           .then((value) {
         if(value!=null){
           change_date.value = false;
   leavelLineList.removeAt(index);
-        leavelLineList.insert(index, value);
+        leavelLineList.insert(index, value as LeaveLine);
         var num = 0;
         double days = 0;
 

@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -7,31 +6,31 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_product_category_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/services/fleet_service.dart';
-import 'package:winbrother_hr_app/services/maintenance_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/fleet_model.dart';
+import '../models/maintenance_product_category_model.dart';
+import '../models/maintenance_request_model.dart';
+import '../services/fleet_service.dart';
+import '../services/maintenance_service.dart';
+import '../utils/app_utils.dart';
 
 class MaintenanceController extends GetxController{
-TextEditingController selectedDateTextController;
-TextEditingController qtyTextController;
-TextEditingController descriptionTextController;
-TextEditingController fromDateTimeTextController;
-TextEditingController toDateTimeTextController;
-MaintenanceService maintenanceService;
-var maintenanceList = List<Maintenance_request_model>().obs;
-var maintenanceProductCategorys = List<Maintenance_product_category_model>().obs;
-var maintenanceProductList = List<Product_id>().obs;
+TextEditingController selectedDateTextController = TextEditingController();
+TextEditingController qtyTextController = TextEditingController();
+TextEditingController descriptionTextController = TextEditingController();
+TextEditingController fromDateTimeTextController = TextEditingController();
+TextEditingController toDateTimeTextController = TextEditingController();
+MaintenanceService? maintenanceService;
+var maintenanceList = <Maintenance_request_model>[].obs;
+var maintenanceProductCategorys = <Maintenance_product_category_model>[].obs;
+var maintenanceProductList = <Product_id>[].obs;
 var selectedProduct = Product_id().obs;
 var selectedProductCategory = Maintenance_product_category_model().obs;
 var selectedProductType = 'repair'.obs;
-var maintenanceProductIdList = List<Maintenance_product_ids>().obs;
-var maintenanceProductIds = List<Maintenance_product_ids>();
-var maintenanceProductIdLists = List<Maintenance_product_id>();
-var fleetList = List<Fleet_model>().obs;
-var maintenanceWarehouseIdList = List<Warehouse_ids>().obs;
+var maintenanceProductIdList = <Maintenance_product_ids>[].obs;
+var maintenanceProductIds = <Maintenance_product_ids>[];
+var maintenanceProductIdLists = <Maintenance_product_id>[];
+var fleetList = <Fleet_model>[].obs;
+var maintenanceWarehouseIdList = <Warehouse_ids>[].obs;
 var addLine = false.obs;
 Rx<Fleet_model> _selectedVehicle =
     Fleet_model().obs;
@@ -84,7 +83,7 @@ var selectedToDate = "".obs;
     fromDateTimeTextController = TextEditingController();
     toDateTimeTextController = TextEditingController();
   }
-FleetService fleetService;
+FleetService? fleetService;
   @override
   void onReady() async{
     super.onReady();
@@ -115,7 +114,7 @@ getMaintenanceList(String status) async {
   //fetch emp_id from GetX Storage
   var employee_id = box.read('emp_id');
   this.maintenanceService = await MaintenanceService().init();
-  await maintenanceService.getMaintenanceRequestList(int.tryParse(employee_id),status).then((data) {
+  await maintenanceService?.getMaintenanceRequestList(int.tryParse(employee_id),status).then((data) {
    maintenanceList.value = data;
     Get.back();
   });
@@ -142,7 +141,7 @@ void createMaintenanceRequest() async{
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await maintenanceService.createMaintenanceRequestModel(employee_id,selectedVehicle.id,from_date_time, to_date_time,maintenanceProductIdLists,priority.toInt(),descriptionTextController.text,imageList,before_image_one_base64,before_image_two_base64,
+    await maintenanceService?.createMaintenanceRequestModel(employee_id,selectedVehicle.id,from_date_time, to_date_time,maintenanceProductIdLists,priority.toInt(),descriptionTextController.text,imageList,before_image_one_base64,before_image_two_base64,
     before_image_three_base64,after_image_one_base64,after_image_two_base64,after_image_three_base64,selectedVehicle,formattedTodayDate).then((data) {
       if(data!=null){
       Get.back();
@@ -177,7 +176,7 @@ void clickReproposeButton(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.submitReproposeButton(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.submitReproposeButton(employee_id,id,current_page.value).then((data) {
     maintenanceList.value = data;
     Get.back();
     Get.back();
@@ -197,7 +196,7 @@ void updateEndDate(int id) async{
                   )),
               barrierDismissible: false));
       var employee_id = box.read('emp_id');
-      await maintenanceService.updateEndDate(employee_id,id,start_date,current_page.value).then((data) {
+      await maintenanceService?.updateEndDate(employee_id,id,start_date,current_page.value).then((data) {
         maintenanceList.value = data;
         Get.back();
         Get.back();
@@ -222,7 +221,7 @@ void updateStartDate(int id) async{
                   )),
               barrierDismissible: false));
       var employee_id = box.read('emp_id');
-      await maintenanceService.updateStartDate(employee_id,id,start_date,current_page.value).then((data) {
+      await maintenanceService?.updateStartDate(employee_id,id,start_date,current_page.value).then((data) {
         maintenanceList.value = data;
         Get.back();
         Get.back();
@@ -244,7 +243,7 @@ void approveMaintenance(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.approveMaintenance(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.approveMaintenance(employee_id,id,current_page.value).then((data) {
     if(data!=null){
       Get.back();
       AppUtils.showConfirmDialog('Information', "Successfully Approved!",() async {
@@ -266,7 +265,7 @@ void rejectMaintenance(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.rejectMaintenance(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.rejectMaintenance(employee_id,id,current_page.value).then((data) {
      if(data!=null){
       Get.back();
       AppUtils.showConfirmDialog('Information', "Successfully Declined!",() async {
@@ -291,7 +290,7 @@ void secondApprove(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.secondApproveMaintenance(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.secondApproveMaintenance(employee_id,id,current_page.value).then((data) {
     if(data!=null){
       Get.back();
       AppUtils.showConfirmDialog('Information', "Successfully Approved!",() async {
@@ -313,7 +312,7 @@ void resubmitClick(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.reSubmitButton(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.reSubmitButton(employee_id,id,current_page.value).then((data) {
     maintenanceList.value = data;
     Get.back();
     Get.back();
@@ -330,7 +329,7 @@ void clickQCButton(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.submitQCButton(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.submitQCButton(employee_id,id,current_page.value).then((data) {
     maintenanceList.value = data;
     Get.back();
     Get.back();
@@ -348,7 +347,7 @@ void clickStartButton(int id) async{
               )),
           barrierDismissible: false));
   var employee_id = box.read('emp_id');
-  await maintenanceService.submitStartButton(employee_id,id,current_page.value).then((data) {
+  await maintenanceService?.submitStartButton(employee_id,id,current_page.value).then((data) {
     maintenanceList.value = data;
     Get.back();
     Get.back();
@@ -366,7 +365,7 @@ getMaintenanceProductCategorys() async {
           barrierDismissible: false));
   var company_id = box.read('emp_company');
   //fetch emp_id from GetX Storage
-  await maintenanceService.getProductCategory(int.tryParse(company_id)).then((data) {
+  await maintenanceService?.getProductCategory(int.tryParse(company_id)).then((data) {
     maintenanceProductCategorys.value = data;
      selectedProductCategory.value = null;
     //getMaintenanceProductList(this.selectedProductCategory.value.id);
@@ -387,7 +386,7 @@ getMaintenanceProductList(int id) async {
           barrierDismissible: false));
   //fetch company_id from GetX Storage
   var company_id = box.read('emp_company');
-  await maintenanceService.getProductList(id,company_id.toString()).then((data) {
+  await maintenanceService?.getProductList(id,company_id.toString()).then((data) {
     maintenanceProductList.value = data;
     if(data.length>0){
       selectedProduct.value = data[0];
@@ -400,7 +399,7 @@ getMaintenanceProductList(int id) async {
 
 void createProductLine(Maintenance_product_id maintenance_product_id,var id) async{
 
-  await maintenanceService.createProductLine(id, maintenance_product_id,box.read('emp_id')).then((data){
+  await maintenanceService?.createProductLine(id, maintenance_product_id,box.read('emp_id')).then((data){
     maintenanceList.value = data;
   });
 }
@@ -408,7 +407,7 @@ void createProductLine(Maintenance_product_id maintenance_product_id,var id) asy
 
 void updateImageFile(var id,var index,String imageFile) async{
 
-  await maintenanceService.updateImage(id,index,imageFile,box.read('emp_id')).then((data){
+  await maintenanceService?.updateImage(id,index,imageFile,box.read('emp_id')).then((data){
     maintenanceList.value = data;
   });
 }
@@ -449,7 +448,7 @@ void deleteMaintenanceProductId(Maintenance_product_ids maintenance_product_id){
   this.maintenanceProductIdList.value.remove(maintenance_product_id);
   this.maintenanceProductIdLists.remove(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
   update();
-  maintenanceService.deleteProductLine(maintenance_product_id.id,box.read('emp_id')).then((data){
+  maintenanceService?.deleteProductLine(maintenance_product_id.id,box.read('emp_id')).then((data){
     maintenanceList.value = data;
   });
 }
@@ -525,7 +524,7 @@ void updateCameraImage(int id,String from,File image, String image64) async {
   else if(from=='after_three'){
     index = 5;
   }
- await maintenanceService.updateImage(id, index, image64,box.read('emp_id')).then((data){
+ await maintenanceService?.updateImage(id, index, image64,box.read('emp_id')).then((data){
 
     if(from=='before_one'){
       isShowBeforeOne.value = true;
@@ -559,7 +558,7 @@ getFleetList(var empId) async{
                 size: 30.0,
               )),
           barrierDismissible: false));
-  fleetList.value = await fleetService.getFleetList(empId);
+  fleetList.value = await fleetService!.getFleetList(empId);
   if(fleetList.value.length>0){
     selectedVehicle = fleetList[0];
 

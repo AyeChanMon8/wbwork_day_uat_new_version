@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
+import '../models/employee.dart';
+import '../services/employee_service.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

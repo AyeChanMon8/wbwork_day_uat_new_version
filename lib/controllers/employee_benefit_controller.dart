@@ -1,16 +1,15 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/employee_benefit.dart';
-import 'package:winbrother_hr_app/services/benefit_service.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../models/employee_benefit.dart';
+import '../services/benefit_service.dart';
 
 class EmployeeBenefitController extends GetxController {
   static EmployeeBenefitController to = Get.find();
-  BenefitService benefitService;
-  var employeeBenefitList = List<EmployeeBenefit>().obs;
+  BenefitService? benefitService;
+  var employeeBenefitList = <EmployeeBenefit>[].obs;
   final box = GetStorage();
   var isLoading = false.obs;
   var offset = 0.obs;
@@ -38,15 +37,18 @@ class EmployeeBenefitController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
     this.benefitService = await BenefitService().init();
-    await benefitService.fetchEmployeeBenefit(employee_id,offset.toString()).then((data) {
+    await benefitService?.fetchEmployeeBenefit(employee_id,offset.toString()).then((data) {
       if(offset!=0){
         print("offsetnotzero");
         print(data.length);
         isLoading.value = false;
         //loanList.value.addAll(data);
-        data.forEach((element) {
-          employeeBenefitList.add(element);
-        });
+        // data.forEach((element) {
+        //   employeeBenefitList.add(element);
+        // });
+        for(var i = 0;i<data.length;i++){
+          employeeBenefitList.add(data[i]);
+        }
 
       }else{
         employeeBenefitList.value = data;

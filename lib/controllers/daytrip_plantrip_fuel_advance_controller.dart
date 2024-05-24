@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:ffi';
 import 'dart:io';
 
@@ -8,56 +7,47 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_expense_controller.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/models/advance_line.dart';
-import 'package:winbrother_hr_app/models/day_trip_expense_line.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/models/daytrip_advance_expense_category.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/fuelin_line.dart';
-import 'package:winbrother_hr_app/models/palntrip_with_product_fuelin_line.dart';
-import 'package:winbrother_hr_app/models/plan_trip_product.dart';
-import 'package:winbrother_hr_app/models/plantrip_product_adavance_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill_fuelin_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybilll_advance_line.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_line_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/services/daytrip_service.dart';
-import 'package:winbrother_hr_app/services/plan_trip_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+
+import '../models/advance_line.dart';
+import '../models/day_trip_model.dart';
+import '../models/daytrip_advance_expense_category.dart';
+import '../models/daytrip_expense.dart';
+import '../models/fuelin_line.dart';
+import '../models/plantrip_product_adavance_line.dart';
+import '../models/plantrip_waybilll_advance_line.dart';
+import '../models/stock_location.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../services/daytrip_service.dart';
+import '../services/plan_trip_service.dart';
+import '../utils/app_utils.dart';
 
 class DayTripPlanTripGeneralController extends GetxController{
   var formatter = new NumberFormat("###,###", "en_US");
-  DayTripServie dayTripServie;
-  PlanTripServie planTripServie;
-  TextEditingController dateTextController;
-  TextEditingController expenseCodeController;
-  TextEditingController approvedTravelController;
-  TextEditingController qtyController;
-  TextEditingController priceController;
-  TextEditingController totalFuelInAmtController;
-  TextEditingController descriptionController;
-  TextEditingController shopNameTextController;
-  TextEditingController slipNoTextController;
-  TextEditingController quantityTextController;
-  TextEditingController amountTextController;
-  TextEditingController remarkTextController;
+  DayTripServie? dayTripServie;
+  PlanTripServie? planTripServie;
+  TextEditingController dateTextController = TextEditingController();
+  TextEditingController expenseCodeController = TextEditingController();
+  TextEditingController approvedTravelController = TextEditingController();
+  TextEditingController qtyController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController totalFuelInAmtController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController shopNameTextController = TextEditingController();
+  TextEditingController slipNoTextController = TextEditingController();
+  TextEditingController quantityTextController = TextEditingController();
+  TextEditingController amountTextController = TextEditingController();
+  TextEditingController remarkTextController = TextEditingController();
 
-  var expense_category_list = List<Daytrip_expense>().obs;
-  TextEditingController expenseDateController;
-  final Rx<File> selectedImage = File('').obs;
+  var expense_category_list = <Daytrip_expense>[].obs;
+  TextEditingController expenseDateController = TextEditingController();
+  final Rx<File?> selectedImage = File('').obs;
   final RxBool isShowImage = false.obs;
   final RxBool save_btn_show = true.obs;
   var totalAdvanceAmount = 0.0.obs;
   var amount = 0.0.obs;
   final is_show_expense = true.obs;
   var daytrip_id = 0;
-  DayTripModel dayTripModel;
+  DayTripModel? dayTripModel;
   var selectedProductId = 0;
   var selectedLocationId = 0;
   final RxBool isAdvanceButton = false.obs;
@@ -74,7 +64,7 @@ class DayTripPlanTripGeneralController extends GetxController{
       _selectedExpenseProduct.value = type;
 
   var totalAmountForExpense =0.0.obs;
-  TextEditingController totalAmountController;
+  TextEditingController totalAmountController = TextEditingController();
   final box = GetStorage();
   String image_base64 = "";
 
@@ -82,20 +72,20 @@ class DayTripPlanTripGeneralController extends GetxController{
   Stock_location get selectedLocation => _selectedLocation.value;
   set selectedLocation(Stock_location type) =>
       _selectedLocation.value = type;
-  var location_list = List<Stock_location>().obs;
+  var location_list = <Stock_location>[].obs;
 
   Rx<Daytrip_expense> _selectedProduct = Daytrip_expense().obs;
   Daytrip_expense get selectedProduct => _selectedProduct.value;
   set selectedProduct(Daytrip_expense type) =>
       _selectedProduct.value = type;
-  var product_list = List<Daytrip_expense>().obs;
+  var product_list = <Daytrip_expense>[].obs;
 
   //Expense Category Dropdown for Advance
   Rx<Daytrip_advance_expense_category> _selectedExpenseCategory = Daytrip_advance_expense_category().obs;
   Daytrip_advance_expense_category get selectedExpenseCategory => _selectedExpenseCategory.value;
   set selectedExpenseCategory(Daytrip_advance_expense_category type) =>
       _selectedExpenseCategory.value = type;
-  var exp_category_list = List<Daytrip_advance_expense_category>().obs;
+  var exp_category_list = <Daytrip_advance_expense_category>[].obs;
 
   @override
   void onReady() async {
@@ -160,7 +150,7 @@ class DayTripPlanTripGeneralController extends GetxController{
 
   getExpenseType() async {
     var company_id = box.read('emp_company');
-    await dayTripServie.getDayTripExpenseList(company_id).then((data){
+    await dayTripServie?.getDayTripExpenseList(company_id).then((data){
       data.insert(
           0, Daytrip_expense(id: 0, name: 'Expense Type'));
       this.selectedExpenseType = data[0];
@@ -170,7 +160,7 @@ class DayTripPlanTripGeneralController extends GetxController{
   getAdvanceExpenseCategoryList() async {
     this.dayTripServie = await DayTripServie().init();
     var company_id = box.read('emp_company');
-    await dayTripServie.getDayTripAdvanceExpenseCategory(int.tryParse(company_id)).then((data){
+    await dayTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id)).then((data){
       data.insert(
           0, Daytrip_advance_expense_category(id: 0, displayName: 'Expense Category Type'));
       this.selectedExpenseCategory = data[0];
@@ -178,7 +168,7 @@ class DayTripPlanTripGeneralController extends GetxController{
     });
   }
   getAddFuelLocation() async {
-    await dayTripServie.getStockLocationList().then((data){
+    await dayTripServie?.getStockLocationList().then((data){
       data.insert(
           0, Stock_location(id: 0, name: 'Location'));
       //this.selectedLocation = data[0];
@@ -222,7 +212,7 @@ class DayTripPlanTripGeneralController extends GetxController{
   }
   getProductForFuelTab() async {
     var company_id = box.read('emp_company');
-    await dayTripServie.getDayTripProductListForFuelTab(company_id).then((data){
+    await dayTripServie?.getDayTripProductListForFuelTab(company_id).then((data){
       data.insert(
           0, Daytrip_expense(id: 0, name: 'Product'));
       
@@ -245,10 +235,10 @@ class DayTripPlanTripGeneralController extends GetxController{
     // if(priceController.text.isEmpty)
     //   priceController.text = '0';
     var unit_price = priceController.text ?? "0";
-    amount.value = double.tryParse(qty) * double.tryParse(unit_price).round();
+    amount.value = double.tryParse(qty)! * double.tryParse(unit_price)!.round();
     // totalAmountController.text = formatter.format(amoun.value);
     var amt = amount.value.toStringAsFixed(1);
-    totalFuelInAmtController.text = NumberFormat('###.##').format(double.tryParse(amt).round());
+    totalFuelInAmtController.text = NumberFormat('###.##').format(double.tryParse(amt)!.round());
     update();
   }
 
@@ -257,9 +247,9 @@ class DayTripPlanTripGeneralController extends GetxController{
     // if(amountTextController.text.isEmpty)
     //   amountTextController.text = '0';
     var unit_price = amountTextController.text ?? "0";
-    amount.value = double.tryParse(qty) * double.tryParse(unit_price);
+    amount.value = double.tryParse(qty)! * double.tryParse(unit_price)!;
     var amt = amount.value.toStringAsFixed(1);
-    totalAmountController.text = NumberFormat('###.##').format(double.tryParse(amt).round());
+    totalAmountController.text = NumberFormat('###.##').format(double.tryParse(amt)!.round());
     update();
   }
   void calculatePriceUnit() {
@@ -267,9 +257,9 @@ class DayTripPlanTripGeneralController extends GetxController{
     // if(totalFuelInAmtController.text.isEmpty)
     //   totalFuelInAmtController.text = '0';
     var unit_price = totalFuelInAmtController.text ?? "0";
-    amount.value = double.tryParse(unit_price)/double.tryParse(qty);
+    amount.value = double.tryParse(unit_price)!/double.tryParse(qty)!;
     var amt = amount.value.toStringAsFixed(1);
-    priceController.text = NumberFormat('###.##').format(double.tryParse(amt).round());
+    priceController.text = NumberFormat('###.##').format(double.tryParse(amt)!.round());
 
     update();
   }
@@ -366,7 +356,7 @@ class DayTripPlanTripGeneralController extends GetxController{
            fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text),priceUnit:double.tryParse(priceController.text),dayTripId: trip_id,status: 'plantrip_waybill',employeeId: int.parse(employee_id), lineId: line_id);
 
         }
-      await dayTripServie.addFuelIn(fuelin).then((data) {
+      await dayTripServie?.addFuelIn(fuelin).then((data) {
           //Get.back();
           if (data != 0) {
             Get.back();
@@ -454,7 +444,7 @@ class DayTripPlanTripGeneralController extends GetxController{
         isAdvanceButton.value = true;
         if(arg=="DayTrip"){
           var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),total_amount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-          await dayTripServie.addAdvance(advance).then((data) {
+          await dayTripServie?.addAdvance(advance).then((data) {
             isAdvanceButton.value = false;
             if (data != 0) {
               Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
@@ -467,7 +457,7 @@ class DayTripPlanTripGeneralController extends GetxController{
         }else if(arg=="PlanTripProduct"){
 
           var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-          await planTripServie.addPlanTripProductAdvance(advance).then((data) {
+          await planTripServie?.addPlanTripProductAdvance(advance).then((data) {
             isAdvanceButton.value = false;
             if (data != 0) {
               Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
@@ -479,7 +469,7 @@ class DayTripPlanTripGeneralController extends GetxController{
           });
         }else{
           var advance  = Plantrip_waybilll_advance_line(tripWaybillId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-          await planTripServie.addPlanTripWaybillAdvance(advance).then((data) {
+          await planTripServie?.addPlanTripWaybillAdvance(advance).then((data) {
             isAdvanceButton.value = false;
             if (data != 0) {
               Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
@@ -501,16 +491,16 @@ class DayTripPlanTripGeneralController extends GetxController{
     // if(totalAmountController.text.isEmpty)
     //   totalAmountController.text = '0';
     var unit_price = totalAmountController.text ?? "0";
-    amount.value = double.tryParse(unit_price)/double.tryParse(qty);
+    amount.value = double.tryParse(unit_price)!/double.tryParse(qty)!;
     var amt = amount.value.toStringAsFixed(1);
-    amountTextController.text = NumberFormat('###.##').format(double.tryParse(amt).round());
+    amountTextController.text = NumberFormat('###.##').format(double.tryParse(amt)!.round());
 
     update();
   }
   deleteAdvance(String arg, int tripID) async {
     if(arg=="DayTrip"){
       var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),total_amount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-      await dayTripServie.addAdvance(advance).then((data) {
+      await dayTripServie?.addAdvance(advance).then((data) {
         if (data != 0) {
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
             Get.back();
@@ -521,7 +511,7 @@ class DayTripPlanTripGeneralController extends GetxController{
     }
     else if(arg=="PlanTripProduct"){
       var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-      await planTripServie.addPlanTripProductAdvance(advance).then((data) {
+      await planTripServie?.addPlanTripProductAdvance(advance).then((data) {
         if (data != 0) {
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
             Get.back();
@@ -532,7 +522,7 @@ class DayTripPlanTripGeneralController extends GetxController{
     }
     else{
       var advance  = Plantrip_waybilll_advance_line(tripWaybillId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
-      await planTripServie.addPlanTripWaybillAdvance(advance).then((data) {
+      await planTripServie?.addPlanTripWaybillAdvance(advance).then((data) {
         if (data != 0) {
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
             Get.back();

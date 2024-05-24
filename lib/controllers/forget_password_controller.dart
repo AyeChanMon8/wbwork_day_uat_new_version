@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -9,11 +8,11 @@ import '../services/employee_service.dart';
 import 'package:get/get.dart';
 
 import '../utils/app_utils.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../routes/app_pages.dart';
 
 class ForgetPasswordController extends GetxController {
-  EmployeeService employeeService;
-  TextEditingController barcodeController;
+  EmployeeService? employeeService;
+  TextEditingController barcodeController = TextEditingController();
 
   final box = GetStorage();
 
@@ -41,7 +40,7 @@ class ForgetPasswordController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    await employeeService.forgetPassword(barcode).then((value) {
+    await employeeService?.forgetPassword(barcode).then((value) {
       //Get.back();
       if (value.isNotEmpty) {
         Get.back();

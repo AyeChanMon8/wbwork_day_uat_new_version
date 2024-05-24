@@ -1,30 +1,28 @@
-// @dart=2.9
-// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/fleet_insurance.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/fuel_log_model.dart';
-import 'package:winbrother_hr_app/models/fuel_tank.dart';
-import 'package:winbrother_hr_app/models/fuel_tank.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/services/fleet_service.dart';
-import 'package:winbrother_hr_app/services/maintenance_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/fleet_insurance.dart';
+import '../models/fleet_model.dart';
+import '../models/fuel_log_model.dart';
+import '../models/fuel_tank.dart';
+import '../models/fuel_tank.dart';
+import '../models/maintenance_request_model.dart';
+import '../services/fleet_service.dart';
+import '../services/maintenance_service.dart';
+import '../utils/app_utils.dart';
 
 class FleetController extends GetxController{
-  FleetService fleetService;
-  MaintenanceService maintenanceService;
+  FleetService? fleetService;
+  MaintenanceService? maintenanceService;
 
-  var fleetList = List<Fleet_model>().obs;
-  var fleetInsuranceList = List<Fleet_insurance>().obs;
-  var fuelLogList = List<Fuel_log_model>().obs;
-  var fueComsumptionList = List<ConsumptionAverageHistory>().obs;
-  var tiredList = List<TypredHistory>().obs;
-  var maintenanceList = List<Maintenance_request_model>().obs;
-  var fuelTankList = List<Fuel_History>().obs;
+  var fleetList = <Fleet_model>[].obs;
+  var fleetInsuranceList = <Fleet_insurance>[].obs;
+  var fuelLogList = <Fuel_log_model>[].obs;
+  var fueComsumptionList = <ConsumptionAverageHistory>[].obs;
+  var tiredList = <TypredHistory>[].obs;
+  var maintenanceList = <Maintenance_request_model>[].obs;
+  var fuelTankList = <Fuel_History>[].obs;
   var fleetModel = Fleet_model().obs;
   var box = GetStorage();
   var totalFuelAmount = 0.0.obs;
@@ -49,7 +47,7 @@ class FleetController extends GetxController{
 
 
   getMaintenanceList(var vehicleId) async {
-    await maintenanceService.getMaintenanceRequestModelWithVehicle(vehicleId).then((data) {
+    await maintenanceService?.getMaintenanceRequestModelWithVehicle(vehicleId).then((data) {
       maintenanceList.value = data;
     });
   }
@@ -64,7 +62,7 @@ class FleetController extends GetxController{
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await fleetService.getFleetList(empId).then((value){
+    await fleetService?.getFleetList(empId).then((value){
       fleetList.value = value;
       if(value.length!=0){
         fueComsumptionList.value =  value[0].consumption_average_history;
@@ -83,7 +81,7 @@ class FleetController extends GetxController{
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    trace_url.value = await fleetService.show_current_localize(vehicleID);
+    trace_url.value = await fleetService!.show_current_localize(vehicleID);
     Get.back();
     return trace_url.value;
   }
@@ -115,13 +113,13 @@ class FleetController extends GetxController{
   }
 
   getFleetInsuranceList(var vehicleid) async{
-    fleetInsuranceList.value = await fleetService.getFleetInsuranceList(vehicleid);
+    fleetInsuranceList.value = await fleetService!.getFleetInsuranceList(vehicleid);
   }
   getFuelLogList(var vehicleid) async{
-    fuelLogList.value = await fleetService.getFuelLogList(vehicleid);
+    fuelLogList.value = await fleetService!.getFuelLogList(vehicleid);
   }
   getFuelTankList(int fueltank_id) async{
-    await fleetService.getFuelTankList(fueltank_id.toString()).then((value){
+    await fleetService?.getFuelTankList(fueltank_id.toString()).then((value){
       var totalLit = 0.0;
       var totalAmt = 0.0;
       var totalPrice = 0.0;
@@ -149,6 +147,8 @@ class FleetController extends GetxController{
       fuelTankList.value.sort((a,b) {
         if(b.filling_date!=null&&b.filling_date!=null){
           return b.filling_date.compareTo(a.filling_date);
+        }else{
+          return -1;
         }
 
       });

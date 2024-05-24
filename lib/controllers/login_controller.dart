@@ -1,26 +1,23 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/components/toast/gf_toast.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/splash_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../localization.dart';
 import '../pages/bottom_navigation.dart';
 import '../pages/home_page.dart';
+import '../routes/app_pages.dart';
+import '../services/employee_service.dart';
+import '../utils/app_utils.dart';
 
 class LoginController extends GetxController {
-  TextEditingController emailTextController;
-  TextEditingController passwordTextController;
-  EmployeeService employeeService;
-  String emp_id;
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
+  EmployeeService? employeeService;
+  String emp_id = '';
   final RxBool passwordToggle = true.obs;
   final box = GetStorage();
   var rememberme = true.obs;
@@ -56,8 +53,7 @@ class LoginController extends GetxController {
                 size: 30.0,
               )),
               barrierDismissible: false));
-      await employeeService
-          .checkLogin(emailTextController.text, passwordTextController.text)
+      await employeeService?.checkLogin(emailTextController.text, passwordTextController.text)
           .then((data) async {
         print("dataReturn");
         print(data.toString());
@@ -113,7 +109,7 @@ class LoginController extends GetxController {
   }
 
   void checkRole(String emp_id) async {
-    await employeeService.checkRole(int.tryParse(emp_id)).then((data) async {
+    await employeeService?.checkRole(int.tryParse(emp_id)).then((data) async {
       final labels = AppLocalizations.of(Get.context);
       var storage = LocalStorage('storefunction');
       bool value  = await storage.ready;

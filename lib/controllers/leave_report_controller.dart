@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/leave_balance.dart';
-import 'package:winbrother_hr_app/models/leave_report.dart';
-import 'package:winbrother_hr_app/models/leave_report_list.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
+import '../models/leave_balance.dart';
+import '../models/leave_report.dart';
+import '../models/leave_report_list.dart';
+import '../services/leave_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LeaveTripReportController extends GetxController {
-  LeaveService leaveService;
-  var leaveReportList = List<LeaveReportList>();
-  var leave_report_list = List<LeaveReportList>().obs;
+  LeaveService? leaveService;
+  var leaveReportList = <LeaveReportList>[];
+  var leave_report_list = <LeaveReportList>[].obs;
 
   final box = GetStorage();
   // UserProfileController({@required this.employeeService}) : assert(employeeService != null);
@@ -40,7 +39,7 @@ class LeaveTripReportController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await leaveService.getLeaveReport(int.tryParse(employee_id)).then((data) {
+    await leaveService?.getLeaveReport(int.tryParse(employee_id)).then((data) {
       createLeaveReport(data);
       Get.back();
     });
@@ -72,7 +71,7 @@ class LeaveTripReportController extends GetxController {
         }
 
         if (!found) {
-          List<LeaveBalance> leave_balance_list = List<LeaveBalance>();
+          List<LeaveBalance> leave_balance_list = <LeaveBalance>[];
           leave_balance_list.add(leave_balance);
           var leaveReport = LeaveReportList(
               employee_id: list[i].x_employee_id,
@@ -81,7 +80,7 @@ class LeaveTripReportController extends GetxController {
           leaveReportList.add(leaveReport);
         }
       } else {
-        List<LeaveBalance> leave_balance_list = List<LeaveBalance>();
+        List<LeaveBalance> leave_balance_list = <LeaveBalance>[];
         leave_balance_list.add(leave_balance);
         var leaveReport = LeaveReportList(
             employee_id: list[i].x_employee_id,

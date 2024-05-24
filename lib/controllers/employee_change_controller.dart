@@ -1,44 +1,39 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/emp_job.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_change_create.dart';
-import 'package:winbrother_hr_app/models/employee_jobinfo.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/leave_balance.dart';
-import 'package:winbrother_hr_app/models/leave_report.dart';
-import 'package:winbrother_hr_app/models/leave_report_list.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/emp_job.dart';
+import '../models/employee_change_create.dart';
+import '../models/employee_jobinfo.dart';
+import '../models/employee_promotion.dart';
+import '../services/employee_service.dart';
+import '../utils/app_utils.dart';
 
 class EmployeeChangeController extends GetxController {
 
-  TextEditingController wageTextController;
-  TextEditingController noteTextController;
-  EmployeeService employeeService;
-  var empChangeList = List<Employee_promotion>().obs;
+  TextEditingController wageTextController = TextEditingController();
+  TextEditingController noteTextController = TextEditingController();
+  EmployeeService? employeeService;
+  var empChangeList = <Employee_promotion>[].obs;
   final box = GetStorage();
   var offset = 0.obs;
   var isLoading = false.obs;
-  var employee_list = List<Emp_job>().obs;
-  var manager_employee_list = List<Emp_job>().obs;
-  var company_list = List<Company_id>().obs;
-  var old_company_list = List<Company_id>().obs;
-  var department_list = List<Department>().obs;
-  var old_department_list = List<Department>().obs;
-  var branch_list = List<Branch_id>().obs;
-  var old_branch_list = List<Branch_id>().obs;
-  var salary_level_list = List<Company>().obs;
-  var jobposition_list = List<Company>().obs;
-  var jobgrade_list = List<Company>().obs;
-  TextEditingController effectiveDateTextController;
-  TextEditingController typeAheadController;
+  var employee_list = <Emp_job>[].obs;
+  var manager_employee_list = <Emp_job>[].obs;
+  var company_list = <Company_id>[].obs;
+  var old_company_list = <Company_id>[].obs;
+  var department_list = <Department>[].obs;
+  var old_department_list = <Department>[].obs;
+  var branch_list = <Branch_id>[].obs;
+  var old_branch_list = <Branch_id>[].obs;
+  var salary_level_list = <Company>[].obs;
+  var jobposition_list = <Company>[].obs;
+  var jobgrade_list = <Company>[].obs;
+  TextEditingController effectiveDateTextController = TextEditingController();
+  TextEditingController typeAheadController = TextEditingController();
   var old_jobgrade = "".obs;
   var old_salary_level = "".obs;
   var old_jobgrade_name = "".obs;
@@ -131,13 +126,16 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getEmployeeChangeList(int.tryParse(employee_id),offset.toString()).then((data) {
+    await employeeService?.getEmployeeChangeList(int.tryParse(employee_id),offset.toString()).then((data) {
       //empChangeList.value = data;
       if(offset!=0){
         isLoading.value = false;
-        data.forEach((element) {
-          empChangeList.add(element);
-        });
+        // data.forEach((element) {
+        //   empChangeList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          empChangeList.add(data[i]);
+        }
 
       }else{
         empChangeList.value = data;
@@ -160,7 +158,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getAllEmployeeList(companyID,branchId,deptID).then((value) {
+    await employeeService?.getAllEmployeeList(companyID,branchId,deptID).then((value) {
       if(value.length!=0){
           selectedEmployee = value[0];
           getEmployeeJobInfo();
@@ -180,7 +178,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getManagerEmployeeList(companyID,branchId,deptId).then((data) {
+    await employeeService?.getManagerEmployeeList(companyID,branchId,deptId).then((data) {
       if(data.length!=0){
         this.selectedManagerEmployee = data[0];
       }
@@ -202,8 +200,8 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getEmployeeJobInfo(this.selectedEmployee.id).then((data) {
-      this._selectedEmployeeJobInfo.value = data;
+    await employeeService?.getEmployeeJobInfo(this.selectedEmployee.id).then((data) {
+      this._selectedEmployeeJobInfo.value = data as Employee_jobinfo;
       this.old_salary_level.value = AppUtils.removeNullString(data.salary_level);
       this.old_jobgrade.value = AppUtils.removeNullString(data.job_grade);
       this.old_salary_level_name.value = AppUtils.removeNullString(data.salary_level_name);
@@ -224,7 +222,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getDepartmentList(id,"").then((data) {
+    await employeeService?.getDepartmentList(id,"").then((data) {
       // this.selectedDepartment = data[0];
       // this.selectedOldDepartment = data[0];
       this.selectedDepartment = null;
@@ -248,7 +246,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getDepartmentList(id,"").then((data) {
+    await employeeService?.getDepartmentList(id,"").then((data) {
       this.selectedDepartment = data[0];
       department_list.value = data;
       getManagerEmployeeList(this.selectedCompany.id, selectedBranch.id,selectedDepartment.id);
@@ -267,7 +265,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getAllDepartmentList(id).then((data) {
+    await employeeService?.getAllDepartmentList(id).then((data) {
       if(data.length!=0){
         this.selectedOldDepartment = data[0];
       }
@@ -289,7 +287,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getJobList(int.tryParse(employee_id)).then((data) {
+    await employeeService?.getJobList(int.tryParse(employee_id)).then((data) {
       if(data.length!=0){
         //this.selectedJobPosition = data[0];
         this.selectedJobPosition = null;
@@ -313,7 +311,7 @@ class EmployeeChangeController extends GetxController {
                 )),
             barrierDismissible: false));
 
-    await employeeService.getJobGradeList().then((data) {
+    await employeeService?.getJobGradeList().then((data) {
       if(data.length!=0){
         //this.selectedJobGrade = data[0];
         this.selectedJobGrade = null;
@@ -335,7 +333,7 @@ class EmployeeChangeController extends GetxController {
                 )),
             barrierDismissible: false));
 
-    await employeeService.getEmployeeNewWage(int.tryParse(this.selectedJobGrade.id.toString()),int.tryParse(this.selectedSalaryLevel.id.toString())).then((data) {
+    await employeeService?.getEmployeeNewWage(int.tryParse(this.selectedJobGrade.id.toString()),int.tryParse(this.selectedSalaryLevel.id.toString())).then((data) {
       // print("newWage#");
       wageTextController.text = AppUtils.addThousnadSperator(data);
       print(data);
@@ -353,7 +351,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getCompanyList(keyword).then((data) {
+    await employeeService?.getCompanyList(keyword).then((data) {
       if(data.length!=0){
         //data.insert(0,Company_id(id: 0,name: "Choose"));
         this.selectedCompany = null;
@@ -378,7 +376,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getCompanyList("").then((data) {
+    await employeeService?.getCompanyList("").then((data) {
       if(data.length!=0){
         this.selectedOldCompany = data[0];
       }
@@ -398,7 +396,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getBranchList(id,"").then((data) {
+    await employeeService?.getBranchList(id,"").then((data) {
       if(data.length!=0){
         this.selectedOldBranch = data[0];
       }
@@ -419,7 +417,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getBranchList(id,"").then((data) {
+    await employeeService?.getBranchList(id,"").then((data) {
       if(data.length!=0){
         this.selectedBranch = null;
         this.selectedOldBranch = null;
@@ -444,7 +442,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getBranchList(id,"").then((data) {
+    await employeeService?.getBranchList(id,"").then((data) {
       Get.back();
       if(data.length!=0){
         this.selectedBranch = data[0];
@@ -583,7 +581,7 @@ class EmployeeChangeController extends GetxController {
                     )),
                 barrierDismissible: false));
 
-        await employeeService.createEmployeeChange(employee_change_create).then((data) {
+        await employeeService?.createEmployeeChange(employee_change_create).then((data) {
          print("created");
           Get.back();
          AppUtils.showConfirmDialog('Information', 'Successfully Created!',(){
@@ -607,7 +605,7 @@ class EmployeeChangeController extends GetxController {
                 )),
             barrierDismissible: false));
 
-    await employeeService.getSalaryLevelList().then((data) {
+    await employeeService?.getSalaryLevelList().then((data) {
       if(data.length!=0){
         // this.selectedSalaryLevel = data[0];
         this.selectedSalaryLevel = null;
@@ -635,7 +633,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.sendRequest(id,requestID).then((data) {
+    await employeeService?.sendRequest(id,requestID).then((data) {
       Get.back();
       AppUtils.showConfirmDialog('Information', 'Successful Requested!', (){
         offset.value = 0;

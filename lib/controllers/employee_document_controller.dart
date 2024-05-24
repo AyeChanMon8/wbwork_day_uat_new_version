@@ -1,46 +1,48 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_change_create.dart';
-import 'package:winbrother_hr_app/models/employee_document.dart';
-import 'package:winbrother_hr_app/models/employee_document_attachment.dart';
-import 'package:winbrother_hr_app/models/employee_jobinfo.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/leave_balance.dart';
-import 'package:winbrother_hr_app/models/leave_report.dart';
-import 'package:winbrother_hr_app/models/leave_report_list.dart';
-import 'package:winbrother_hr_app/services/employee_service.dart';
-import 'package:winbrother_hr_app/services/leave_service.dart';
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/employee.dart';
+import '../models/employee_change_create.dart';
+import '../models/employee_document.dart';
+import '../models/employee_document_attachment.dart';
+import '../models/employee_jobinfo.dart';
+import '../models/employee_promotion.dart';
+import '../models/leave_balance.dart';
+import '../models/leave_report.dart';
+import '../models/leave_report_list.dart';
+import '../services/employee_service.dart';
+import '../services/leave_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
+
+import '../models/employee_document.dart';
+import '../services/employee_service.dart';
 
 class EmployeeDocumentController extends GetxController {
 
-  TextEditingController wageTextController;
-  TextEditingController noteTextController;
-  EmployeeService employeeService;
-  var docList = List<Employee_document>().obs;
-  var attachment_list = List<Attachment>().obs;
+  TextEditingController wageTextController = TextEditingController();
+  TextEditingController noteTextController = TextEditingController();
+  EmployeeService? employeeService;
+  var docList = <Employee_document>[].obs;
+  var attachment_list = <Attachment>[].obs;
   final box = GetStorage();
   var offset = 0.obs;
   var isLoading = false.obs;
-  var employee_list = List<Employee>().obs;
-  var manager_employee_list = List<Employee>().obs;
-  var company_list = List<Company_id>().obs;
-  var old_company_list = List<Company_id>().obs;
-  var department_list = List<Department>().obs;
-  var old_department_list = List<Department>().obs;
-  var branch_list = List<Branch_id>().obs;
-  var old_branch_list = List<Branch_id>().obs;
-  var salary_level_list = List<Company>().obs;
-  var jobposition_list = List<Company>().obs;
-  var jobgrade_list = List<Company>().obs;
-  TextEditingController effectiveDateTextController;
-  TextEditingController typeAheadController;
+  var employee_list = <Employee>[].obs;
+  var manager_employee_list = <Employee>[].obs;
+  var company_list = <Company_id>[].obs;
+  var old_company_list = <Company_id>[].obs;
+  var department_list = <Department>[].obs;
+  var old_department_list = <Department>[].obs;
+  var branch_list = <Branch_id>[].obs;
+  var old_branch_list = <Branch_id>[].obs;
+  var salary_level_list = <Company>[].obs;
+  var jobposition_list = <Company>[].obs;
+  var jobgrade_list = <Company>[].obs;
+  TextEditingController effectiveDateTextController = TextEditingController();
+  TextEditingController typeAheadController = TextEditingController();
   var old_jobgrade = "".obs;
   var old_salary_level = "".obs;
   var old_jobgrade_name = "".obs;
@@ -127,14 +129,16 @@ class EmployeeDocumentController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getEmployeeDocList(int.tryParse(employee_id),offset.toString()).then((data) {
+    await employeeService?.getEmployeeDocList(int.tryParse(employee_id),offset.toString()).then((data) {
       //docList.value = data;
       if(offset!=0){
         isLoading.value = false;
-        data.forEach((element) {
-          docList.add(element);
-        });
-
+        // data.forEach((element) {
+        //   docList.add(element);
+        // });
+        for(var i=0;i<data.length;i++){
+          docList.add(data[i]);
+        }
       }else{
         docList.value = data;
       }
@@ -153,7 +157,7 @@ class EmployeeDocumentController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService.getAttachementByDocID(docID).then((data) {
+    await employeeService?.getAttachementByDocID(docID).then((data) {
 
       attachment_list.value = data;
       print("att#");
