@@ -1,22 +1,21 @@
-// @dart=2.9
 
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/advance_line.dart';
-import 'package:winbrother_hr_app/models/day_trip_expense_line.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/models/daytrip_advance_expense_category.dart';
-import 'package:winbrother_hr_app/models/daytrip_fuel_consumption.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/fuelin_line.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
+import '../constants/globals.dart';
+import '../models/advance_line.dart';
+import '../models/day_trip_expense_line.dart';
+import '../models/day_trip_model.dart';
+import '../models/daytrip_advance_expense_category.dart';
+import '../models/daytrip_fuel_consumption.dart';
+import '../models/daytrip_expense.dart';
+import '../models/fuelin_line.dart';
+import '../models/stock_location.dart';
+import '../services/odoo_service.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 class DayTripServie extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<DayTripServie> init() async {
     dioClient = await client();
@@ -62,7 +61,7 @@ class DayTripServie extends OdooService {
         companyID.toString() +
         "),('product_tmpl_id.company_id','=','false')]";
     Response response = await dioClient.get(url);
-    List<Daytrip_expense> expense_list = new List<Daytrip_expense>();
+    List<Daytrip_expense> expense_list = <Daytrip_expense>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       var code = response.data['code'];
@@ -78,7 +77,7 @@ class DayTripServie extends OdooService {
   Future<List<Stock_location>> getStockLocationList() async {
     String url = Globals.baseURL + "/stock.location";
     Response response = await dioClient.get(url);
-    List<Stock_location> expense_list = new List<Stock_location>();
+    List<Stock_location> expense_list = <Stock_location>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -95,7 +94,7 @@ class DayTripServie extends OdooService {
         companyID.toString() +
         "),('product_tmpl_id.company_id','=','false')]";
     Response response = await dioClient.get(url);
-    List<Daytrip_expense> expense_list = new List<Daytrip_expense>();
+    List<Daytrip_expense> expense_list = <Daytrip_expense>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -112,7 +111,7 @@ class DayTripServie extends OdooService {
         companyID.toString() +
         "),('product_tmpl_id.company_id','=','false')]";
     Response response = await dioClient.get(url);
-    List<Daytrip_expense> expense_list = new List<Daytrip_expense>();
+    List<Daytrip_expense> expense_list = <Daytrip_expense>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -248,7 +247,7 @@ class DayTripServie extends OdooService {
     //String url = Globals.baseURL + "/product.category?filters=[('day_trip','=',True)]";
     Response response = await dioClient.get(url);
     List<Daytrip_advance_expense_category> expense_category_list =
-        new List<Daytrip_advance_expense_category>();
+        <Daytrip_advance_expense_category>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       var count = response.data['count'];

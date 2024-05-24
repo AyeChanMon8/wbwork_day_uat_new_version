@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/document.dart';
-import 'package:winbrother_hr_app/models/document_detail.dart';
-import 'package:winbrother_hr_app/models/document_folder.dart';
-import 'package:winbrother_hr_app/models/document_list_model.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
+import '../constants/globals.dart';
+import '../models/document.dart';
+import '../models/document_detail.dart';
+import '../models/document_folder.dart';
+import '../models/document_list_model.dart';
+import '../services/odoo_service.dart';
 
 class DocumentService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<DocumentService> init() async {
     print('DocumentService has been initialize');
@@ -25,7 +25,7 @@ class DocumentService extends OdooService {
     //String url = Globals.baseURL + "/hr.employee/1/get_documents";
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<Documents> doc_list = new List<Documents>();
+    List<Documents> doc_list = <Documents>[];
     if (response.statusCode == 200) {
       print(response.toString());
 
@@ -46,8 +46,8 @@ class DocumentService extends OdooService {
     var data = jsonEncode({'employee_id' : empID});
     Response response =
     await dioClient.put(url,data: data);
-    List<DocumentListModel> docListModels= new List<DocumentListModel>();
-    List<Documents> doc_list = new List<Documents>();
+    List<DocumentListModel> docListModels= <DocumentListModel>[];
+    List<Documents> doc_list = <Documents>[];
     if (response.statusCode == 200) {
 
       var list = response.data;
@@ -80,7 +80,7 @@ class DocumentService extends OdooService {
   Future<List<Document_folder>> getDocumentFolders(String empID) async {
     String url = Globals.baseURL + "/hr.employee/1/get_folders/";
     Response response = await dioClient.put(url,data: jsonEncode({"employee_id":int.parse(empID)}));
-    List<Document_folder> doc_folders = new List<Document_folder>();
+    List<Document_folder> doc_folders = <Document_folder>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data;

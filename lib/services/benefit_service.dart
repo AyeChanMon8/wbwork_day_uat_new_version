@@ -1,11 +1,10 @@
-// @dart=2.9
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/employee_benefit.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
+import '../constants/globals.dart';
+import '../models/employee_benefit.dart';
+import '../services/odoo_service.dart';
 class BenefitService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<BenefitService> init() async {
     print('EmployeeService has been initialize');
@@ -18,7 +17,7 @@ class BenefitService extends OdooService {
     String url = Globals.baseURL +
         "/employee.job.benefit.line?filters=[('emp_benefit_id','='," + empID.toString() + ")]&limit="+Globals.pag_limit.toString()+"&offset="+offset+"&order=id asc";
     Response response = await dioClient.get(url);
-    List<EmployeeBenefit> employee_benefit_list = new List<EmployeeBenefit>();
+    List<EmployeeBenefit> employee_benefit_list = <EmployeeBenefit>[];
     if (response.statusCode == 200) {
       print(response.toString());
       if (response.data['count'] != 0) {

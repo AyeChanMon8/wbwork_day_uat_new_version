@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:io';
@@ -6,43 +5,43 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/announcement.dart';
-import 'package:winbrother_hr_app/models/announcement.dart';
-import 'package:winbrother_hr_app/models/claiminsurancemodel.dart';
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/emp_d.dart';
-import 'package:winbrother_hr_app/models/emp_job.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_category.dart';
-import 'package:winbrother_hr_app/models/employee_change_create.dart';
-import 'package:winbrother_hr_app/models/employee_document.dart';
-import 'package:winbrother_hr_app/models/employee_document_attachment.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/employee_jobinfo.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/insurance.dart';
-import 'package:winbrother_hr_app/models/insurancemodel.dart';
-import 'package:winbrother_hr_app/models/insurancetypemodel.dart';
-import 'package:winbrother_hr_app/models/leave.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/models/leave_report.dart';
-import 'package:winbrother_hr_app/models/loan.dart';
-import 'package:winbrother_hr_app/models/notification_msg.dart';
-import 'package:winbrother_hr_app/models/payslip.dart';
-import 'package:winbrother_hr_app/models/reminder.dart';
-import 'package:winbrother_hr_app/models/resignation.dart';
-import 'package:winbrother_hr_app/models/reward.dart';
-import 'package:winbrother_hr_app/models/travel_request.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/models/warning.dart';
-import 'package:winbrother_hr_app/models/warning_model.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/announcement.dart';
+import '../models/announcement.dart';
+import '../models/claiminsurancemodel.dart';
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/emp_d.dart';
+import '../models/emp_job.dart';
+import '../models/employee.dart';
+import '../models/employee_category.dart';
+import '../models/employee_change_create.dart';
+import '../models/employee_document.dart';
+import '../models/employee_document_attachment.dart';
+import '../models/employee_id.dart';
+import '../models/employee_jobinfo.dart';
+import '../models/employee_promotion.dart';
+import '../models/insurance.dart';
+import '../models/insurancemodel.dart';
+import '../models/insurancetypemodel.dart';
+import '../models/leave.dart';
+import '../models/leave_list_response.dart';
+import '../models/leave_report.dart';
+import '../models/loan.dart';
+import '../models/notification_msg.dart';
+import '../models/payslip.dart';
+import '../models/reminder.dart';
+import '../models/resignation.dart';
+import '../models/reward.dart';
+import '../models/travel_request.dart';
+import '../models/travel_request_list_response.dart';
+import '../models/warning.dart';
+import '../models/warning_model.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 import 'package:get/get.dart' hide Response;
 class EmployeeService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<EmployeeService> init() async {
     print('EmployeeService has been initialize');
@@ -57,7 +56,7 @@ class EmployeeService extends OdooService {
     //String filter = "[['id', '=','" + empID + "']]";
     Response response = await dioClient.get(url);
 
-    Employee empInfo;
+    Employee empInfo = Employee();
     if (response.statusCode == 200) {
       var data = response.data['results'][0];
       empInfo = Employee.fromMap(data);
@@ -86,7 +85,7 @@ class EmployeeService extends OdooService {
 
   Future<int> travelRequest(TravelRequest travelRequest) async {
     String url = Globals.baseURL + "/travel.request";
-    int travel_id;
+    int travel_id = 0;
     print(travelRequest.toJson());
     var travel = travelRequest.toJson();
     Response response = await dioClient.post(url, data: travel);
@@ -116,7 +115,7 @@ class EmployeeService extends OdooService {
 
   Future<List<TravelRequestListResponse>> getTravelRequestListForManger(
       String empID) async {
-    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID));
+    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID)!);
 
     String filter = "[('employee_id','in'," +
         empIds.toString() +
@@ -126,7 +125,7 @@ class EmployeeService extends OdooService {
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -157,7 +156,7 @@ class EmployeeService extends OdooService {
   }
 
   Future<List<Loan>> fetchLoan(String empID, String offset) async {
-    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID));
+    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID)!);
     var dateBefore = AppUtils.threemonthago();
     // String url = Globals.baseURL +
     //     "/hr.loan?filters=[('employee_id','in'," + empIds.toString() + "),('create_date','>=','$dateBefore')]&limit="+Globals.pag_limit.toString()+"&offset="+offset+"&order=name desc";
@@ -168,7 +167,7 @@ class EmployeeService extends OdooService {
     //     empIds.toString() +
     //     ")]";
     Response response = await dioClient.get(url);
-    List<Loan> loan_list = new List<Loan>();
+    List<Loan> loan_list = <Loan>[];
     if (response.statusCode == 200) {
       print(response.toString());
       if (response.data['count'] != 0) {
@@ -191,7 +190,7 @@ class EmployeeService extends OdooService {
         "/hr.employee/"+empID+"/get_employee_payslip";
     print("payslipsUrl:"+url);
     Response response = await dioClient.put(url, data: jsonEncode({'employee_id': empID}));
-    List<PaySlips> payslip_list = new List<PaySlips>();
+    List<PaySlips> payslip_list = <PaySlips>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['data'];
@@ -210,7 +209,7 @@ class EmployeeService extends OdooService {
         "/hr.salary.rule.category";
 
     Response response = await dioClient.get(url);
-    List<Branch_id> rule_list = new List<Branch_id>();
+    List<Branch_id> rule_list = <Branch_id>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -230,7 +229,7 @@ class EmployeeService extends OdooService {
         ")]";
 
     Response response = await dioClient.get(url);
-    List<Insurancemodel> insurance_list = new List<Insurancemodel>();
+    List<Insurancemodel> insurance_list = <Insurancemodel>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -247,7 +246,7 @@ class EmployeeService extends OdooService {
         Globals.baseURL + "/hr.claims?filters=[('employee_id','='," + id + ")]";
     Response response = await dioClient.get(url);
     List<Claiminsurancemodel> claim_insurance_list =
-        new List<Claiminsurancemodel>();
+        <Claiminsurancemodel>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -263,7 +262,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL + "/insurance.type";
     Response response = await dioClient.get(url);
     List<Insurancetypemodel> insurance_type_list =
-        new List<Insurancetypemodel>();
+        <Insurancetypemodel>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -285,7 +284,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL + "/hr.claims";
     var list = refList?.map((x) => x?.toMap())?.toList();
     List<Claiminsurancemodel> claim_insurance_list =
-        new List<Claiminsurancemodel>();
+        <Claiminsurancemodel>[];
     Response response = await dioClient.post(url,
         data: jsonEncode({
           "insurance_type_id": insurancemodel.insuranceTypeId.id,
@@ -296,7 +295,7 @@ class EmployeeService extends OdooService {
           "description": description,
           'attached_file': attach_file,
           'date': date,
-          'insurance_ids': list
+          'insurance_ids': list as List<Emp_ID>
         }));
     if (response.statusCode == 200) {
       String url = Globals.baseURL +
@@ -320,7 +319,7 @@ class EmployeeService extends OdooService {
       Insurancetypemodel insurancetypemodel,
       int employee_id,
       String employeename) async {
-    List<Insurancemodel> insurance_list = new List<Insurancemodel>();
+    List<Insurancemodel> insurance_list = <Insurancemodel>[];
     String url = Globals.baseURL + "/hr.insurance";
     Response response = await dioClient.post(url,
         data: jsonEncode({
@@ -380,7 +379,7 @@ class EmployeeService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<Announcement> announcement_list = new List<Announcement>();
+    List<Announcement> announcement_list = <Announcement>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       print("Announcement Type $data");
@@ -405,7 +404,7 @@ class EmployeeService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<Announcement> announcement_list = new List<Announcement>();
+    List<Announcement> announcement_list = <Announcement>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -491,7 +490,7 @@ class EmployeeService extends OdooService {
         "&offset=" + offset;
     ;
     Response response = await dioClient.get(url);
-    List<Announcement> announcement_list = new List<Announcement>();
+    List<Announcement> announcement_list = <Announcement>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -507,7 +506,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL + "/hr.employee/1/get_reminder_ids";
     Response response = await dioClient.put(url,
         data: jsonEncode({'employee_id': int.parse(id)}));
-    List<Reminder> reminderList = new List<Reminder>();
+    List<Reminder> reminderList = <Reminder>[];
     if (response.statusCode == 200) {
       var data = response.data;
       if (response.data.length != 0) {
@@ -567,7 +566,7 @@ class EmployeeService extends OdooService {
         offset;
 
     Response response = await dioClient.get(url);
-    List<Reward> rewards_list = new List<Reward>();
+    List<Reward> rewards_list = <Reward>[];
     Reward result;
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -600,7 +599,7 @@ class EmployeeService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<Reward> rewards_list = new List<Reward>();
+    List<Reward> rewards_list = <Reward>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -640,7 +639,7 @@ class EmployeeService extends OdooService {
     //     "&offset=" +
     //     offset;
     Response response = await dioClient.get(url);
-    List<Reward> rewards_list = new List<Reward>();
+    List<Reward> rewards_list = <Reward>[];
     Warning_model result;
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -683,7 +682,7 @@ class EmployeeService extends OdooService {
     return result;
   }
 
-  Future<File> downloadReward(int id, String name) async {
+  Future<File?> downloadReward(int id, String name) async {
     String retrieve_url = Globals.baseURL + "/report/get_pdf";
     Response response = await dioClient.get(retrieve_url, queryParameters: {
       'report_name': "hr_reward.report_reward_letter",
@@ -695,7 +694,7 @@ class EmployeeService extends OdooService {
     }
   }
 
-  Future<File> downloadWarning(int id, String name) async {
+  Future<File?> downloadWarning(int id, String name) async {
     String retrieve_url = Globals.baseURL + "/report/get_pdf";
     Response response = await dioClient.get(retrieve_url, queryParameters: {
       'report_name': "hr_warning.report_warning_letter",
@@ -718,7 +717,7 @@ class EmployeeService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<Warning_model> warnings_list = new List<Warning_model>();
+    List<Warning_model> warnings_list = <Warning_model>[];
     Warning_model result;
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -754,7 +753,7 @@ class EmployeeService extends OdooService {
 
     Response response = await dioClient.get(url);
     debugPrint("URL: $url");
-    List<Warning_model> warnings_list = new List<Warning_model>();
+    List<Warning_model> warnings_list = <Warning_model>[];
     //Warning_model result;
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -789,7 +788,7 @@ class EmployeeService extends OdooService {
     //     "&offset=" +
     //     offset;
     Response response = await dioClient.get(url);
-    List<Warning_model> warnings_list = new List<Warning_model>();
+    List<Warning_model> warnings_list = <Warning_model>[];
     Warning_model result;
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -931,7 +930,7 @@ class EmployeeService extends OdooService {
     //     emp_ids.toString() +
     //     ")]";
     // Response response = await dioClient.get(url);
-    List<Emp_job> emp_list = new List<Emp_job>();
+    List<Emp_job> emp_list = <Emp_job>[];
     if (response.statusCode == 200) {
       var data = response.data;
       if (response.data != null) {
@@ -957,7 +956,7 @@ class EmployeeService extends OdooService {
     //     "/hr.employee?filters=[('company_id', '=', "+companyID.toString()+"), ('branch_id', '=', "+branchId.toString()+")]";
     // ;
     // Response response = await dioClient.get(url);
-    List<Emp_job> emp_list = new List<Emp_job>();
+    List<Emp_job> emp_list = <Emp_job>[];
     if (response.statusCode == 200) {
       var data = response.data;
       if (response.data != null) {
@@ -973,7 +972,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL +
         "/hr.department?filters=['|', ('branch_id', '=', "+branchId.toString()+"),('branch_id', '=', False)]";
     Response response = await dioClient.get(url);
-    List<Department> dept_list = new List<Department>();
+    List<Department> dept_list = <Department>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -989,7 +988,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL +
         "/res.branch?filters=['|', ('company_id', '=', "+companyId.toString()+"),('company_id', '=', False)]";
     Response response = await dioClient.get(url);
-    List<Company> branch_list = new List<Company>();
+    List<Company> branch_list = <Company>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1004,7 +1003,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL +
         "/res.company";
     Response response = await dioClient.get(url);
-    List<Company_id> company_list = new List<Company_id>();
+    List<Company_id> company_list = <Company_id>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1043,7 +1042,7 @@ class EmployeeService extends OdooService {
         ")]";
 
     Response response = await dioClient.get(url);
-    List<Company> job_list = new List<Company>();
+    List<Company> job_list = <Company>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1062,7 +1061,7 @@ class EmployeeService extends OdooService {
         ")]";
 
     Response response = await dioClient.get(url);
-    List<Company> job_grade_list = new List<Company>();
+    List<Company> job_grade_list = <Company>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1082,7 +1081,7 @@ class EmployeeService extends OdooService {
         salary_ids.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<Company> salary_level_list = new List<Company>();
+    List<Company> salary_level_list = <Company>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1127,7 +1126,7 @@ class EmployeeService extends OdooService {
         offset+"&order=date desc";
     print("employee url >>"+url);
     Response response = await dioClient.get(url);
-    List<Employee_promotion> promotion_list = new List<Employee_promotion>();
+    List<Employee_promotion> promotion_list = <Employee_promotion>[];
     print("employee change response >>"+response.toString());
     if (response.statusCode == 200) {
       var data = response.data['results'];
@@ -1149,7 +1148,7 @@ class EmployeeService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<Employee_document> doc_list = new List<Employee_document>();
+    List<Employee_document> doc_list = <Employee_document>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1164,7 +1163,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL +
         "/hr.employee/2/get_emp_document_attachments";
     Response response = await dioClient.put(url,data:jsonEncode({'doc_id': id}));
-    List<Attachment> attachment_list = new List<Attachment>();
+    List<Attachment> attachment_list = <Attachment>[];
     if (response.statusCode == 200) {
       print(response.data);
        var data = response.data['attachment'];
@@ -1254,7 +1253,7 @@ class EmployeeService extends OdooService {
         company_ids.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<Company_id> company_list = new List<Company_id>();
+    List<Company_id> company_list = <Company_id>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1312,7 +1311,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL + "/hr.insurance?filters=[('id','in'," + insurance_ids.toString() + ")]&limit="+Globals.pag_limit.toString()+"&offset="+offset+"&order=name desc";
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<Insurancemodel> insurance_list = new List<Insurancemodel>();
+    List<Insurancemodel> insurance_list = <Insurancemodel>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -1332,7 +1331,7 @@ class EmployeeService extends OdooService {
         branch_ids.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<Branch_id> company_list = new List<Branch_id>();
+    List<Branch_id> company_list = <Branch_id>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1359,7 +1358,7 @@ class EmployeeService extends OdooService {
         department_ids.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<Department> company_list = new List<Department>();
+    List<Department> company_list = <Department>[];
     if (response.statusCode == 200) {
       var data = response.data['results'];
       if (response.data['count'] != 0) {
@@ -1435,7 +1434,7 @@ class EmployeeService extends OdooService {
     String url = Globals.baseURL + "/hr.insurance?filters=[('id','in'," + insurance_ids.toString() + ")]&limit="+Globals.pag_limit.toString()+"&offset="+offset+"&order=name desc";
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<Insurancemodel> insurance_list = new List<Insurancemodel>();
+    List<Insurancemodel> insurance_list = <Insurancemodel>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];

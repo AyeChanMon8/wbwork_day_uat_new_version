@@ -1,18 +1,17 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/attandanceuser.dart';
-import 'package:winbrother_hr_app/models/attendance.dart';
-import 'package:winbrother_hr_app/models/attendance_request.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/attandanceuser.dart';
+import '../models/attendance.dart';
+import '../models/attendance_request.dart';
+import '../models/employee.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 
 class AttendanceService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<AttendanceService> init() async {
     dioClient = await client();
@@ -23,7 +22,7 @@ class AttendanceService extends OdooService {
       int empId, String offset) async {
     String url =
         Globals.baseURL + "/hr.employee/${empId}/get_attendance_history";
-    List<Attandanceuser> attendance_list = new List<Attandanceuser>();
+    List<Attandanceuser> attendance_list = <Attandanceuser>[];
     Response response = await dioClient.put(url);
     if (response.statusCode == 200) {
       response.data.forEach((v) {
@@ -122,7 +121,7 @@ class AttendanceService extends OdooService {
         empID.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<dynamic> emp_ids = new List<dynamic>();
+    List<dynamic> emp_ids = <dynamic>[];
     if (response.data['count'] != 0) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -143,7 +142,7 @@ class AttendanceService extends OdooService {
     String url = Globals.baseURL + "/hr.attendance";
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<Attendance> attendance_list = new List<Attendance>();
+    List<Attendance> attendance_list = <Attendance>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -188,7 +187,7 @@ class AttendanceService extends OdooService {
       int empIds, String date) async {
     String datebefore = AppUtils.oneYearago();
     // List<dynamic> empIds = await getEmployeeListForApprovalManager(empID);
-    List<Attendance> attendance_list = new List<Attendance>();
+    List<Attendance> attendance_list = <Attendance>[];
     // String filter = "[('employee_id','in'," +
     //     empIds.toString() +
     //     "),('state','!=','approve')]";
@@ -226,7 +225,7 @@ class AttendanceService extends OdooService {
       String url = Globals.baseURL + "/hr.attendance";
       Response response =
           await dioClient.get(url, queryParameters: {"filters": filter});
-      List<Attendance> attendace_list = new List<Attendance>();
+      List<Attendance> attendace_list = <Attendance>[];
       if (response.statusCode == 200) {
         var list = response.data['results'];
         if (response.data['count'] != 0) {
@@ -251,7 +250,7 @@ class AttendanceService extends OdooService {
       String url = Globals.baseURL + "/hr.attendance";
       Response response =
           await dioClient.get(url, queryParameters: {"filters": filter});
-      List<Attendance> attendace_list = new List<Attendance>();
+      List<Attendance> attendace_list = <Attendance>[];
       if (response.statusCode == 200) {
         if (response.data['count'] != 0) {
           var list = response.data['results'];
@@ -275,7 +274,7 @@ class AttendanceService extends OdooService {
       String url = Globals.baseURL + "/hr.attendance";
       Response response =
           await dioClient.get(url, queryParameters: {"filters": filter});
-      List<Attendance> attendace_list = new List<Attendance>();
+      List<Attendance> attendace_list = <Attendance>[];
       if (response.statusCode == 200) {
         if (response.data['count'] != 0) {
           var list = response.data['results'];
@@ -336,7 +335,7 @@ class AttendanceService extends OdooService {
       String empID, String offset) async {
     String date =
         DateTime(DateTime.now().year, DateTime.now().month, 1).toString();
-    List<Attendance> attendance_list = new List<Attendance>();
+    List<Attendance> attendance_list = <Attendance>[];
     List<dynamic> attendance_ids = await getAttanIDsList(empID);
     if (attendance_ids != null) {
       String filter = "[('id','in'," +

@@ -1,16 +1,15 @@
-// @dart=2.9
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/calendar_data.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/globals.dart';
+import '../models/calendar_data.dart';
+import '../utils/app_utils.dart';
+import 'odoo_service.dart';
+
 class CalendarService extends OdooService{
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<CalendarService> init() async {
     print('AttendanceService has been initialize');

@@ -1,9 +1,8 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
+import '../constants/globals.dart';
+import '../services/odoo_service.dart';
 
 //import 'package:dio/dio.dart';
 class AuthService extends OdooService {
@@ -23,7 +22,7 @@ class AuthService extends OdooService {
   }
 
   authenticate(String mobile, String otp) async {
-    String userId;
+    String userId = '';
     String url = Globals.baseURL + "/res.partner/2/authenticate";
     Dio dioClient = await client();
     Response response = await dioClient.put(url,
