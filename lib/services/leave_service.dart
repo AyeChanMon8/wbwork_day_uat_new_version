@@ -1,20 +1,19 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/leave.dart';
-import 'package:winbrother_hr_app/models/leave_line.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/models/leave_report.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_response.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/leave.dart';
+import '../models/leave_line.dart';
+import '../models/leave_list_response.dart';
+import '../models/leave_report.dart';
+import '../models/travel_expense/out_of_pocket_response.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 
 class LeaveService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<LeaveService> init() async {
     print('LeaveService has been initialize');
@@ -28,7 +27,7 @@ class LeaveService extends OdooService {
     Response response =
         await dioClient.put(url, data: jsonEncode({'employee_id': empID}));
 
-    List<LeaveReport> leave_reports = new List<LeaveReport>();
+    List<LeaveReport> leave_reports = <LeaveReport>[];
     if (response.statusCode == 200) {
       List<dynamic> list = response.data;
       list.forEach((v) {
@@ -52,7 +51,7 @@ class LeaveService extends OdooService {
         }
       }
     } on DioError catch (e) {
-      created = e.response.data['error_descrip'].toString();
+      created = e.response!.data['error_descrip'].toString();
     }
     return created;
   }
@@ -74,7 +73,7 @@ class LeaveService extends OdooService {
         }
       }
     } on DioError catch (e) {
-      status = e.response.data['message'].toString();
+      status = e.response!.data['message'].toString();
     }
     return status;
   }
@@ -104,7 +103,7 @@ class LeaveService extends OdooService {
         AppUtils.showErrorDialog(response.toString(),response.statusCode.toString());
       }
     } on DioError catch (e) {
-      created = e.response.data['error_descrip'].toString();
+      created = e.response!.data['error_descrip'].toString();
     }
     return created;
   }
@@ -123,7 +122,7 @@ class LeaveService extends OdooService {
         "&offset=" +
         offset+"&order=start_date desc";
     Response response = await dioClient.get(url);
-    List<LeaveListResponse> leave_list = new List<LeaveListResponse>();
+    List<LeaveListResponse> leave_list = <LeaveListResponse>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if (response.data['count'] != 0) {
@@ -151,7 +150,7 @@ class LeaveService extends OdooService {
     String url = Globals.baseURL + "/summary.request";
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<LeaveListResponse> leave_list = new List<LeaveListResponse>();
+    List<LeaveListResponse> leave_list = <LeaveListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -176,18 +175,27 @@ class LeaveService extends OdooService {
         id.toString() +
         "/button_approve";
         print("leave approve >>"+url);
-    Response response = await dioClient.put(url).onError((error, stackTrace) {
-       print("button approve error");
-       print(error.toString());
-    });
 
-    if (response.statusCode == 200) {
+    Response response = await dioClient.put(url);
+      if (response.statusCode == 200) {
       result = true;
     } else {
       Get.back();
       AppUtils.showDialog('Warning!', response.data['error_descrip']);
       result = false;
     }
+    // Response response = await dioClient.put(url).onError((error, stackTrace) {
+    //    print("button approve error");
+    //    print(error.toString());
+    // });
+
+    // if (response.statusCode == 200) {
+    //   result = true;
+    // } else {
+    //   Get.back();
+    //   AppUtils.showDialog('Warning!', response.data['error_descrip']);
+    //   result = false;
+    // }
 
 
     return result;
@@ -267,7 +275,7 @@ class LeaveService extends OdooService {
     print(leave.toJson());
     Response response = await dioClient.put(url, data: leave.toJson());
 
-    List<LeaveLine> leave_line = new List<LeaveLine>();
+    List<LeaveLine> leave_line = <LeaveLine>[];
     if (response.statusCode == 200) {
       if (response.data['status'] == false) {
         print("falseexist");
@@ -293,7 +301,7 @@ class LeaveService extends OdooService {
         Globals.baseURL + "/summary.request.line/1/update_request_line";
     print(data.toJson());
     Response response = await dioClient.put(url, data: data.toJson());
-    LeaveLine leave_line;
+    LeaveLine leave_line = LeaveLine();
     if (response.statusCode == 200) {
       if(response.data['status']==true){
         leave_line = LeaveLine.fromMap(response.data['message']);
@@ -324,7 +332,7 @@ class LeaveService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<LeaveListResponse> leave_list = new List<LeaveListResponse>();
+    List<LeaveListResponse> leave_list = <LeaveListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -349,7 +357,7 @@ class LeaveService extends OdooService {
         "&offset=" +
         offset;
     Response response = await dioClient.get(url);
-    List<LeaveListResponse> leave_list = new List<LeaveListResponse>();
+    List<LeaveListResponse> leave_list = <LeaveListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];

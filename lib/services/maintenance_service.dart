@@ -1,19 +1,19 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_product_category_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/fleet_model.dart';
+import '../models/maintenance_product_category_model.dart';
+import '../models/maintenance_request_model.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 
 class MaintenanceService extends OdooService{
-  Dio dioClient;
+  Dio dioClient = Dio();
  @override
   Future<MaintenanceService> init() async{
      dioClient = await client();
@@ -99,7 +99,7 @@ class MaintenanceService extends OdooService{
     String url = Globals.baseURL+"/maintenance.request";
     Response response = await dioClient.post(url,data: json);
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),"planned") as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,"planned") as List<Maintenance_request_model>;
 
     }else{
       Get.back();
@@ -114,7 +114,7 @@ class MaintenanceService extends OdooService{
    String url = Globals.baseURL+"/maintenance.product";
    Response response = await dioClient.post(url,data: jsonEncode({"line_id":id,"category_id":maintenance_product_id.categoryId,"product_id":maintenance_product_id.productId,"type":maintenance_product_id.type,"qty":maintenance_product_id.qty}));
    if(response.statusCode == 200){
-     maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),"planned") as List<Maintenance_request_model>;
+     maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,"planned") as List<Maintenance_request_model>;
      // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
      // Response response = await dioClient.get(url);
      // if(response.statusCode == 200){
@@ -134,7 +134,7 @@ class MaintenanceService extends OdooService{
    String url = Globals.baseURL+"/maintenance.product/${id}";
    Response response = await dioClient.delete(url);
    if(response.statusCode == 200){
-     maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),"planned") as List<Maintenance_request_model>;
+     maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,"planned") as List<Maintenance_request_model>;
      // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
      // Response response = await dioClient.get(url);
      // if(response.statusCode == 200){
@@ -158,7 +158,7 @@ class MaintenanceService extends OdooService{
     }
     Response response = await dioClient.put(url,data: json);
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),"planned") as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,"planned") as List<Maintenance_request_model>;
       // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
       // Response response = await dioClient.get(url);
       // if(response.statusCode == 200){
@@ -178,7 +178,7 @@ class MaintenanceService extends OdooService{
     String url = Globals.baseURL+"/maintenance.request/${id}";
     Response response = await dioClient.put(url,data: jsonEncode({'state' : 'reproposed'}));
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
       // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
       // Response response = await dioClient.get(url);
       // if(response.statusCode == 200){
@@ -196,7 +196,7 @@ class MaintenanceService extends OdooService{
     String url = Globals.baseURL+"/maintenance.request/${id}";
     Response response = await dioClient.put(url,data: jsonEncode({'state' : 'approved','maintenance_req_from_mobile': true}));
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
       // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
       // Response response = await dioClient.get(url);
       // if(response.statusCode == 200){
@@ -217,7 +217,7 @@ class MaintenanceService extends OdooService{
     String url = Globals.baseURL+"/maintenance.request/${id}";
     Response response = await dioClient.put(url,data: jsonEncode({'state' : 'reject'}));
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
       // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
       // Response response = await dioClient.get(url);
       // if(response.statusCode == 200){
@@ -238,7 +238,7 @@ class MaintenanceService extends OdooService{
     String url = Globals.baseURL+"/maintenance.request/${id}";
     Response response = await dioClient.put(url,data: jsonEncode({'state' : 'approve','maintenance_req_from_mobile': true}));
     if(response.statusCode == 200){
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
       // String url = Globals.baseURL+"/maintenance.request?filters=[('driver_id', '=', ${employeeId})]";
       // Response response = await dioClient.get(url);
       // if(response.statusCode == 200){
@@ -268,7 +268,7 @@ class MaintenanceService extends OdooService{
       //       maintenanceRequestModelList.add(Maintenance_request_model.fromJson(v));
       //     });
       // }
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
     }
     return maintenanceRequestModelList;
   }
@@ -286,7 +286,7 @@ class MaintenanceService extends OdooService{
       //       maintenanceRequestModelList.add(Maintenance_request_model.fromJson(v));
       //     });
       // }
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
     }
     return maintenanceRequestModelList;
   }
@@ -304,7 +304,7 @@ class MaintenanceService extends OdooService{
       //       maintenanceRequestModelList.add(Maintenance_request_model.fromJson(v));
       //     });
       // }
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(employeeId)!,state) as List<Maintenance_request_model>;
     }
     return maintenanceRequestModelList;
   }
@@ -315,7 +315,7 @@ class MaintenanceService extends OdooService{
     Response response = await dioClient.put(url,data: jsonEncode({'start_date' : date}));
     if(response.statusCode == 200){
 
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(empID),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(empID)!,state) as List<Maintenance_request_model>;
     }
     return maintenanceRequestModelList;
   }
@@ -325,7 +325,7 @@ class MaintenanceService extends OdooService{
     Response response = await dioClient.put(url,data: jsonEncode({'end_date' : date}));
     if(response.statusCode == 200){
 
-      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(empID),state) as List<Maintenance_request_model>;
+      maintenanceRequestModelList = await getMaintenanceRequestList(int.tryParse(empID)!,state) as List<Maintenance_request_model>;
     }
     return maintenanceRequestModelList;
   }

@@ -1,16 +1,16 @@
-// @dart=2.9
+
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/fleet_insurance.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/fuel_log_model.dart';
-import 'package:winbrother_hr_app/models/fuel_tank.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/fleet_insurance.dart';
+import '../models/fleet_model.dart';
+import '../models/fuel_log_model.dart';
+import '../models/fuel_tank.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 
 class FleetService extends OdooService{
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<FleetService> init() async {
     dioClient = await client();
