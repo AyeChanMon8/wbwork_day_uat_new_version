@@ -1,15 +1,14 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/drawer.dart';
-import 'package:winbrother_hr_app/pages/expense_tab.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/drawer.dart';
+import '../pages/expense_tab.dart';
+import '../routes/app_pages.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class AdminPage extends StatefulWidget {
 class _AdminPageState extends State<AdminPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -111,7 +110,9 @@ class _AdminPageState extends State<AdminPage> {
     }
 
     return Scaffold(
-      appBar: appbar(context, labels?.adminTitle, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.adminTitle, image)),
       drawer: DrawerPage(),
       body: Container(
           margin: EdgeInsets.only(top: 10),

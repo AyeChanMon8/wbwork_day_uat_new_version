@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -13,12 +13,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
+import '../constants/globals.dart';
+import '../controllers/announcements_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/pdf_view.dart';
 
 import 'leave_detail.dart';
 
@@ -64,7 +64,9 @@ class AnnouncementsDetails extends StatelessWidget {
       announcementText = controller.announcementList.value[index].announcement;
     }
     return Scaffold(
-      appBar: appbar(context, "Announcements Details", image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Announcements Details", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: 20, top: 20, right: 20),

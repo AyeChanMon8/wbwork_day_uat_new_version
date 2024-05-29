@@ -60,7 +60,7 @@ var unReadMsgCount = 0.obs;
         });
       });
     } catch (error) {
-      Get.snackbar('Alert', 'Network connection fail ${error.response?.statusCode}!\nPlease, try again');
+      Get.snackbar('Alert', 'Network connection fail!\nPlease, try again');
     }
   }
 

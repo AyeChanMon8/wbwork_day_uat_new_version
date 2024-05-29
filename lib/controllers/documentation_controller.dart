@@ -56,7 +56,7 @@ class DoucmentController extends GetxController {
     });
   }
 
-  Future<File> getDoc(int documentId,String type) async {
+  Future<File?> getDoc(int documentId,String type) async {
     Future.delayed(
         Duration.zero,
         () => Get.dialog(
@@ -71,7 +71,7 @@ class DoucmentController extends GetxController {
       doc.value = data as Document_detail;
       Get.back();
     });
-    return  _createFileFromString(type!);
+    return _createFileFromString(type);
   }
 
   Future<File?> _createFileFromString(String type) async {

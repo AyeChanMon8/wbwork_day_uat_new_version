@@ -63,7 +63,7 @@ void onReady() async {
     await pmsService?.pmsApproveorNot(value.employeeId.id.toString(),value.state).then((value){
       print("Status#");
       print(value);
-      approve_or_not.value = value;
+      approve_or_not.value = value!;
       return value;
     });
 
@@ -183,7 +183,7 @@ clickSubmit(String pmsId) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-    String message =detailModel.value.state == 'acknowledge'? await pmsService!.sendMidYearSelfAssessment(pmsId) : await pmsService!.sendYearEndSelfAssessment(pmsId);
+    String message =detailModel.value.state == 'acknowledge'? await pmsService!.sendMidYearSelfAssessment(pmsId).toString()! : await pmsService!.sendYearEndSelfAssessment(pmsId).toString()!;
     if (message == 'Success') {
       Get.back();
       AppUtils.showConfirmDialog('Information', message, () {
@@ -345,7 +345,7 @@ editEmployeeCompetenciesScore(int index) async{
   }else{
     print("editCompetenciesScore");
   print(detailModel.value.competenciesIds[index].score);
-  String message= await pmsService!.editEmployeeCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
+  String message= await pmsService!.editEmployeeCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment).toString();
   if(message == 'Success'){
     AppUtils.showConfirmDialog('Information', message, () async{
       var pmsList =await pmsListController!.getPmsList();

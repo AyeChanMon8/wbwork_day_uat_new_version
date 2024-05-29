@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 import 'approval_details.dart';
 
 class OvertimeApprovalList extends StatefulWidget {
@@ -18,7 +18,7 @@ class OvertimeApprovalList extends StatefulWidget {
 class _OvertimeApprovalListState extends State<OvertimeApprovalList> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,8 @@ class _OvertimeApprovalListState extends State<OvertimeApprovalList> {
   Widget build(BuildContext context) {
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, "Overtime Approval List", image),
+      appBar: PreferredSize(preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Overtime Approval List", image)),
       body: ListView.builder(
         itemCount: controller.otcList.value.length,
         itemBuilder: (BuildContext context, int index) {

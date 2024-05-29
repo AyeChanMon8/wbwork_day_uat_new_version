@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
 
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/maintenance_request.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/maintenance_request.dart';
 
 class ApprovalAttendanceDetails extends StatefulWidget {
   @override
@@ -25,8 +25,8 @@ class ApprovalAttendanceDetails extends StatefulWidget {
 class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -41,7 +41,9 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
     }
 
     return Scaffold(
-        appBar: appbar(context, "Attendance Approve Details", image),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(8.0),
+          child: appbar(context, "Attendance Approve Details", image)),
         body: SingleChildScrollView(
           child: Obx(()=>Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +60,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
-                          child: Text(labels?.name),
+                          child: Text(labels.name),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
@@ -88,7 +90,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
-                          child: Text(labels?.workHours),
+                          child: Text(labels.workHours),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
@@ -111,7 +113,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
-                          child: Text(labels?.status),
+                          child: Text(labels.status),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
@@ -131,7 +133,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
-                          child: Text(labels?.overTime),
+                          child: Text(labels.overTime),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
@@ -151,7 +153,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 40, right: 40),
-                        child: Text(labels?.late),
+                        child: Text(labels.late),
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 40, right: 40),
@@ -170,7 +172,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 40, right: 40),
-                        child: Text(labels?.early),
+                        child: Text(labels.early),
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 40, right: 40),

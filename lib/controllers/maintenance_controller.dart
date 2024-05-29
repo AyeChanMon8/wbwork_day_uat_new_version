@@ -365,9 +365,9 @@ getMaintenanceProductCategorys() async {
           barrierDismissible: false));
   var company_id = box.read('emp_company');
   //fetch emp_id from GetX Storage
-  await maintenanceService?.getProductCategory(int.tryParse(company_id)).then((data) {
+  await maintenanceService?.getProductCategory(int.tryParse(company_id)!).then((data) {
     maintenanceProductCategorys.value = data;
-     selectedProductCategory.value = null;
+     selectedProductCategory.value = null!;
     //getMaintenanceProductList(this.selectedProductCategory.value.id);
     Get.back();
   });

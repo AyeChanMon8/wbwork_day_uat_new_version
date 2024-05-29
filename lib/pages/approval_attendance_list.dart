@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -6,12 +5,12 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 import 'approval_details.dart';
 
@@ -23,14 +22,15 @@ class ApprovalAttendanceList extends StatefulWidget {
 class _ApprovalAttendanceListState extends State<ApprovalAttendanceList> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     image = box.read('emp_image');
     final labels = AppLocalizations.of(context);
     return Scaffold(
-      appBar: appbar(context, labels.attendanceApprovalList, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.attendanceApprovalList, image)),
       body: ListView.builder(
         itemCount: controller.attendanceApprovalList.value.length,
         itemBuilder: (BuildContext context, int index) {

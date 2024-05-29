@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/overtime_response_controller.dart';
-import 'package:winbrother_hr_app/controllers/overtime_response_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/overtime_response_controller.dart';
+import '../controllers/overtime_response_list_controller.dart';
+import '../localization.dart';
+import '../models/employee_id.dart';
+import '../my_class/my_app_bar.dart';
+import '../routes/app_pages.dart';
 import '../controllers/overtime_list_controller.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ import 'pre_page.dart';
 class OvertimeApprovalDetail extends StatelessWidget {
   ApprovalController controller =
       Get.put(ApprovalController());
-  int index;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
       }
     }
     return Scaffold(
-      appBar: appbar(context, labels?.overtimeDetails,user_image),
+      appBar: PreferredSize(preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.overtimeDetails,user_image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +67,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.name,
+                  labels.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -95,7 +95,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.title,
+                  labels.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -118,7 +118,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
               Container(
                 child: Text(
                   // "Start Date Time",
-                  labels?.startDate + " :",
+                  labels.startDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -141,7 +141,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
               Container(
                 child: Text(
                   // "End Date Time",
-                  (labels?.endDate + " :"),
+                  (labels.endDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -162,7 +162,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -196,13 +196,15 @@ class OvertimeApprovalDetail extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     controller.approveOvertime(controller.otcList[index].id);
                   },
                   child: Text(
-                    labels?.accept,
+                    labels.accept,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -214,8 +216,10 @@ class OvertimeApprovalDetail extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     Get.toNamed(Routes.OVERTIME_DECLINE, arguments: index);
 
@@ -223,7 +227,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
                     //     controller.travelLineList.value[index].id);
                   },
                   child: Text(
-                    labels?.decline,
+                    labels.decline,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -233,7 +237,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
     );
   }
 
-  Widget confirmDialog(BuildContext context, int index) {
+  Widget? confirmDialog(BuildContext context, int index) {
     final labels = AppLocalizations.of(context);
 
     //   AlertDialog(

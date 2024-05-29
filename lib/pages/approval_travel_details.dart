@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 //import 'package:easy_localization/easy_localization.dart';
@@ -7,16 +7,16 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
 
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/maintenance_request.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/maintenance_request.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class ApprovalTravelDetails extends StatefulWidget {
   @override
@@ -26,8 +26,8 @@ class ApprovalTravelDetails extends StatefulWidget {
 class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -157,21 +157,21 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels?.date,
+              labels.date,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.destination,
+              labels.destination,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.purpose,
+              labels.purpose,
               style: subtitleStyle(),
             ),
           )
@@ -264,7 +264,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.fromDate,
+                  labels.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -287,7 +287,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.toDate,
+                  labels.toDate,
                   // ("To Date : "),
                   style: datalistStyle(),
                 ),
@@ -311,7 +311,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
               Container(
                 child: Text(
                   // ("From : "),
-                  labels?.from,
+                  labels.from,
                   style: datalistStyle(),
                 ),
               ),
@@ -331,7 +331,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.to,
+                  labels.to,
                   // ("To : "),
 
                   style: datalistStyle(),
@@ -353,7 +353,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),

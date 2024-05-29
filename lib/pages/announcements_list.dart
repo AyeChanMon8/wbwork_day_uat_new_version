@@ -1,28 +1,29 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/announcements_details.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/announcements_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/announcements_details.dart';
+import '../routes/app_pages.dart';
 
 class AnnouncementsList extends StatelessWidget {
   final AnnouncementsController controller = Get.put(AnnouncementsController());
   final box = GetStorage();
-  int index;
+  int index = 0;
 
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.announcements, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.announcements, image)),
       body: Obx(
         () => NotificationListener<ScrollNotification>(
                 // ignore: missing_return
@@ -36,6 +37,7 @@ class AnnouncementsList extends StatelessWidget {
                         }
 
                     }
+                    return true;
                 },
                 child: ListView.builder(
                                       itemCount: controller.announcementList.value.length,

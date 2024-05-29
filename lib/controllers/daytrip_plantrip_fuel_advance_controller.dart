@@ -70,14 +70,14 @@ class DayTripPlanTripGeneralController extends GetxController{
 
   Rx<Stock_location> _selectedLocation = Stock_location().obs;
   Stock_location get selectedLocation => _selectedLocation.value;
-  set selectedLocation(Stock_location type) =>
-      _selectedLocation.value = type;
+  set selectedLocation(Stock_location? type) =>
+      _selectedLocation.value = type!;
   var location_list = <Stock_location>[].obs;
 
   Rx<Daytrip_expense> _selectedProduct = Daytrip_expense().obs;
   Daytrip_expense get selectedProduct => _selectedProduct.value;
-  set selectedProduct(Daytrip_expense type) =>
-      _selectedProduct.value = type;
+  set selectedProduct(Daytrip_expense? type) =>
+      _selectedProduct.value = type!;
   var product_list = <Daytrip_expense>[].obs;
 
   //Expense Category Dropdown for Advance

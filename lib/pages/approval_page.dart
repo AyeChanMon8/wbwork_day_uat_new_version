@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/reward_controller.dart';
-import 'package:winbrother_hr_app/controllers/warning_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/announcements_controller.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/reward_controller.dart';
+import '../controllers/warning_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class ApprovalPage extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
   final AnnouncementsController announcementsController = Get.put(AnnouncementsController());
   final WarningController warningController = Get.put(WarningController());
   final box = GetStorage();
-  String image;
+  String image = '';
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels?.approval,
+          labels.approval,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -65,7 +65,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                     controller.getOtResponse();
                   },
                   child: Text(
-                    labels?.overtimeResponse,
+                    labels.overtimeResponse,
                     style: labelStyle(),
                   ),
                 ),
@@ -155,7 +155,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.allRequests,
+                          labels.allRequests,
                           style: listTileStyle(),
                         ),
                       ),
@@ -202,7 +202,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels?.approval,
+          labels.approval,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -228,7 +228,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                         children: [
                           Container(
                             child: Text(
-                              labels?.leaveApproval,
+                              labels.leaveApproval,
                               style: listTileStyle(),
                             ),
                           ),

@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -12,28 +12,31 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/size/gf_size.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/announcement.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import 'package:path_provider/path_provider.dart';
+import '../controllers/announcements_controller.dart';
+import '../controllers/approval_controller.dart';
+import '../localization.dart';
+import '../models/announcement.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 
 import 'leave_detail.dart';
 
 class AnnouncementApprovalDetails extends StatelessWidget {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  Announcement announcement;
-  String image;
+  Announcement announcement = Announcement();
+  String image = '';
   @override
   Widget build(BuildContext context) {
     announcement = Get.arguments;
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
-    print("announcement.attachment_id ${announcement.attachment_id.length}");
+    print("announcement.attachment_id ${announcement!.attachment_id.length}");
     return Scaffold(
-      appBar: appbar(context, labels?.announcements, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.announcements, image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: 20, top: 20, right: 20),

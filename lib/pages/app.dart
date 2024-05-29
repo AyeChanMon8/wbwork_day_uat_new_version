@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/bindings/home_binding.dart';
-import 'package:winbrother_hr_app/controllers/auth_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/pages/language.dart';
-import 'package:winbrother_hr_app/pages/leave_trip_tabbar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/theme/app_theme.dart';
-import 'package:winbrother_hr_app/ui/components/loading.dart';
+import '../bindings/home_binding.dart';
+import '../controllers/auth_controller.dart';
+import '../localization.dart';
+import '../pages/language.dart';
+import '../pages/leave_trip_tabbar.dart';
+import '../routes/app_pages.dart';
+import '../theme/app_theme.dart';
+import '../ui/components/loading.dart';
 import 'login_page.dart';
 
 class App extends StatelessWidget {

@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 
@@ -7,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/approval_controller.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
@@ -22,8 +21,8 @@ class ApprovalRouteDetails extends StatefulWidget {
 class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -137,21 +136,21 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels?.date,
+              labels.date,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.destination,
+              labels.destination,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.purpose,
+              labels.purpose,
               style: subtitleStyle(),
             ),
           )
@@ -164,7 +163,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
     final labels = AppLocalizations.of(context);
     var fuel_liter = "";
     fuel_liter = AppUtils.addThousnadSperator(double.tryParse(
-        controller.routeApprovalList.value[index].fuel_liter.toString()));
+        controller.routeApprovalList.value[index].fuel_liter.toString())!);
     print("code##");
     print(controller.routeApprovalList.value[index].code);
     return Container(
@@ -280,7 +279,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),

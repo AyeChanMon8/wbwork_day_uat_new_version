@@ -168,7 +168,7 @@ Widget expenseCategoryDropDown() {
             // margin: EdgeInsets.only(right: 20),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey[350], width: 2),
+                border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                 // Border.all(color: Colors.white, width: 2),
                 borderRadius: const BorderRadius.all(
                   const Radius.circular(1),

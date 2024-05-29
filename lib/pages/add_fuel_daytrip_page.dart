@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +6,16 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_expense_controller.dart';
-import 'package:winbrother_hr_app/controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/plan_trip_product.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/day_trip_expense_controller.dart';
+import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
+import '../localization.dart';
+import '../models/day_trip_model.dart';
+import '../models/daytrip_expense.dart';
+import '../models/plan_trip_product.dart';
+import '../models/plantrip_waybill.dart';
+import '../models/stock_location.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 class AddFuelDaytripPage extends StatelessWidget {
   //final DayTripExpenseController day_trip_controller = Get.find();
   DayTripPlanTripGeneralController day_trip_controller = Get.put(DayTripPlanTripGeneralController());
@@ -66,7 +67,9 @@ class AddFuelDaytripPage extends StatelessWidget {
     var labels = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: appbar(context, 'Add Fuel', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Add Fuel', '')),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -246,7 +249,7 @@ class AddFuelDaytripPage extends StatelessWidget {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -269,8 +272,8 @@ class AddFuelDaytripPage extends StatelessWidget {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Stock_location value) {
-                            day_trip_controller.onChangeLocationDropdown(value);
+                          onChanged: (Stock_location? value) {
+                            day_trip_controller.onChangeLocationDropdown(value!);
                           },
                           items: day_trip_controller.location_list
                               .map((Stock_location category) {
@@ -310,7 +313,7 @@ class AddFuelDaytripPage extends StatelessWidget {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -333,8 +336,8 @@ class AddFuelDaytripPage extends StatelessWidget {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Daytrip_expense value) {
-                            day_trip_controller.onChangeProductDropdown(value);
+                          onChanged: (Daytrip_expense? value) {
+                            day_trip_controller.onChangeProductDropdown(value!);
                           },
                           items: day_trip_controller.product_list
                               .map((Daytrip_expense category) {
@@ -360,12 +363,12 @@ class AddFuelDaytripPage extends StatelessWidget {
     );
   }
   Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
         initialDate: DateTime.parse(from_date),
         firstDate: DateTime.parse(from_date),
         lastDate: DateTime.parse(to_date),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -374,9 +377,9 @@ class AddFuelDaytripPage extends StatelessWidget {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
