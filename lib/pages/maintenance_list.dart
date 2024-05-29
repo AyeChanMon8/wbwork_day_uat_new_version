@@ -135,6 +135,9 @@ class _MaintenanceListPageState extends State<MaintenanceListPage> {
                       children: [
                         AutoSizeText(labels.priority+' :',style: maintitleStyle(),),
                         RatingBar.builder(
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
                           initialRating: double.parse(maintenanceModel.priority??'0'),
                           minRating: 1,
                           direction: Axis.horizontal,

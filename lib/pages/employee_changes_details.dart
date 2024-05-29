@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/employee_change_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/employee_change_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 import '../localization.dart';
 
 class EmployeeChangeDetails extends StatefulWidget {
@@ -20,8 +20,8 @@ class _EmployeeChangeDetailsState extends State<EmployeeChangeDetails> {
   final EmployeeChangeController controller =
       Get.put(EmployeeChangeController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,11 @@ class _EmployeeChangeDetailsState extends State<EmployeeChangeDetails> {
     image = box.read('emp_image');
     index = Get.arguments;
     return Scaffold(
-      appBar: appbar(context, labels.employeeChangeDetails, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.employeeChangeDetails, image)),
       body: Scrollbar(
-        isAlwaysShown: true,
+        // isAlwaysShown: true,
         controller: scrollController,
         thickness: 5,
         radius: Radius.circular(10),
@@ -57,7 +59,7 @@ class _EmployeeChangeDetailsState extends State<EmployeeChangeDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.status,
+                          labels.status,
                           // ("employee_name"),
                           style: datalistStyle(),
                         ),
@@ -83,7 +85,7 @@ class _EmployeeChangeDetailsState extends State<EmployeeChangeDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.employeeName,
+                          labels.employeeName,
                           // ("employee_name"),
                           style: datalistStyle(),
                         ),
@@ -203,7 +205,7 @@ class _EmployeeChangeDetailsState extends State<EmployeeChangeDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.position,
+                          labels.position,
                           // ("position"),
                           style: datalistStyle(),
                         ),

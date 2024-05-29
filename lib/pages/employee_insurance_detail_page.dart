@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/insurancemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../localization.dart';
+import '../models/insurancemodel.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 class EmployeeInsuranceDetailPage extends StatelessWidget {
   ScrollController scrollController = ScrollController();
   @override
@@ -16,10 +16,12 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
     final labels = AppLocalizations.of(context);
     Insurancemodel insurance = Get.arguments;
     return Scaffold(
-      appBar: appbar(context, 'Insurance Detail', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Insurance Detail', '')),
       body: Scrollbar(
         controller: scrollController,
-        isAlwaysShown: true,
+        // isAlwaysShown: true,
         thickness: 5,
         radius: Radius.circular(10),
         child: SingleChildScrollView(

@@ -1,10 +1,10 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/expense_report_complete.dart';
-import 'package:winbrother_hr_app/pages/expense_report_open.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/expense_report_complete.dart';
+import '../pages/expense_report_open.dart';
 
 class ExpenseReportTabBar extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _ExpenseReportTabBarState extends State<ExpenseReportTabBar> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(labels?.expenseReports, style: appbarTextStyle()),
+          title: Text(labels.expenseReports, style: appbarTextStyle()),
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,

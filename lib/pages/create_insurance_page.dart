@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,11 +8,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/insurance.dart';
-import 'package:winbrother_hr_app/models/insurancetypemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/insurance.dart';
+import '../models/insurancetypemodel.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 class CreateInsurancePage extends StatefulWidget {
   @override
   _CreateInsurancePageState createState() => _CreateInsurancePageState();
@@ -38,7 +38,9 @@ class _CreateInsurancePageState extends State<CreateInsurancePage> {
     var expireDate = AppUtils.removeNullString(controller.selectedPolicyType.value.expireDate);
 
     return Scaffold(
-      appBar: appbar(context, 'Create Insurance', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Create Insurance', '')),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -228,7 +230,7 @@ Widget InsuranceTypeDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -250,8 +252,8 @@ Widget InsuranceTypeDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Insurancetypemodel value) {
-                            controller.onChangePolicyDropdown(value);
+                          onChanged: (Insurancetypemodel? value) {
+                            controller.onChangePolicyDropdown(value!);
                           },
                           items: controller.insurancyTypeList.value
                               .map((Insurancetypemodel insurancetypemodel) {

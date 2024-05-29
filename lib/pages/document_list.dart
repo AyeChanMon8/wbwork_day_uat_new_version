@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:io';
 
@@ -7,12 +7,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/documentation_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/documentation_controller.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class DocumentList extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class DocumentList extends StatefulWidget {
 class _DocumentListState extends State<DocumentList> {
   final DoucmentController controller = Get.find();
   final box = GetStorage();
-  String image;
+  String image = '';
   var arguments_index = 0;
   Future _loadData() async {
     print("****loadmore****");
@@ -78,15 +78,15 @@ class _DocumentListState extends State<DocumentList> {
                   itemBuilder: (BuildContext context, int fileIndex) {
                     return InkWell(
                       onTap: () async {
-                        File file = await controller.getDoc(
+                        File? file = await controller.getDoc(
                             controller
                                 .docList[arguments_index].documentList[fileIndex].documentId,controller
                             .docList[arguments_index].documentList[fileIndex].file_type);
-                        if (AppUtils.isImage(file.path)) {
+                        if (AppUtils.isImage(file!.path)) {
                           Get.dialog(Stack(
                             children: [
                               Center(child: Image.file(file)),
-                              Positioned(right : 0,child: FlatButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
+                              Positioned(right : 0,child: TextButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
                             ],
                           ));
                         } else {

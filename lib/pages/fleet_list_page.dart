@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/FleetController.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/FleetController.dart';
+import '../localization.dart';
+import '../models/fleet_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../routes/app_pages.dart';
 
 class FleetListPage extends StatelessWidget {
  final FleetController controller = Get.put(FleetController());
@@ -16,7 +16,9 @@ class FleetListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var labels = AppLocalizations.of(context);
     return Scaffold(
-      appBar: appbar(context,labels.fleet, ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context,labels.fleet, '')),
       body: Container(
         child: Obx(()=> ListView.separated(
             itemCount: controller.fleetList.length ,

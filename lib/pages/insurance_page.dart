@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 // import 'dart:html';
 
@@ -6,15 +6,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/insurance.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/insurancemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/employee_claim_insurance_list_page.dart';
-import 'package:winbrother_hr_app/pages/employee_insurance_list_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/insurance.dart';
+import '../localization.dart';
+import '../models/insurancemodel.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/employee_claim_insurance_list_page.dart';
+import '../pages/employee_insurance_list_page.dart';
+import '../routes/app_pages.dart';
 
 class InsurancePage extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _InsurancePageState extends State<InsurancePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.insurance, style: appbarTextStyle()),
+              title: Text(labels.insurance, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

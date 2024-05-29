@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_controller.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/day_trip_controller.dart';
+import '../models/day_trip_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 class DayTripListPage extends StatefulWidget {
   final String pageType;
   DayTripListPage(this.pageType);
@@ -38,7 +38,7 @@ class _DayTripListPageState extends State<DayTripListPage> {
     print(box.read("role_category"));
     isDriver = box.read("is_driver");
     role_category = box.read("role_category");
-    emp_id = int.tryParse(box.read('emp_id').toString());
+    emp_id = int.tryParse(box.read('emp_id').toString())!;
     print("is_driver");
     print(box.read("is_driver"));
   }
@@ -82,7 +82,7 @@ class _DayTripListPageState extends State<DayTripListPage> {
                     child:InkWell(
                       onTap:(){
                         dayTripController.current_page.value = widget.pageType;
-                        Get.toNamed(Routes.CREATE_DAY_TRIP,arguments: index).then((value) {
+                        Get.toNamed(Routes.CREATE_DAY_TRIP,arguments: index)?.then((value) {
                           if(value!=null){
                             dayTripController.offset.value = 0;
                             dayTripController.getDayTripList(widget.pageType);

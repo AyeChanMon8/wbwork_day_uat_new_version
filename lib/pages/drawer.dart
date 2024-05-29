@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -7,8 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
+import '../constants/globals.dart';
+import '../controllers/user_profile_controller.dart';
 import '../localization.dart';
 import '../routes/app_pages.dart';
 import 'login_page.dart';
@@ -18,8 +18,8 @@ class DrawerPage extends StatelessWidget {
       Get.put(UserProfileController());
   bool checkcondition = true;
   List listdata = [];
-  String name;
-  String phone;
+  String name = '';
+  String phone = '';
   var changePassswrod = "";
   var logout = "";
   var language = "";
@@ -194,13 +194,13 @@ class DrawerPage extends StatelessWidget {
               title: Text(labels.logout, style: TextStyle(color: Colors.redAccent)),
               content:  Text(labels.areYousurewanttoLogout),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   child: Text(labels.no, style: TextStyle(color: Colors.blueGrey)),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
-                FlatButton(
+                TextButton(
                   child: Text(labels.yes, style: TextStyle(color: Colors.red)),
                   onPressed: () {
                     box.write('emp_image',"");

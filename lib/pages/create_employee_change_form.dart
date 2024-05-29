@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:io';
 import 'dart:typed_data';
@@ -8,18 +8,18 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/employee_change_controller.dart';
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/emp_job.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/employee_change_controller.dart';
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/emp_job.dart';
+import '../models/employee.dart';
+import '../models/employee_promotion.dart';
+import '../models/leave_type.dart';
+import '../my_class/my_style.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../utils/app_utils.dart';
+import '../models/employee_promotion.dart';
+import '../localization.dart';
 
 
 class EmployeeChangeCreateForm extends StatefulWidget {
@@ -31,19 +31,19 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
   final EmployeeChangeController controller = Get.put(EmployeeChangeController());
 
   int _value = 1;
-  File imageFile;
+  File? imageFile;
   bool keyboardOpen = false;
-  String starttime;
-  String endtime;
-  DateTime starttimeDate;
-  DateTime endtimeDate;
-  String duration;
+  String starttime = '';
+  String endtime = '';
+  late DateTime starttimeDate;
+  late DateTime endtimeDate;
+  String duration = '';
   final picker = ImagePicker();
-  String img64;
-  Uint8List bytes;
-  DateTime fromData;
-  File image;
-  int index;
+  String img64 = '';
+  late Uint8List bytes;
+  late DateTime fromData;
+  File? image;
+  int index = 0;
   DateTime selectedDate = DateTime.now();
   TextEditingController dateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -55,10 +55,10 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
   DateTime toDate = DateTime.now();
   var date = new DateFormat.yMd().add_jm().format(new DateTime.now());
   final box = GetStorage();
-  String user_image;
-  LeaveType leaves;
+  String user_image = '';
+  LeaveType leaves = LeaveType();
   bool checkLeave = false; //true
-  String idData;
+  String idData = '';
   // int val = 1;
   @override
   void initState() {
@@ -71,7 +71,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
       margin: EdgeInsets.only(left: 10, right: 10),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[350], width: 2),
+          border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
           borderRadius: const BorderRadius.all(
             const Radius.circular(1),
           ),
@@ -97,8 +97,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 30,
                   isExpanded: true,
-                  onChanged: (Emp_job value) {
-                    controller.onChangeEmployeeDropdown(value);
+                  onChanged: (Emp_job? value) {
+                    controller.onChangeEmployeeDropdown(value!);
                   },
                   items:
                   controller.employee_list.map((Emp_job emp) {
@@ -125,7 +125,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
       margin: EdgeInsets.only(left: 10, right: 10),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[350], width: 2),
+          border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
           borderRadius: const BorderRadius.all(
             const Radius.circular(1),
           ),
@@ -151,9 +151,9 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 30,
                   isExpanded: true,
-                  onChanged: (Emp_job value) {
+                  onChanged: (Emp_job? value) {
                     controller.selected_emp_type = labels.manager;
-                    controller.onChangeManagerDropdown(value);
+                    controller.onChangeManagerDropdown(value!);
                   },
                   items:
                   controller.manager_employee_list.map((Emp_job emp) {
@@ -185,7 +185,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -211,8 +211,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Company_id value) {
-                            controller.onChangeCompanyDropdown(value,labels.new1);
+                          onChanged: (Company_id? value) {
+                            controller.onChangeCompanyDropdown(value!,labels.new1);
                           },
                           items:
                           controller.company_list.map((Company_id company) {
@@ -248,7 +248,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -274,8 +274,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Company_id value) {
-                            controller.onChangeCompanyDropdown(value,labels.old1);
+                          onChanged: (Company_id? value) {
+                            controller.onChangeCompanyDropdown(value!,labels.old1);
                           },
                           items:
                           controller.old_company_list.map((Company_id company) {
@@ -311,7 +311,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -337,8 +337,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Department value) {
-                            controller.onChangeDepartmentDropdown(value,labels.new1);
+                          onChanged: (Department? value) {
+                            controller.onChangeDepartmentDropdown(value!,labels.new1);
                           },
                           items:
                           controller.department_list.map((Department dept) {
@@ -374,7 +374,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -400,8 +400,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Department value) {
-                            controller.onChangeDepartmentDropdown(value,labels.old1);
+                          onChanged: (Department? value) {
+                            controller.onChangeDepartmentDropdown(value!,labels.old1);
                           },
                           items:
                           controller.old_department_list.map((Department dept) {
@@ -437,7 +437,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -463,8 +463,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Branch_id value) {
-                            controller.onChangeBranchDropdown(value,labels.new1);
+                          onChanged: (Branch_id? value) {
+                            controller.onChangeBranchDropdown(value!,labels.new1);
                           },
                           items:
                           controller.branch_list.map((Branch_id branch) {
@@ -500,7 +500,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -526,8 +526,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Branch_id value) {
-                            controller.onChangeBranchDropdown(value,labels.old1);
+                          onChanged: (Branch_id? value) {
+                            controller.onChangeBranchDropdown(value!,labels.old1);
                           },
                           items:
                           controller.old_branch_list.map((Branch_id branch) {
@@ -563,7 +563,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -589,8 +589,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Company value) {
-                            controller.onChangeJobPositioneDropdown(value);
+                          onChanged: (Company? value) {
+                            controller.onChangeJobPositioneDropdown(value!);
                           },
                           items:
                           controller.jobposition_list.map((Company branch) {
@@ -626,7 +626,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -653,8 +653,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Company value) {
-                            controller.onChangeJobGradeDropdown(value);
+                          onChanged: (Company? value) {
+                            controller.onChangeJobGradeDropdown(value!);
                           },
                           items:
                           controller.jobgrade_list.map((Company branch) {
@@ -690,7 +690,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -716,8 +716,8 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Company value) {
-                            controller.onChangeSalaryDropdown(value);
+                          onChanged: (Company? value) {
+                            controller.onChangeSalaryDropdown(value!);
                           },
                           items:
                           controller.salary_level_list.map((Company branch) {
@@ -789,7 +789,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                         groupValue: controller.val.value,
                         onChanged: (value) {
                           //setState(() {
-                          controller.val.value = value;
+                          controller.val.value = value!;
                           print("value#");
                           print(value);
                           //});
@@ -810,7 +810,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                       groupValue: controller.val.value,
                       onChanged: (value) {
                         //setState(() {
-                        controller.val.value = value;
+                        controller.val.value = value!;
                         //});
                       },
                       activeColor: Colors.green,
@@ -830,7 +830,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                       value: 3,
                       groupValue: controller.val.value,
                       onChanged: (value) {
-                        controller.val.value = value;
+                        controller.val.value = value!;
                         print("value#");
                         print(value);
                       },
@@ -852,7 +852,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                       groupValue: controller.val.value,
                       onChanged: (value) {
                         //setState(() {
-                        controller.val.value = value;
+                        controller.val.value = value!;
                         print("value#");
                         print(value);
                         //});
@@ -1335,12 +1335,12 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
     );
   }
   Future<Null> _selectDate(BuildContext context, String date) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate:  DateTime.now(),
       firstDate: DateTime(1950),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -1349,9 +1349,9 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );

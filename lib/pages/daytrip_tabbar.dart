@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/day_trip_list.dart';
+import '../controllers/day_trip_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/day_trip_list.dart';
 class DayTripTabBar extends StatefulWidget {
   @override
   _StateDayTripTabBar createState() => _StateDayTripTabBar();
@@ -39,7 +39,7 @@ class _StateDayTripTabBar extends State<DayTripTabBar> {
       length: tabbar,
         child: Scaffold(
             appBar: AppBar(
-                title: Text(labels?.dayTrip, style: appbarTextStyle()),
+                title: Text(labels.dayTrip, style: appbarTextStyle()),
                 leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,

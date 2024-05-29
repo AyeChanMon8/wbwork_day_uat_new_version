@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/ui/components/textbox.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../localization.dart';
+import '../ui/components/textbox.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 
 class CreatePlanTrip extends StatefulWidget {
   @override
@@ -16,8 +16,8 @@ class CreatePlanTrip extends StatefulWidget {
 class _CreatePlanTripState extends State<CreatePlanTrip>
     with SingleTickerProviderStateMixin {
   var box = GetStorage();
-  String image;
-  TabController _tabController;
+  String image = '';
+  TabController? _tabController;
   @override
   void initState() {
     _tabController = TabController(length: 6, vsync: this);
@@ -27,7 +27,7 @@ class _CreatePlanTripState extends State<CreatePlanTrip>
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
 
   @override
@@ -40,7 +40,7 @@ class _CreatePlanTripState extends State<CreatePlanTrip>
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels?.planTrip),
+        title: Text(labels.planTrip),
         actions: [
           IconButton(
               icon: Icon(Icons.check),

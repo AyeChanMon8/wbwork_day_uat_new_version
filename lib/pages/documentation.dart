@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:isolate';
@@ -18,13 +18,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/documentation_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/document.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/documentation_controller.dart';
+import '../localization.dart';
+import '../models/document.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 import 'pdf_view.dart';
 
@@ -38,14 +38,16 @@ class _DocumentationState extends State<Documentation> {
 
   final box = GetStorage();
 
-  String image;
+  String image = '';
 
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels.documents, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.documents, image)),
       body: Container(
         child: Obx(
               () => SizedBox(

@@ -331,6 +331,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   RatingBar.builder(
+                    onRatingUpdate: (rating) {
+                            print(rating);
+                    },
                     initialRating:
                     double.parse(maintenanceRequestModel.priority ?? '0'),
                     minRating: 1,

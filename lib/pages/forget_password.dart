@@ -1,16 +1,16 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/auth_controller.dart';
-import 'package:winbrother_hr_app/controllers/forget_password_controller.dart';
-import 'package:winbrother_hr_app/controllers/login_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/auth_controller.dart';
+import '../controllers/forget_password_controller.dart';
+import '../controllers/login_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
   ForgetPasswordController controller = Get.put(ForgetPasswordController());
@@ -61,14 +61,16 @@ class ForgetPasswordPage extends StatelessWidget {
                 width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     //box.write(Globals.token, '');
                     controller.forgetPassword();
                   },
                   child: Text(
-                    (labels?.submit),
+                    (labels.submit),
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),

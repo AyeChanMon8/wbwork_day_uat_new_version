@@ -615,6 +615,9 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                 children: [
                   Text(labels.priority+' :',style: middleLabelStyle(),) ,
                   RatingBar.builder(
+                    onRatingUpdate: (rating) {
+                            print(rating);
+                    },
                     initialRating: 0,
                     minRating: 1,
                     direction: Axis.horizontal,

@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 
@@ -9,24 +8,24 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/controllers/notification_controller.dart';
-import 'package:winbrother_hr_app/controllers/reminder_controller.dart';
-import 'package:winbrother_hr_app/controllers/reminder_noti_controller.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/home_function.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/tools/internet_provider.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/drawer.dart';
+import '../controllers/announcements_controller.dart';
+import '../controllers/notification_controller.dart';
+import '../controllers/reminder_controller.dart';
+import '../controllers/reminder_noti_controller.dart';
+import '../controllers/user_profile_controller.dart';
+import '../localization.dart';
+import '../models/home_function.dart';
+import '../routes/app_pages.dart';
+import '../tools/internet_provider.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/drawer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:rxdart/subjects.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _MainState createState() => _MainState();
@@ -34,7 +33,7 @@ class HomePage extends StatefulWidget {
 
 class _MainState extends State<HomePage> {
   final box = GetStorage();
-  String image;
+  String image = '';
   String _debugLabelString = "";
   bool _enableConsentButton = false;
   UserProfileController controller = Get.put(UserProfileController());
@@ -195,16 +194,16 @@ class _MainState extends State<HomePage> {
         String message =
         event.notification.jsonRepresentation().replaceAll("\\n", "\n");
 
-        String message_type = null;
-        Map<String, dynamic> dataMap = event.notification.additionalData;
+        String message_type = '';
+        Map<String, dynamic>? dataMap = event.notification.additionalData;
         if (dataMap != null && dataMap.length > 0) {
           message_type = dataMap["type"];
         }
 
         if (message_type != null && message_type == "noti") {
           notiController.retrieveMsgs();
-          String title = event.notification.title;
-          String body = event.notification.body;
+          String title = event.notification.title!;
+          String body = event.notification.body!;
           Get.snackbar("Notification $title", body);
         }
       });
@@ -276,7 +275,7 @@ class _MainState extends State<HomePage> {
       appBar:AppBar(
         backgroundColor: backgroundIconColor,
         title: Text(
-          labels?.home,
+          labels.home,
           style: appbarTextStyle(),
         ),
         iconTheme: drawerIconColor,
@@ -385,13 +384,13 @@ class _MainState extends State<HomePage> {
                               top: 30, left: 10, bottom: 20, right: 80),
                           child: controller.empData.value.name != null
                               ? AutoSizeText(
-                                  labels?.welcome + " ${controller.empData.value.name}",
+                                  labels.welcome + " ${controller.empData.value.name}",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25))
-                              : AutoSizeText(labels?.welcome,
+                              : AutoSizeText(labels.welcome,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20))),
@@ -565,7 +564,7 @@ class _MainState extends State<HomePage> {
             children: [
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
-                child: Text((labels?.reminders), style: maintitleStyle()),
+                child: Text((labels.reminders), style: maintitleStyle()),
               ),
               Divider(
                 thickness: 1,
@@ -581,7 +580,7 @@ class _MainState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(labels?.allReminders, style: subtitleStyle()),
+                      Text(labels.allReminders, style: subtitleStyle()),
                       Row(
                         children: [
                           Container(
@@ -630,7 +629,7 @@ class _MainState extends State<HomePage> {
             children: [
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
-                child: Text((labels?.announcements), style: maintitleStyle()),
+                child: Text((labels.announcements), style: maintitleStyle()),
               ),
               Divider(
                 thickness: 1,
@@ -704,7 +703,7 @@ class _MainState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(labels?.allAnnouncements, style: subtitleStyle()),
+                      Text(labels.allAnnouncements, style: subtitleStyle()),
                       Row(
                         children: [
                           Container(
@@ -746,7 +745,7 @@ class _MainState extends State<HomePage> {
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
                 child: Text(
-                  labels?.notifications,
+                  labels.notifications,
                   style: maintitleStyle(),
                 ),
               ),
@@ -764,7 +763,7 @@ class _MainState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(labels?.allNotifications, style: subtitleStyle()),
+                      Text(labels.allNotifications, style: subtitleStyle()),
                       Row(
                         children: [
                           Obx(()=>

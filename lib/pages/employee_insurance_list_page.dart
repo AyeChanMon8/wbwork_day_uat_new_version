@@ -1,15 +1,15 @@
-// @dart=2.9
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/insurance.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/insurancemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/insurance.dart';
+import '../localization.dart';
+import '../models/insurancemodel.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 class EmployeeInsuranceListPage extends StatelessWidget {
   InsuranceController controller = Get.put(InsuranceController());
   @override
@@ -45,12 +45,12 @@ class EmployeeInsuranceListPage extends StatelessWidget {
                               ],),
                               SizedBox(height: 10,),
                               Row(children: [
-                                AutoSizeText(labels?.insuranceType,style: detailsStyle()),
+                                AutoSizeText(labels.insuranceType,style: detailsStyle()),
                                 AutoSizeText(' : ${insurance.insuranceTypeId.policy_type}',style: maintitleStyle()),
                               ],),
                               SizedBox(height: 10,),
                               Row(children: [
-                                AutoSizeText(labels?.employeeName,style: detailsStyle()),
+                                AutoSizeText(labels.employeeName,style: detailsStyle()),
                                 AutoSizeText(' : ${insurance.employeeId.name}',style: maintitleStyle()),
                               ],),
                               SizedBox(height: 10,),

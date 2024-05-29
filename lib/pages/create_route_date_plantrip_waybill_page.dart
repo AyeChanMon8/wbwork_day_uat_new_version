@@ -1,15 +1,14 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../models/plantrip_waybill.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
@@ -20,9 +19,9 @@ class CreateRouteDatePlanTripWaybill extends StatefulWidget {
 
 class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTripWaybill> {
   final PlanTripController controller = Get.find();
-  WayBill_Route_plan_ids arguments;
+  late WayBill_Route_plan_ids arguments;
   var box = GetStorage();
-  String image;
+  String image = '';
   DateTime selectedFromDate = DateTime.now();
   DateTime selectedToDate = DateTime.now();
 
@@ -50,7 +49,9 @@ class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTrip
     image = box.read('emp_image');
     
     return Scaffold(
-      appBar: appbar(context, "Plan Trip WayBill Route Form", image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Plan Trip WayBill Route Form", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -171,12 +172,12 @@ class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTrip
   }
 
   Future<Null> _selectDate(BuildContext context, String date) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: date == 'Start Date' ? (controller.fromDateTextController.text != null && controller.fromDateTextController.text != "" ? DateTime.parse(controller.fromDateTextController.text): DateTime.now()): (controller.toDateTextController.text!=null && controller.toDateTextController.text != ""? DateTime.parse(controller.toDateTextController.text): DateTime.now()),
       firstDate:date == 'Start Date' ? (controller.fromDateTextController.text != null && controller.fromDateTextController.text != "" ? DateTime.parse(controller.fromDateTextController.text): DateTime.now()): (controller.toDateTextController.text!=null && controller.toDateTextController.text != "" ? DateTime.parse(controller.toDateTextController.text): DateTime.now()),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -185,9 +186,9 @@ class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTrip
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );

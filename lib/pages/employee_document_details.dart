@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -9,12 +9,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/employee_change_controller.dart';
-import 'package:winbrother_hr_app/controllers/employee_document_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import 'package:path_provider/path_provider.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/employee_change_controller.dart';
+import '../controllers/employee_document_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 import '../localization.dart';
 import 'leave_detail.dart';
 
@@ -26,8 +27,8 @@ class EmployeeDocumentDetails extends StatefulWidget {
 class _EmployeeDocumentDetailsState extends State<EmployeeDocumentDetails> {
   final EmployeeDocumentController controller = Get.put(EmployeeDocumentController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,11 @@ class _EmployeeDocumentDetailsState extends State<EmployeeDocumentDetails> {
     index = Get.arguments;
     controller.getAttachementByDocID(controller.docList[index].id);
     return Scaffold(
-      appBar: appbar(context, "Employee Document Details",image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Employee Document Details",image)),
       body: Scrollbar(
-        isAlwaysShown: true,
+        // isAlwaysShown: true,
         controller: scrollController,
         thickness: 5,
         radius: Radius.circular(10),

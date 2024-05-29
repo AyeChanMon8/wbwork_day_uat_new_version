@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -8,18 +8,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/FleetController.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_insurance.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/fuel_log_model.dart';
-import 'package:winbrother_hr_app/models/fuel_tank.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/ui/components/web_container.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/FleetController.dart';
+import '../localization.dart';
+import '../models/fleet_insurance.dart';
+import '../models/fleet_model.dart';
+import '../models/fuel_log_model.dart';
+import '../models/fuel_tank.dart';
+import '../models/maintenance_request_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../ui/components/web_container.dart';
+import '../utils/app_utils.dart';
 
 class FleetPage extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _FleetPageState extends State<FleetPage> {
   final FleetController controller = Get.find();
   var box = GetStorage();
     var formatter = new NumberFormat("###,###", "en_US");
-  String image;
+  String image = '';
   @override
   void initState() {
     super.initState();
@@ -40,7 +40,9 @@ class _FleetPageState extends State<FleetPage> {
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.fleet,image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.fleet,image)),
       body: SingleChildScrollView(
         child:Obx(()=> controller.fleetModel.value.name !=null ? Card(
           elevation: 0,
@@ -85,7 +87,7 @@ class _FleetPageState extends State<FleetPage> {
                       child: Column(
                         children: [
                           Container(
-                            child: Text(labels?.currentOdometer,style: subtitleStyle(),),
+                            child: Text(labels.currentOdometer,style: subtitleStyle(),),
                           ),
                           SizedBox(
                             height: 10,
@@ -118,7 +120,7 @@ class _FleetPageState extends State<FleetPage> {
                             height: 10,
                           ),
                           Container(
-                            child: Text(labels?.trace),
+                            child: Text(labels.trace),
                           ),
                         ],
                       ),
@@ -179,7 +181,7 @@ class _FleetPageState extends State<FleetPage> {
                       Container(
                         margin: EdgeInsets.only(left: 20, top: 20),
                         child: Text(
-                          labels?.detailInformations,
+                          labels.detailInformations,
                           // "Details Information",
                           style: maintitleStyle(),
                         ),
@@ -189,7 +191,7 @@ class _FleetPageState extends State<FleetPage> {
                       ),
                       ExpansionTile(
                         title: Text(
-                          labels?.vehicle,
+                          labels.vehicle,
                           // "Vehicle",
                           style: subtitleStyle(),
                         ),
@@ -248,7 +250,7 @@ class _FleetPageState extends State<FleetPage> {
 
                       ExpansionTile(
                         title: Text(
-                          labels?.maintenanceLogs,
+                          labels.maintenanceLogs,
                           // "Maintenace Logs",
                           style: subtitleStyle(),
                         ),
@@ -269,7 +271,7 @@ class _FleetPageState extends State<FleetPage> {
                       // ),
                       ExpansionTile(
                         title: Text(
-                          labels?.insuranceInformation,
+                          labels.insuranceInformation,
                           // "Insurance Information",
                           style: subtitleStyle(),
                         ),
@@ -442,6 +444,9 @@ class _FleetPageState extends State<FleetPage> {
                         AutoSizeText(labels.maintenanceTeam+' : ${maintenance_request_model.maintenanceTeamId.name??''}',style: datalistStyle(),),
                        maintenance_request_model.startDate != null && maintenance_request_model.endDate != null ? AutoSizeText('${AppUtils.changeDateFormat(maintenance_request_model.startDate)} - ${AppUtils.changeDateFormat(maintenance_request_model.endDate)}',style: datalistStyle(),) : AutoSizeText('${AppUtils.formatter.format(DateTime.parse(maintenance_request_model.requestDate))}',style: datalistStyle(),),
                         RatingBar.builder(
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
                           initialRating:
                           double.parse(maintenance_request_model.priority ?? '0'),
                           minRating: 1,
@@ -658,7 +663,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.fuelType),
+                child: Text(labels.fuelType),
               ),
               Container(
                 child: Text(controller.fleetModel.value.fuelType??''),
@@ -672,7 +677,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.carNo),
+                child: Text(labels.carNo),
               ),
               Container(
                 child: Text(controller.fleetModel.value.licensePlate),
@@ -687,7 +692,7 @@ class _FleetPageState extends State<FleetPage> {
             children: [
               Container(
                 child: Text(
-                  labels?.immatriculationDate,
+                  labels.immatriculationDate,
                 ),
               ),
               Container(
@@ -718,7 +723,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.chassisNo),
+                child: Text(labels.chassisNo),
               ),
               Container(
                 child: Text(controller.fleetModel.value.traccarUniqueID??''),
@@ -746,7 +751,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.model),
+                child: Text(labels.model),
               ),
               Container(
                 child: Text(controller.fleetModel.value.modelId.name),
@@ -760,7 +765,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.deviceID),
+                child: Text(labels.deviceID),
               ),
               Container(
                 child: Text(controller.fleetModel.value.traccarUniqueID.toString()),
@@ -774,7 +779,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels?.color),
+                child: Text(labels.color),
               ),
               Container(
                 child: Text(controller.fleetModel.value.color.toString()),

@@ -1,16 +1,15 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/approval_employee_change_list.dart';
-import 'package:winbrother_hr_app/pages/approval_loan_list.dart';
-import 'package:winbrother_hr_app/pages/approval_route_list.dart';
-import 'package:winbrother_hr_app/pages/approved_employee_change_list.dart';
-import 'package:winbrother_hr_app/pages/approved_loan_list.dart';
-import 'package:winbrother_hr_app/pages/approved_route_list.dart';
-import 'package:winbrother_hr_app/pages/first_approval_employee_change_list.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/approval_employee_change_list.dart';
+import '../pages/approval_loan_list.dart';
+import '../pages/approval_route_list.dart';
+import '../pages/approved_employee_change_list.dart';
+import '../pages/approved_loan_list.dart';
+import '../pages/approved_route_list.dart';
+import '../pages/first_approval_employee_change_list.dart';
 
 class EmployeeChangeApprovalTabBar extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class EmployeeChangeApprovalTabBar extends StatefulWidget {
 
 class _StateEmployeeChangeApprovalTabBar extends State<EmployeeChangeApprovalTabBar> {
 
-  int tabbar;
+  int tabbar = 0;
   @override
   void initState() {
     super.initState();

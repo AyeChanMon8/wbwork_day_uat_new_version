@@ -1,10 +1,10 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/auth_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/auth_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
 
 class LanguagePage extends StatefulWidget {
   @override
@@ -95,7 +95,7 @@ class _LanguagePageState extends State<LanguagePage> {
                   groupValue: controller.currentLanguageStore.value,
                   activeColor: Colors.green,
                   onChanged: (val) {
-                    controller.updateLanguage(val);
+                    controller.updateLanguage(val!);
                   },
                 ),
               ],
@@ -114,7 +114,7 @@ class _LanguagePageState extends State<LanguagePage> {
                   groupValue: controller.currentLanguageStore.value,
                   activeColor: Colors.green,
                   onChanged: (val) {
-                    controller.updateLanguage(val);
+                    controller.updateLanguage(val!);
                   },
                 ),
               ],

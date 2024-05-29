@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
 
 class CreateRequestPage extends StatefulWidget {
-  CreateRequestPage({Key key}) : super(key: key);
+  CreateRequestPage({Key? key}) : super(key: key);
 
   @override
   _CreateRequestPageState createState() => _CreateRequestPageState();
@@ -15,13 +15,15 @@ class CreateRequestPage extends StatefulWidget {
 
 class _CreateRequestPageState extends State<CreateRequestPage> {
   var box = GetStorage();
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.expense,image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.expense,image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,12 +51,12 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 10),
-                    child: Text(labels?.outOfPocket),
+                    child: Text(labels.outOfPocket),
                   ),
                   Container(
                     child: Row(
                       children: [
-                        Container(child: Text(labels?.type)),
+                        Container(child: Text(labels.type)),
                         IconButton(
                             icon: Icon(Icons.keyboard_arrow_down),
                             onPressed: () {
@@ -108,12 +110,12 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(left: 10),
-                            child: Text(labels?.expense),
+                            child: Text(labels.expense),
                           ),
                           Container(
                             child: Row(
                               children: [
-                                Container(child: Text(labels?.expenseType)),
+                                Container(child: Text(labels.expenseType)),
                                 IconButton(
                                     icon: Icon(Icons.keyboard_arrow_down),
                                     onPressed: () {
@@ -143,7 +145,7 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
                           Container(
                             child: Row(
                               children: [
-                                Container(child: Text(labels?.quantity)),
+                                Container(child: Text(labels.quantity)),
                               ],
                             ),
                           )
@@ -168,7 +170,7 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
                           Container(
                             child: Row(
                               children: [
-                                Container(child: Text(labels?.unitPrice)),
+                                Container(child: Text(labels.unitPrice)),
                               ],
                             ),
                           )
@@ -188,12 +190,12 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
                         children: [
                           Container(
                             // padding: EdgeInsets.only(left: 10),
-                            child: Text(labels?.reason),
+                            child: Text(labels.reason),
                           ),
                           Container(
                             child: Row(
                               children: [
-                                Container(child: Text(labels?.reason)),
+                                Container(child: Text(labels.reason)),
                               ],
                             ),
                           )

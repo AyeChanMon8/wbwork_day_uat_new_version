@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:io';
 
@@ -7,17 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/models/fleet_insurance.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/fleet_insurance.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/pdf_view.dart';
+import '../utils/app_utils.dart';
 class FleetInsuranceDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Fleet_insurance fleet_insurance = Get.arguments;
     return Scaffold(
-      appBar: appbar(context, 'Insurance Detail', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Insurance Detail', '')),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -53,12 +55,12 @@ class FleetInsuranceDetail extends StatelessWidget {
                   itemBuilder: (BuildContext context, int fileIndex) {
                     return InkWell(
                       onTap: () async {
-                        File file = await _createFileFromString(fleet_insurance.attachmentId[fileIndex].datas,fleet_insurance.attachmentId[fileIndex].name,fleet_insurance.attachmentId[fileIndex].mimetype);
-                        if (AppUtils.isImage(file.path)) {
+                        File? file = await _createFileFromString(fleet_insurance.attachmentId[fileIndex].datas,fleet_insurance.attachmentId[fileIndex].name,fleet_insurance.attachmentId[fileIndex].mimetype);
+                        if (AppUtils.isImage(file!.path)) {
                           Get.dialog(Stack(
                             children: [
                               Center(child: Image.file(file)),
-                              Positioned(right : 0,child: FlatButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
+                              Positioned(right : 0,child: TextButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
                             ],
                           ));
                         } else {
@@ -95,7 +97,7 @@ class FleetInsuranceDetail extends StatelessWidget {
       ),
     );
   }
-  Future<File> _createFileFromString(String data,String name,String type) async {
+  Future<File?> _createFileFromString(String data,String name,String type) async {
     return AppUtils.createPDF(data, name,type);
   }
 }

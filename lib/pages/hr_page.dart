@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 
@@ -6,22 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/attendance_page.dart';
-import 'package:winbrother_hr_app/pages/attendance_report.dart';
-import 'package:winbrother_hr_app/pages/drawer.dart';
-import 'package:winbrother_hr_app/pages/insurance_page.dart';
-import 'package:winbrother_hr_app/pages/leave_trip_report.dart';
-import 'package:winbrother_hr_app/pages/leave_trip_tabbar.dart';
-import 'package:winbrother_hr_app/pages/loan_list_page.dart';
-import 'package:winbrother_hr_app/pages/organization_chart.dart';
-import 'package:winbrother_hr_app/pages/over_time.dart';
-import 'package:winbrother_hr_app/pages/payslip_page.dart';
-import 'package:winbrother_hr_app/pages/pms_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/user_profile_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/attendance_page.dart';
+import '../pages/attendance_report.dart';
+import '../pages/drawer.dart';
+import '../pages/insurance_page.dart';
+import '../pages/leave_trip_report.dart';
+import '../pages/leave_trip_tabbar.dart';
+import '../pages/loan_list_page.dart';
+import '../pages/organization_chart.dart';
+import '../pages/over_time.dart';
+import '../pages/payslip_page.dart';
+import '../pages/pms_page.dart';
+import '../routes/app_pages.dart';
 
 class HRPage extends StatefulWidget {
   @override
@@ -32,7 +31,7 @@ class _HRPageState extends State<HRPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final box = GetStorage();
 
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -90,7 +89,9 @@ class _HRPageState extends State<HRPage> {
       hr.add([Icons.person, labels.employeeChanges, Routes.EMPLOYEE_CHANGE]);
     }
     return Scaffold(
-      appBar: appbar(context, (labels?.hr), image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, (labels.hr), image)),
       drawer: DrawerPage(),
       body: Container(
           margin: EdgeInsets.only(top: 10),
@@ -153,13 +154,18 @@ class _HRPageState extends State<HRPage> {
 
   void _showToast(BuildContext context) {
     final scaffold = Scaffold.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: const Text('Leave Trip Click!'),
-        action: SnackBarAction(
-            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
-      ),
-    );
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Leave Trip Click!'),
+      action: SnackBarAction(
+            label: 'UNDO', onPressed: ScaffoldMessenger.of(context).hideCurrentSnackBar)
+    ));
+    // scaffold.showSnackBar(
+    //   SnackBar(
+    //     content: const Text('Leave Trip Click!'),
+    //     action: SnackBarAction(
+    //         label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+    //   ),
+    // );
   }
 
   /*void navigatePage(BuildContext context, String route) {

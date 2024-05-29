@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_controller.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/day_trip_controller.dart';
+import '../models/day_trip_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 class DayTripToApproveListPage extends StatelessWidget {
   DayTripController dayTripController = Get.put(DayTripController());
   Future _loadData() async {
@@ -42,7 +42,7 @@ class DayTripToApproveListPage extends StatelessWidget {
                     elevation: 5,
                     child:InkWell(
                       onTap:(){
-                        Get.toNamed(Routes.CREATE_DAY_TRIP,arguments: dayTripModel).then((value) {
+                        Get.toNamed(Routes.CREATE_DAY_TRIP,arguments: dayTripModel)?.then((value) {
                           if(value!=null){
                             dayTripController.offset.value = 0;
                             dayTripController.getDayTripToApproveList();
