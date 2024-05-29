@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +6,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/components/button/gf_button.dart';
-import 'package:winbrother_hr_app/controllers/configuration_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/configuration_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
@@ -32,7 +32,9 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: appbar(context, 'Settings', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Settings', '')),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -60,7 +62,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                       onChanged: (value) {
                         setState(() {
                           controller.hr[index][3] = value;
-                          if (value) {
+                          if (value!) {
                               controller.home.add(controller.hr[index]);
                           } else {
                             controller.home.removeWhere((element) =>
@@ -100,7 +102,7 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                       onChanged: (value) {
                         setState(() {
                           controller.admin[index][3] = value;
-                          if (value) {
+                          if (value!) {
                             controller.home.forEach((element) {
                               print(element);
                             });

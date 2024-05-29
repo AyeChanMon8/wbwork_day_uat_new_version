@@ -1,28 +1,27 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/attendance_request_controller.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/attendance_request_controller.dart';
+import '../controllers/user_profile_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 class AttendanceRequest extends GetWidget<AttendanceRequestController> {
   AttendanceRequestController _attendanceController =
       Get.put(AttendanceRequestController());
   final UserProfileController _userProfileController = Get.find();
   var box = GetStorage();
-  String image;
+  String image = '';
   Location location = new Location();
 
-  bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
-  LocationData _locationData;
+  bool _serviceEnabled = false;
+  late PermissionStatus _permissionGranted;
+  late LocationData _locationData;
   @override
   Widget build(BuildContext context) {
     final attendance = box.read("mobile_app_attendance");
@@ -100,7 +99,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                 ),
                 Container(
                   child: Text(
-                    labels?.welcome,
+                    labels.welcome,
                     textAlign: TextAlign.center,
                     style: labelPrimaryTitleBoldTextStyle(),
                   ),
@@ -147,9 +146,11 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                               ),
                               actions: [
                                 Center(
-                                  child: RaisedButton(
+                                  child: ElevatedButton(
                                       child: Text("Close"),
-                                      color: Color.fromRGBO(60, 47, 126, 1),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color.fromRGBO(60, 47, 126, 1),
+                                      ),
                                       onPressed: () {
                                         Get.back();
                                         // controller.editPhoneNo();
@@ -184,12 +185,12 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                   () => Container(
                     child: controller.check_in.value
                         ? Text(
-                            labels?.checkOut,
+                            labels.checkOut,
                             textAlign: TextAlign.center,
                             style: labelPrimaryTitleBoldTextStyle(),
                           )
                         : Text(
-                            labels?.checkIn1,
+                            labels.checkIn1,
                             textAlign: TextAlign.center,
                             style: labelPrimaryTitleBoldTextStyle(),
                           ),
@@ -203,8 +204,8 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       controller.check_in.value
-                          ? labels?.records
-                          : labels?.checkOut,
+                          ? labels.records
+                          : labels.checkOut,
                       style: labelPrimaryTitleTextStyle(),
                     ),
                   ),
@@ -225,7 +226,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                       child: Expanded(
                         flex: 2,
                         child: Text(
-                          labels?.checkIn2,
+                          labels.checkIn2,
                           textAlign: TextAlign.center,
                           style: labelPrimaryHightlightTextStyle(),
                         ),
@@ -235,7 +236,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                       child: Expanded(
                         flex: 2,
                         child: Text(
-                          labels?.checkOut,
+                          labels.checkOut,
                           textAlign: TextAlign.center,
                           style: labelPrimaryHightlightTextStyle(),
                         ),
@@ -245,7 +246,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
                       child: Expanded(
                         flex: 1,
                         child: Text(
-                          labels?.workHours,
+                          labels.workHours,
                           textAlign: TextAlign.center,
                           style: labelPrimaryHightlightTextStyle(),
                         ),

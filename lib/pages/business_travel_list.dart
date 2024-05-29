@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:ffi';
 
@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/expense_travel_list_controller.dart';
-import 'package:winbrother_hr_app/controllers/travel_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/business_travel_create.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/expense_travel_list/expense_travel_list_controller.dart';
+import '../controllers/travel_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/business_travel_create.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class BusinessTravelList extends StatefulWidget {
   @override
@@ -57,6 +57,7 @@ class _BusinessTravelState extends State<BusinessTravelList> {
                 controller.isLoading.value = true;
                 _loadData();
               }
+              return true;
             },
             child: ListView.builder(
               shrinkWrap: true,
@@ -122,7 +123,7 @@ class _BusinessTravelState extends State<BusinessTravelList> {
                                 Text(
                                   controller
                                       .travelExpenseList.value[index].state
-                                      .toString().capitalize,
+                                      .toString().capitalize!,
                                   style: maintitleStyle(),
                                 ),
                               ),

@@ -1,12 +1,11 @@
-// @dart=2.9
 
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:winbrother_hr_app/controllers/calendar_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../controllers/calendar_controller.dart';
+import '../localization.dart';
 class CalendarPage extends StatefulWidget {
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -21,10 +20,10 @@ class _CalendarPageState extends State<CalendarPage> {
     CalendarView.month,
     CalendarView.schedule
   ];
-  List<String> subjectCollection;
-  List<Color> colorCollection;
-  List<Appointment> appointments;
-  DataSource events;
+  List<String> subjectCollection = [];
+  List<Color> colorCollection = [];
+  List<Appointment> appointments = [];
+  DataSource? events;
 
   @override
   void initState() {

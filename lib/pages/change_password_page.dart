@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/change_password_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../controllers/change_password_controller.dart';
+import '../localization.dart';
 
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   @override
@@ -46,7 +46,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       _obscureText3 = !_obscureText3;
     });
   }
-  String emp_id;
+  String emp_id = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -60,7 +60,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(labels?.changePassword),
+        title: Text(labels.changePassword),
         backgroundColor: backgroundIconColor,
       ),
       body: SingleChildScrollView(
@@ -82,8 +82,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       controller: controller.employeeIDController,
                       readOnly: true,
                       enabled: false,
-                      validator: (String value){
-                      if(value.isEmpty)
+                      validator: (String? value){
+                      if(value!.isEmpty)
                       {
                         return 'Please Enter Employee ID';
                       }
@@ -109,8 +109,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                     child: TextFormField(
                       controller: controller.newPasswordController,
-                      validator: (String value){
-                      if(value.isEmpty)
+                      validator: (String? value){
+                      if(value!.isEmpty)
                       {
                         return 'Please Enter New Password';
                       }
@@ -138,8 +138,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ),
                     child: TextFormField(
                       controller: controller.confirmPasswordController,
-                       validator: (String value){
-                      if(value.isEmpty)
+                       validator: (String? value){
+                      if(value!.isEmpty)
                       {
                         return 'Please Enter Confirm New Password';
                       }
@@ -166,10 +166,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                   style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
-                    if(_formkey.currentState.validate())
+                    if(_formkey.currentState!.validate())
                       {
                         controller.changePassword();
                       }else{
@@ -178,7 +180,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     
                   },
                   child: Text(
-                    labels?.submit,
+                    labels.submit,
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),

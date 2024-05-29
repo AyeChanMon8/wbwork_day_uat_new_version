@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io' as Io;
@@ -13,12 +13,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/insurance.dart';
-import 'package:winbrother_hr_app/models/insurancemodel.dart';
-import 'package:winbrother_hr_app/models/insurancetypemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/ui/components/textbox.dart';
+import '../controllers/insurance.dart';
+import '../models/insurancemodel.dart';
+import '../models/insurancetypemodel.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../ui/components/textbox.dart';
 
 class ClaimInsurancePage extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
   InsuranceController controller = Get.find();
   final box = GetStorage();
   final picker = ImagePicker();
-  String img64;
+  String img64 = '';
   @override
   void initState() {
     controller.getInsurance();
@@ -45,7 +45,9 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(context, 'Claim Insurance', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Claim Insurance', '')),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -158,7 +160,7 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
                         hintText: "Description",
                           hintStyle: detailsStyle(),
                         border: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.grey[50])),
+                            borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                       ),
                     ),
                   )),
@@ -190,7 +192,7 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
                                 Expanded(
                                     flex: 1,
                                     child: Image.file(
-                                        controller.selectedImage.value)),
+                                        controller.selectedImage.value!)),
                                 Expanded(
                                   flex: 1,
                                   child: InkWell(
@@ -234,12 +236,12 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
   }
 
   Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate:  DateTime.now(),
       firstDate:DateTime.now(),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -248,9 +250,9 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -273,7 +275,7 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -295,8 +297,8 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Insurancemodel value) {
-                            controller.onChangeInsuranceDropdown(value);
+                          onChanged: (Insurancemodel? value) {
+                            controller.onChangeInsuranceDropdown(value!);
                           },
                           items: controller.insuranceList.value
                               .map((Insurancemodel insurancetypemodel) {
@@ -334,7 +336,7 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -356,8 +358,8 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Insurancemodel value) {
-                            controller.onChangeInsuranceRefDropdown(value);
+                          onChanged: (Insurancemodel? value) {
+                            controller.onChangeInsuranceRefDropdown(value!);
                           },
                           items: controller.insuranceList.value
                               .map((Insurancemodel insurancetypemodel) {
@@ -383,18 +385,18 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
     );
   }
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    File image = File(pickedFile.path);
-    final bytes = Io.File(pickedFile.path).readAsBytesSync();
+    File image = File(pickedFile!.path);
+    final bytes = Io.File(pickedFile!.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     controller.setCameraImage(image, img64);
   }
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
-    final bytes = Io.File(pickedFile.path).readAsBytesSync();
+    File image = File(pickedFile!.path);
+    final bytes = Io.File(pickedFile!.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     controller.setCameraImage(image, img64);
   }

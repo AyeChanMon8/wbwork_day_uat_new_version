@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -7,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/approval_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
 
@@ -23,8 +22,8 @@ class ApprovedLeaveDetails extends StatefulWidget {
 class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -288,7 +287,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
   }
 
   Widget leaveData(BuildContext context) {
-    Uint8List bytes;
+    late Uint8List bytes;
     if (controller.leaveApprovedList.value[index].attachment != null) {
       if (controller.leaveApprovedList.value[index].attachment.isNotEmpty) {
         bytes =
@@ -308,7 +307,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.leaveType + " :",
+                  labels.leaveType + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),
@@ -333,7 +332,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.fromDate + " :",
+                  labels.fromDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -354,7 +353,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels?.toDate + " :"),
+                  (labels.toDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -399,7 +398,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels?.description + " :"),
+                  (labels.description + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -421,7 +420,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -441,7 +440,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.attachment + " : ",
+                  labels.attachment + " : ",
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),

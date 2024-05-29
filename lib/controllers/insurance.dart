@@ -29,7 +29,7 @@ class InsuranceController extends GetxController {
   var selectedInsuranceType = Insurancemodel().obs;
   var balanceAmount = 0.0.obs;
   var image_base64 ='';
-  final Rx<File> selectedImage = File('').obs;
+  final Rx<File?> selectedImage = File('').obs;
   final RxBool isShowImage = false.obs;
   final box = GetStorage();
   TextEditingController txtCalimAmont = TextEditingController();

@@ -1,18 +1,18 @@
-// @dart=2.9
+
 
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../localization.dart';
 
-import 'package:winbrother_hr_app/tools/internet_provider.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/admin_page.dart';
-import 'package:winbrother_hr_app/pages/chat.dart';
-import 'package:winbrother_hr_app/pages/home_page.dart';
-import 'package:winbrother_hr_app/pages/hr_page.dart';
-import 'package:winbrother_hr_app/pages/setting_page.dart';
+import '../tools/internet_provider.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/admin_page.dart';
+import '../pages/chat.dart';
+import '../pages/home_page.dart';
+import '../pages/hr_page.dart';
+import '../pages/setting_page.dart';
 
 import '../routes/app_pages.dart';
 

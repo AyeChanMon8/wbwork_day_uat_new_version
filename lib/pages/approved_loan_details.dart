@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -10,11 +10,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/travel_expense_page/travel_expense_detail.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import 'package:path_provider/path_provider.dart';
+import '../controllers/approval_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/travel_expense_page/travel_expense_detail.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 import 'leave_detail.dart';
@@ -27,8 +28,8 @@ class ApprovedLoanDetails extends StatefulWidget {
 class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,10 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
     image = box.read('emp_image');
     index = Get.arguments;
     return Scaffold(
-      appBar: appbar(context, labels.loanDetails,image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.loanDetails,image)),
       body: Scrollbar(
-        isAlwaysShown: true,
+        // isAlwaysShown: true,
         controller: scrollController,
         thickness: 5,
         radius: Radius.circular(10),
@@ -62,7 +64,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.status,
+                          labels.status,
                           // ("employee_name"),
                           style: datalistStyle(),
                         ),
@@ -85,7 +87,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.employeeName,
+                          labels.employeeName,
                           // ("employee_name"),
                           style: datalistStyle(),
                         ),
@@ -108,7 +110,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.position,
+                          labels.position,
                           // ("position"),
                           style: datalistStyle(),
                         ),
@@ -142,7 +144,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.date,
+                          labels.date,
                           // ("date"),
                           style: datalistStyle(),
                         ),
@@ -193,7 +195,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.company,
+                          labels.company,
                           // ("date"),
                           style: datalistStyle(),
                         ),
@@ -254,14 +256,14 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels?.loanAmount,
+                          labels.loanAmount,
                           // ("loan_amount"),
                           style: datalistStyle(),
                         ),
                       ),
                       Container(
                         child: Text(
-                          labels?.noOfInstallments,
+                          labels.noOfInstallments,
                           // ("no_of_installments"),
                           style: datalistStyle(),
                         ),
@@ -361,7 +363,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
                   thickness: 1,
                 ),
                 Container(
-                  child: Text(labels?.installments, style: datalistStyle()),
+                  child: Text(labels.installments, style: datalistStyle()),
                 ),
                 SizedBox(
                   height: 20,
@@ -393,21 +395,21 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
         children: [
           Container(
             child: Text(
-              labels?.paymentDate,
+              labels.paymentDate,
               // ("payment_date"),
               style: subtitleStyle(),
             ),
           ),
           Container(
             child: Text(
-              labels?.status,
+              labels.status,
               // ("status"),
               style: subtitleStyle(),
             ),
           ),
           Container(
             child: Text(
-              labels?.amount,
+              labels.amount,
               // ("amount"),
               style: subtitleStyle(),
             ),

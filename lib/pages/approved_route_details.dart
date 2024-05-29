@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/approval_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
@@ -18,8 +18,8 @@ class ApprovedRouteDetails extends StatefulWidget {
 class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -29,7 +29,9 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
     print(controller.routeApprovedList[index].code);
 
     return Scaffold(
-        appBar: appbar(context, "Routed Approved", image),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(8.0),
+          child: appbar(context, "Routed Approved", image)),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,21 +79,21 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels?.date,
+              labels.date,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.destination,
+              labels.destination,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.purpose,
+              labels.purpose,
               style: subtitleStyle(),
             ),
           )
@@ -104,7 +106,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
     final labels = AppLocalizations.of(context);
     var fuel_liter = "";
     fuel_liter = AppUtils.addThousnadSperator(double.tryParse(
-        controller.routeApprovedList[index].fuel_liter.toString()));
+        controller.routeApprovedList[index].fuel_liter.toString())!);
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Column(
@@ -180,7 +182,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),
@@ -260,7 +262,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
               .routeApprovedList[index].expenseIds[pos].amount
               .toString());
           if (amount.isNotEmpty) {
-            amount = AppUtils.addThousnadSperator(double.tryParse(amount));
+            amount = AppUtils.addThousnadSperator(double.tryParse(amount)!);
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

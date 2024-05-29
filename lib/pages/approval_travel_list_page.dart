@@ -1,14 +1,14 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 import 'approval_details.dart';
 
 class ApprovalTravelList extends StatefulWidget {
@@ -18,7 +18,7 @@ class ApprovalTravelList extends StatefulWidget {
 class _ApprovalTravelListState extends State<ApprovalTravelList> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
+  String image = '';
   Future _loadData() async {
     print("****loadmore****");
     controller.getTravelApprovalList();

@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:io' as Io;
@@ -12,18 +11,18 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_controller.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_expense_controller.dart';
-import 'package:winbrother_hr_app/controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/day_trip_model.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/add_advance_page.dart';
-import 'package:winbrother_hr_app/pages/add_fuel_page.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/day_trip_controller.dart';
+import '../controllers/day_trip_expense_controller.dart';
+import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
+import '../localization.dart';
+import '../models/day_trip_model.dart';
+import '../models/daytrip_expense.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/add_advance_page.dart';
+import '../pages/add_fuel_page.dart';
+import '../utils/app_utils.dart';
 
 import 'add_fuel_daytrip_page.dart';
 import 'leave_detail.dart';
@@ -38,9 +37,9 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
   final DayTripController daytrip_controller = Get.find();
   
   var box = GetStorage();
-  String image;
+  String image = '';
   int groupValue = 0;
-  TabController _tabController;
+  TabController? _tabController;
   var arg_index;
   var isDriver = false;
   var is_branch_manager = false;
@@ -79,9 +78,9 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
-  DayTripModel dayTripModel;
+  DayTripModel dayTripModel = DayTripModel();
   @override
   Widget build(BuildContext context) {
     //DayTripModel dayTripModel = Get.arguments;
@@ -113,7 +112,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels?.dayTrip),
+        title: Text(labels.dayTrip),
         actions: [
         ],
       ),
@@ -505,7 +504,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
             shrinkWrap: true,
             itemCount: daytrip_controller.dayTripList[arg_index].expenseIds.length,
             itemBuilder: (BuildContext context, int index) {
-              Uint8List bytes;
+              late Uint8List bytes;
               if(daytrip_controller.dayTripList[arg_index].expenseIds[index].attachement_image!=null){
                  bytes = base64Decode(daytrip_controller.dayTripList[arg_index].expenseIds[index].attachement_image);
               }
@@ -847,7 +846,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                               child: IconButton(
                                 icon: Icon(Icons.edit),
                                 onPressed: () {
-                                   Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,daytrip_controller.dayTripList[arg_index].fuelInIds[index])).then((value) {
+                                   Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,daytrip_controller.dayTripList[arg_index].fuelInIds[index]))?.then((value) {
                                       daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
                                     });
                                 },
@@ -867,6 +866,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         child: Container(
                           // width: 80,
                           child:  IconButton(
+                            onPressed: null,
                             icon: Icon(
                                Icons.more_horiz,
                               size: 25,
@@ -993,10 +993,14 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                                           Center(
                                             child: Padding(
                                               padding: const EdgeInsets.only(right:8.0),
-                                              child: RaisedButton(
+                                              child: TextButton(
                                                   child: Text("Cancel",style: TextStyle(color: Colors.red),),
-                                                  color: Color.fromRGBO(
-                                                      255, 255, 255, 1.0),
+                                                  style: ElevatedButton.styleFrom(
+                                                        backgroundColor: Color.fromRGBO(
+                                                                                          255, 255, 255, 1.0),
+                                                      ),
+                                                  // color: Color.fromRGBO(
+                                                  //     255, 255, 255, 1.0),
                                                   onPressed: () {
                                                     Get.back();
                                                   }),
@@ -1004,10 +1008,14 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                                           ),
                                           SizedBox(width: 10,),
                                           Center(
-                                            child: RaisedButton(
+                                            child: ElevatedButton(
                                                 child: Text("Update"),
-                                                color: Color.fromRGBO(
+                                                style: ElevatedButton.styleFrom(
+                                                        backgroundColor: Color.fromRGBO(
                                                     60, 47, 126, 1),
+                                                      ),
+                                                // color: Color.fromRGBO(
+                                                //     60, 47, 126, 1),
                                                 onPressed: () {
                                                   controller.updateQty(daytrip_controller.dayTripList[arg_index].product_lines[index].id);
                                                 }),
@@ -1247,6 +1255,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         child: Container(
                           // width: 80,
                           child:  IconButton(
+                            onPressed: null,
                             icon: Icon(
                               Icons.more_horiz,
                               size: 25,
@@ -1517,6 +1526,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         child: Container(
                           // width: 80,
                           child:  IconButton(
+                            onPressed: null,
                             icon: Icon(
                                Icons.more_horiz,
                               size: 25,
@@ -1605,7 +1615,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                 daytrip_controller.dayTripList[arg_index].advance_lines.forEach((element) {
                   itemTotalAmount +=element.total_amount;
                 });
-                Get.to(AddAdvancePage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].advancedRequest,itemTotalAmount)).then((value){
+                Get.to(AddAdvancePage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].advancedRequest,itemTotalAmount))?.then((value){
                   //daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
                   if(value!=null){
                     DayTripPlanTripGeneralController day_trip_controller = Get.find();
@@ -1708,7 +1718,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
             Align(
               alignment:Alignment.topRight,
               child: FloatingActionButton(onPressed: (){
-                Get.to(ExpenseCreate()).then((value){
+                Get.to(ExpenseCreate())?.then((value){
                   if(value!=null){
                     controller.isShowImage.value=false;
                     daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
@@ -1859,7 +1869,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
               ((daytrip_controller.dayTripList[arg_index].state == 'running' || isDriver==false&&is_spare==false||is_branch_manager==true)) ?Align(
                 alignment:Alignment.topRight,
                 child: FloatingActionButton(onPressed: (){
-                  Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,null)).then((value) {
+                  Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,null))?.then((value) {
                     daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
 
                   });
@@ -2027,7 +2037,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
 //   }
 // }
 
-void showFuelAddDialog(int lineID,Consumption_ids consumption) {
+void showFuelAddDialog(int lineID,Consumption_ids? consumption) {
     if(consumption!=null){
       controller.actualFuelLiterTextController.text = consumption.consumed_liter.toString();
       controller.descriptionTextController.text = consumption.description!= null ? consumption.description.toString() : "";
@@ -2041,7 +2051,7 @@ void showFuelAddDialog(int lineID,Consumption_ids consumption) {
           var labels = AppLocalizations.of(context);
           return AlertDialog(
             content: Stack(
-              overflow: Overflow.visible,
+              // overflow: Overflow.visible,
               children: <Widget>[
                 Positioned(
                   right: -40.0,
@@ -2158,15 +2168,15 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   final DayTripExpenseController controller = Get.find();
   var box = GetStorage();
 
-  String image;
-  String img64;
-  List<TravelLineListModel> datalist;
+  String image = '';
+  String img64 = '';
+  List<TravelLineListModel> datalist = [];
   DateTime selectedFromDate = DateTime.now();
   final picker = ImagePicker();
   TextEditingController qtyController = TextEditingController(text: "1");
-  File imageFile;
-  String expenseValue;
-  Uint8List bytes;
+  File? imageFile;
+  String expenseValue = '';
+  late Uint8List? bytes;
   bool show_image_container = true;
   @override
   void initState() {
@@ -2174,21 +2184,21 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
     bytes = null;
   }
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    File image = File(pickedFile.path);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     bytes = Io.File(compressedFile.path).readAsBytesSync();
-    img64 = base64Encode(bytes);
+    img64 = base64Encode(bytes!);
     controller.setCameraImage(compressedFile, img64);
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if(pickedFile!=null){
       File image = File(pickedFile.path);
       File compressedFile = await AppUtils.reduceImageFileSize(image);
       bytes = Io.File(compressedFile.path).readAsBytesSync();
-      img64 = base64Encode(bytes);
+      img64 = base64Encode(bytes!);
       controller.setCameraImage(compressedFile, img64);
     }
   }
@@ -2258,7 +2268,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -2281,8 +2291,8 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Daytrip_expense value) {
-                            controller.onChangeExpenseCategoryDropdown(value);
+                          onChanged: (Daytrip_expense? value) {
+                            controller.onChangeExpenseCategoryDropdown(value!);
                           },
                           items: controller.expense_category_list
                               .map((Daytrip_expense category) {
@@ -2317,7 +2327,9 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       resizeToAvoidBottomInset: true,
-      appBar: appbar(context, labels.daytripExpenseForm, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.daytripExpenseForm, image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -2413,7 +2425,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                             ):
                             Padding(
                               padding: const EdgeInsets.only(left:10.0),
-                              child: Image.memory(bytes,width: 100,height: 100,),
+                              child: Image.memory(bytes!,width: 100,height: 100,),
                             ),
                           ],
                         ),

@@ -24,7 +24,7 @@ class AddFuelDaytripPage extends StatelessWidget {
   var from_date = "";
   var to_date = "";
   var line_id = 0;
-  AddFuelDaytripPage(String from,int daytrip_id, String fromDatetime,String toDateTime,FuelIn_ids fuelInId){
+  AddFuelDaytripPage(String from,int daytrip_id, String fromDatetime,String toDateTime,FuelIn_ids? fuelInId){
     day_trip_controller.getProductForFuelTab();
     day_trip_controller.getAddFuelLocation();
     arg_id = daytrip_id;

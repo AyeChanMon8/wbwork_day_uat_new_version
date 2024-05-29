@@ -1,9 +1,8 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:buttons_tabbar/buttons_tabbar.dart';
 //import 'package:easy_localization/easy_localization.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -12,12 +11,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/attendance_report_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/attendance_report_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class AttendanceReport extends StatelessWidget {
   static final DateTime now = DateTime.now();
@@ -26,11 +25,11 @@ class AttendanceReport extends StatelessWidget {
   DateTime selected_from_date = DateTime.now();
   DateTime selected_to_date = DateTime.now();
   bool isChecked = false;
-  AttendanceReportController controller;
-  Uint8List bytes;
+  AttendanceReportController controller = AttendanceReportController();
+  late Uint8List bytes;
   final box = GetStorage();
-  String image;
-  String role_category;
+  String image = '';
+  String role_category = '';
   ScrollController _scrollController = new ScrollController();
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -54,7 +53,7 @@ class AttendanceReport extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels?.attendanceReport,
+            labels.attendanceReport,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -153,8 +152,10 @@ class AttendanceReport extends StatelessWidget {
   Widget specialChar(String title) {
     return Container(
       child: ButtonTheme(
-        child: RaisedButton(
-          color: Colors.white,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                  ),
           onPressed: () {},
           child: Text(
             title,
@@ -174,9 +175,9 @@ class AttendanceReport extends StatelessWidget {
         child: Wrap(
           direction: Axis.horizontal,
           children: <Widget>[
-            specialChar(labels?.name),
-            specialChar(labels?.late),
-            specialChar(labels?.early),
+            specialChar(labels.name),
+            specialChar(labels.late),
+            specialChar(labels.early),
           ],
         ),
       ),
@@ -611,6 +612,7 @@ class AttendanceReport extends StatelessWidget {
             controller.isLoading.value = true;
             _loadData();
           }
+          return true;
         },
         child: ListView.builder(
           shrinkWrap: true,
@@ -785,7 +787,7 @@ class AttendanceReport extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   if (date == 'End Date') {
-                    if (controller.fromDateTextController.text.isNotEmpty) {
+                    if (controller.fromDateTextController!.text.isNotEmpty) {
                       _selectDate(context, date);
                     } else {
                       //showToast('Choose Start Date First!');
@@ -816,12 +818,12 @@ class AttendanceReport extends StatelessWidget {
   Future<Null> _selectDate(BuildContext context, String date) async {
     // DateTime selectedFromDate = DateTime.now();
     // DateTime selectedToDate = DateTime.now();
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2018),
       lastDate: DateTime(2030),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -830,9 +832,9 @@ class AttendanceReport extends StatelessWidget {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -841,18 +843,18 @@ class AttendanceReport extends StatelessWidget {
       if (date == 'Start Date') {
         selected_from_date = picked;
 
-        controller.fromDateTextController.text =
+        controller.fromDateTextController!.text =
             ("${selected_from_date.toLocal()}".split(' ')[0]);
         var formatter = new DateFormat('yyyy-MM-dd');
-        controller.fromDateTextController.text = formatter.format(picked);
+        controller.fromDateTextController!.text = formatter.format(picked);
       } else {
         selected_to_date = picked;
 
-        controller.toDateTextController.text =
+        controller.toDateTextController!.text =
             ("${selected_to_date.toLocal()}".split(' ')[0]);
         var formatter = new DateFormat('yyyy-MM-dd');
 
-        controller.toDateTextController.text = formatter.format(picked);
+        controller.toDateTextController!.text = formatter.format(picked);
         controller.filterByDate(selected_from_date, selected_to_date);
       }
     }
@@ -868,13 +870,13 @@ class AttendanceReport extends StatelessWidget {
     // }
     message = "Would you like to approve this attendance?";
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text("On Duty"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -887,7 +889,7 @@ class AttendanceReport extends StatelessWidget {
         controller.approveAllAttendance();
       },
     ); //
-    Widget declineButton = FlatButton(
+    Widget declineButton = TextButton(
       child: Text("Action"),
       onPressed: () {
         Navigator.of(context).pop();

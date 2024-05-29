@@ -1,19 +1,20 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/user_profile_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../routes/app_pages.dart';
 
 class DetailsList extends StatefulWidget {
-  DetailsList({Key key, this.title}) : super(key: key);
+  DetailsList({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _DetailsListState createState() => _DetailsListState();
@@ -21,17 +22,19 @@ class DetailsList extends StatefulWidget {
 
 class _DetailsListState extends State<DetailsList>
     with TickerProviderStateMixin {
-  Map<DateTime, List> _events;
-  List _selectedEvents;
-  AnimationController _animationController;
-  CalendarController _calendarController;
-  String image;
+  Map<DateTime, List>? _events;
+  late List _selectedEvents;
+  late AnimationController _animationController;
+  late CalendarController _calendarController;
+  String image = '';
   UserProfileController controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(context, 'Calendar', image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Calendar', image)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -54,7 +57,7 @@ class _DetailsListState extends State<DetailsList>
   }
 
   Widget dataProfile(context) {
-    Uint8List bytes;
+    late Uint8List bytes;
     if (controller.empData.value.image_128 != null) {
       bytes = base64Decode(controller.empData.value.image_128);
     }

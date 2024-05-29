@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:io';
 
@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/models/claiminsurancemodel.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../models/claiminsurancemodel.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/pdf_view.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 
@@ -21,7 +21,9 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
     Claiminsurancemodel insurance = Get.arguments;
     final labels = AppLocalizations.of(context);
     return Scaffold(
-      appBar: appbar(context, 'Claim Insurance Detail', ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, 'Claim Insurance Detail', '')),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -102,7 +104,7 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.all(7.0),
-                    child: Text(labels?.insuranceType,
+                    child: Text(labels.insuranceType,
                         style:
                             TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                   ),
@@ -133,7 +135,7 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.all(7.0),
-                    child: Text(labels?.employeeName,
+                    child: Text(labels.employeeName,
                         style:
                             TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                   ),
@@ -231,17 +233,17 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
                       padding: const EdgeInsets.all(7.0),
                       child: InkWell(
                         onTap: () async {
-                          File file = await AppUtils.createPDF(
+                          File? file = await AppUtils.createPDF(
                               insurance.attachmentId,
                               "attachmentId.png",
                               "application/png");
-                          if (AppUtils.isImage(file.path)) {
+                          if (AppUtils.isImage(file!.path)) {
                             Get.dialog(Stack(
                               children: [
                                 Center(child: Image.file(file)),
                                 Positioned(
                                     right: 0,
-                                    child: FlatButton(
+                                    child: TextButton(
                                         onPressed: () {
                                           Get.back();
                                         },

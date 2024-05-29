@@ -1,18 +1,17 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../controllers/approval_controller.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
 
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/maintenance_request.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/maintenance_request.dart';
+import '../utils/app_utils.dart';
 
 class ApprovedTravelDetails extends StatefulWidget {
   @override
@@ -22,8 +21,8 @@ class ApprovedTravelDetails extends StatefulWidget {
 class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  String image = '';
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -33,7 +32,9 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
     print(controller.travelApprovedList[index].name);
 
     return Scaffold(
-        appBar: appbar(context, labels.travelApproved, image),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(8.0),
+          child: appbar(context, labels.travelApproved, image)),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,21 +83,21 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels?.date,
+              labels.date,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.destination,
+              labels.destination,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.purpose,
+              labels.purpose,
               style: subtitleStyle(),
             ),
           )
@@ -192,7 +193,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.fromDate,
+                  labels.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -215,7 +216,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.toDate,
+                  labels.toDate,
                   // ("To Date : "),
                   style: datalistStyle(),
                 ),
@@ -239,7 +240,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
               Container(
                 child: Text(
                   // ("From : "),
-                  labels?.from,
+                  labels.from,
                   style: datalistStyle(),
                 ),
               ),
@@ -259,7 +260,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.to,
+                  labels.to,
                   // ("To : "),
 
                   style: datalistStyle(),
@@ -281,7 +282,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),

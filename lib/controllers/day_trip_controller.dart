@@ -26,7 +26,7 @@ class DayTripController extends GetxController{
     //getDayTripToApproveList();
   }
 
-  void getDayTripList(String pageType) async{
+  void getDayTripList(String? pageType) async{
     this.dayTripServie = await DayTripServie().init();
     Future.delayed(
         Duration.zero,
@@ -38,7 +38,7 @@ class DayTripController extends GetxController{
                 )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    dayTripServie?.getDayTripList(employee_id!,offset.toString(),pageType).then((data){
+    dayTripServie?.getDayTripList(employee_id!,offset.toString(),pageType!).then((data){
       if(offset!=0){
         // update data and loading status
         isLoading.value = false;

@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:async';
 import 'dart:convert';
@@ -14,26 +14,27 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/busiess_travel_controller.dart';
-import 'package:winbrother_hr_app/controllers/business_travel_update_controller.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/expense_travel_list_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_request_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_line_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_expense_approve_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_line.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import 'package:path_provider/path_provider.dart';
+import '../constants/globals.dart';
+import '../controllers/busiess_travel_controller.dart';
+import '../controllers/business_travel_update_controller.dart';
+import '../controllers/expense_travel_list/expense_travel_list_controller.dart';
+import '../controllers/leave_request_controller.dart';
+import '../localization.dart';
+import '../models/fleet_model.dart';
+import '../models/leave_type.dart';
+import '../models/travel_expense/create/travel_line_model.dart';
+import '../models/travel_expense/list/travel_expense_approve_model.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../models/travel_expense/pocket_line.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../models/travel_request_list_response.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 import 'dart:io' as Io;
 import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 import 'leave_detail.dart';
 class BusinessTravelUpdate extends StatefulWidget {
   @override
@@ -44,10 +45,14 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
   @override
   void initState() {
     index = Get.arguments;
-    controllerList.travelExpenseList.value[index].travel_line.forEach((element) {
-      travelLine.add(TravelLineModel(id:element.id,date:element.date,categ_id: element.categ_id.id,expense_category: element.product_id.name,product_id: element.product_id.id,description: element.description,qty: element.qty,price_unit: element.price_unit,price_subtotal: element.price_subtotal,attached_file: element.attached_file,attached_filename: element.attachment_filename,vehicle_id: element.vehicle_id.id,
-          image1: element.image1,image2: element.image2,image3: element.image3,image4: element.image4,image5: element.image5,image6: element.image6,image7: element.image7,image8: element.image8,image9: element.image9,attachment_include: element.attachment_include));
-    });
+    // controllerList.travelExpenseList.value[index].travel_line!.forEach((element) {
+    //   travelLine.add(TravelLineModel(id:element.id,date:element.date,categ_id: element.categ_id.id,expense_category: element.product_id.name,product_id: element.product_id.id,description: element.description,qty: element.qty,price_unit: element.price_unit,price_subtotal: element.price_subtotal,attached_file: element.attached_file,attached_filename: element.attachment_filename,vehicle_id: element.vehicle_id.id,
+    //       image1: element.image1,image2: element.image2,image3: element.image3,image4: element.image4,image5: element.image5,image6: element.image6,image7: element.image7,image8: element.image8,image9: element.image9,attachment_include: element.attachment_include));
+    // });
+    for(int i=0;i<controllerList.travelExpenseList.value[index].travel_line.length;i++){
+      travelLine.add(TravelLineModel(id:controllerList.travelExpenseList.value[index].travel_line[i].id,date:controllerList.travelExpenseList.value[index].travel_line[i].date,categ_id: controllerList.travelExpenseList.value[index].travel_line[i].categ_id.id,expense_category: controllerList.travelExpenseList.value[index].travel_line[i].product_id.name,product_id: controllerList.travelExpenseList.value[index].travel_line[i].product_id.id,description: controllerList.travelExpenseList.value[index].travel_line[i].description,qty: controllerList.travelExpenseList.value[index].travel_line[i].qty,price_unit: controllerList.travelExpenseList.value[index].travel_line[i].price_unit,price_subtotal: controllerList.travelExpenseList.value[index].travel_line[i].price_subtotal,attached_file: controllerList.travelExpenseList.value[index].travel_line[i].attached_file,attached_filename: controllerList.travelExpenseList.value[index].travel_line[i].attachment_filename,vehicle_id: controllerList.travelExpenseList.value[index].travel_line[i].vehicle_id.id,
+          image1: controllerList.travelExpenseList.value[index].travel_line[i].image1,image2: controllerList.travelExpenseList.value[index].travel_line[i].image2,image3: controllerList.travelExpenseList.value[index].travel_line[i].image3,image4: controllerList.travelExpenseList.value[index].travel_line[i].image4,image5: controllerList.travelExpenseList.value[index].travel_line[i].image5,image6: controllerList.travelExpenseList.value[index].travel_line[i].image6,image7: controllerList.travelExpenseList.value[index].travel_line[i].image7,image8: controllerList.travelExpenseList.value[index].travel_line[i].image8,image9: controllerList.travelExpenseList.value[index].travel_line[i].image9,attachment_include: controllerList.travelExpenseList.value[index].travel_line[i].attachment_include));
+    }
     controller.travelLineModel.value = travelLine;
     image = box.read('emp_image');
     super.initState();
@@ -57,26 +62,26 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
   final ExpensetravelListController attachController =
       Get.put(ExpensetravelListController());
   var box = GetStorage();
-  String image;
-  int index;
-  String img64;
-  List<TravelLineListModel> datalist;
+  String image = '';
+  int index = 0;
+  String img64 = '';
+  List<TravelLineListModel> datalist = [];
   DateTime selectedFromDate = DateTime.now();
   DateTime selectedUpdateFromDate = DateTime.now();
   final picker = ImagePicker();
   TextEditingController qtyController = TextEditingController(text: "1");
-  File imageFile;
-  String expenseValue;
+  File? imageFile;
+  String expenseValue = '';
   List expenseData = ["Breakfast", "Lunch", "Dinner"];
   List<Asset> images = <Asset>[];
   String _error = 'No Error Dectected';
   List image_64 = [];
   bool selectCamera = false;
-  int imgIndex;
+  int imgIndex = 0;
   Future getCamera() async {
     image_64 = [];
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    File image = File(pickedFile.path);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -88,8 +93,8 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    File image = File(pickedFile.path);
+    final pickedFile = await picker!.pickImage(source: ImageSource.gallery);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -103,7 +108,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
         child: Text('No Image Selected!'),
       ));
     } else {
-      return Image.file(imageFile, width: 50, height: 50);
+      return Image.file(imageFile!, width: 50, height: 50);
     }
   }
 
@@ -172,7 +177,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[350], width: 2),
+            border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
             borderRadius: const BorderRadius.all(
               const Radius.circular(1),
             ),
@@ -195,7 +200,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                         style: TextStyle(color: Colors.black),
                       ),
                       value: expenseValue,
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         // setState(() {
                         //   expenseValue = newValue;
                         // });
@@ -224,7 +229,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -246,9 +251,9 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelRequestListResponse value) {
+                          onChanged: (TravelRequestListResponse? value) {
                             controller
-                                .onChangeTravelExpenseApproveDropdown(value);
+                                .onChangeTravelExpenseApproveDropdown(value!);
                           },
                           items: controller.travel_expense_approve_list
                               .map((TravelRequestListResponse travel) {
@@ -284,7 +289,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -306,8 +311,8 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            controller.onChangeExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            controller.onChangeExpenseCategoryDropdown(value!);
                           },
                           items: controller.travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -343,7 +348,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -365,9 +370,9 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseProduct value) {
-                            print(value.name);
-                            print(value.id);
+                          onChanged: (TravelExpenseProduct? value) {
+                            print(value!.name);
+                            print(value!.id);
                             controller.onChangeExpenseProductDropdown(value);
                           },
                           items: controller.travel_expense_product_list
@@ -525,12 +530,12 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
     // var end_month = int.tryParse(end.toString().split("-")[1]);
     // var end_day = int.tryParse(end.toString().split("-")[2]);
     controller.getOneTravelApprove(controllerList.travelExpenseList.value[index].travel_id.id).then((value) async{
-      final DateTime picked = await showDatePicker(
+      final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.parse(controller.from_travel_date.value),
         firstDate: DateTime.parse(controller.from_travel_date.value),
         lastDate: DateTime.parse(controller.to_travel_date.value),
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext? context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
               dialogBackgroundColor: Colors.white,
@@ -539,9 +544,9 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
               ),
               buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
               highlightColor: Colors.grey[400],
-              textSelectionColor: Colors.grey,
+              // textSelectionColor: Colors.grey,
             ),
-            child: child,
+            child: child!,
           );
         },
       );
@@ -578,7 +583,9 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
       // },
       return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: appbar(context, "Travel Expense Form", image),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(8.0), 
+          child: appbar(context, "Travel Expense Form", image)),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -768,7 +775,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                 Stack(
                   children: [
                     Image.file(
-                        controller.selectedImage.value,
+                        controller.selectedImage.value!,
                         width: 150,
                         height: 150),
                   Positioned(
@@ -864,8 +871,10 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
                     width: double.infinity,
                     height: 45,
                     margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: RaisedButton(
-                      color: textFieldTapColor,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: textFieldTapColor,
+                      ),
                       onPressed: () {
                         controller.updateTravelLineExpense(
                             controllerList.travelExpenseList.value[index].id,controllerList.travelExpenseList.value[index].travel_id.id,controllerList.travelExpenseList.value[index].number,context);
@@ -926,7 +935,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
       shrinkWrap: true,
       crossAxisCount: 3,
       children: List.generate(image_array.length, (index) {
-        Uint8List bytes1;
+        late Uint8List bytes1;
         if(image_array[index]!=null){
            bytes1 = base64Decode(image_array[index]);
         }
@@ -1319,8 +1328,10 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
       Container(
         width: double.maxFinite,
         alignment: Alignment.center,
-        child: RaisedButton(
-          color: textFieldTapColor,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
           onPressed: () {
             if(imgIndex!=null){
               if(controller.travelLineModel[index].attachment_include != null&& 
@@ -1358,7 +1369,7 @@ Widget editVehicleDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1380,8 +1391,8 @@ Widget editVehicleDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            print(value.name);
+                          onChanged: (Fleet_model? value) {
+                            print(value!.name);
                             print(value.id);
                             controller.onChangeEditVehicleDropdown(value);
                           },
@@ -1419,7 +1430,7 @@ Widget expenseEditProductDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1441,8 +1452,8 @@ Widget expenseEditProductDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseProduct value) {
-                            print(value.name);
+                          onChanged: (TravelExpenseProduct? value) {
+                            print(value!.name);
                             print(value.id);
                             controller.onChangeEditExpenseProductDropdown(value);
                           },
@@ -1480,7 +1491,7 @@ Widget expenseEditCategoryDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1502,8 +1513,8 @@ Widget expenseEditCategoryDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            controller.onChangeEditExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            controller.onChangeEditExpenseCategoryDropdown(value!);
                           },
                           items: controller.edit_travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -1565,12 +1576,12 @@ Widget dateWidgetEdit(
 
   Future<Null> _selectDateEdit(BuildContext context,int index) async {
     controller.getOneTravelApprove(controllerList.travelExpenseList.value[index].travel_id.id).then((value) async{
-      final DateTime picked = await showDatePicker(
+      final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.parse(controller.from_travel_date.value),
         firstDate: DateTime.parse(controller.from_travel_date.value),
         lastDate: DateTime.parse(controller.to_travel_date.value),
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext? context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
               dialogBackgroundColor: Colors.white,
@@ -1579,9 +1590,9 @@ Widget dateWidgetEdit(
               ),
               buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
               highlightColor: Colors.grey[400],
-              textSelectionColor: Colors.grey,
+              // textSelectionColor: Colors.grey,
             ),
-            child: child,
+            child: child!,
           );
         },
       );
@@ -1675,7 +1686,7 @@ Widget dateWidgetEdit(
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: Color.fromARGB(255, 21, 3, 3), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1697,8 +1708,8 @@ Widget dateWidgetEdit(
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            print(value.name);
+                          onChanged: (Fleet_model? value) {
+                            print(value!.name);
                             print(value.id);
                             controller.onChangeVehicleDropdown(value);
                           },
@@ -1789,7 +1800,7 @@ Widget dateWidgetEdit(
       shrinkWrap: true,
       crossAxisCount: 2,
       children: List.generate(value.length, (index) {
-        Uint8List bytes1;
+        late Uint8List bytes1;
         if(value[index]!=null){
           bytes1 = base64Decode(value[index]);
         }

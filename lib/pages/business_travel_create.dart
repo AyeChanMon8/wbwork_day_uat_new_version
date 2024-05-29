@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -18,26 +16,27 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/busiess_travel_controller.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/expense_travel_list_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_request_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_line_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_expense_approve_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_line.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/out_of_pocket_create.dart';
+import 'package:path_provider/path_provider.dart';
+import '../constants/globals.dart';
+import '../controllers/busiess_travel_controller.dart';
+import '../controllers/expense_travel_list/expense_travel_list_controller.dart';
+import '../controllers/leave_request_controller.dart';
+import '../localization.dart';
+import '../models/fleet_model.dart';
+import '../models/leave_type.dart';
+import '../models/travel_expense/create/travel_line_model.dart';
+import '../models/travel_expense/list/travel_expense_approve_model.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../models/travel_expense/pocket_line.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../models/travel_request_list_response.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/out_of_pocket_create.dart';
 import 'dart:io' as Io;
 
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class BusinessTravelCreate extends StatefulWidget {
   @override
@@ -49,27 +48,27 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
       Get.put(BusinessTravelController());
   ExpensetravelListController controllerList = Get.find();
   var box = GetStorage();
-bool selectCamera = false;
-  String image;
-  int index;
-  String img64;
-  List<TravelLineListModel> datalist;
+  bool selectCamera = false;
+  String image = '';
+  int index = 0;
+  String img64 = '';
+  List<TravelLineListModel> datalist = [];
   DateTime selectedFromDate = DateTime.now();
   final picker = ImagePicker();
   TextEditingController qtyController = TextEditingController(text: "1");
-  File imageFile;
-  String expenseValue;
+  late File imageFile;
+  String expenseValue = '';
   List expenseData = ["Breakfast", "Lunch", "Dinner"];
   List<Asset> images = <Asset>[];
   String _error = 'No Error Dectected';
   List image_64 = [];
-  TextEditingController expenseUpdateDateController;
- DateTime selectedUpdateFromDate = DateTime.now();
+  TextEditingController expenseUpdateDateController = TextEditingController();
+  DateTime selectedUpdateFromDate = DateTime.now();
   Future getCamera() async {
     image_64 = [];
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    
-    File image = File(pickedFile.path);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -81,9 +80,9 @@ bool selectCamera = false;
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -254,7 +253,8 @@ bool selectCamera = false;
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(
+                      color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -280,9 +280,9 @@ bool selectCamera = false;
                           //   controller
                           //       .onChangeTravelExpenseApproveDropdown(value);
                           // },
-                          onChanged: controller.travelLineModel.length > 0 ? null : (TravelRequestListResponse value) {
-                            
-                          },
+                          onChanged: controller.travelLineModel.length > 0
+                              ? null
+                              : (TravelRequestListResponse? value) {},
                           items: controller.travel_expense_approve_list
                               .map((TravelRequestListResponse travel) {
                             return DropdownMenuItem<TravelRequestListResponse>(
@@ -317,7 +317,7 @@ bool selectCamera = false;
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -339,10 +339,10 @@ bool selectCamera = false;
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            print(value.display_name);
-                            print(value.id);
-                            controller.onChangeExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            print(value!.display_name);
+                            print(value!.id);
+                            controller.onChangeExpenseCategoryDropdown(value!);
                           },
                           items: controller.travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -378,7 +378,8 @@ bool selectCamera = false;
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(
+                      color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -400,10 +401,10 @@ bool selectCamera = false;
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseProduct value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeExpenseProductDropdown(value);
+                          onChanged: (TravelExpenseProduct? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller.onChangeExpenseProductDropdown(value!);
                           },
                           items: controller.travel_expense_product_list
                               .map((TravelExpenseProduct product) {
@@ -592,12 +593,12 @@ bool selectCamera = false;
     // var end_year = int.tryParse(end.toString().split("-")[0]);
     // var end_month = int.tryParse(end.toString().split("-")[1]);
     // var end_day = int.tryParse(end.toString().split("-")[2]);
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.parse(controller.from_travel_date.value),
       firstDate: DateTime.parse(controller.from_travel_date.value),
       lastDate: DateTime.parse(controller.to_travel_date.value),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -606,9 +607,9 @@ bool selectCamera = false;
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -687,7 +688,7 @@ bool selectCamera = false;
 
   attachFilePath() async {
     if (images.length > 0) {
-      if( selectCamera == false)  image_64.clear();
+      if (selectCamera == false) image_64.clear();
       for (var i = 0; i < images.length; i++) {
         final byteData = await images[i].getByteData();
         final tempFile =
@@ -720,327 +721,329 @@ bool selectCamera = false;
     }
     image = box.read('emp_image');
     //return WillPopScope(
-      // onWillPop: () async{
-      //   if(Globals.ph_hardware_back.value){
-      //     return Future.value(true);
-      //   }else{
-      //     return Future.value(false);
-      //   }
-      // },
-      return Scaffold(
-        resizeToAvoidBottomInset: true,
-        appBar: appbar(context, labels.travelExpense, image),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-            child: Column(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: travelApproveDropdown()),
-                SizedBox(
-                  height: 10,
-                ),
-                Align(
-                    alignment: Alignment.center,
-                    child: Obx(
-                      () => Container(
-                          margin: EdgeInsets.symmetric(horizontal: 18),
-                          child: controller.totalAdvanceAmount.value != null
-                              ? controller.totalAdvanceAmount.value > 0.0
-                                  ? Text(
-                                      '${labels?.total} ${labels?.travelExpense} ${labels?.actualAmt} : ${NumberFormat('#,###').format(controller.totalAdvanceAmount)}',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.deepPurple),
-                                    )
-                                  : SizedBox()
-                              : SizedBox()),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                          child: Theme(
-                            data: new ThemeData(
-                              primaryColor: textFieldTapColor,
-                            ),
-                            child: dateWidget(context),
-                          )),
-                    ),
-                    // Expanded(
-                    //   child: Container(
-                    //       margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    //       child: expenseCategoryDropDown()),
-                    // ),
-                  ],
-                ),
-                Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: expenseCategoryDropDown()),
-                SizedBox(
-                  height: 10,
-                ),
-                expenseProductDropDown(),
-                SizedBox(
-                  height: 10,
-                ),
-                Obx(() =>
-                    controller.selectedExpenseCategory.is_vehicle_selected == true
-                        ? Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: vehicleDropDown())
-                        : SizedBox()),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                          child: Theme(
-                            data: new ThemeData(
-                              primaryColor: textFieldTapColor,
-                            ),
-                            child: TextField(
-                              controller: controller.qtyController,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: labels?.quantity),
-                              onChanged: (text) {
-                                controller.calculateAmount();
-                              },
-                            ),
-                          )),
-                    ),
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                          child: Theme(
-                            data: new ThemeData(
-                              primaryColor: textFieldTapColor,
-                            ),
-                            child: TextField(
-                              enabled: false,
-                              controller: controller.priceController,
-                              decoration: InputDecoration(
+    // onWillPop: () async{
+    //   if(Globals.ph_hardware_back.value){
+    //     return Future.value(true);
+    //   }else{
+    //     return Future.value(false);
+    //   }
+    // },
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(8.0),
+          child: appbar(context, labels.travelExpense, image)),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+          child: Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, top: 20),
+                  child: travelApproveDropdown()),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Obx(
+                    () => Container(
+                        margin: EdgeInsets.symmetric(horizontal: 18),
+                        child: controller.totalAdvanceAmount.value != null
+                            ? controller.totalAdvanceAmount.value > 0.0
+                                ? Text(
+                                    '${labels?.total} ${labels?.travelExpense} ${labels?.actualAmt} : ${NumberFormat('#,###').format(controller.totalAdvanceAmount)}',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.deepPurple),
+                                  )
+                                : SizedBox()
+                            : SizedBox()),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                        child: Theme(
+                          data: new ThemeData(
+                            primaryColor: textFieldTapColor,
+                          ),
+                          child: dateWidget(context),
+                        )),
+                  ),
+                  // Expanded(
+                  //   child: Container(
+                  //       margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                  //       child: expenseCategoryDropDown()),
+                  // ),
+                ],
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                  child: expenseCategoryDropDown()),
+              SizedBox(
+                height: 10,
+              ),
+              expenseProductDropDown(),
+              SizedBox(
+                height: 10,
+              ),
+              Obx(() =>
+                  controller.selectedExpenseCategory.is_vehicle_selected == true
+                      ? Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: vehicleDropDown())
+                      : SizedBox()),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                        child: Theme(
+                          data: new ThemeData(
+                            primaryColor: textFieldTapColor,
+                          ),
+                          child: TextField(
+                            controller: controller.qtyController,
+                            decoration: InputDecoration(
                                 border: OutlineInputBorder(),
-                                hintText: labels?.unitPrice,
-                              ),
-                              onChanged: (text) {
-                                controller.calculateAmount();
-                              },
+                                hintText: labels?.quantity),
+                            onChanged: (text) {
+                              controller.calculateAmount();
+                            },
+                          ),
+                        )),
+                  ),
+                  Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                        child: Theme(
+                          data: new ThemeData(
+                            primaryColor: textFieldTapColor,
+                          ),
+                          child: TextField(
+                            enabled: false,
+                            controller: controller.priceController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: labels?.unitPrice,
                             ),
-                          )),
+                            onChanged: (text) {
+                              controller.calculateAmount();
+                            },
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: Theme(
+                    data: new ThemeData(
+                      primaryColor: textFieldTapColor,
+                    ),
+                    child: TextField(
+                      controller: controller.totalAmountController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: labels?.amount,
+                      ),
+                      onChanged: (text) {
+                        // setState(() {});
+                        controller.calculateUnitAmount();
+                      },
+                    ),
+                  )),
+              Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: Theme(
+                    data: new ThemeData(
+                      primaryColor: textFieldTapColor,
+                    ),
+                    child: TextField(
+                      controller: controller.descriptionController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: labels?.description,
+                      ),
+                      onChanged: (text) {
+                        // setState(() {});
+                      },
+                    ),
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                print("Image File");
+                                // loadAssets();
+                                showOptions(context);
+                              });
+                            },
+                            child: Container(
+                                decoration: BoxDecoration(),
+                                child: Container(
+                                    decoration:
+                                        BoxDecoration(color: textFieldTapColor),
+                                    height: 45,
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ))),
+                          ),
+                        ),
+                        //_decideImageView(),
+                      ],
                     ),
                   ],
                 ),
-                Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Theme(
-                      data: new ThemeData(
-                        primaryColor: textFieldTapColor,
-                      ),
-                      child: TextField(
-                        controller: controller.totalAmountController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: labels?.amount,
-                        ),
-                        onChanged: (text) {
-                          // setState(() {});
-                          controller.calculateUnitAmount();
-                        },
-                      ),
-                    )),
-                Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Theme(
-                      data: new ThemeData(
-                        primaryColor: textFieldTapColor,
-                      ),
-                      child: TextField(
-                        controller: controller.descriptionController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: labels?.description,
-                        ),
-                        onChanged: (text) {
-                          // setState(() {});
-                        },
-                      ),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+              Container(
+                child: controller.selectedImage.value != null &&
+                        selectCamera == true
+                    ? Row(
                         children: [
                           Expanded(
+                              flex: 2,
+                              child: Image.file(controller.selectedImage.value!,
+                                  width: 150, height: 150)),
+                          Expanded(
+                            flex: 1,
                             child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  print("Image File");
-                                  // loadAssets();
-                                  showOptions(context);
-    
-                                });
+                                onTap: () {
+                                  nullPhoto();
                                 },
-                              child: Container(
-                                  decoration: BoxDecoration(),
-                                  child: Container(
-                                      decoration:
-                                      BoxDecoration(color: textFieldTapColor),
-                                      height: 45,
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.white,
-                                        size: 30,
-                                      ))),
-                            ),
-                          ),
-                          //_decideImageView(),
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                )),
+                          )
                         ],
-                      ),
-    
-                    ],
-                  ),
-                ),
-                Container(
-                  child: controller.selectedImage.value != null && selectCamera == true ?Row(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child:Image.file(
-                              controller.selectedImage.value,
-                              width: 150,
-                              height: 150)),
-                      Expanded(
-                        flex: 1,
-                        child: InkWell(
-                            onTap: () {
-                              nullPhoto();
-                            },
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )),
                       )
-                    ],
-                  ):SizedBox.fromSize(),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: imageGridView(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Obx(
-                  () => controller.is_show_expense.value
-                      ? Container(
-                          margin: EdgeInsets.only(left: 20, right: 20),
-                          child: GFButton(
-                            onPressed: () {
-                              //print("selectedDate");
-                              if (controller.expenseDateController.text
-                                  .toString()
-                                  .isEmpty) {
-                                AppUtils.showDialog(
-                                    labels?.warning, labels?.chooseDate);
-                              } else {
-                                controller.addTravelLine(image_64);
-                                setState(() {
-                                  selectCamera = false;
-                                  controller.selectedImage.value = null;
-                                  images.clear();
-                                  image_64.clear();
-                                });
-                              }
-                            },
-                            text: labels?.addExpenseLine,
-                            color: textFieldTapColor,
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                            shape: GFButtonShape.pills,
-                            blockButton: true,
+                    : SizedBox.fromSize(),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: imageGridView(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Obx(
+                () => controller.is_show_expense.value
+                    ? Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: GFButton(
+                          onPressed: () {
+                            //print("selectedDate");
+                            if (controller.expenseDateController.text
+                                .toString()
+                                .isEmpty) {
+                              AppUtils.showDialog(
+                                  labels.warning, labels.chooseDate);
+                            } else {
+                              controller.addTravelLine(image_64);
+                              setState(() {
+                                selectCamera = false;
+                                controller.selectedImage.value = null;
+                                images.clear();
+                                image_64.clear();
+                              });
+                            }
+                          },
+                          text: labels?.addExpenseLine,
+                          color: textFieldTapColor,
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.white,
                           ),
-                        )
-                      : new Container(),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Obx(
-                  () => controller.travelLineModel.length > 0
-                      ? expenseTitleWidget(context)
-                      : new Container(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                index == null ? Container() : expenseListWidget(context),
-                Obx(
-                  () => controller.travelLineModel.length > 0
-                      ? expenseWidget(context)
-                      : new Container(),
-                ),
-                Align(
-                    alignment: Alignment.center,
-                    child: Obx(
-                      () => Container(
-                          margin: EdgeInsets.symmetric(horizontal: 18),
-                          child: controller.totalAmountForExpense.value > 0.0
-                              ? Text(
-                                  '${labels?.total} Amount : ${NumberFormat('#,###').format(controller.totalAmountForExpense)}',
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.deepPurple),
-                                )
-                              : SizedBox()),
-                    )),
-                Container(
-                    width: double.infinity,
-                    height: 45,
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: RaisedButton(
-                      color: textFieldTapColor,
-                      onPressed: () {
-                        if (index == null) {
-                          if (controller.travelLineModel.length > 0)
-                            controller.createTravel(context);
-                          else
-                            AppUtils.showDialog(
-                                labels.warning, labels.addExpenseLine);
-                        } else {
-                          controller.updateTravelLineExpense(
+                          shape: GFButtonShape.pills,
+                          blockButton: true,
+                        ),
+                      )
+                    : new Container(),
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              Obx(
+                () => controller.travelLineModel.length > 0
+                    ? expenseTitleWidget(context)
+                    : new Container(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              index == null ? Container() : expenseListWidget(context),
+              Obx(
+                () => controller.travelLineModel.length > 0
+                    ? expenseWidget(context)
+                    : new Container(),
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Obx(
+                    () => Container(
+                        margin: EdgeInsets.symmetric(horizontal: 18),
+                        child: controller.totalAmountForExpense.value > 0.0
+                            ? Text(
+                                '${labels?.total} Amount : ${NumberFormat('#,###').format(controller.totalAmountForExpense)}',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.deepPurple),
+                              )
+                            : SizedBox()),
+                  )),
+              Container(
+                  width: double.infinity,
+                  height: 45,
+                  margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: textFieldTapColor,
+                    ),
+                    onPressed: () {
+                      if (index == null) {
+                        if (controller.travelLineModel.length > 0)
+                          controller.createTravel(context);
+                        else
+                          AppUtils.showDialog(
+                              labels.warning, labels.addExpenseLine);
+                      } else {
+                        controller.updateTravelLineExpense(
                             controllerList.travelExpenseList.value[index].id
                                 .toString(),
-                            context
-                          );
-                        }
-                      },
-                      child: index == null
-                          ? Text(
-                              (labels.save),
-                              style: TextStyle(fontSize: 20, color: Colors.white),
-                            )
-                          : Text(
-                              (labels.update),
-                              style: TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                    )),
-              ],
-            ),
+                            context);
+                      }
+                    },
+                    child: index == null
+                        ? Text(
+                            (labels.save),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        : Text(
+                            (labels.update),
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                  )),
+            ],
           ),
         ),
-      );
+      ),
+    );
     //);
   }
 
@@ -1158,16 +1161,17 @@ bool selectCamera = false;
                           child: Row(
                         children: [
                           IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: (){
-                                  controller.setEditExpenseLine(controller.travelLineModel[index]);
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) => _travelExpenseLineEdit(context,index,controller
-                                                                .travelLineModel[index]),
-                                        );
-                                  }
-                                  ),
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                controller.setEditExpenseLine(
+                                    controller.travelLineModel[index]);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _travelExpenseLineEdit(context, index,
+                                          controller.travelLineModel[index]),
+                                );
+                              }),
                           IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
@@ -1215,7 +1219,7 @@ bool selectCamera = false;
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1237,9 +1241,9 @@ bool selectCamera = false;
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            print(value.name);
-                            print(value.id);
+                          onChanged: (Fleet_model? value) {
+                            print(value!.name);
+                            print(value!.id);
                             controller.onChangeVehicleDropdown(value);
                           },
                           items:
@@ -1266,155 +1270,168 @@ bool selectCamera = false;
     );
   }
 
-  Widget _travelExpenseLineEdit(BuildContext context,int index, TravelLineModel travelLine) {
-  final labels = AppLocalizations.of(context);
-  return new AlertDialog(
-    title: const Text('Expense Line Form'),
-    content: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-          width: MediaQuery.of(context).size.width *0.8,
-          height: 120,
-          padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey[350]),
-          child: Center(
-            child: Text("Can update other fields except photo attachment. If you want to edit photo, you can delete travel expense line and then add again.",),
-          ),
-        ),
-          Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                            child: Theme(
-                              data: new ThemeData(
-                                primaryColor: textFieldTapColor,
-                              ),
-                              child: dateWidgetEdit(context,travelLine),
-                            )),
-                      ),
-                    ],
-                  ),
-                  controller.edit_travel_expense_category_list.length>0 ?Container(
-                      margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: expenseEditCategoryDropDown()):SizedBox(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Obx(()=> controller.edit_travel_expense_product_list.value.length>0 ?expenseEditProductDropDown():SizedBox()),
-                  Obx(()=> controller.selectedEditExpenseCategory.is_vehicle_selected == true ?
-                Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: editVehicleDropDown()) : SizedBox()),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                            child: Theme(
-                              data: new ThemeData(
-                                primaryColor: textFieldTapColor,
-                              ),
-                              child: TextField(
-                                controller: controller.editQtyController,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: labels?.quantity),
-                                onChanged: (text) {
-                                  controller.editCalculateAmount();
-                                },
-                              ),
-                            )),
-                      ),
-                      Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                            child: Theme(
-                              data: new ThemeData(
-                                primaryColor: textFieldTapColor,
-                              ),
-                              child: TextField(
-                                enabled: false,
-                                controller: controller.editPriceController,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: labels?.unitPrice,
-                                ),
-                                onChanged: (text) {
-                                  controller.editCalculateAmount();
-                                },
-                              ),
-                            )),
-                      ),
-                    ],
-                  ),
-                  Container(
+  Widget _travelExpenseLineEdit(
+      BuildContext context, int index, TravelLineModel travelLine) {
+    final labels = AppLocalizations.of(context);
+    return new AlertDialog(
+      title: const Text('Expense Line Form'),
+      content: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: 120,
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.grey[350]),
+              child: Center(
+                child: Text(
+                  "Can update other fields except photo attachment. If you want to edit photo, you can delete travel expense line and then add again.",
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                      child: Theme(
+                        data: new ThemeData(
+                          primaryColor: textFieldTapColor,
+                        ),
+                        child: dateWidgetEdit(context, travelLine),
+                      )),
+                ),
+              ],
+            ),
+            controller.edit_travel_expense_category_list.length > 0
+                ? Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: expenseEditCategoryDropDown())
+                : SizedBox(),
+            SizedBox(
+              height: 10,
+            ),
+            Obx(() =>
+                controller.edit_travel_expense_product_list.value.length > 0
+                    ? expenseEditProductDropDown()
+                    : SizedBox()),
+            Obx(() =>
+                controller.selectedEditExpenseCategory.is_vehicle_selected ==
+                        true
+                    ? Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: editVehicleDropDown())
+                    : SizedBox()),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
                       margin: EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Theme(
                         data: new ThemeData(
                           primaryColor: textFieldTapColor,
                         ),
                         child: TextField(
-                          controller: controller.editTotalAmountController,
+                          controller: controller.editQtyController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: labels?.amount,
-                          ),
+                              border: OutlineInputBorder(),
+                              hintText: labels?.quantity),
                           onChanged: (text) {
-                            // setState(() {});
-                            controller.editCalculateUnitAmount();
+                            controller.editCalculateAmount();
                           },
                         ),
                       )),
-                  Container(
+                ),
+                Expanded(
+                  child: Container(
                       margin: EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Theme(
                         data: new ThemeData(
                           primaryColor: textFieldTapColor,
                         ),
                         child: TextField(
-                          controller: controller.editDescriptionController,
+                          enabled: false,
+                          controller: controller.editPriceController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: labels?.description,
+                            hintText: labels?.unitPrice,
                           ),
                           onChanged: (text) {
-                            // setState(() {});
+                            controller.editCalculateAmount();
                           },
                         ),
                       )),
-                  SizedBox(
-                    height: 20,
+                ),
+              ],
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: Theme(
+                  data: new ThemeData(
+                    primaryColor: textFieldTapColor,
                   ),
-        ],
-      ),
-    ),
-    actions: <Widget>[
-      Container(
-        width: double.maxFinite,
-        alignment: Alignment.center,
-        child: new RaisedButton(
-          color: textFieldTapColor,
-          onPressed: () {
-              controller.updateExpenseLine(index,travelLine);
-              Navigator.of(context).pop();
-          },
-          textColor: Theme.of(context).primaryColor,
-          child: Text((labels.update),
-                style: TextStyle(fontSize: 20, color: Colors.white))
+                  child: TextField(
+                    controller: controller.editTotalAmountController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: labels?.amount,
+                    ),
+                    onChanged: (text) {
+                      // setState(() {});
+                      controller.editCalculateUnitAmount();
+                    },
+                  ),
+                )),
+            Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: Theme(
+                  data: new ThemeData(
+                    primaryColor: textFieldTapColor,
+                  ),
+                  child: TextField(
+                    controller: controller.editDescriptionController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: labels?.description,
+                    ),
+                    onChanged: (text) {
+                      // setState(() {});
+                    },
+                  ),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+          ],
         ),
       ),
-    ],
-  );
-}
+      actions: <Widget>[
+        Container(
+          width: double.maxFinite,
+          alignment: Alignment.center,
+          child: new ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                    textStyle: TextStyle(color: Theme.of(context).primaryColor )
+                  ),
+              onPressed: () {
+                controller.updateExpenseLine(index, travelLine);
+                Navigator.of(context).pop();
+              },
+              // textColor: Theme.of(context).primaryColor,
+              child: Text((labels.update),
+                  style: TextStyle(fontSize: 20, color: Colors.white))),
+        ),
+      ],
+    );
+  }
 
-Widget editVehicleDropDown() {
+  Widget editVehicleDropDown() {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Row(
@@ -1424,7 +1441,7 @@ Widget editVehicleDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1435,7 +1452,7 @@ Widget editVehicleDropDown() {
                     primaryColorDark: Color.fromRGBO(60, 47, 126, 1),
                   ),
                   child: Obx(
-                        () => DropdownButtonHideUnderline(
+                    () => DropdownButtonHideUnderline(
                       child: DropdownButton<Fleet_model>(
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
@@ -1446,13 +1463,13 @@ Widget editVehicleDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            print(value.name);
+                          onChanged: (Fleet_model? value) {
+                            print(value!.name);
                             print(value.id);
                             controller.onChangeEditVehicleDropdown(value);
                           },
-                          items: controller.fleetList
-                              .map((Fleet_model vehicle) {
+                          items:
+                              controller.fleetList.map((Fleet_model vehicle) {
                             return DropdownMenuItem<Fleet_model>(
                               value: vehicle,
                               child: Padding(
@@ -1475,7 +1492,7 @@ Widget editVehicleDropDown() {
     );
   }
 
-Widget expenseEditProductDropDown() {
+  Widget expenseEditProductDropDown() {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
       child: Row(
@@ -1485,7 +1502,7 @@ Widget expenseEditProductDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1496,7 +1513,7 @@ Widget expenseEditProductDropDown() {
                     primaryColorDark: Color.fromRGBO(60, 47, 126, 1),
                   ),
                   child: Obx(
-                        () => DropdownButtonHideUnderline(
+                    () => DropdownButtonHideUnderline(
                       child: DropdownButton<TravelExpenseProduct>(
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
@@ -1507,10 +1524,11 @@ Widget expenseEditProductDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseProduct value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeEditExpenseProductDropdown(value);
+                          onChanged: (TravelExpenseProduct? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller
+                                .onChangeEditExpenseProductDropdown(value!);
                           },
                           items: controller.edit_travel_expense_product_list
                               .map((TravelExpenseProduct product) {
@@ -1536,7 +1554,7 @@ Widget expenseEditProductDropDown() {
     );
   }
 
-Widget expenseEditCategoryDropDown() {
+  Widget expenseEditCategoryDropDown() {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10),
       child: Row(
@@ -1546,7 +1564,7 @@ Widget expenseEditCategoryDropDown() {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1557,7 +1575,7 @@ Widget expenseEditCategoryDropDown() {
                     primaryColorDark: Color.fromRGBO(60, 47, 126, 1),
                   ),
                   child: Obx(
-                        () => DropdownButtonHideUnderline(
+                    () => DropdownButtonHideUnderline(
                       child: DropdownButton<TravelExpenseCategory>(
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
@@ -1568,8 +1586,9 @@ Widget expenseEditCategoryDropDown() {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            controller.onChangeEditExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            controller
+                                .onChangeEditExpenseCategoryDropdown(value!);
                           },
                           items: controller.edit_travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -1595,9 +1614,7 @@ Widget expenseEditCategoryDropDown() {
     );
   }
 
-Widget dateWidgetEdit(
-      BuildContext context,TravelLineModel travelLine
-      ) {
+  Widget dateWidgetEdit(BuildContext context, TravelLineModel travelLine) {
     var date_controller;
     date_controller = controller.expenseUpdateDateController;
     return Container(
@@ -1608,7 +1625,7 @@ Widget dateWidgetEdit(
               flex: 3,
               child: InkWell(
                 onTap: () {
-                  _selectDateEdit(context,index);
+                  _selectDateEdit(context, index);
                 },
                 child: Container(
                   height: 50,
@@ -1629,14 +1646,17 @@ Widget dateWidgetEdit(
     );
   }
 
-  Future<Null> _selectDateEdit(BuildContext context,int index) async {
-    controller.getOneTravelApprove(controllerList.travelExpenseList.value[index].travel_id.id).then((value) async{
-      final DateTime picked = await showDatePicker(
+  Future<Null> _selectDateEdit(BuildContext context, int index) async {
+    controller
+        .getOneTravelApprove(
+            controllerList.travelExpenseList.value[index].travel_id.id)
+        .then((value) async {
+      final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.parse(controller.from_travel_date.value),
         firstDate: DateTime.parse(controller.from_travel_date.value),
         lastDate: DateTime.parse(controller.to_travel_date.value),
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext? context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
               dialogBackgroundColor: Colors.white,
@@ -1645,21 +1665,20 @@ Widget dateWidgetEdit(
               ),
               buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
               highlightColor: Colors.grey[400],
-              textSelectionColor: Colors.grey,
+              // textSelectionColor: Colors.grey,
             ),
-            child: child,
+            child: child!,
           );
         },
       );
       if (picked != null) {
         selectedUpdateFromDate = picked;
         controller.expenseUpdateDateController.text =
-        ("${selectedUpdateFromDate.toLocal()}".split(' ')[0]);
+            ("${selectedUpdateFromDate.toLocal()}".split(' ')[0]);
         var formatter = new DateFormat('yyyy-MM-dd');
         controller.expenseUpdateDateController.text = formatter.format(picked);
         //controller.travelLineModel[index].date = formatter.format(picked);
       }
-    }
-    );
+    });
   }
 }

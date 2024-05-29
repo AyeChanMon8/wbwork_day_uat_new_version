@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/attendance_report_controller.dart';
-import 'package:winbrother_hr_app/models/attandanceuser.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../constants/globals.dart';
+import '../controllers/attendance_report_controller.dart';
+import '../models/attandanceuser.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
+import '../localization.dart';
 
 class AttendanceApprovalList extends StatefulWidget {
   @override
@@ -21,8 +21,8 @@ class AttendanceApprovalList extends StatefulWidget {
 class _AttendanceApprovalListState extends State<AttendanceApprovalList> {
   final AttendanceReportController controller = Get.find();
   final box = GetStorage();
-  String image;
-  Attandanceuser employee;
+  String image = '';
+  Attandanceuser employee = Attandanceuser();
   @override
   void initState() {
     controller.offset.value = 0;
@@ -47,7 +47,9 @@ class _AttendanceApprovalListState extends State<AttendanceApprovalList> {
     // employee = Get.arguments;
     var labels = AppLocalizations.of(context);
     return Scaffold(
-      appBar: appbar(context, labels?.attendanceApprovalList, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.attendanceApprovalList, image)),
       body: Obx(() => NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
               if (!controller.isLoading.value &&
