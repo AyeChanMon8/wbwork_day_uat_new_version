@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
@@ -7,38 +7,38 @@ import 'dart:io';
 import 'dart:io' as Io;
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/base_route.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/expense_attachment.dart';
-import 'package:winbrother_hr_app/models/loan.dart';
-import 'package:winbrother_hr_app/models/outof_pocket_update.dart';
-import 'package:winbrother_hr_app/models/resignation.dart';
-import 'package:winbrother_hr_app/models/suspension.dart';
-import 'package:winbrother_hr_app/models/travel_expense.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/out_of_pocket_expnese_line.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_line_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/edit_pocketModle.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/EditTravelExpenseModel.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_list_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/out_of_pocket_response.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_list.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_expense_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense_update.dart';
-import 'package:winbrother_hr_app/models/travel_line.dart';
-import 'package:winbrother_hr_app/models/travel_request.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/models/trip_expense.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/base_route.dart';
+import '../models/employee_promotion.dart';
+import '../models/expense_attachment.dart';
+import '../models/loan.dart';
+import '../models/outof_pocket_update.dart';
+import '../models/resignation.dart';
+import '../models/suspension.dart';
+import '../models/travel_expense.dart';
+import '../models/travel_expense/create/out_of_pocket_expnese_line.dart';
+import '../models/travel_expense/create/travel_line_model.dart';
+import '../models/travel_expense/edit_pocketModle.dart';
+import '../models/travel_expense/list/EditTravelExpenseModel.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../models/travel_expense/list/travel_list_model.dart';
+import '../models/travel_expense/out_of_pocket_model.dart';
+import '../models/travel_expense/out_of_pocket_response.dart';
+import '../models/travel_expense/pocket_model.dart';
+import '../models/travel_expense/travel_expense_list.dart';
+import '../models/travel_expense/create/travel_expense_model.dart';
+import '../models/travel_expense_category.dart';
+import '../models/travel_expense_update.dart';
+import '../models/travel_line.dart';
+import '../models/travel_request.dart';
+import '../models/travel_request_list_response.dart';
+import '../models/trip_expense.dart';
+import '../routes/app_pages.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 import 'package:get/get.dart' hide Response;
 class TravelRequestService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<TravelRequestService> init() async {
     print('TravelRequestService has been initialize');
@@ -161,7 +161,7 @@ class TravelRequestService extends OdooService {
       }
     }
     
-    int travel_id;
+    int travel_id = 0;
     print("travel url >>"+url);
     print(travelRequest.toJson());
     var travel = travelRequest.toJson();
@@ -242,7 +242,7 @@ class TravelRequestService extends OdooService {
   Future<List<Expense_attachment>> getAttachment(int id,String type) async{
     String url = Globals.baseURL +"/hr.employee/2/get_expense_attachment_list";
     Response response = await dioClient.put(url,data: jsonEncode({"parent_id":id,"expense":type}));
-    List<Expense_attachment> attachment_list = new List<Expense_attachment>();
+    List<Expense_attachment> attachment_list = <Expense_attachment>[];
     if (response.statusCode == 200) {
       print(response.toString());
       if (response.data!=null) {
@@ -293,7 +293,7 @@ class TravelRequestService extends OdooService {
 
     Response response =
         await dioClient.get(url);
-    List<OutofPocketResponse> pocket_list = new List<OutofPocketResponse>();
+    List<OutofPocketResponse> pocket_list = <OutofPocketResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -312,7 +312,7 @@ class TravelRequestService extends OdooService {
 
     Response response =
     await dioClient.get(url);
-    List<TripExpense> pocket_list = new List<TripExpense>();
+    List<TripExpense> pocket_list = <TripExpense>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -331,7 +331,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL + "/admin.trip.expense?filters=[('id','in'," + trip_expense_ids.toString() + ")]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
     Response response =
     await dioClient.get(url);
-    List<TripExpense> pocket_list = new List<TripExpense>();
+    List<TripExpense> pocket_list = <TripExpense>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -353,7 +353,7 @@ class TravelRequestService extends OdooService {
     // String url = Globals.baseURL + "/hr.pocket.expense";
     // String filter="['|',('employee_id.approve_manager','=',$empID),('employee_id.branch_id.manager_id','=',$empID),('state','in',['approve','finance_approve','reconcile'])]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
    // String url = Globals.baseURL + "/hr.pocket.expense?filters=['|',('employee_id.approve_manager','=',$employee_id),('employee_id.branch_id.manager_id','=',$empID),('state','in',['approve','finance_approve','reconcile'])]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
-    List<OutofPocketResponse> pocket_list = new List<OutofPocketResponse>();
+    List<OutofPocketResponse> pocket_list = <OutofPocketResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -378,7 +378,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL + "/hr.travel.expense?filters=[('id','in'," + travel_expense_ids.toString() + ")]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
-    List<TravelExpenseList> travel_expense_list = new List<TravelExpenseList>();
+    List<TravelExpenseList> travel_expense_list = <TravelExpenseList>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -402,7 +402,7 @@ class TravelRequestService extends OdooService {
     // String filter="['|',('employee_id.approve_manager','=',$empID),('employee_id.branch_id.manager_id','=',$empID),('state','in',['approve','finance_approve','reconcile'])]";
     // Response response =
     // await dioClient.get(url);
-    List<TravelExpenseList> travel_expense_list = new List<TravelExpenseList>();
+    List<TravelExpenseList> travel_expense_list = <TravelExpenseList>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -422,7 +422,7 @@ class TravelRequestService extends OdooService {
         ")]";
     Response response = await dioClient.get(url);
     List<TravelExpenseListModel> travel_list =
-        new List<TravelExpenseListModel>();
+        <TravelExpenseListModel>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if (response.data['count'] != 0) {
@@ -443,7 +443,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL +
         "/hr.pocket.expense?filters=[('employee_id','=',$employeeID),('create_date','>=','$startDate'),('create_date','<=','$endDate')]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
     Response response = await dioClient.get(url);
-    List<OutofPocketResponse> out_of_pocket = new List<OutofPocketResponse>();
+    List<OutofPocketResponse> out_of_pocket = <OutofPocketResponse>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
 
@@ -462,7 +462,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL +
         "/hr.pocket.expense?filters=[('employee_id','=',$employeeID),('state','=','submit')]";
     Response response = await dioClient.get(url);
-    List<OutofPocketResponse> out_of_pocket = new List<OutofPocketResponse>();
+    List<OutofPocketResponse> out_of_pocket = <OutofPocketResponse>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if (response.data['count'] != 0) {
@@ -480,7 +480,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL +
         "/hr.travel.expense?filters=[('employee_id','=',$employeeID),('state','=','submit')]";
     Response response = await dioClient.get(url);
-    List<TravelExpenseList> travelExpense = new List<TravelExpenseList>();
+    List<TravelExpenseList> travelExpense = <TravelExpenseList>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       // print("List");
@@ -505,7 +505,7 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL +
         "/hr.travel.expense?filters=[('employee_id','=',$employeeID)]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
     Response response = await dioClient.get(url);
-    List<TravelExpenseList> travelExpense = new List<TravelExpenseList>();
+    List<TravelExpenseList> travelExpense = <TravelExpenseList>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if (response.data['count'] != 0) {
@@ -746,7 +746,7 @@ class TravelRequestService extends OdooService {
 
   Future<List<TravelRequestListResponse>> getTravelRequestListForManger(
       String empID) async {
-    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID));
+    List<dynamic> empIds = await getEmployeeList(int.tryParse(empID)!);
     String filter = "[('employee_id','in'," +
         empIds.toString() +
         "),('state','!=','submit')]";
@@ -755,7 +755,7 @@ class TravelRequestService extends OdooService {
     Response response =
         await dioClient.get(url, queryParameters: {"filters": filter});
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -785,7 +785,7 @@ class TravelRequestService extends OdooService {
         empID + "),('create_date','>=','$startDate'),('create_date','<=','$endDate')]&limit="+Globals.pag_limit.toString()+"&offset="+offset;
     Response response = await dioClient.get(url);
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -941,7 +941,7 @@ class TravelRequestService extends OdooService {
       barrierDismissible: false,
       content: Text(title),
        actions: [
-          FlatButton(
+          TextButton(
           child: Text('Yes', style: TextStyle(color: Colors.red)),
           onPressed: () {
             Navigator.of(context).pop();
@@ -951,7 +951,7 @@ class TravelRequestService extends OdooService {
             return result;
           },
           ),
-           FlatButton(
+           TextButton(
           child: Text('No', style: TextStyle(color: Colors.red)),
           onPressed: () {
             Navigator.of(context).pop();

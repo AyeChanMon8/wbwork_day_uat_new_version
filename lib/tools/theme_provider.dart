@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
-import 'package:winbrother_hr_app/tools/theme_bloc.dart';
+import '../tools/theme_bloc.dart';
 
 class ThemeProvider extends InheritedWidget {
-  final ThemeBloc nightMode;
+  final ThemeBloc? nightMode;
 
-  const ThemeProvider({Key key, Widget child, this.nightMode})
+  const ThemeProvider({Key? key, required Widget child, this.nightMode})
       : assert(child != null),
         super(key: key, child: child);
 

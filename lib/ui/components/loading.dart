@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +10,7 @@ final _tKey = GlobalKey(debugLabel: 'overlay_parent');
 final _modalBarrierDefaultColor = Colors.black.withOpacity(0.7);
 
 /// Updates with the latest [OverlayEntry] child
-OverlayEntry _loaderEntry;
+OverlayEntry? _loaderEntry;
 
 /// is dark theme
 bool isDarkTheme = false;
@@ -18,14 +18,14 @@ bool isDarkTheme = false;
 /// To keep track if the [Overlay] is shown
 bool _loaderShown = false;
 
-Widget _loadingIndicator;
+Widget? _loadingIndicator;
 
 class Loading extends StatelessWidget {
-  final Widget child;
-  final Widget loader;
+  final Widget? child;
+  final Widget? loader;
   final bool darkTheme;
 
-  const Loading({Key key, this.child, this.loader, this.darkTheme = false})
+  const Loading({Key? key, this.child, this.loader, this.darkTheme = false})
       : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ OverlayState get _overlayState {
   final context = _tKey.currentContext;
   if (context == null) return null;
 
-  NavigatorState navigator;
+  NavigatorState? navigator;
   void visitor(Element element) {
     if (navigator != null) return;
 

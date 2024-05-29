@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'package:easy_localization/easy_localization_delegate.dart';
 import 'package:flutter/widgets.dart';

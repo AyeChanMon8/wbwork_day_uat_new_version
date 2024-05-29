@@ -1,16 +1,16 @@
-// @dart=2.9
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/reminder.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/reminder.dart';
+import '../utils/app_utils.dart';
 
 import 'odoo_service.dart';
 
 class ReminderNotiService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   String url = Globals.baseURL + "/one.signal.notification.message";
   @override
   Future<ReminderNotiService> init() async {
@@ -23,7 +23,7 @@ class ReminderNotiService extends OdooService {
     String url = Globals.baseURL + "/hr.employee/1/get_reminder_ids";
     Response response = await dioClient.put(url,
         data: jsonEncode({'employee_id': int.parse(id)}));
-    List<Reminder> reminderList = new List<Reminder>();
+    List<Reminder> reminderList = <Reminder>[];
     if (response.statusCode == 200) {
       var data = response.data;
       if (response.data.length != 0) {
@@ -57,7 +57,7 @@ class ReminderNotiService extends OdooService {
 
   Future<int> retrieveAllReminders(
       String partnerId) async {
-    List<Reminder> msgs = new List<Reminder>();
+    List<Reminder> msgs = <Reminder>[];
     int unreadCount = 0;
     try {
       String datebefore = AppUtils.onemonthago();

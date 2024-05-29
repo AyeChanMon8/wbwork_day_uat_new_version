@@ -1,26 +1,26 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/daytrip_advance_expense_category.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/palntrip_with_product_fuelin_line.dart';
-import 'package:winbrother_hr_app/models/plan_trip_product.dart';
-import 'package:winbrother_hr_app/models/plantrip_fuel_consumption.dart';
-import 'package:winbrother_hr_app/models/plantrip_product_adavance_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_product_expense_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill_expense_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill_fuelin_line.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybilll_advance_line.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/daytrip_advance_expense_category.dart';
+import '../models/daytrip_expense.dart';
+import '../models/palntrip_with_product_fuelin_line.dart';
+import '../models/plan_trip_product.dart';
+import '../models/plantrip_fuel_consumption.dart';
+import '../models/plantrip_product_adavance_line.dart';
+import '../models/plantrip_product_expense_line.dart';
+import '../models/plantrip_waybill.dart';
+import '../models/plantrip_waybill_expense_line.dart';
+import '../models/plantrip_waybill_fuelin_line.dart';
+import '../models/plantrip_waybilll_advance_line.dart';
+import '../models/stock_location.dart';
+import '../services/odoo_service.dart';
+import '../utils/app_utils.dart';
 import 'package:get/get.dart' hide Response;
 class PlanTripServie extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<PlanTripServie> init() async {
     dioClient = await client();
@@ -116,7 +116,7 @@ class PlanTripServie extends OdooService {
   Future<List<Stock_location>> getStockLocationList() async {
     String url = Globals.baseURL + "/stock.location";
     Response response = await dioClient.get(url);
-    List<Stock_location> expense_list = new List<Stock_location>();
+    List<Stock_location> expense_list = <Stock_location>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -133,7 +133,7 @@ class PlanTripServie extends OdooService {
         companyID.toString() +
         "),('product_tmpl_id.company_id','=','false')]";
     Response response = await dioClient.get(url);
-    List<Daytrip_expense> expense_list = new List<Daytrip_expense>();
+    List<Daytrip_expense> expense_list = <Daytrip_expense>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -150,7 +150,7 @@ class PlanTripServie extends OdooService {
         companyID.toString() +
         "),('product_tmpl_id.company_id','=','false')]";
     Response response = await dioClient.get(url);
-    List<Daytrip_expense> expense_list = new List<Daytrip_expense>();
+    List<Daytrip_expense> expense_list = <Daytrip_expense>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -170,7 +170,7 @@ class PlanTripServie extends OdooService {
 
     Response response = await dioClient.get(url);
     List<Daytrip_advance_expense_category> expense_category_list =
-        new List<Daytrip_advance_expense_category>();
+        <Daytrip_advance_expense_category>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       var count = response.data['count'];
@@ -245,7 +245,7 @@ class PlanTripServie extends OdooService {
     if (response.statusCode == 200) {
       if (response.data != null) {
         created = 1;
-        saveEmployee(int.tryParse(lineID), int.tryParse(empID), status);
+        saveEmployee(int.tryParse(lineID)!, int.tryParse(empID)!, status);
       }
     }
     return created;

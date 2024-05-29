@@ -1,27 +1,27 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/base_route.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/depart_empids.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee_category.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/models/ot_department.dart';
-import 'package:winbrother_hr_app/models/overtime_category.dart';
-import 'package:winbrother_hr_app/models/rating_config.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_expense_approve_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
+import '../constants/globals.dart';
+import '../models/base_route.dart';
+import '../models/daytrip_expense.dart';
+import '../models/depart_empids.dart';
+import '../models/department.dart';
+import '../models/employee_category.dart';
+import '../models/leave_type.dart';
+import '../models/ot_department.dart';
+import '../models/overtime_category.dart';
+import '../models/rating_config.dart';
+import '../models/stock_location.dart';
+import '../models/travel_expense/list/travel_expense_approve_model.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../models/travel_request_list_response.dart';
+import '../services/odoo_service.dart';
 
 class MasterService extends OdooService {
-  Dio dioClient;
+  Dio? dioClient;
 
   Future<MasterService> init() async {
     dioClient = await client();
@@ -31,7 +31,7 @@ class MasterService extends OdooService {
   Future<List<dynamic>> getEmployeeList(int empID) async {
     String url = Globals.baseURL + "/hr.employee/1/get_employees";
     Response response =
-        await dioClient.put(url, data: jsonEncode({'employee_id': empID}));
+        await dioClient!.put(url, data: jsonEncode({'employee_id': empID}));
     List<dynamic> emp_ids = response.data;
     return emp_ids;
   }
@@ -39,8 +39,8 @@ class MasterService extends OdooService {
   Future<List<LeaveType>> getLeaveType() async {
     String url = Globals.baseURL +
         "/hr.leave.type?filters=[('show_in_mobile_app','=','t')]&order=code";
-    Response response = await dioClient.get(url);
-    List<LeaveType> states = new List<LeaveType>();
+    Response response = await dioClient!.get(url);
+    List<LeaveType> states = <LeaveType>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -53,8 +53,8 @@ class MasterService extends OdooService {
   Future<List<TravelExpenseCategory>> getTravelExpenseCategory(int companyID) async {
     String url = Globals.baseURL +
         "/product.category?filters=[('travel_expense','=',True),'|',('company_id', '=', "+companyID.toString()+"), ('company_id', '=', False)]";
-    Response response = await dioClient.get(url);
-    List<TravelExpenseCategory> states = new List<TravelExpenseCategory>();
+    Response response = await dioClient!.get(url);
+    List<TravelExpenseCategory> states = <TravelExpenseCategory>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -67,8 +67,8 @@ class MasterService extends OdooService {
   Future<List<TravelExpenseCategory>> getOutofPocketExpenseCategory(int companyID) async {
     String url = Globals.baseURL +
         "/product.category?filters=[('out_of_pocket_expense','=',True),'|', ('company_id', '=', "+companyID.toString()+"), ('company_id', '=', False)]";
-    Response response = await dioClient.get(url);
-    List<TravelExpenseCategory> states = new List<TravelExpenseCategory>();
+    Response response = await dioClient!.get(url);
+    List<TravelExpenseCategory> states = <TravelExpenseCategory>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -82,8 +82,8 @@ class MasterService extends OdooService {
     String url = Globals.baseURL +
         "/product.product?filters=[('product_tmpl_id.categ_id','=',$id),'|',('product_tmpl_id.company_id','=',"+companyID.toString()+"),('product_tmpl_id.company_id','=','false')]";
 
-    Response response = await dioClient.get(url);
-    List<TravelExpenseProduct> states = new List<TravelExpenseProduct>();
+    Response response = await dioClient!.get(url);
+    List<TravelExpenseProduct> states = <TravelExpenseProduct>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if(response.data['count']!=0){
@@ -98,7 +98,7 @@ class MasterService extends OdooService {
   Future<int> getVehicleProduct(int vehicleID, int id,String companyID) async {
     String url = Globals.baseURL + "/hr.employee/1/get_vehicle_product";
     Response response =
-        await dioClient.put(url, data: jsonEncode({'vehicle_id': vehicleID, 'id': id, 'company_id': companyID}));
+        await dioClient!.put(url, data: jsonEncode({'vehicle_id': vehicleID, 'id': id, 'company_id': companyID}));
     int product_id = 0;
     if (response.statusCode == 200) {
       product_id = response.data;
@@ -110,8 +110,8 @@ class MasterService extends OdooService {
     String url = Globals.baseURL +
         "/product.product?filters=[('id','=',$id)]";
 
-    Response response = await dioClient.get(url);
-    List<TravelExpenseProduct> states = new List<TravelExpenseProduct>();
+    Response response = await dioClient!.get(url);
+    List<TravelExpenseProduct> states = <TravelExpenseProduct>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if(response.data['count']!=0){
@@ -128,9 +128,9 @@ class MasterService extends OdooService {
     http://54.254.62.118:8069/api/travel.request?filters=%5B('state','in',('approve',in_progress','advance_request','advance_withdraw')),('employee_id','=',6029)%5D
     //String url = "/travel.request?filters=[('state','not in',('draft','submit','cancel')),('employee_id',"=",6115)]";
     String url = Globals.baseURL+ "/travel.request?filters=[('state','in',('approve','advance_request','advance_withdraw')),('employee_id','=',"+empID.toString()+")]";
-    Response response = await dioClient.get(url);
+    Response response = await dioClient!.get(url);
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       var list = response.data['results'];
@@ -148,9 +148,9 @@ class MasterService extends OdooService {
     http://54.254.62.118:8069/api/travel.request?filters=%5B('state','in',('approve','advance_request','advance_withdraw')),('employee_id','=',6029)%5D
     //String url = "/travel.request?filters=[('state','not in',('draft','submit','cancel')),('employee_id',"=",6115)]";
     String url = Globals.baseURL+ "/travel.request/"+travel_id.toString()+"?filters=[('employee_id','=',"+empID.toString()+")]";
-    Response response = await dioClient.get(url);
+    Response response = await dioClient!.get(url);
     List<TravelRequestListResponse> travel_list =
-    new List<TravelRequestListResponse>();
+    <TravelRequestListResponse>[];
     if (response.statusCode == 200) {
       print(response.toString());
       travel_list.add(TravelRequestListResponse.fromMap(response.data));
@@ -168,8 +168,8 @@ class MasterService extends OdooService {
 
   Future<List<EmployeeCategory>> getEmployeeCategoryList() async {
     String url = Globals.baseURL + "/hr.employee.category";
-    Response response = await dioClient.get(url);
-    List<EmployeeCategory> category_list = new List<EmployeeCategory>();
+    Response response = await dioClient!.get(url);
+    List<EmployeeCategory> category_list = <EmployeeCategory>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       list.forEach((v) {
@@ -182,8 +182,8 @@ class MasterService extends OdooService {
   Future<List<OTDepartment>> getDepartmentList(int empID) async {
     String url = Globals.baseURL + "/ot.request/1/get_department_filter";
     Response response =
-        await dioClient.put(url, data: jsonEncode({'employee_id': empID}));
-    List<OTDepartment> department_list = new List<OTDepartment>();
+        await dioClient!.put(url, data: jsonEncode({'employee_id': empID}));
+    List<OTDepartment> department_list = <OTDepartment>[];
     // List<DepartmentEmpIds> department_list = response.data;
     // print(department_list);
     // print("Test");
@@ -198,8 +198,8 @@ class MasterService extends OdooService {
   Future<List<OvertimeCategory>> getOvertimeCategoryList(int empID) async {
     String url = Globals.baseURL + "/ot.request/1/get_overtime_category";
     Response response =
-        await dioClient.put(url, data: jsonEncode({'employee_id': empID}));
-    List<OvertimeCategory> category_list = new List<OvertimeCategory>();
+        await dioClient!.put(url, data: jsonEncode({'employee_id': empID}));
+    List<OvertimeCategory> category_list = <OvertimeCategory>[];
     // List<DepartmentEmpIds> department_list = response.data;
     // print(department_list);
     // print("Test");
@@ -214,7 +214,7 @@ class MasterService extends OdooService {
   
   getRouteIDsList(String trip_id,String tripType) async {
     String url = Globals.baseURL + "/hr.employee/2/get_route_list";
-    Response response = await dioClient.put(url, data: jsonEncode({'trip_id': int.tryParse(trip_id),'trip_type': tripType}));
+    Response response = await dioClient!.put(url, data: jsonEncode({'trip_id': int.tryParse(trip_id),'trip_type': tripType}));
     List<dynamic> travel_ids = response.data;
     print(response.data);
     return travel_ids;
@@ -224,10 +224,10 @@ class MasterService extends OdooService {
     String url = Globals.baseURL + "/route.plan";
     String filter = "[('id','in'," + route_ids.toString() + ")]";
     Response response =
-    await dioClient.get(url, queryParameters: {"filters": filter});
+    await dioClient!.get(url, queryParameters: {"filters": filter});
     // String url = Globals.baseURL + "/route.plan?filters=[('state', 'in', ('approve', 'verify')), ('company_id', '=', "+companyID.toString()+"), ('branch_id', '=', "+branchID.toString()+")]";
     // Response response = await dioClient.get(url);
-    List<BaseRoute> route_list = new List<BaseRoute>();
+    List<BaseRoute> route_list = <BaseRoute>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
       if(response.data['count']!=0){
@@ -243,8 +243,8 @@ class MasterService extends OdooService {
   Future<List<RatingConfig>> getRatingConfig() async {
     String url = Globals.baseURL +
         "/rating.structure?filters=&order=point desc";
-    Response response = await dioClient.get(url);
-    List<RatingConfig> states = new List<RatingConfig>();
+    Response response = await dioClient!.get(url);
+    List<RatingConfig> states = <RatingConfig>[];
     if (response.statusCode == 200) {
       if(response.data['results'].length > 0){
         var list = response.data['results'];

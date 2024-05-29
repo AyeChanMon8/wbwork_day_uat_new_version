@@ -1,16 +1,14 @@
-// @dart=2.9
-
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/notification_msg.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/notification_msg.dart';
+import '../utils/app_utils.dart';
 
 import 'odoo_service.dart';
 
 class NotificationService extends OdooService {
   String url = Globals.baseURL + "/one.signal.notification.message";
-  Dio dioClient;
+  Dio? dioClient;
   Future<OdooService> init() async {
     dioClient = await client();
     return this;
@@ -19,7 +17,7 @@ class NotificationService extends OdooService {
   Future<NotificationMsg> updateNotificationMsg(NotificationMsg msg) async {
     int id = msg.id;
     String updateUrl = url + "/$id";
-    Response response = await dioClient.put(updateUrl,
+    Response response = await dioClient!.put(updateUrl,
         data: jsonEncode({
           'has_read': 't',
         }));
@@ -33,7 +31,7 @@ class NotificationService extends OdooService {
     int id = msg.id;
     bool status = false;
     String updateUrl = url + "/$id";
-    Response response = await dioClient.delete(updateUrl);
+    Response response = await dioClient!.delete(updateUrl);
     if (response.statusCode == 200) {
       status = true;
     }
@@ -41,7 +39,7 @@ class NotificationService extends OdooService {
   }
   Future<List<NotificationMsg>> retrieveNotificationMessages(
       String partnerId,String offset) async {
-    List<NotificationMsg> msgs = new List<NotificationMsg>();
+    List<NotificationMsg> msgs = <NotificationMsg>[];
     try {
 
       String datebefore = AppUtils.onemonthago();
@@ -50,7 +48,7 @@ class NotificationService extends OdooService {
           "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['message_type','!=','reminder']]&order=write_date desc";
 
       Response response =
-      await dioClient.get(urlData);
+      await dioClient!.get(urlData);
       if (response.statusCode == 200) {
         var list = response.data['results'];
         if (list.length > 0) {
@@ -73,7 +71,7 @@ class NotificationService extends OdooService {
   }
   Future<int> retrieveAllNotification(
       String partnerId) async {
-    List<NotificationMsg> msgs = new List<NotificationMsg>();
+    List<NotificationMsg> msgs = <NotificationMsg>[];
     int unreadCount = 0;
     try {
 
@@ -82,7 +80,7 @@ class NotificationService extends OdooService {
       String urlData = url +
           "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['has_read','!=','t'],['message_type','!=','reminder']]&order=write_date desc";
       Response response =
-          await dioClient.get(urlData);
+          await dioClient!.get(urlData);
 
       if (response.statusCode == 200) {
         unreadCount = response.data['count'];

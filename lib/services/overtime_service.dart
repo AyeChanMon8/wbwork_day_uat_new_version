@@ -1,19 +1,19 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/overtime_request.dart';
-import 'package:winbrother_hr_app/models/overtime_request_response.dart';
-import 'package:winbrother_hr_app/models/overtime_response.dart';
-import 'package:winbrother_hr_app/models/remark.dart';
-import 'package:winbrother_hr_app/services/odoo_service.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+
+import '../constants/globals.dart';
+import '../models/employee.dart';
+import '../models/overtime_request.dart';
+import '../models/overtime_request_response.dart';
+import '../models/overtime_response.dart';
+import '../models/remark.dart';
+import '../utils/app_utils.dart';
+import 'odoo_service.dart';
 
 class OvertimeService extends OdooService {
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<OvertimeService> init() async {
     print('OvertimeService has been initialize');
@@ -34,7 +34,7 @@ class OvertimeService extends OdooService {
         offset +
         "&order=create_date desc";
     Response response = await dioClient.get(url);
-    List<OvertimeRequestResponse> ot_list = new List<OvertimeRequestResponse>();
+    List<OvertimeRequestResponse> ot_list = <OvertimeRequestResponse>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -57,7 +57,7 @@ class OvertimeService extends OdooService {
         result = 'true';
       }
     } on DioError catch (e) {
-      result = e.response.data['error_descrip'].toString();
+      result = e.response!.data['error_descrip'].toString();
     }
     return result;
   }
@@ -71,7 +71,7 @@ class OvertimeService extends OdooService {
         result = "true";
       }
     } on DioError catch (e) {
-      result = e.response.data['error_descrip'].toString();
+      result = e.response!.data['error_descrip'].toString();
     }
     return result;
   }
@@ -99,7 +99,7 @@ class OvertimeService extends OdooService {
         result = response.data['error_descrip'].toString();
       }
     } on DioError catch (e) {
-      result = e.response.data['error_descrip'].toString();
+      result = e.response!.data['error_descrip'].toString();
     }
 
     return result;
@@ -113,7 +113,7 @@ class OvertimeService extends OdooService {
         empID.toString() +
         ")]";
     Response response = await dioClient.get(url);
-    List<Employee> emp_list = new List<Employee>();
+    List<Employee> emp_list = <Employee>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -137,7 +137,7 @@ class OvertimeService extends OdooService {
         result = "true";
       }
     } on DioError catch (e) {
-      result = e.response.data['error_descrip'].toString();
+      result = e.response!.data['error_descrip'].toString();
     }
 
     return result;
@@ -169,7 +169,7 @@ class OvertimeService extends OdooService {
         empID +
         ")]";
     Response response = await dioClient.get(url);
-    List<OvertimeResponse> ot_list = new List<OvertimeResponse>();
+    List<OvertimeResponse> ot_list = <OvertimeResponse>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -188,7 +188,7 @@ class OvertimeService extends OdooService {
         empID +
         "),('state','=','accept')]";
     Response response = await dioClient.get(url);
-    List<OvertimeResponse> ot_list = new List<OvertimeResponse>();
+    List<OvertimeResponse> ot_list = <OvertimeResponse>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -207,7 +207,7 @@ class OvertimeService extends OdooService {
         empID +
         "),('state','=','decline')]";
     Response response = await dioClient.get(url);
-    List<OvertimeResponse> ot_list = new List<OvertimeResponse>();
+    List<OvertimeResponse> ot_list = <OvertimeResponse>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];
@@ -226,7 +226,7 @@ class OvertimeService extends OdooService {
         empID +
         "),('state','=','draft')]";
     Response response = await dioClient.get(url);
-    List<OvertimeResponse> ot_list = new List<OvertimeResponse>();
+    List<OvertimeResponse> ot_list = <OvertimeResponse>[];
     if (response.statusCode == 200) {
       if (response.data['count'] != 0) {
         var list = response.data['results'];

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 showAlertDialog(BuildContext context, String title, String name) {
-  Widget okButton = FlatButton(
+  Widget okButton = TextButton(
     child: Text("OK"),
     onPressed: () {
       Navigator.pop(context, true);
     },
   );
   // set up the buttons
-  Widget cancelButton = FlatButton(
+  Widget cancelButton = TextButton(
     child: Text("Cancel"),
     onPressed: () {
       Navigator.of(context).pop();

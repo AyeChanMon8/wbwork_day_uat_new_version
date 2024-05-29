@@ -1,21 +1,21 @@
-// @dart=2.9
+
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/odoo_instance.dart';
-import 'package:winbrother_hr_app/models/user.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/odoo_instance.dart';
+import '../models/user.dart';
+import '../utils/app_utils.dart';
 
 class OdooService extends GetxService {
   final odooInstance = OdooInstance().obs;
   final String tokenURL = Globals.baseURL + "/auth/get_tokens";
-  String token;
+  String token = '';
   var box = GetStorage();
-  Dio dioClient;
+  Dio dioClient =  Dio();
 
   // Future<OdooService> init() async {
   //   odooInstance.value = await getOdooInstance();
@@ -79,7 +79,7 @@ class OdooService extends GetxService {
       
       dio.interceptors.clear();
       dio.interceptors
-        ..add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+        ..add(InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
           // Do something before request is sent
           options.headers.clear();
           options.headers["Access-Token"] = token;
@@ -88,10 +88,10 @@ class OdooService extends GetxService {
           options.connectTimeout = 60 * 30 * 1000;
           options.receiveTimeout = 60 * 30 * 1000;
           return options;
-        }, onResponse: (Response response) {
+        }, onResponse: (Response response, handler) {
           // Do something with response data
           return response; // continue
-        }, onError: (DioError error) async {
+        }, onError: (DioError error, handler) async {
           print('Odoo error response=> ${error.response}');
           Get.back();
           // Do something with response error
@@ -119,10 +119,10 @@ class OdooService extends GetxService {
           box.save();
           var error_message = '';
           if(error.response?.data != null){
-            if(error.response.data['error_descrip'].contains("ValidationError('")){
-              error_message =  error.response.data['error_descrip'].split('ValidationError(')[1];
+            if(error.response!.data['error_descrip'].contains("ValidationError('")){
+              error_message =  error.response!.data['error_descrip'].split('ValidationError(')[1];
             }else{
-              error_message =  error.response.data['error_descrip'];
+              error_message =  error.response!.data['error_descrip'];
             }
           }else{
             //Globals.ph_hardware_back.value = true;

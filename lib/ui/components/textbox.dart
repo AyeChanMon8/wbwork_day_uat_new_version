@@ -1,9 +1,9 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 class TextBox extends StatelessWidget {
- final TextEditingController textEditingController;
- final String hintText;
+ final TextEditingController? textEditingController;
+ final String? hintText;
  final bool enable;
 
   TextBox({this.textEditingController, this.hintText,this.enable=true});

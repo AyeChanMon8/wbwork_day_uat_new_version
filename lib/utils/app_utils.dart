@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -15,8 +15,8 @@ import 'package:mime/mime.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:winbrother_hr_app/pages/login_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+
+import '../routes/app_pages.dart';
 
 class AppUtils {
   static void showSnackBar(String str, ScaffoldState context,
@@ -31,10 +31,10 @@ class AppUtils {
   static bool isImage(String path) {
     final mimeType = lookupMimeType(path);
 
-    return mimeType.startsWith('image/');
+    return mimeType!.startsWith('image/');
   }
 
-  static Future<File> createPDF(
+  static Future<File?> createPDF(
       String pdfString, String fileName, String type) async {
     try {
       if (pdfString.isNotEmpty) {
@@ -71,7 +71,7 @@ class AppUtils {
     File compressedFile = await FlutterNativeImage.compressImage(image.path,
         quality: 80,
         targetWidth: 640,
-        targetHeight: (properties.height * 640 / properties.width).round());
+        targetHeight: (properties.height! * 640 / properties.width!).round());
     double sizeInKb = getFileSizeInKB(compressedFile);
     print("sizeInKb");
     print(sizeInKb);
@@ -79,7 +79,7 @@ class AppUtils {
       compressedFile = await FlutterNativeImage.compressImage(image.path,
           quality: 70,
           targetWidth: 640,
-          targetHeight: (properties.height * 640 / properties.width).round());
+          targetHeight: (properties.height! * 640 / properties.width!).round());
     }
     return compressedFile;
   }
@@ -134,7 +134,7 @@ class AppUtils {
     Get.defaultDialog(
         title: title,
         middleText: msg,
-        onConfirm: onConfirm,
+        onConfirm: onConfirm(),
         confirmTextColor: Colors.white);
   }
 
@@ -186,8 +186,8 @@ class AppUtils {
         content: Text(msg),
         textCancel: 'Cancel',
         textConfirm: 'Proceed',
-        onConfirm: onConfirm,
-        onCancel: onCancel,
+        onConfirm: onConfirm(),
+        onCancel: onCancel(),
         confirmTextColor: Colors.white);
   }
 
@@ -302,7 +302,7 @@ class AppUtils {
       title: title,
       content: Text(msg),
        actions: [
-          FlatButton(
+          TextButton(
           child: Text('Yes', style: TextStyle(color: Colors.red)),
           onPressed: () {
             box.write('emp_image',"");
@@ -384,7 +384,7 @@ class AppUtils {
       title: title,
       content: Text(msg),
        actions: [
-          FlatButton(
+          TextButton(
           child: Text('Yes', style: TextStyle(color: Colors.red)),
           onPressed: () {
             // box.write('emp_image',"");

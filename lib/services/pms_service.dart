@@ -1,19 +1,19 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/models/pms_attach.dart';
-import 'package:winbrother_hr_app/models/pms_attachment.dart';
-import 'package:winbrother_hr_app/models/pms_detail_model.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../models/pms_attach.dart';
+import '../models/pms_attachment.dart';
+import '../models/pms_detail_model.dart';
+import '../utils/app_utils.dart';
 
 import 'odoo_service.dart';
 
 class PMSService extends OdooService{
-  Dio dioClient;
+  Dio dioClient = Dio();
   @override
   Future<PMSService> init() async {
     print('LeaveService has been initialize');
@@ -25,7 +25,7 @@ class PMSService extends OdooService{
     String datebefore = AppUtils.oneYearago();
     String url = Globals.baseURL + "/employee.performance.management?filters=[('employee_id','=',$empID),('state','not in',['draft','cancel']),('create_date','>=','$datebefore')]&limit="+Globals.pag_limit.toString()+"&offset="+offset+"&order=deadline asc";
     Response response = await dioClient.get(url);
-    List<PMSDetailModel> pmsDetailModels = new List<PMSDetailModel>();
+    List<PMSDetailModel> pmsDetailModels = <PMSDetailModel>[];
     if (response.statusCode == 200) {
       if(response.data["count"]>0){
       List list = response.data["results"];
@@ -163,7 +163,7 @@ class PMSService extends OdooService{
     return message;
   }
 
-  Future<String> editEmployeeCompetencyScore(String competenciesId,int value,String remark) async{
+  Future<String?> editEmployeeCompetencyScore(String competenciesId,int value,String remark) async{
     String url = Globals.baseURL + "/key.competencies/$competenciesId";
     Response response = await dioClient.put(url,data: jsonEncode({"employee_rating":value,"comment":remark}));
     if(response.statusCode == 200){
@@ -187,7 +187,7 @@ class PMSService extends OdooService{
     return message;
   }
 
-  Future<int> pmsApproveorNot(String empId,String status)async{
+  Future<int?> pmsApproveorNot(String empId,String status)async{
     int value = 0;
     String url = Globals.baseURL +"/hr.employee/2/get_respective_manager_id";
     Response response= await dioClient.put(url,data: jsonEncode({"employee_id":int.tryParse(empId),"status":status}));
@@ -212,7 +212,7 @@ class PMSService extends OdooService{
     return message;
   }
 
-  Future<String> sendYearEndSelfAssessment(String pmsId)async{
+  Future<String?> sendYearEndSelfAssessment(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_year_end_self_assessment";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -222,7 +222,7 @@ class PMSService extends OdooService{
     }
   }
 
-  Future<String> sendToManager(String pmsId)async{
+  Future<String?> sendToManager(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_sent_manager";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -232,7 +232,7 @@ class PMSService extends OdooService{
     }
   }
 
-  Future<String> sendDone(String pmsId)async{
+  Future<String?> sendDone(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_done";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -256,7 +256,7 @@ class PMSService extends OdooService{
     }
     return message;
   }
-  Future<String> sendMidYearManagerApprove(String pmsId)async{
+  Future<String?> sendMidYearManagerApprove(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_mid_year_manager_approve";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -266,7 +266,7 @@ class PMSService extends OdooService{
     }
   }
 
-  Future<String> sendYearEndManagerApprove(String pmsId)async{
+  Future<String?> sendYearEndManagerApprove(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_year_end_manager_approve";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -276,7 +276,7 @@ class PMSService extends OdooService{
     }
   }
 
-  Future<String> sendMidYearDottedManagerApprove(String pmsId)async{
+  Future<String?> sendMidYearDottedManagerApprove(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.managements/$pmsId/action_mid_year_dotted_manager_approve";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -286,7 +286,7 @@ class PMSService extends OdooService{
     }
   }
 
-  Future<String> sendYearEndDottedManagerApprove(String pmsId)async{
+  Future<String?> sendYearEndDottedManagerApprove(String pmsId)async{
     String url = Globals.baseURL +"/employee.performance.management/$pmsId/action_year_end_dotted_manager_approve";
     Response response= await dioClient.put(url);
     if(response.statusCode == 200){
@@ -299,7 +299,7 @@ class PMSService extends OdooService{
   Future<List<PMSattachment>> getAttachment(List<int> id) async{
     String url = Globals.baseURL +"/employee.performance.management/2/get_attachment_list";
     Response response = await dioClient.put(url,data: jsonEncode({"attachment_ids":id}));
-    List<PMSattachment> attachment_list = new List<PMSattachment>();
+    List<PMSattachment> attachment_list = <PMSattachment>[];
     if (response.statusCode == 200) {
       print(response.toString());
       if (response.data!=null) {
