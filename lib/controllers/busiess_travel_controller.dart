@@ -414,7 +414,7 @@ class BusinessTravelController extends GetxController {
     EditTravelExpenseModel outRequest =
         EditTravelExpenseModel(travel_line: travelLineModel);
     await travelService
-        ?.updateTravelExpenseLine(outRequest, id, int.tryParse(employee_id))
+        ?.updateTravelExpenseLine(outRequest, id, int.tryParse(employee_id)!)
         .then((data) {
       if (data != 0) {
         save_btn_show.value = false;
@@ -517,7 +517,7 @@ class BusinessTravelController extends GetxController {
   getTravelExpenseCategory() async {
     var company_id = box.read('emp_company');
     await masterService
-        ?.getTravelExpenseCategory(int.tryParse(company_id))
+        ?.getTravelExpenseCategory(int.tryParse(company_id)!)
         .then((data) {
       if (data.length != 0) {
         this.selectedExpenseCategory = data[0];
@@ -590,7 +590,7 @@ class BusinessTravelController extends GetxController {
 
   getTravelApproveList() async {
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService?.getTravelApproveList(employee_id).then((data) {
+    await masterService?.getTravelApproveList(employee_id!).then((data) {
       if (data != null) {
         data.insert(
             0, TravelRequestListResponse(id: 0, name: 'Approve Travel List'));
@@ -867,7 +867,7 @@ class BusinessTravelController extends GetxController {
 
   Future<void> getOneTravelApprove(int travel_id) async {
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService?.getOneTravelApprove(employee_id, travel_id)
+    await masterService?.getOneTravelApprove(employee_id!, travel_id)
         .then((data) {
       if (data != null) {
         from_travel_date.value = data[0].start_date;

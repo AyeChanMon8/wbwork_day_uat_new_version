@@ -47,7 +47,7 @@ class OrganizationalChartController extends GetxController {
     });
   }
 
-  Future<Employee> getEmployeeInfo(String employee_id) async {
+  Future<Employee?> getEmployeeInfo(String employee_id) async {
    /* Future.delayed(
         Duration.zero,
             () => Get.dialog(

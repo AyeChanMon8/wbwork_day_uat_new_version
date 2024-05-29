@@ -187,7 +187,7 @@ class ApprovalController extends GetxController {
         isLoading.value = false;
         //travelExpenseList.addAll(data);
         for (var i = 0; i < data.length; i++) {
-          travelExpenseList(data[i]); // prints each element of the array
+          travelExpenseList.add(data[i]); // prints each element of the array
         }
         // data.forEach((element) {
         //   travelExpenseList.add(element);
@@ -220,7 +220,7 @@ class ApprovalController extends GetxController {
         isLoading.value = false;
         //resignationApprovalList.addAll(data);
         for (var i = 0; i < data.length; i++) {
-          insuranceApprovalList(data[i]); // prints each element of the array
+          insuranceApprovalList.add(data[i]); // prints each element of the array
         }
         // data.forEach((element) {
         //   insuranceApprovalList.add(element);

@@ -91,8 +91,8 @@ class OutOfPocketUpdateController extends GetxController {
   Rx<TravelExpenseProduct> _selectedExpenseProduct = TravelExpenseProduct().obs;
   TravelExpenseProduct get selectedExpenseProduct =>
       _selectedExpenseProduct.value;
-  set selectedExpenseProduct(TravelExpenseProduct type) =>
-      _selectedExpenseProduct.value = type;
+  set selectedExpenseProduct(TravelExpenseProduct? type) =>
+      _selectedExpenseProduct.value = type!;
   final box = GetStorage();
   final leaveInterval = 1.obs;
   String? image_base64;
@@ -289,7 +289,7 @@ class OutOfPocketUpdateController extends GetxController {
 
   getTravelExpenseCategory() async {
     var company_id = box.read('emp_company');
-    await masterService?.getOutofPocketExpenseCategory(int.tryParse(company_id)).then((data) {
+    await masterService?.getOutofPocketExpenseCategory(int.tryParse(company_id)!).then((data) {
       this.selectedExpenseCategory = data[0];
       travel_expense_category_list.value = data;
       int id = selectedExpenseCategory.id;

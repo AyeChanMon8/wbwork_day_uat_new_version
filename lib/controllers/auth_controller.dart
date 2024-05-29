@@ -94,7 +94,7 @@ class AuthController extends GetxController {
   }
 
   // Sign out
-  Future<void> signOut() {
+  void signOut() {
     otp.value = '';
     phoneController.clear();
     otpController.clear();

@@ -62,7 +62,7 @@ OverlayState get _overlayState {
 
 /// To handle a loader for the application
 Future<void> showLoadingIndicator(
-    {bool isModal = true, Color modalColor}) async {
+    {bool isModal = true, Color? modalColor}) async {
   try {
     debugPrint('Showing loading overlay');
     final _child = Center(
@@ -105,7 +105,7 @@ Future<void> hideLoadingIndicator() async {
 
 ///----------------------------------------------------------------------------
 /// These methods deal with showing and hiding the overlay
-Future<void> _showOverlay({Widget child}) async {
+Future<void> _showOverlay({Widget? child}) async {
   try {
     final overlay = _overlayState;
 

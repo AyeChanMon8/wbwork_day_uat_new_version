@@ -21,7 +21,7 @@ import '../models/travel_request_list_response.dart';
 import '../services/odoo_service.dart';
 
 class MasterService extends OdooService {
-  Dio? dioClient;
+  Dio dioClient =  Dio();
 
   Future<MasterService> init() async {
     dioClient = await client();

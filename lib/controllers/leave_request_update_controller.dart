@@ -224,7 +224,7 @@ class LeaveRequestUpdateController extends GetxController {
           attachment: image_base64,
           leave_line: leavelLineList);
 
-      await leaveService?.deleteLeave(int.tryParse(id)).then((data) async{
+      await leaveService?.deleteLeave(int.tryParse(id)!).then((data) async{
         if(data){
         await leaveService?.createLeave(leaveRequest,1).then((data) {
           Get.back();

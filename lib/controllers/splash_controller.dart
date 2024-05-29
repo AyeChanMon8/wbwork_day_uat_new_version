@@ -43,8 +43,8 @@ class SplashController extends GetxController{
   }
   void checkRole(String emp_id) async {
     this.employeeService = await EmployeeService().init();
-    await employeeService?.checkRole(int.tryParse(emp_id)).then((data) async {
-      final labels = AppLocalizations.of(Get.context);
+    await employeeService?.checkRole(int.tryParse(emp_id)!).then((data) async {
+      final labels = AppLocalizations.of(Get.context!);
       var storage = LocalStorage('storefunction');
       bool value  = await storage.ready;
       if(value)

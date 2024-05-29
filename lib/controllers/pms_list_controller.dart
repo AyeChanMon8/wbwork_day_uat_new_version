@@ -44,7 +44,7 @@ class PmsListController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
 
-    await pmsService?.getPmSelfList(int.tryParse(employee_id),offset.toString()).then((data){
+    await pmsService?.getPmSelfList(int.tryParse(employee_id)!,offset.toString()).then((data){
       if(offset!=0){
         // update data and loading status
         isLoading.value = false;
@@ -74,7 +74,7 @@ class PmsListController extends GetxController {
                )),
            barrierDismissible: false));
    var employee_id = box.read('emp_id');
-   await pmsService?.getPmsToApproveList(int.tryParse(employee_id),offset.toString()).then((value){
+   await pmsService?.getPmsToApproveList(int.tryParse(employee_id)!,offset.toString()).then((value){
      if(offset!=0){
        // update data and loading status
        isLoading.value = false;
@@ -97,7 +97,7 @@ class PmsListController extends GetxController {
                 )),
             barrierDismissible: false));
     var employee_id = box.read('emp_id');
-    await pmsService?.getPmsApprovedList(int.tryParse(employee_id),offset.toString()).then((value){
+    await pmsService?.getPmsApprovedList(int.tryParse(employee_id)!,offset.toString()).then((value){
       if(offset!=0){
         // update data and loading status
         isLoading.value = false;

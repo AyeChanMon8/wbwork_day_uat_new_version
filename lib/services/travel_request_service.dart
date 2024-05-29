@@ -181,7 +181,7 @@ class TravelRequestService extends OdooService {
 
   Future<int> travelRequestUpdate(TravelRequest travelRequest,int travelId) async {
     String url = Globals.baseURL + "/travel.request/$travelId";
-    int travel_id;
+    int travel_id = 0;
     print(travelRequest.toJson());
     var travel = travelRequest.toJson();
     Response response = await dioClient.put(url, data: travel);
@@ -604,11 +604,16 @@ class TravelRequestService extends OdooService {
       if(response.data!=null){
         code = response.data['number'];
       }
-      outofPocket.pocket_line.forEach((element) {
-        if(element.vehicle_id!=null&&element.vehicle_id!=0){
-          create_vehicle_cost(element.vehicle_id,element.date,element.price_subtotal,element.description,code,element.price_unit,element.qty,outofPocket.employee_id,element.categ_id);
+      for(int i=0;i<outofPocket.pocket_line.length;i++){
+        if(outofPocket.pocket_line[i].vehicle_id!=null&&outofPocket.pocket_line[i].vehicle_id!=0){
+          create_vehicle_cost(outofPocket.pocket_line[i].vehicle_id,outofPocket.pocket_line[i].date,outofPocket.pocket_line[i].price_subtotal,outofPocket.pocket_line[i].description,code,outofPocket.pocket_line[i].price_unit,outofPocket.pocket_line[i].qty,outofPocket.employee_id,outofPocket.pocket_line[i].categ_id);
         }
-      });
+      }
+      // outofPocket.pocket_line.forEach((element) {
+      //   if(element.vehicle_id!=null&&element.vehicle_id!=0){
+      //     create_vehicle_cost(element.vehicle_id,element.date,element.price_subtotal,element.description,code,element.price_unit,element.qty,outofPocket.employee_id,element.categ_id);
+      //   }
+      // });
       if (response.data != null) {
         if (response.data['id'] == null) {
         } else {
@@ -652,11 +657,16 @@ class TravelRequestService extends OdooService {
       if(response.data!=null){
         code = response.data['number'];
       }
-      outofPocketExpenseLine.travel_line.forEach((element) {
-        if(element.vehicle_id!=null||element.vehicle_id!=0){
-          travel_create_vehicle_cost(element.vehicle_id,element.date,element.price_subtotal,element.description,code,element.price_unit,element.qty,empID,element.categ_id);
+      for(int i=0;i<outofPocketExpenseLine.travel_line.length;i++){
+        if(outofPocketExpenseLine.travel_line[i].vehicle_id!=null||outofPocketExpenseLine.travel_line[i].vehicle_id!=0){
+          travel_create_vehicle_cost(outofPocketExpenseLine.travel_line[i].vehicle_id,outofPocketExpenseLine.travel_line[i].date,outofPocketExpenseLine.travel_line[i].price_subtotal,outofPocketExpenseLine.travel_line[i].description,code,outofPocketExpenseLine.travel_line[i].price_unit,outofPocketExpenseLine.travel_line[i].qty,empID,outofPocketExpenseLine.travel_line[i].categ_id);
         }
-      });
+      }
+      // outofPocketExpenseLine.travel_line.forEach((element) {
+      //   if(element.vehicle_id!=null||element.vehicle_id!=0){
+      //     travel_create_vehicle_cost(element.vehicle_id,element.date,element.price_subtotal,element.description,code,element.price_unit,element.qty,empID,element.categ_id);
+      //   }
+      // });
       created = 1;
       /* if (response.data != null) {
         print(response.data['id']);
@@ -675,18 +685,23 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL + "/hr.travel.expense";
     print(traveldata.toJson());
     var leave = traveldata.toJson();
-    String code;
+    String code ='';
     //Globals.ph_hardware_back.value = false;
     Response response = await dioClient.post(url, data: leave);
     if (response.statusCode == 200) {
       if(response.data!=null){
         code = response.data["number"];
       }
-      traveldata.travel_line.forEach((element) {
-        if(element.vehicle_id!=null&&element.vehicle_id!=0){
-          travel_create_vehicle_cost(element.vehicle_id, element.date, element.price_subtotal, element.description, code,element.price_unit,element.qty,traveldata.employee_id,element.categ_id);
+      for(int i=0;i<traveldata.travel_line.length;i++){
+        if(traveldata.travel_line[i].vehicle_id!=null&&traveldata.travel_line[i].vehicle_id!=0){
+          travel_create_vehicle_cost(traveldata.travel_line[i].vehicle_id, traveldata.travel_line[i].date, traveldata.travel_line[i].price_subtotal, traveldata.travel_line[i].description, code,traveldata.travel_line[i].price_unit,traveldata.travel_line[i].qty,traveldata.employee_id,traveldata.travel_line[i].categ_id);
         }
-      });
+      }
+      // traveldata.travel_line.forEach((element) {
+      //   if(element.vehicle_id!=null&&element.vehicle_id!=0){
+      //     travel_create_vehicle_cost(element.vehicle_id, element.date, element.price_subtotal, element.description, code,element.price_unit,element.qty,traveldata.employee_id,element.categ_id);
+      //   }
+      // });
       if (response.data != null) {
         print(response.data[0]);
         if (response.data == null) {
@@ -929,7 +944,7 @@ class TravelRequestService extends OdooService {
     return result;
   }
 
-  Future<bool> showConfirmSuspensionDialog(
+  bool showConfirmSuspensionDialog(
     String title,
     String msg,
     int id,
@@ -948,18 +963,19 @@ class TravelRequestService extends OdooService {
             Get.back();
             // confirmSuspensionDialog(id);
             result = true;
-            return result;
+            // return result;
           },
           ),
            TextButton(
           child: Text('No', style: TextStyle(color: Colors.red)),
           onPressed: () {
             Navigator.of(context).pop();
-            return result;
+            // return result;
           },
           ),
     ],
     );
+    return result;
   }
 
 
@@ -1138,7 +1154,7 @@ class TravelRequestService extends OdooService {
         await dioClient.get(url);
 
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1160,7 +1176,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Loan> loan_list =
-    new List<Loan>();
+    <Loan>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1183,7 +1199,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Loan> loan_list =
-    new List<Loan>();
+    <Loan>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1206,7 +1222,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Resignation> loan_list =
-    new List<Resignation>();
+    <Resignation>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1229,7 +1245,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Suspension> suspension_list =
-    new List<Suspension>();
+    <Suspension>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1252,7 +1268,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Resignation> loan_list =
-    new List<Resignation>();
+    <Resignation>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1274,7 +1290,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Suspension> suspension_list =
-    new List<Suspension>();
+    <Suspension>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1298,7 +1314,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Employee_promotion> loan_list =
-    new List<Employee_promotion>();
+    <Employee_promotion>[];
     print("employee response >>"+response.toString());
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1320,7 +1336,7 @@ class TravelRequestService extends OdooService {
     await dioClient.get(url);
 
     List<Employee_promotion> loan_list =
-    new List<Employee_promotion>();
+    <Employee_promotion>[];
 print("secondApproval $response");
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1342,7 +1358,7 @@ print("secondApproval $response");
     Response response =
     await dioClient.get(url);
     List<Employee_promotion> promo_list =
-    new List<Employee_promotion>();
+    <Employee_promotion>[];
     if (response.statusCode == 200) {
       var list = response.data['results'];
 
@@ -1363,7 +1379,7 @@ print("secondApproval $response");
     await dioClient.get(url);
 
     List<BaseRoute> travel_list =
-    new List<BaseRoute>();
+    <BaseRoute>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1386,7 +1402,7 @@ print("secondApproval $response");
     await dioClient.get(url);
 
     List<BaseRoute> travel_list =
-    new List<BaseRoute>();
+    <BaseRoute>[];
 
     if (response.statusCode == 200) {
       var list = response.data['results'];
@@ -1411,7 +1427,7 @@ print("secondApproval $response");
     // Response response =
     // await dioClient.get(url, queryParameters: {"filters": filter});
     List<TravelRequestListResponse> travel_list =
-        new List<TravelRequestListResponse>();
+        <TravelRequestListResponse>[];
 
     if (response.statusCode == 200) {
       print(response.toString());
@@ -1437,7 +1453,7 @@ print("secondApproval $response");
     Response response =
     await dioClient.get(url, queryParameters: {"filters": filter});
     List<TravelRequestListResponse> travel_list =
-    new List<TravelRequestListResponse>();
+    <TravelRequestListResponse>[];
 
     if (response.statusCode == 200) {
       print(response.toString());
@@ -1456,7 +1472,7 @@ print("secondApproval $response");
     print(travel.toJson());
     Response response = await dioClient.put(url, data: travel.toJson());
 
-    List<TravelLine> travel_line = new List<TravelLine>();
+    List<TravelLine> travel_line = <TravelLine>[];
     if (response.statusCode == 200) {
       if(response.data['status']){
       var list = response.data['message'];
@@ -1638,7 +1654,7 @@ print("secondApproval $response");
   Future<TravelLine> updateTravelLine(TravelLine data) async {
     String url = Globals.baseURL + "/travel.request.line/1/update_travel_line";
     Response response = await dioClient.put(url, data: data.toJson());
-    TravelLine leave_line;
+    TravelLine leave_line =  TravelLine();
     //if (response.statusCode == 200) {
       // if(response.data['status']){
       //   leave_line = TravelLine.fromMap(response.data['message']);
@@ -1661,7 +1677,7 @@ print("secondApproval $response");
         "/product.category?filters=[('travel_request','=',True),'|', ('company_id', '=', "+companyID.toString()+"), ('company_id', '=', False)]";
     Response response = await dioClient.get(url);
     List<TravelExpenseCategory> expense_category_list =
-        new List<TravelExpenseCategory>();
+        <TravelExpenseCategory>[];
     print("getExpenseCategory");
     print(response.data.toString());
     if (response.statusCode == 200) {

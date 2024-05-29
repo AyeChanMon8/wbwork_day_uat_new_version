@@ -15,7 +15,7 @@ class OdooService extends GetxService {
   final String tokenURL = Globals.baseURL + "/auth/get_tokens";
   String token = '';
   var box = GetStorage();
-  Dio dioClient =  Dio();
+  Dio dioClient = Dio();
 
   // Future<OdooService> init() async {
   //   odooInstance.value = await getOdooInstance();
@@ -78,27 +78,28 @@ class OdooService extends GetxService {
       }
       
       dio.interceptors.clear();
-      dio.interceptors
-        ..add(InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
-          // Do something before request is sent
-          options.headers.clear();
-          options.headers["Access-Token"] = token;
-          options.headers['Content-Type'] = "text/html";
-          options.headers['Connection'] = "Keep-Alive";
-          options.connectTimeout = 60 * 30 * 1000;
-          options.receiveTimeout = 60 * 30 * 1000;
-          return options;
-        }, onResponse: (Response response, handler) {
-          // Do something with response data
-          return response; // continue
-        }, onError: (DioError error, handler) async {
-          print('Odoo error response=> ${error.response}');
+
+       dio.interceptors..add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        options.headers.clear();
+        options.headers["Access-Token"] = token;
+        options.headers['Content-Type'] = "text/html";
+        options.headers['Connection'] = "Keep-Alive";
+        options.connectTimeout = 60 * 30 * 1000;
+        options.receiveTimeout = 60 * 30 * 1000;
+        return handler.next(options);
+      },
+      onResponse: (response, handler) {
+        return handler.next(response);
+      },
+      onError: (DioError e, handler) async {
+            print('Odoo error response=> ${e.response}');
           Get.back();
           // Do something with response error
-          if (error.response?.statusCode == 403) {
+          if (e.response?.statusCode == 403) {
             dio.interceptors.requestLock.lock();
             dio.interceptors.responseLock.lock();
-            RequestOptions options = error.response.request;
+            RequestOptions options = e.requestOptions;
             OdooInstance newInst = await getOdooInstance();
             token = newInst.user.access_token;
             options.headers["Access-Token"] = token;
@@ -106,7 +107,7 @@ class OdooService extends GetxService {
             options.receiveTimeout = 3000000;
             dio.interceptors.requestLock.unlock();
             dio.interceptors.responseLock.unlock();
-            dio.request(options.path, options: options);
+            dio.request(options.path, options: options as Options);
           } else {
            // Get.snackbar("Try Again", "Token is expired or invalid!");
           }
@@ -118,20 +119,80 @@ class OdooService extends GetxService {
           box.write(Globals.tokenDate, DateTime.now().toString());
           box.save();
           var error_message = '';
-          if(error.response?.data != null){
-            if(error.response!.data['error_descrip'].contains("ValidationError('")){
-              error_message =  error.response!.data['error_descrip'].split('ValidationError(')[1];
+          if(e.response?.data != null){
+            if(e.response!.data['error_descrip'].contains("ValidationError('")){
+              error_message =  e.response!.data['error_descrip'].split('ValidationError(')[1];
             }else{
-              error_message =  error.response!.data['error_descrip'];
+              error_message =  e.response!.data['error_descrip'];
             }
           }else{
             //Globals.ph_hardware_back.value = true;
-            error_message = 'Network connection fail ${error.response?.statusCode}!\nPlease, try again';
+            error_message = 'Network connection fail ${e.response?.statusCode}!\nPlease, try again';
           }
           AppUtils.showDialog('Warning', error_message);
 
           print("Server down and please check");
-        }))
+        return handler.next(e);
+      },
+    ))
+
+      // dio.interceptors
+      //   ..add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+      //     // Do something before request is sent
+      //     options.headers.clear();
+      //     options.headers["Access-Token"] = token;
+      //     options.headers['Content-Type'] = "text/html";
+      //     options.headers['Connection'] = "Keep-Alive";
+      //     options.connectTimeout = 60 * 30 * 1000;
+      //     options.receiveTimeout = 60 * 30 * 1000;
+      //     return options;
+      //   }, onResponse: (Response response) {
+      //     // Do something with response data
+      //     return response; // continue
+      //   }, onError: (DioError error) async {
+      //     print('Odoo error response=> ${error.response}');
+      //     Get.back();
+      //     // Do something with response error
+      //     if (error.response?.statusCode == 403) {
+      //       dio.interceptors.requestLock.lock();
+      //       dio.interceptors.responseLock.lock();
+      //       RequestOptions options = error.response.request;
+      //       OdooInstance newInst = await getOdooInstance();
+      //       token = newInst.user.access_token;
+      //       options.headers["Access-Token"] = token;
+      //       options.connectTimeout = 5000000;
+      //       options.receiveTimeout = 3000000;
+      //       dio.interceptors.requestLock.unlock();
+      //       dio.interceptors.responseLock.unlock();
+      //       dio.request(options.path, options: options);
+      //     } else {
+      //      // Get.snackbar("Try Again", "Token is expired or invalid!");
+      //     }
+      //     // return error;
+      //    // Get.snackbar("Try Again Login", "Token is expired or invalid!",snackPosition: SnackPosition.BOTTOM,backgroundColor:Colors.red,colorText: Colors.white);
+      //     this.odooInstance.value = await getOdooInstance();
+      //     token = this.odooInstance.value.user.access_token;
+      //     box.write(Globals.token, token);
+      //     box.write(Globals.tokenDate, DateTime.now().toString());
+      //     box.save();
+      //     var error_message = '';
+      //     if(error.response?.data != null){
+      //       if(error.response.data['error_descrip'].contains("ValidationError('")){
+      //         error_message =  error.response.data['error_descrip'].split('ValidationError(')[1];
+      //       }else{
+      //         error_message =  error.response.data['error_descrip'];
+      //       }
+      //     }else{
+      //       //Globals.ph_hardware_back.value = true;
+      //       error_message = 'Network connection fail ${error.response?.statusCode}!\nPlease, try again';
+      //     }
+      //     AppUtils.showDialog('Warning', error_message);
+
+      //     print("Server down and please check");
+      //   }))
+
+
+        
         ..add(LogInterceptor(
             request: true,
             requestBody: true,

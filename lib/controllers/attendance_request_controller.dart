@@ -87,7 +87,7 @@ class AttendanceRequestController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
-    await attendanceService?.getOwnAtendance(int.tryParse(emp_id),0.toString()).then((data) {
+    await attendanceService?.getOwnAtendance(int.tryParse(emp_id)!,0.toString()).then((data) {
       if (data.length != 0) {
         attendance_list.value = data;
       }

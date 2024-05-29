@@ -129,7 +129,7 @@ class EmployeeDocumentController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService?.getEmployeeDocList(int.tryParse(employee_id),offset.toString()).then((data) {
+    await employeeService?.getEmployeeDocList(int.tryParse(employee_id)!,offset.toString()).then((data) {
       //docList.value = data;
       if(offset!=0){
         isLoading.value = false;

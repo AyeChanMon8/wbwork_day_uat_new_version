@@ -71,10 +71,10 @@ class DoucmentController extends GetxController {
       doc.value = data as Document_detail;
       Get.back();
     });
-    return  _createFileFromString(type);
+    return  _createFileFromString(type!);
   }
 
-  Future<File> _createFileFromString(String type) async {
+  Future<File?> _createFileFromString(String type) async {
     String encodedStr = doc.value.datas;
     print("displayname");
     print(doc.value.displayName);

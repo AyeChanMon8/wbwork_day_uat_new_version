@@ -8,7 +8,7 @@ import 'odoo_service.dart';
 
 class NotificationService extends OdooService {
   String url = Globals.baseURL + "/one.signal.notification.message";
-  Dio? dioClient;
+  Dio dioClient = Dio();
   Future<OdooService> init() async {
     dioClient = await client();
     return this;
@@ -59,9 +59,9 @@ class NotificationService extends OdooService {
       }
       if (msgs.length > 2) {
         msgs.sort((a, b) {
-          DateTime bDateTime = AppUtils.convertStringToDate(b.create_date);
-          DateTime aDateTime = AppUtils.convertStringToDate(a.create_date);
-          return bDateTime.compareTo(aDateTime);
+          DateTime? bDateTime = AppUtils.convertStringToDate(b.create_date);
+          DateTime? aDateTime = AppUtils.convertStringToDate(a.create_date);
+          return bDateTime!.compareTo(aDateTime!);
         });
       }
     } catch (error) {

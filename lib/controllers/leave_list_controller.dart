@@ -84,7 +84,7 @@ class LeaveListController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await leaveService?.getLeaveListForManager(int.tryParse(employee_id))
+    await leaveService?.getLeaveListForManager(int.tryParse(employee_id)!)
         .then((data) {
           leaveList.value = data;
           update();

@@ -196,7 +196,7 @@ class PlanTripController extends GetxController {
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
     await planTripServie?.getPlanTripWithProductList(
-            int.tryParse(employee_id), offset.toString(), state)
+            int.tryParse(employee_id)!, offset.toString(), state)
         .then((data) {
       if (offset != 0) {
         // update data and loading status
@@ -231,7 +231,7 @@ class PlanTripController extends GetxController {
     var employee_id = box.read('emp_id');
 
     await planTripServie?.getPlanTripWithWayBillList(
-            int.tryParse(employee_id), waybill_offset.toString(), state)
+            int.tryParse(employee_id)!, waybill_offset.toString(), state)
         .then((data) {
       plantrip_with_waybill_list.value.clear();
       if (waybill_offset != 0) {
@@ -267,7 +267,7 @@ class PlanTripController extends GetxController {
 
   getAdvanceExpenseCategoryList() async {
     var company_id = box.read('emp_company');
-    await planTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id))
+    await planTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id)!)
         .then((data) {
       data.insert(
           0,
@@ -468,7 +468,7 @@ class PlanTripController extends GetxController {
                 description: expenseDescriptionTextController.text.toString(),
                 image: selectedExpensePlanTripProductImage);
         planTripServie?.addPlanTripProductExpense(plantrip_product_expense_line, lineID,
-                int.tryParse(employee_id), "edit")
+                int.tryParse(employee_id)!, "edit")
             .then((data) {
           if (data != 0) {
             Get.defaultDialog(
@@ -663,7 +663,7 @@ class PlanTripController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await planTripServie?.getPlanTripProductListToApprove(int.tryParse(employee_id))
+    await planTripServie?.getPlanTripProductListToApprove(int.tryParse(employee_id)!)
         .then((data) {
       plantrip_with_product_toapprove_list.value = data;
 
@@ -684,7 +684,7 @@ class PlanTripController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await planTripServie?.getPlanTripWaybillListToApprove(int.tryParse(employee_id))
+    await planTripServie?.getPlanTripWaybillListToApprove(int.tryParse(employee_id)!)
         .then((data) {
       plantrip_with_waybill_topprove_list.value = data;
 
@@ -1155,7 +1155,7 @@ class PlanTripController extends GetxController {
     var employee_id = box.read('emp_id');
 
     await planTripServie?.getPlanTripWithProductList(
-            int.tryParse(employee_id), product_offset.toString(), state)
+            int.tryParse(employee_id)!, product_offset.toString(), state)
         .then((data) {
       plantrip_with_product_list.value.clear();
       if (product_offset != 0) {

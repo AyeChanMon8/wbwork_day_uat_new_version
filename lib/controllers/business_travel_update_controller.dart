@@ -483,7 +483,7 @@ class BusinessTravelUpdateController extends GetxController {
 
   getTravelExpenseCategory() async {
     var company_id = box.read('emp_company');
-    await masterService?.getTravelExpenseCategory(int.tryParse(company_id)).then((data) {
+    await masterService?.getTravelExpenseCategory(int.tryParse(company_id)!).then((data) {
       if(data.length!=0){
         this.selectedExpenseCategory = data[0];
         travel_expense_category_list.value = data;
@@ -610,7 +610,7 @@ class BusinessTravelUpdateController extends GetxController {
 
   Future<void> getOneTravelApprove(int travel_id) async {
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService?.getOneTravelApprove(employee_id,travel_id).then((data) {
+    await masterService?.getOneTravelApprove(employee_id!,travel_id).then((data) {
       if (data != null) {
         from_travel_date.value = data[0].start_date;
         to_travel_date.value = data[0].end_date;

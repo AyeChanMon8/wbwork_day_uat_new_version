@@ -47,8 +47,8 @@ class WarningController extends GetxController {
               size: 30.0,
             )),
             barrierDismissible: false));
-    File file = await employeeService!.downloadWarning(warning.id, 'warning${warning.id}');
-    await OpenFile.open(file.path);
+    File? file = await employeeService!.downloadWarning(warning.id, 'warning${warning.id}');
+    await OpenFile.open(file!.path);
     Get.back();
     //Get.to(PdfView(file.path,'warning${warning.id}'));
     /*PDFDocument document= await PDFDocument.fromFile(file);

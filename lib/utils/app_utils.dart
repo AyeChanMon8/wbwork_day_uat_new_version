@@ -19,9 +19,9 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../routes/app_pages.dart';
 
 class AppUtils {
-  static void showSnackBar(String str, ScaffoldState context,
+  static void showSnackBar(String str, BuildContext context,
       {color = Colors.blue}) {
-    context.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(str),
       backgroundColor: color,
     ));
@@ -141,7 +141,7 @@ class AppUtils {
   // static void otDialog(String title, String msg) {
   //   Get.defaultDialog(title: title, content: Text(msg), confirm:);
   // }
-  static DateTime convertStringToDate(String dateStr) {
+  static DateTime? convertStringToDate(String dateStr) {
     try {
       if (dateStr != null && dateStr.length > 0) {
         DateTime date = DateTime.parse(dateStr);

@@ -172,7 +172,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getAttendanceInfo(int.tryParse(emp_id), offset.toString())
+        ?.getAttendanceInfo(int.tryParse(emp_id)!, offset.toString())
         .then((data) {
       Get.back();
       if (data.length != 0) {
@@ -207,7 +207,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getOwnAtendance(int.tryParse(emp_id), offset.toString())
+        ?.getOwnAtendance(int.tryParse(emp_id)!, offset.toString())
         .then((data) {
       Get.back();
       // List<Attendance> tempData = [];
@@ -285,7 +285,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getAttendanceEarlyReport(int.tryParse(emp_id))
+        ?.getAttendanceEarlyReport(int.tryParse(emp_id)!)
         .then((data) {
       if (data.length != 0) {
         attendance_early_report_list.value = data;
@@ -303,7 +303,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getAttendanceLateReport(int.tryParse(emp_id))
+        ?.getAttendanceLateReport(int.tryParse(emp_id)!)
         .then((data) {
       if (data.length != 0) {
         attendance_late_report_list.value = data;
@@ -521,7 +521,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getAttendanceApproveReport(int.tryParse(emp_id))
+        ?.getAttendanceApproveReport(int.tryParse(emp_id)!)
         .then((data) {
       if (data.length != null) {
         attendance_approve_list.value = data;
@@ -683,7 +683,7 @@ class AttendanceReportController extends GetxController {
     //fetch emp_id from GetX Storage
     var emp_id = box.read('emp_id');
     await attendanceService
-        ?.getOwnAtendance(int.tryParse(emp_id), 0.toString())
+        ?.getOwnAtendance(int.tryParse(emp_id)!, 0.toString())
         .then((data) {
       if (data.length != 0) {
         attendance_own_list.value = data;
@@ -745,7 +745,7 @@ class AttendanceReportController extends GetxController {
       }
     });
     await attendanceService
-        ?.getAttendanceInfo(int.tryParse(emp_id), 0.toString())
+        ?.getAttendanceInfo(int.tryParse(emp_id)!, 0.toString())
         .then((data) {
       Get.back();
       if (data.length != 0) {

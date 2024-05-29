@@ -38,7 +38,7 @@ class DayTripController extends GetxController{
                 )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    dayTripServie?.getDayTripList(employee_id,offset.toString(),pageType).then((data){
+    dayTripServie?.getDayTripList(employee_id!,offset.toString(),pageType).then((data){
       if(offset!=0){
         // update data and loading status
         isLoading.value = false;
@@ -66,7 +66,7 @@ class DayTripController extends GetxController{
                 )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    dayTripServie?.getDayTripListToApprove(employee_id).then((data){
+    dayTripServie?.getDayTripListToApprove(employee_id!).then((data){
       dayTripToApproveList.value = data;
       Get.back();
     });

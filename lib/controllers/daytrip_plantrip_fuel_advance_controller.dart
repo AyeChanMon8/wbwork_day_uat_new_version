@@ -160,7 +160,7 @@ class DayTripPlanTripGeneralController extends GetxController{
   getAdvanceExpenseCategoryList() async {
     this.dayTripServie = await DayTripServie().init();
     var company_id = box.read('emp_company');
-    await dayTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id)).then((data){
+    await dayTripServie?.getDayTripAdvanceExpenseCategory(int.tryParse(company_id)!).then((data){
       data.insert(
           0, Daytrip_advance_expense_category(id: 0, displayName: 'Expense Category Type'));
       this.selectedExpenseCategory = data[0];

@@ -34,9 +34,9 @@ class ReminderNotiService extends OdooService {
     }
     if (reminderList.length > 2) {
       reminderList.sort((a, b) {
-        DateTime bDateTime = AppUtils.convertStringToDate(b.create_date);
-        DateTime aDateTime = AppUtils.convertStringToDate(a.create_date);
-        return bDateTime.compareTo(aDateTime);
+        DateTime? bDateTime = AppUtils.convertStringToDate(b.create_date);
+        DateTime? aDateTime = AppUtils.convertStringToDate(a.create_date);
+        return bDateTime!.compareTo(aDateTime!);
       });
     }
     return reminderList;

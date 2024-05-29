@@ -53,39 +53,39 @@ class EmployeeChangeController extends GetxController {
 
   Rx<Company_id> _selectedCompany = Company_id().obs;
   Company_id get selectedCompany => _selectedCompany.value;
-  set selectedCompany(Company_id type) => _selectedCompany.value = type;
+  set selectedCompany(Company_id? type) => _selectedCompany.value = type!;
 
   Rx<Company_id> _selectedOldCompany = Company_id().obs;
   Company_id get selectedOldCompany => _selectedOldCompany.value;
-  set selectedOldCompany(Company_id type) => _selectedOldCompany.value = type;
+  set selectedOldCompany(Company_id? type) => _selectedOldCompany.value = type!;
 
   Rx<Department> _selectedDepartment = Department().obs;
   Department get selectedDepartment => _selectedDepartment.value;
-  set selectedDepartment(Department type) => _selectedDepartment.value = type;
+  set selectedDepartment(Department? type) => _selectedDepartment.value = type!;
 
   Rx<Department> _selectedOldDepartment = Department().obs;
   Department get selectedOldDepartment => _selectedOldDepartment.value;
-  set selectedOldDepartment(Department type) => _selectedOldDepartment.value = type;
+  set selectedOldDepartment(Department? type) => _selectedOldDepartment.value = type!;
 
   Rx<Branch_id> _selectedBranch = Branch_id().obs;
   Branch_id get selectedBranch => _selectedBranch.value;
-  set selectedBranch(Branch_id type) => _selectedBranch.value = type;
+  set selectedBranch(Branch_id? type) => _selectedBranch.value = type!;
 
   Rx<Branch_id> _selectedOldBranch = Branch_id().obs;
   Branch_id get selectedOldBranch => _selectedOldBranch.value;
-  set selectedOldBranch(Branch_id type) => _selectedOldBranch.value = type;
+  set selectedOldBranch(Branch_id? type) => _selectedOldBranch.value = type!;
 
   Rx<Company> _selectedJobPosition = Company().obs;
   Company get selectedJobPosition => _selectedJobPosition.value;
-  set selectedJobPosition(Company type) => _selectedJobPosition.value = type;
+  set selectedJobPosition(Company? type) => _selectedJobPosition.value = type!;
 
   Rx<Company> _selectedJobGrade = Company().obs;
   Company get selectedJobGrade => _selectedJobGrade.value;
-  set selectedJobGrade(Company type) => _selectedJobGrade.value = type;
+  set selectedJobGrade(Company? type) => _selectedJobGrade.value = type!;
 
   Rx<Company> _selectedSalaryLevel = Company().obs;
   Company get selectedSalaryLevel => _selectedSalaryLevel.value;
-  set selectedSalaryLevel(Company type) => _selectedSalaryLevel.value = type;
+  set selectedSalaryLevel(Company? type) => _selectedSalaryLevel.value = type!;
 
   @override
   void onReady() async {
@@ -126,7 +126,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService?.getEmployeeChangeList(int.tryParse(employee_id),offset.toString()).then((data) {
+    await employeeService?.getEmployeeChangeList(int.tryParse(employee_id)!,offset.toString()).then((data) {
       //empChangeList.value = data;
       if(offset!=0){
         isLoading.value = false;
@@ -287,7 +287,7 @@ class EmployeeChangeController extends GetxController {
                   size: 30.0,
                 )),
             barrierDismissible: false));
-    await employeeService?.getJobList(int.tryParse(employee_id)).then((data) {
+    await employeeService?.getJobList(int.tryParse(employee_id)!).then((data) {
       if(data.length!=0){
         //this.selectedJobPosition = data[0];
         this.selectedJobPosition = null;
@@ -333,14 +333,14 @@ class EmployeeChangeController extends GetxController {
                 )),
             barrierDismissible: false));
 
-    await employeeService?.getEmployeeNewWage(int.tryParse(this.selectedJobGrade.id.toString()),int.tryParse(this.selectedSalaryLevel.id.toString())).then((data) {
+    await employeeService?.getEmployeeNewWage(int.tryParse(this.selectedJobGrade.id.toString())!,int.tryParse(this.selectedSalaryLevel.id.toString())!).then((data) {
       // print("newWage#");
       wageTextController.text = AppUtils.addThousnadSperator(data);
       print(data);
       Get.back();
     });
   }
-  Future<List<Company_id>> getCompanyList(String keyword) async{
+  Future<List<Company_id>?> getCompanyList(String keyword) async{
     this.employeeService = await EmployeeService().init();
     Future.delayed(
         Duration.zero,

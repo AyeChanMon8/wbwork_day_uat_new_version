@@ -141,7 +141,7 @@ class TravelRequestUpdateController extends GetxController {
 
   getExpenseCategory() async {
     var company_id = box.read('emp_company');
-    await _travelRequestService?.getExpenseCategory(int.tryParse(company_id)).then((data) {
+    await _travelRequestService?.getExpenseCategory(int.tryParse(company_id)!).then((data) {
       this.selectedExpenseType = data[0];
       expenseCategoryList.value = data;
     });

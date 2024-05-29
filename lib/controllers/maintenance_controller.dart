@@ -114,7 +114,7 @@ getMaintenanceList(String status) async {
   //fetch emp_id from GetX Storage
   var employee_id = box.read('emp_id');
   this.maintenanceService = await MaintenanceService().init();
-  await maintenanceService?.getMaintenanceRequestList(int.tryParse(employee_id),status).then((data) {
+  await maintenanceService?.getMaintenanceRequestList(int.tryParse(employee_id)!,status).then((data) {
    maintenanceList.value = data;
     Get.back();
   });

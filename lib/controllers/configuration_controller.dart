@@ -14,7 +14,7 @@ class ConfigurationController extends GetxController{
   var storage = LocalStorage('storefunction');
   @override
   void onInit() async{
-    final labels = AppLocalizations.of(Get.context);
+    final labels = AppLocalizations.of(Get.context!);
     var employee_role = box.read("role_category");
     final leave_report = box.read("allow_leave_report");
     final travel_request = box.read("allow_travel_request");

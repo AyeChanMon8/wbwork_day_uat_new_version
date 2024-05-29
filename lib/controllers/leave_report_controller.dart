@@ -39,7 +39,7 @@ class LeaveTripReportController extends GetxController {
             barrierDismissible: false));
     //fetch emp_id from GetX Storage
     var employee_id = box.read('emp_id');
-    await leaveService?.getLeaveReport(int.tryParse(employee_id)).then((data) {
+    await leaveService?.getLeaveReport(int.tryParse(employee_id)!).then((data) {
       createLeaveReport(data);
       Get.back();
     });

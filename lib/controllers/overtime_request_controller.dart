@@ -121,7 +121,7 @@ class OvertimeRequestController extends GetxController {
                   size: 30.0,
                 )),
                 barrierDismissible: false));
-        await overtimeService?.getEmployeeByDept(department.id, employee_id)
+        await overtimeService?.getEmployeeByDept(department.id, employee_id!)
             .then((data) {
           Get.back();
           for (int i = 0; i < data.length; i++) {
@@ -175,7 +175,7 @@ class OvertimeRequestController extends GetxController {
 
   getDepartments() async {
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService?.getDepartmentList(employee_id).then((data) {
+    await masterService?.getDepartmentList(employee_id!).then((data) {
       print("deptSize");
       print(data.length);
       data.insert(0, OTDepartment(id: 0, name: 'Department', branch_id: Branch_id(id: 0, name: 'Branch')));
@@ -186,7 +186,7 @@ class OvertimeRequestController extends GetxController {
 
   getOvertimeCategories() async{
     var employee_id = int.tryParse(box.read('emp_id'));
-    await masterService?.getOvertimeCategoryList(employee_id).then((data) {
+    await masterService?.getOvertimeCategoryList(employee_id!).then((data) {
       print("deptSize");
       print(data.length);
       data.insert(0, OvertimeCategory(id: 0, name: 'Overtime Category'));
@@ -243,7 +243,7 @@ class OvertimeRequestController extends GetxController {
       );
       print(overtime_request.toJson());
 
-      await overtimeService?.overtimeRequest(employee_id, overtime_request)
+      await overtimeService?.overtimeRequest(employee_id!, overtime_request)
           .then((data) {
         Get.back();
         if (data.contains("ERROR")) {

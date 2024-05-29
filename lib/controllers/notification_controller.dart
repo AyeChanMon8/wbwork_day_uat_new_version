@@ -71,7 +71,7 @@ class NotificationController extends GetxController {
 
     } catch (error) {
       // Get.snackbar("Error ", "Error , $error");
-      Get.snackbar('Alert', 'Network connection fail ${error.response.statusCode}!\nPlease, try again');
+      Get.snackbar('Alert', 'Network connection fail ${error.response!.statusCode}!\nPlease, try again');
     }
   }
 

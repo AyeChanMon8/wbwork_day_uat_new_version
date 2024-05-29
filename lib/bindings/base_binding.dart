@@ -26,7 +26,7 @@ abstract class BaseBinding implements Bindings {
           if (e.response?.statusCode == 403) {
             dio..interceptors.requestLock.lock();
             dio.interceptors.responseLock.lock();
-            RequestOptions options = e.response.request;
+            RequestOptions options = e.requestOptions;
             var response = await dio.post(token_url,
                 options: Options(contentType: "text/html"),
                 data: {
@@ -39,7 +39,7 @@ abstract class BaseBinding implements Bindings {
             }
             dio.interceptors.requestLock.unlock();
             dio.interceptors.responseLock.unlock();
-            dio.request(options.path, options: options);
+            dio.request(options.path, options: options as Options);
           }
           return handler.next(e);
         },

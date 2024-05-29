@@ -31,7 +31,7 @@ class CalendarControllers extends GetxController{
                 )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    calendarService?.getCalendarInformation(employee_id).then((calendardata){
+    calendarService?.getCalendarInformation(employee_id!).then((calendardata){
       calendarData = calendardata as CalendarData;
       for(Travel travel in calendarData.travel){
         appointmentsList.add(Appointment(
