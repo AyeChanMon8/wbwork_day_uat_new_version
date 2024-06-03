@@ -1,11 +1,11 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+// import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,15 +13,17 @@ import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/controllers/reminder_noti_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/announcements_details.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:wb_workday_uat_new_version/ui/components/textbox.dart';
+import '../constants/globals.dart';
+import '../controllers/announcements_controller.dart';
+import '../controllers/reminder_noti_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/announcements_details.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 
 import 'leave_detail.dart';
@@ -36,9 +38,9 @@ class _RemindersListState extends State<RemindersList> {
 
   final box = GetStorage();
 
-  int index;
+  late int index;
 
-  String image;
+  late String image;
   String selectall = "Select All";
 
   void initData() async {
@@ -114,7 +116,9 @@ class _RemindersListState extends State<RemindersList> {
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.reminders, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.reminders, image)),
       body: Stack(
         children: <Widget>[
           Container(
@@ -192,6 +196,7 @@ class _RemindersListState extends State<RemindersList> {
                                   controller.isLoading.value = true;
                                   //_loadData();
                                 }
+                                return true;
                               },
                               child: ListView.separated(
                                 separatorBuilder: (context, index) => Divider(
@@ -452,7 +457,7 @@ class _RemindersListState extends State<RemindersList> {
                                                 content: Text(
                                                     "Are you sure you want to delete?"),
                                                 actions: <Widget>[
-                                                  FlatButton(
+                                                  TextButton(
                                                     child: Text(
                                                       "Cancel",
                                                       style: TextStyle(
@@ -463,7 +468,7 @@ class _RemindersListState extends State<RemindersList> {
                                                           .pop();
                                                     },
                                                   ),
-                                                  FlatButton(
+                                                  TextButton(
                                                     child: Text(
                                                       "Delete",
                                                       style: TextStyle(

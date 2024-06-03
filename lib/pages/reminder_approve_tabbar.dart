@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/reminder_approval_page.dart';
-import 'package:winbrother_hr_app/pages/reward_approval_page.dart';
+import '../my_class/my_style.dart';
+import '../pages/reminder_approval_page.dart';
+import '../pages/reward_approval_page.dart';
 
 import '../localization.dart';
 class ReminderApproveTabbar extends StatefulWidget {

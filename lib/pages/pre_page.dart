@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
@@ -6,14 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:winbrother_hr_app/pages/bottom_navigation.dart';
-import 'package:winbrother_hr_app/pages/business_travel_list.dart';
-import 'package:winbrother_hr_app/pages/login_page.dart';
-import 'package:winbrother_hr_app/pages/network_util.dart';
-import 'package:winbrother_hr_app/pages/request_list.dart';
-import 'package:winbrother_hr_app/tools/internet_provider.dart';
-import 'package:winbrother_hr_app/tools/theme_bloc.dart';
-import 'package:winbrother_hr_app/tools/theme_provider.dart';
+import '../pages/bottom_navigation.dart';
+import '../pages/business_travel_list.dart';
+import '../pages/login_page.dart';
+import '../pages/network_util.dart';
+import '../pages/request_list.dart';
+import '../tools/internet_provider.dart';
+import '../tools/theme_bloc.dart';
+import '../tools/theme_provider.dart';
 
 class PrePage extends StatefulWidget {
   @override
@@ -37,7 +36,7 @@ const MaterialColor white = const MaterialColor(
 );
 
 class _PrePageState extends State<PrePage> {
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   final Connectivity _connectivity = new Connectivity();
 
   bool internetConnected = false;

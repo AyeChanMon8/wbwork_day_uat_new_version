@@ -439,7 +439,7 @@ bool checkYearEndDate(){
   }
   return false;
 }
-bool? showSubmitOrNot(){
+dynamic showSubmitOrNot(){
   if(detailModel.value.state=='acknowledge'){
     return checkMidDate();
   }else if(detailModel.value.state=='mid_year_hr_approve'){

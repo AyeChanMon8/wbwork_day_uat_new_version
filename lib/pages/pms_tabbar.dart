@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/bottom_navigation.dart';
-import 'package:winbrother_hr_app/pages/leave_list.dart';
-import 'package:winbrother_hr_app/pages/pms_done_page.dart';
-import 'package:winbrother_hr_app/pages/pms_manager_page.dart';
-import 'package:winbrother_hr_app/pages/pms_page.dart';
-import 'package:winbrother_hr_app/pages/travel_list.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/bottom_navigation.dart';
+import '../pages/leave_list.dart';
+import '../pages/pms_done_page.dart';
+import '../pages/pms_manager_page.dart';
+import '../pages/pms_page.dart';
+import '../pages/travel_list.dart';
+import '../routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -65,7 +65,7 @@ class _StatePmsTabBar extends State<PmsTabBar> {
       length: tabbar,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.pms, style: appbarTextStyle()),
+              title: Text(labels.pms, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

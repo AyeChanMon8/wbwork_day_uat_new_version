@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/purchase_order_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/purchase_order_controller.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class PurchaseOrderListPage extends StatefulWidget {
 
@@ -18,7 +18,7 @@ class PurchaseOrderListPage extends StatefulWidget {
 class _PurchaseOrderListPageState extends State<PurchaseOrderListPage> {
   final PurchaseOrderController controller = Get.find();
   final box = GetStorage();
-  String image;
+  String image = '';
   var arguments_index = 0;
   Future _loadData() async {
     print("****loadmore****");

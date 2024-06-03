@@ -1,15 +1,15 @@
-// @dart=2.9
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/warning_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/approval_list.dart';
-import 'package:winbrother_hr_app/pages/leave_approved_list.dart';
-import 'package:winbrother_hr_app/pages/warning_approval_page.dart';
-import 'package:winbrother_hr_app/pages/warning_page.dart';
+import '../controllers/warning_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/approval_list.dart';
+import '../pages/leave_approved_list.dart';
+import '../pages/warning_approval_page.dart';
+import '../pages/warning_page.dart';
 
 class WarningApprovalTabBar extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _StateWarningApprovalTabBar extends State<WarningApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.warning, style: appbarTextStyle()),
+              title: Text(labels.warning, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

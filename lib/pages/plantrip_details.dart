@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io' as Io;
@@ -12,21 +12,21 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/day_trip_expense_controller.dart';
-import 'package:winbrother_hr_app/controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/base_route.dart';
-import 'package:winbrother_hr_app/models/daytrip_expense.dart';
-import 'package:winbrother_hr_app/models/plan_trip_product.dart';
-import 'package:winbrother_hr_app/models/stock_location.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/add_advance_page.dart';
-import 'package:winbrother_hr_app/pages/add_fuel_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/day_trip_expense_controller.dart';
+import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../localization.dart';
+import '../models/base_route.dart';
+import '../models/daytrip_expense.dart';
+import '../models/plan_trip_product.dart';
+import '../models/stock_location.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/add_advance_page.dart';
+import '../pages/add_fuel_page.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class PlanTripDetails extends StatefulWidget {
   @override
@@ -37,9 +37,9 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
     with SingleTickerProviderStateMixin {
   final PlanTripController controller = Get.put(PlanTripController());
   var box = GetStorage();
-  String image;
+  late String image;
   int groupValue = 0;
-  TabController _tabController;
+  late TabController _tabController;
   var arg_index;
   var isDriver = false;
   var is_spare = false;
@@ -649,8 +649,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           .fromDatetime,
                       controller.plantrip_with_product_list[arg_index]
                           .toDatetime,
-                      null))
-                  .then((value) {
+                      null))?.then((value) {
                 if (value != null) {
                   DayTripPlanTripGeneralController general_controller =
                       Get.find();
@@ -765,7 +764,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
          alignment: Alignment.topRight,
           child: FloatingActionButton(
             onPressed: () {
-              fuelAddDialog(0, null);
+              fuelAddDialog(0, null!);
             },
             mini: true,
             child: Icon(Icons.add),
@@ -835,7 +834,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels?.planTrip),
+        title: Text(labels.planTrip),
         actions: [],
       ),
       body: SingleChildScrollView(
@@ -1417,7 +1416,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             flex: 2,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey[350], width: 2),
+                border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                 // Border.all(color: Colors.white, width: 2),
                 borderRadius: const BorderRadius.all(
                   const Radius.circular(1),
@@ -1440,8 +1439,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                         icon: Icon(Icons.keyboard_arrow_down),
                         iconSize: 30,
                         isExpanded: true,
-                        onChanged: (BaseRoute value) {
-                          controller.onChangeRouteCategoryDropdown(value);
+                        onChanged: (BaseRoute? value) {
+                          controller.onChangeRouteCategoryDropdown(value!);
                         },
                         items:
                             controller.base_route_list.map((BaseRoute route) {
@@ -1475,7 +1474,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
       margin: EdgeInsets.only(left: 5, right: 5),
       child: Obx(
         () => controller.plantrip_with_product_list.length > 0 ?Scrollbar(
-          isAlwaysShown: true,
+          // isAlwaysShown: true,
           thickness: 5,
           controller: scrollController,
           child: ListView.builder(
@@ -1618,8 +1617,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                   arguments: controller
                                                       .plantrip_with_product_list[
                                                           arg_index]
-                                                      .expenseIds[index])
-                                              .then((value) {
+                                                      .expenseIds[index])?.then((value) {
                                             if (value != null) {
                                               controller.getPlantripList(
                                                   controller
@@ -2074,7 +2072,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                 controller.plantrip_with_product_list[arg_index]
                                                     .toDatetime,
                                                 controller.plantrip_with_product_list[arg_index].fuelinIds[index]
-                                                )).then((value) {
+                                                ))?.then((value) {
                                                   if (value != null) {
                                                     controller.getPlantripList(controller.current_page.value);
                                                   }
@@ -2105,6 +2103,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                             child: Container(
                               // width: 80,
                               child: IconButton(
+                                onPressed: null,
                                 icon: Icon(
                                   Icons.arrow_circle_up,
                                   size: 25,
@@ -2268,18 +2267,20 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                       padding:
                                                           const EdgeInsets.only(
                                                               right: 8.0),
-                                                      child: RaisedButton(
+                                                      child: ElevatedButton(
                                                           child: Text(
                                                             "Cancel",
                                                             style: TextStyle(
                                                                 color:
                                                                     Colors.red),
                                                           ),
-                                                          color: Color.fromRGBO(
-                                                              255,
-                                                              255,
-                                                              255,
-                                                              1.0),
+                                                          style: ElevatedButton.styleFrom(
+                                                            backgroundColor: Color.fromRGBO(
+                                                                                                      255,
+                                                                                                      255,
+                                                                                                      255,
+                                                                                                      1.0),
+                                                          ),
                                                           onPressed: () {
                                                             Get.back();
                                                           }),
@@ -2289,10 +2290,11 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                     width: 10,
                                                   ),
                                                   Center(
-                                                    child: RaisedButton(
+                                                    child: ElevatedButton(
                                                         child: Text("Update"),
-                                                        color: Color.fromRGBO(
-                                                            60, 47, 126, 1),
+                                                        style: ElevatedButton.styleFrom(
+                                                          backgroundColor: Color.fromRGBO(60, 47, 126, 1),
+                                                        ),
                                                         onPressed: () {
                                                           controller.updateQty(
                                                               controller
@@ -2730,6 +2732,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                             child: Container(
                               // width: 80,
                               child: IconButton(
+                                onPressed: null,
                                 icon: Icon(
                                   Icons.arrow_circle_up,
                                   size: 25,
@@ -2777,7 +2780,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         builder: (BuildContext context) {
           return AlertDialog(
             content: Stack(
-              overflow: Overflow.visible,
+              // overflow: Overflow.visible,
               children: <Widget>[
                 Positioned(
                   right: -40.0,
@@ -2901,16 +2904,16 @@ class ExpenseCreate extends StatefulWidget {
 class _ExpenseCreateState extends State<ExpenseCreate> {
   final PlanTripController controller = Get.find();
   var box = GetStorage();
-  String image;
-  String img64;
-  List<TravelLineListModel> datalist;
+  late String image;
+  late String img64;
+  late List<TravelLineListModel> datalist;
   DateTime selectedFromDate = DateTime.now();
   final picker = ImagePicker();
   TextEditingController qtyController = TextEditingController(text: "1");
-  File imageFile;
-  String expenseValue;
-  Expense_ids arguments;
-  Uint8List bytes;
+  late File imageFile;
+  late String expenseValue;
+  late Expense_ids arguments;
+  late Uint8List bytes;
   Widget routeExpenseDropDown() {
     return Container(
       child: Row(
@@ -2919,7 +2922,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
             flex: 2,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey[350], width: 2),
+                border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                 // Border.all(color: Colors.white, width: 2),
                 borderRadius: const BorderRadius.all(
                   const Radius.circular(1),
@@ -2942,8 +2945,8 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                         icon: Icon(Icons.keyboard_arrow_down),
                         iconSize: 30,
                         isExpanded: true,
-                        onChanged: (Expense_ids value) {
-                          controller.onChangeRouteExpenseDropdown(value);
+                        onChanged: (Expense_ids? value) {
+                          controller.onChangeRouteExpenseDropdown(value!);
                         },
                         items: controller.expense_list
                             .map((Expense_ids category) {
@@ -2998,12 +3001,14 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
     String std_amount = AppUtils.removeNullString(
         controller.selectedExpenseRouteCategory.standardAmount.toString());
     if (std_amount.isNotEmpty) {
-      std_amount = AppUtils.addThousnadSperator(double.tryParse(std_amount));
+      std_amount = AppUtils.addThousnadSperator(double.tryParse(std_amount)!);
     }
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: appbar(context, "Plan Trip Expense Form", image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Plan Trip Expense Form", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -3072,7 +3077,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           controller: controller.expenseActualTextController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: labels?.actual + " " + labels?.amount,
+                            hintText: labels.actual + " " + labels.amount,
                           ),
                           onChanged: (text) {},
                         ),
@@ -3228,7 +3233,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   }
 
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       File compressedFile = await AppUtils.reduceImageFileSize(image);
@@ -3242,7 +3247,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       File image = File(pickedFile.path);
       File compressedFile = await AppUtils.reduceImageFileSize(image);

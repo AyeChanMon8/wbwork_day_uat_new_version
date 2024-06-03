@@ -1,12 +1,12 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/plantrip_with_waybill_list.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/plantrip_with_waybill_list.dart';
 
 class PlanTripWayBillTabBar extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _StatePlanTripWayBillTabBar extends State<PlanTripWayBillTabBar> {
       child: Scaffold(
           appBar: AppBar(
             shadowColor: Colors.white,
-            title: Text(labels?.planTrip, style: appbarTextStyle()),
+            title: Text(labels.planTrip, style: appbarTextStyle()),
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

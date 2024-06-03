@@ -1,10 +1,10 @@
-// @dart=2.9
+
 
 import 'dart:io';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
+import '../my_class/my_app_bar.dart';
 class PdfView extends StatefulWidget {
   String pathPDF;
   String display_name;
@@ -14,7 +14,7 @@ class PdfView extends StatefulWidget {
 }
 
 class _PdfViewState extends State<PdfView> {
-  PDFDocument doc;
+  late PDFDocument doc;
   @override
   void initState() async{
     super.initState();

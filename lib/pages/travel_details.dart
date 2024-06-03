@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 //import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/travel_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/pages/pre_page.dart';
-import 'package:winbrother_hr_app/pages/travel_request_update.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/travel_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../pages/pre_page.dart';
+import '../pages/travel_request_update.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
 
@@ -73,7 +73,9 @@ class TravelDetails extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: appbar(context, labels?.travelDetails, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.travelDetails, user_image)),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -146,8 +148,10 @@ class TravelDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: textFieldTapColor,
+                    ),
                     onPressed: () {
                       Get.toNamed(Routes.TRAVEL_REQUEST_UPDATE,
                           arguments:controller.travelLineList.value[index]);
@@ -165,8 +169,10 @@ class TravelDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     confirmDialog(
                         controller.travelLineList.value[index].id, context);
@@ -184,7 +190,7 @@ class TravelDetails extends StatelessWidget {
   }
 
   confirmDialog(int id, BuildContext context) {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.black),
@@ -193,7 +199,7 @@ class TravelDetails extends StatelessWidget {
         Navigator.pop(context);
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "Yes",
         style: TextStyle(color: Colors.black),
@@ -231,7 +237,7 @@ class TravelDetails extends StatelessWidget {
             child: Container(
               // width: 80,
               child: Text(
-                labels?.date,
+                labels.date,
                 style: subtitleStyle(),
               ),
             ),
@@ -240,7 +246,7 @@ class TravelDetails extends StatelessWidget {
           child:Container(
             // width: 70,
             child: Text(
-              labels?.destination,
+              labels.destination,
               style: subtitleStyle(),
             ),
           ),),
@@ -248,7 +254,7 @@ class TravelDetails extends StatelessWidget {
           child:Container(
                   // width: 70,
                   child: Text(
-                    labels?.purpose,
+                    labels.purpose,
                     style: subtitleStyle(),
                   ),
                 ),)
@@ -267,21 +273,21 @@ class TravelDetails extends StatelessWidget {
           Container(
             // width: 80,
             child: Text(
-              labels?.expense,
+              labels.expense,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.amount,
+              labels.amount,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 70,
             child: Text(
-              labels?.remark,
+              labels.remark,
               style: subtitleStyle(),
             ),
           )
@@ -445,7 +451,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.fromDate,
+                  labels.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -466,7 +472,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.toDate,
+                  labels.toDate,
                   // ("To Date : "),
                   style: datalistStyle(),
                 ),
@@ -490,7 +496,7 @@ class TravelDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // ("From : "),
-                  labels?.from,
+                  labels.from,
                   style: datalistStyle(),
                 ),
               ),
@@ -510,7 +516,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.to,
+                  labels.to,
                   // ("To : "),
 
                   style: datalistStyle(),
@@ -532,7 +538,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),
@@ -644,14 +650,16 @@ class TravelDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     controller.approveTravel(
                         controller.travelLineList.value[index].id);
                   },
                   child: Text(
-                    labels?.approve,
+                    labels.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -663,15 +671,17 @@ class TravelDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     controller.declinedTravel(
                         controller.travelLineList.value[index].id);
                     // .travel_line[ind].);
                   },
                   child: Text(
-                    labels?.cancel,
+                    labels.cancel,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),

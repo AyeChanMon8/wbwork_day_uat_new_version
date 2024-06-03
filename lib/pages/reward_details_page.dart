@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:developer';
@@ -10,17 +10,18 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/reward_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import 'package:path_provider/path_provider.dart';
+import '../controllers/reward_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
 
 class RewardsDetailsPage extends StatelessWidget {
-  int index;
+  int index = 0;
   final RewardController controller = Get.put(RewardController());
   final box = GetStorage();
   Future<String> _createFileFromString(String encodedStr) async {
@@ -41,7 +42,9 @@ class RewardsDetailsPage extends StatelessWidget {
     print(controller.rewards[index].state);
     var date = AppUtils.changeDateFormat(controller.rewards[index].date);
     return Scaffold(
-      appBar: appbar(context, labels?.rewards, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.rewards, user_image)),
       body: Container(
         margin: EdgeInsets.only(top: 10, left: 5, right: 20),
         child: Column(
@@ -66,7 +69,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.employeeName,
+                      labels.employeeName,
                       // (("employee_name")),
                       style: datalistStyle(),
                     ),
@@ -90,7 +93,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.date,
+                      labels.date,
                       // (("date")),
                       style: datalistStyle(),
                     ),
@@ -114,7 +117,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.description,
+                      labels.description,
                       // (("reward_type")),
                       style: datalistStyle(),
                     ),
@@ -138,7 +141,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.rewardsDescription,
+                      labels.rewardsDescription,
                       // (("reward_type")),
                       style: datalistStyle(),
                     ),
@@ -193,7 +196,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.carriedForward,
+                      labels.carriedForward,
                       // (("carrier_forward")),
                       style: datalistStyle(),
                     ),
@@ -219,7 +222,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.thisYear,
+                      labels.thisYear,
                       // (("this_year")),
                       style: datalistStyle(),
                     ),
@@ -244,7 +247,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.total,
+                      labels.total,
                       // (("total")),
                       style: datalistStyle(),
                     ),
@@ -269,7 +272,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels?.marks,
+                      labels.marks,
                       // (("marks")),
                       style: datalistStyle(),
                     ),

@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -10,12 +9,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/approval_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/leave_detail.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/approval_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/leave_detail.dart';
+import '../utils/app_utils.dart';
 
 class TripExpenseApproval extends StatefulWidget {
   @override
@@ -25,8 +24,8 @@ class TripExpenseApproval extends StatefulWidget {
 class _ApprovalDetailsState extends State<TripExpenseApproval> {
   final ApprovalController controller = Get.put(ApprovalController());
   final box = GetStorage();
-  String image;
-  int index;
+  late String image;
+  late int index;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -320,7 +319,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.description + " :"),
+                  (labels.description + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -342,7 +341,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -732,7 +731,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.date + " :"),
+                  (labels.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -756,7 +755,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),

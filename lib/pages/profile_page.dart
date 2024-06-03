@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -10,16 +10,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/documentation_controller.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/login_page.dart';
+import '../controllers/documentation_controller.dart';
+import '../controllers/user_profile_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:winbrother_hr_app/pages/pdf_view.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../pages/pdf_view.dart';
+import '../routes/app_pages.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class ProfilePage extends StatelessWidget {
   //UserProfileController controller = Get.put(UserProfileController());
@@ -27,21 +27,21 @@ class ProfilePage extends StatelessWidget {
   final UserProfileController controller = Get.find();
   final DoucmentController dcontroller = Get.put(DoucmentController());
   int _value = 1;
-  File imageFile;
+  late File imageFile;
   bool keyboardOpen = false;
   final picker = ImagePicker();
-  String img64;
-  Uint8List bytes;
+  late String img64;
+  late Uint8List bytes;
   final box = GetStorage();
-  File image;
+  late File image;
 
-  String user_image;
+  late String user_image;
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
-    final bytes = Io.File(pickedFile.path).readAsBytesSync();
+    File image = File(pickedFile!.path);
+    final bytes = Io.File(pickedFile!.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     controller.setCameraImage(image, img64);
   }
@@ -52,10 +52,10 @@ class ProfilePage extends StatelessWidget {
   }
 
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    File image = File(pickedFile.path);
-    final bytes = Io.File(pickedFile.path).readAsBytesSync();
+    File image = File(pickedFile!.path);
+    final bytes = Io.File(pickedFile!.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     controller.setCameraImage(image, img64);
   }
@@ -122,7 +122,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
-    Uint8List bytes;
+    late Uint8List bytes;
     if (controller.empData.value.image_128 != null) {
       bytes = base64Decode(controller.empData.value.image_128);
     }
@@ -130,7 +130,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundIconColor,
         title: Text(
-          (labels?.profile),
+          (labels.profile),
           style: TextStyle(),
         ),
         bottom: PreferredSize(
@@ -277,7 +277,7 @@ class ProfilePage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Container(
-                                  child: Text(labels?.contact,
+                                  child: Text(labels.contact,
                                       style: textfieldStyle()),
                                 )
                               ],
@@ -341,7 +341,7 @@ class ProfilePage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Container(
-                                  child: Text(labels?.calendar,
+                                  child: Text(labels.calendar,
                                       style: textfieldStyle()),
                                 )
                               ],
@@ -409,7 +409,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 30, top: 20),
                             child: Text(
-                              (labels?.location),
+                              (labels.location),
                               style: datalistStyle(),
                             ),
                           ),
@@ -463,7 +463,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.workMobile),
+                              (labels.workMobile),
                               style: datalistStyle(),
                             ),
                           ),
@@ -517,10 +517,13 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                         actions: [
                                           Center(
-                                            child: RaisedButton(
+                                            child: ElevatedButton(
                                                 child: Text("Change"),
-                                                color: Color.fromRGBO(
-                                                    60, 47, 126, 1),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Color.fromRGBO(60, 47, 126, 1),
+                                                ),
+                                                // color: Color.fromRGBO(
+                                                //     60, 47, 126, 1),
                                                 onPressed: () {
                                                   controller.editPhoneNo();
                                                 }),
@@ -548,7 +551,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.workEmail),
+                              (labels.workEmail),
                               style: datalistStyle(),
                             ),
                           ),
@@ -601,10 +604,13 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                         actions: [
                                           Center(
-                                            child: RaisedButton(
+                                            child: ElevatedButton(
                                                 child: Text("Change"),
-                                                color: Color.fromRGBO(
-                                                    60, 47, 126, 1),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Color.fromRGBO(60, 47, 126, 1),
+                                                ),
+                                                // color: Color.fromRGBO(
+                                                //     60, 47, 126, 1),
                                                 onPressed: () {
                                                   controller.editEmail();
                                                 }),
@@ -632,7 +638,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.workLocation),
+                              (labels.workLocation),
                               style: datalistStyle(),
                             ),
                           ),
@@ -657,7 +663,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.company),
+                              (labels.company),
                               style: datalistStyle(),
                             ),
                           ),
@@ -682,7 +688,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.department),
+                              (labels.department),
                               style: datalistStyle(),
                             ),
                           ),
@@ -707,7 +713,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.position),
+                              (labels.position),
                               style: datalistStyle(),
                             ),
                           ),
@@ -732,7 +738,7 @@ class ProfilePage extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.only(left: 50),
                             child: Text(
-                              (labels?.manager),
+                              (labels.manager),
                               style: datalistStyle(),
                             ),
                           ),
@@ -757,7 +763,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                         ExpansionTile(
                           title: Text(
-                            labels?.privateInformation,
+                            labels.privateInformation,
                             style: subtitleStyle(),
                           ),
                           children: <Widget>[
@@ -822,7 +828,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.ssbNo,
+                  labels.ssbNo,
                   style: subtitleStyle(),
                 ),
               ),
@@ -843,7 +849,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.ssbCardIssueDate,
+                  labels.ssbCardIssueDate,
                   style: datalistStyle(),
                 ),
               ),
@@ -864,7 +870,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.temporaryCardYesNo,
+                  labels.temporaryCardYesNo,
                   style: datalistStyle(),
                 ),
               ),
@@ -886,7 +892,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.temporaryCardNumber,
+                  labels.temporaryCardNumber,
                   style: datalistStyle(),
                 ),
               ),
@@ -906,7 +912,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.smartCardYesNo,
+                  labels.smartCardYesNo,
                   style: datalistStyle(),
                 ),
               ),
@@ -926,7 +932,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.smartCardIssueDate,
+                  labels.smartCardIssueDate,
                   style: datalistStyle(),
                 ),
               ),
@@ -946,7 +952,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.smartCardNumber,
+                  labels.smartCardNumber,
                   style: datalistStyle(),
                 ),
               ),
@@ -999,15 +1005,15 @@ class ProfilePage extends StatelessWidget {
                                           itemBuilder: (BuildContext context, int fileIndex) {
                                             return InkWell(
                                               onTap: () async {
-                                                File file = await dcontroller.getDoc(
+                                                File? file = await dcontroller.getDoc(
                                                     dcontroller
                                                         .docList[index].documentList[fileIndex].documentId, dcontroller
                                                     .docList[index].documentList[fileIndex].file_type);
-                                                if (AppUtils.isImage(file.path)) {
+                                                if (AppUtils.isImage(file!.path)) {
                                                   Get.dialog(Stack(
                                                     children: [
                                                       Center(child: Image.file(file)),
-                                                      Positioned(right : 0,child: FlatButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
+                                                      Positioned(right : 0,child: TextButton(onPressed: (){Get.back();}, child: Text('Close',style:TextStyle(color: Colors.white,fontSize: 20) ,)))
                                                     ],
                                                   ));
                                                 } else{

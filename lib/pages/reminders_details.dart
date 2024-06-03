@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -12,23 +12,24 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
-import 'package:winbrother_hr_app/controllers/reminder_noti_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../constants/globals.dart';
+import '../controllers/announcements_controller.dart';
+import '../controllers/reminder_noti_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 
 import 'leave_detail.dart';
 
 class RemindersDetails extends StatelessWidget {
   final ReindersNotiController controller = Get.put(ReindersNotiController());
   final box = GetStorage();
-  int index;
-  String image;
-  List<String> reminder;
-  String reminderText;
+  late int index;
+  late String image;
+  late List<String> reminder;
+  late String reminderText;
   Future<String> _createFileFromString(String encodedStr) async {
     //final encodedStr = "put base64 encoded string here";
     Uint8List bytes = base64.decode(encodedStr);
@@ -73,7 +74,9 @@ class RemindersDetails extends StatelessWidget {
     //   reminderText = controller.reminderList.value[index].description;
     // }
     return Scaffold(
-      appBar: appbar(context, "Reminders Details", image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Reminders Details", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: 20, top: 20, right: 20),

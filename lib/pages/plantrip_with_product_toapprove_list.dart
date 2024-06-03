@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class PlantripWithProductToApproveListPage extends StatefulWidget {
 
@@ -46,7 +46,7 @@ class _PlantripWithProductToApproveListPage extends State<PlantripWithProductToA
                   margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.PLANTRIP_DETAILS,arguments: controller.plantrip_with_product_toapprove_list.value[index]).then((value) {
+                      Get.toNamed(Routes.PLANTRIP_DETAILS,arguments: controller.plantrip_with_product_toapprove_list.value[index])?.then((value) {
                         if(value!=null){
                           controller.getPlantripToApproveList();
                         }

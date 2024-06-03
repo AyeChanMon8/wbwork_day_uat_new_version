@@ -1,23 +1,23 @@
-// @dart=2.9
 
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
+// import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 //import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/travel_request_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/travel_expense.dart';
-import 'package:winbrother_hr_app/models/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense_response.dart';
-import 'package:winbrother_hr_app/models/travel_line.dart';
-import 'package:winbrother_hr_app/models/travel_request_list_response.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/travel_request_controller.dart';
+import '../localization.dart';
+import '../models/travel_expense.dart';
+import '../models/travel_expense_category.dart';
+import '../models/travel_expense_response.dart';
+import '../models/travel_line.dart';
+import '../models/travel_request_list_response.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/pages/pre_page.dart';
+import '../pages/pre_page.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class TravelRequest extends StatelessWidget {
   final TravelRequestController controller = Get.put(TravelRequestController());
@@ -34,8 +34,8 @@ class TravelRequest extends StatelessWidget {
   final timeFormat = TimeOfDay.now();
   var numberFormat = NumberFormat('#,###.#');
   final box = GetStorage();
-  String purpose;
-  String destination;
+  String purpose = '';
+  String destination = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -174,7 +174,8 @@ class TravelRequest extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   content: Stack(
-                                    overflow: Overflow.visible,
+                                    clipBehavior: Clip.none,
+                                    // overflow: Overflow.visible,
                                     children: <Widget>[
                                       Positioned(
                                         right: -40.0,
@@ -229,10 +230,8 @@ class TravelRequest extends StatelessWidget {
                                                     top: 14.0),
                                                 child: GFButton(
                                                   onPressed: () {
-                                                    if (_formKey.currentState
-                                                        .validate()) {
-                                                      _formKey.currentState
-                                                          .save();
+                                                    if (_formKey.currentState!.validate()) {
+                                                      _formKey.currentState!.save();
                                                     }
                                                     saveTraveline();
                                                   },
@@ -294,7 +293,8 @@ class TravelRequest extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   content: Stack(
-                                    overflow: Overflow.visible,
+                                    // overflow: Overflow.visible,
+                                    clipBehavior: Clip.none,
                                     children: <Widget>[
                                       Positioned(
                                         right: -40.0,
@@ -419,10 +419,8 @@ class TravelRequest extends StatelessWidget {
                                                     top: 14.0),
                                                 child: GFButton(
                                                   onPressed: () {
-                                                    if (_formKey.currentState
-                                                        .validate()) {
-                                                      _formKey.currentState
-                                                          .save();
+                                                    if (_formKey.currentState!.validate()) {
+                                                      _formKey.currentState!.save();
                                                     }
                                                     Navigator.of(context).pop();
                                                     controller.addExpenseLine();
@@ -493,8 +491,7 @@ class TravelRequest extends StatelessWidget {
                                   if (controller.expenseList.length == 0) {
                                     showAlertDialog(context);
                                   } else {
-                                    if (_formKeyParent.currentState
-                                        .validate()) {
+                                    if (_formKeyParent.currentState!.validate()) {
                                       controller.requestTravelRequest(
                                           controller.durationController.text);
                                     }
@@ -546,13 +543,13 @@ class TravelRequest extends StatelessWidget {
     var message = "Are you sure to save?There is no expense!";
 
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text("Save"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -848,7 +845,7 @@ class TravelRequest extends StatelessWidget {
                                       ],
                                       onChanged: (value) {
                                         controller.updateTravelInterval(
-                                            index, value);
+                                            index, value!);
                                       }),
                                 ),
                               ),
@@ -962,20 +959,20 @@ class TravelRequest extends StatelessWidget {
     );
   }
 
-  static void showToast(String msg) {
-    GFToast(
-      text: msg,
-      autoDismiss: true,
-    );
-  }
+  // static void showToast(String msg) {
+  //   GFToast(
+  //     text: msg,
+  //     autoDismiss: true,
+  //   );
+  // }
 
   Future<Null> _selectDate(BuildContext context, String date) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: date == 'From Date' ? DateTime.now() : selectedFromDate,
       firstDate:date == 'From Date' ? DateTime.now() : selectedFromDate,
       lastDate: DateTime.now().add(Duration(days: 365)),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -984,9 +981,9 @@ class TravelRequest extends StatelessWidget {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -1035,12 +1032,12 @@ class TravelRequest extends StatelessWidget {
     var to_year = selectedToDate.year;
     var to_month = selectedToDate.month;
     var to_day = selectedToDate.day;
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime(from_year, from_month, from_day),
       firstDate: DateTime(from_year, from_month, from_day),
       lastDate: DateTime(to_year, to_month, to_day),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -1049,9 +1046,9 @@ class TravelRequest extends StatelessWidget {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -1122,7 +1119,7 @@ class TravelRequest extends StatelessWidget {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -1145,8 +1142,8 @@ class TravelRequest extends StatelessWidget {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            controller.onChangeExpenseDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            controller.onChangeExpenseDropdown(value!);
                           },
                           items: controller.expenseCategoryList
                               .map((TravelExpenseCategory category) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/appproved_tripexpense_list.dart';
-import 'package:winbrother_hr_app/pages/toapprove_tripexpense_list.dart';
-import 'package:winbrother_hr_app/pages/travel_expense_page/toapprove_travelexpense_list.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/appproved_tripexpense_list.dart';
+import '../pages/toapprove_tripexpense_list.dart';
+import '../pages/travel_expense_page/toapprove_travelexpense_list.dart';
 
 class TripExpenseApprovalTabar extends StatefulWidget {
   @override

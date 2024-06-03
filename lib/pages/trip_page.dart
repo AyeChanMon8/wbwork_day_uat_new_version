@@ -1,4 +1,5 @@
-import 'package:fdottedline/fdottedline.dart';
+// import 'package:fdottedline/fdottedline.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -72,13 +73,19 @@ class _TripPageState extends State<TripPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      FDottedLine(
-                        color: Color.fromRGBO(60, 47, 126, 1),
-                        height: 100.0,
-                        strokeWidth: 2.0,
-                        dottedLength: 10.0,
-                        space: 2.0,
-                      ),
+
+                      DottedLine(
+                        lineThickness: 1.0,
+                        dashLength: 10.0,
+                        dashColor: Color.fromRGBO(60, 47, 126, 1)
+                      )
+                      // DottedLine(
+                      //   color: Color.fromRGBO(60, 47, 126, 1),
+                      //   height: 100.0,
+                      //   strokeWidth: 2.0,
+                      //   dottedLength: 10.0,
+                      //   space: 2.0,
+                      // ),
                     ],
                   ),
                   SizedBox(
@@ -127,11 +134,17 @@ class _TripPageState extends State<TripPage> {
                     ),
                   ),
                   Container(
-                    child: RaisedButton(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
                           side: BorderSide(
                               color: Color.fromRGBO(60, 47, 126, 1))),
+                      ),
+                      // color: Colors.white,
+                      // shape: RoundedRectangleBorder(
+                      //     side: BorderSide(
+                      //         color: Color.fromRGBO(60, 47, 126, 1))),
                       child: Text("Start"),
                       onPressed: () {},
                     ),

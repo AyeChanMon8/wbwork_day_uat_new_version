@@ -1,9 +1,9 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
 
 import 'approval_suspension_list.dart';
 import 'approved_suspension_list.dart';
@@ -16,7 +16,7 @@ class SuspensionApprovalTabBar extends StatefulWidget {
 
 class _StateSuspensionApprovalTabBar extends State<SuspensionApprovalTabBar> {
 
-  int tabbar;
+  int tabbar = 0;
   // @override
   // void initState() {
   //   super.initState();

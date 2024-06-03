@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/pages/drawer.dart';
-import 'package:winbrother_hr_app/pages/change_password_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/shared_pref.dart';
-import 'package:winbrother_hr_app/tools/theme_provider.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../pages/drawer.dart';
+import '../pages/change_password_page.dart';
+import '../routes/app_pages.dart';
+import '../shared_pref.dart';
+import '../tools/theme_provider.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _SettingPageState extends State<SettingPage> {
   bool bswitch = false;
   final box = GetStorage();
   List hr = [];
-  final labels = AppLocalizations.of(Get.context);
+  final labels = AppLocalizations.of(Get.context!);
   @override
   void initState() {
     super.initState();
@@ -93,7 +93,7 @@ class _SettingPageState extends State<SettingPage> {
           backgroundColor: backgroundIconColor,
           elevation: 1,
           title: Text(
-            labels?.more,
+            labels.more,
             // style: TextStyle(color: Colors.black),
           ),
           bottom: PreferredSize(

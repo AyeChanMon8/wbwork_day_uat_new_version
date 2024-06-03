@@ -24,7 +24,7 @@ class UserProfileController extends GetxController {
   TextEditingController emailEditController = TextEditingController();
   RxString orgList = "".obs;
   String image_base64 = '';
-  final Rx<File> selectedImage = File('').obs;
+  final Rx<File?> selectedImage = File('').obs;
   final RxBool isShowImage = false.obs;
   var array = [];
   var empData = Employee().obs;

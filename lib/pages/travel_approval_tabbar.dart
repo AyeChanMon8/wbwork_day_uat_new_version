@@ -1,11 +1,11 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/approval_travel_list_page.dart';
-import 'package:winbrother_hr_app/pages/approved_travel_list_page.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/approval_travel_list_page.dart';
+import '../pages/approved_travel_list_page.dart';
 
 class TravelApprovalTabBar extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _StateTravelApprovalTabBar extends State<TravelApprovalTabBar> {
   List arrayList = [];
   List doneList = [];
   List data = [];
-  int tabbar;
+  int tabbar = 0;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _StateTravelApprovalTabBar extends State<TravelApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.travelRequest, style: appbarTextStyle()),
+              title: Text(labels.travelRequest, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

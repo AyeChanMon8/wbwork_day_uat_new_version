@@ -1,9 +1,9 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/reward_approval_page.dart';
+import '../my_class/my_style.dart';
+import '../pages/reward_approval_page.dart';
 
 import '../localization.dart';
 class RewardApproveTabbar extends StatefulWidget {
@@ -19,7 +19,7 @@ class _RewardApproveTabbarState extends State<RewardApproveTabbar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.reward, style: appbarTextStyle()),
+              title: Text(labels.reward, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

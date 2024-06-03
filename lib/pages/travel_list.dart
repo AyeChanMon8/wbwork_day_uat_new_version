@@ -1,15 +1,15 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/travel_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/travel_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class TravelListPage extends StatefulWidget {
   @override
@@ -49,6 +49,7 @@ class _TravelListPage extends State<TravelListPage> {
                     _loadData();
                   }
                 }
+                return true;
               },
               child: ListView.builder(
                 shrinkWrap: true,
@@ -61,8 +62,7 @@ class _TravelListPage extends State<TravelListPage> {
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) => TravelRequest()));
 
-                        Get.toNamed(Routes.TRAVEL_DETAILS, arguments: index)
-                            .then((value) {
+                        Get.toNamed(Routes.TRAVEL_DETAILS, arguments: index)?.then((value) {
                           if (value != null) {
                             controller.offset.value = 0;
                             controller.getTravelList();
@@ -194,7 +194,7 @@ class _TravelListPage extends State<TravelListPage> {
                                                         .toUpperCase() ==
                                                     "IN_PROGRESS"
                                                 ? Text(
-                                                    labels?.inProgress,
+                                                    labels.inProgress,
                                                     style: subtitleStyle(),
                                                     textAlign: TextAlign.right,
                                                   )

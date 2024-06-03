@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/purchase_order_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/purchase_order_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 class PurchaseOrderDetails extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class PurchaseOrderDetails extends StatefulWidget {
 
 class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
   final PurchaseOrderController controller = Get.put(PurchaseOrderController());
-  int index;
+  late int index;
   // String _radioGroupValue;
   List<RadioListTile> answersRadio = [];
   List<String> list = [];
@@ -39,7 +39,9 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
       reject_controller.text = "";
     }
     return Scaffold(
-      appBar: appbar(context, labels?.purchaseOrderDetail, ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.purchaseOrderDetail, '')),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -78,15 +80,17 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     controller.approvePurchaseOrder(
                       controller.purchaseOrderApprovalList.value[index].id,
                     );
                   },
                   child: Text(
-                    labels?.approve,
+                    labels.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -98,14 +102,16 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: Colors.white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                  ),
                   onPressed: () {
                     //controller.declinedPurchaseOrder(controller.purchaseOrderApprovalList.value[index].id,);
                     showOptionsDialog();
                   },
                   child: Text(
-                    labels?.cancel,
+                    labels.cancel,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -115,7 +121,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
     );
   }
   showOptionsDialog(){
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.pop(context, true);
@@ -123,7 +129,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
       },
     );
     // set up the buttons
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text("Cancel"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -147,7 +153,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     value: n,
                     groupValue: reject_controller.text,
                     onChanged: (val) {
-                      reject_controller.text = val;
+                      reject_controller.text = val!;
                       setState(() {});
                     },
                     title: Text(n),
@@ -455,7 +461,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     flex: 2,
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Text(labels?.categoryName,
+                      child: Text(labels.categoryName,
                           style: labelPrimaryHightlightTextStyle()),
                     ),
                   ),
@@ -464,7 +470,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          labels?.productName,
+                          labels.productName,
                           style: labelPrimaryHightlightTextStyle(),
                         )),
                   ),
@@ -472,28 +478,28 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     flex: 1,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.quantity,
+                        child: Text(labels.quantity,
                             style: labelPrimaryHightlightTextStyle())),
                   ),
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.received,
+                        child: Text(labels.received,
                             style: labelPrimaryHightlightTextStyle())),
                   ),
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.unitPrice,
+                        child: Text(labels.unitPrice,
                             style: labelPrimaryHightlightTextStyle())),
                   ),
                   Expanded(
                     flex: 3,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.subTotal,
+                        child: Text(labels.subTotal,
                             style: labelPrimaryHightlightTextStyle())),
                   ),
                 ],

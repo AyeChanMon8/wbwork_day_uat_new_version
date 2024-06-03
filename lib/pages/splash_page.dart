@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/login_controller.dart';
-import 'package:winbrother_hr_app/controllers/splash_controller.dart';
-import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../controllers/login_controller.dart';
+import '../controllers/splash_controller.dart';
+import '../controllers/user_profile_controller.dart';
+import '../routes/app_pages.dart';
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();

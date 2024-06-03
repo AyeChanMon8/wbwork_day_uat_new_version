@@ -1,16 +1,16 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/reward_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/reward_details_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/reward_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/reward_details_page.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class RewardPage extends StatefulWidget {
   @override
@@ -29,7 +29,9 @@ class _RewardPageState extends State<RewardPage> {
     final labels = AppLocalizations.of(context);
     String user_image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.reward, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.reward, user_image)),
       body: SingleChildScrollView(
         child: Container(
           child: Column(

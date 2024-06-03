@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io' as Io;
@@ -12,16 +12,16 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/base_route.dart';
-import 'package:winbrother_hr_app/models/plantrip_waybill.dart';
-import 'package:winbrother_hr_app/models/travel_expense/list/travel_line_list_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/add_advance_page.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../localization.dart';
+import '../models/base_route.dart';
+import '../models/plantrip_waybill.dart';
+import '../models/travel_expense/list/travel_line_list_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/add_advance_page.dart';
+import '../utils/app_utils.dart';
 
 import 'add_fuel_waybill_page.dart';
 
@@ -33,9 +33,9 @@ class PlanTripWayBillDetails extends StatefulWidget {
 class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with SingleTickerProviderStateMixin {
   final PlanTripController controller = Get.put(PlanTripController());
   var box = GetStorage();
-  String image;
+  late String image;
   int groupValue = 0;
-  TabController _tabController;
+  late TabController _tabController;
   var arg_index;
   var isDriver = false;
   var is_spare = false;
@@ -616,7 +616,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
             Align(
               alignment:Alignment.topRight,
               child: FloatingActionButton(onPressed: (){
-                Get.to(AddFuelWayBillPage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fromDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].toDatetime,null)).then((value) {
+                Get.to(AddFuelWayBillPage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fromDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].toDatetime,null))?.then((value) {
                   if(value!=null){
                     DayTripPlanTripGeneralController general_controller = Get.find();
                     controller.plantrip_with_waybill_list.value[controller.arg_index.value].fuelinIds.add(WayBill_Fuelin_ids(id:value,date: general_controller.dateTextController.text,
@@ -818,7 +818,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 controller.plantrip_with_waybill_list[controller.arg_index.value].requestAllowanceLines.forEach((element) {
                   itemAdvanceTotal += element.totalAmount;
                 });
-                Get.to(AddAdvancePage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list[controller.arg_index.value].totalAdvance,itemAdvanceTotal)).then((value){
+                Get.to(AddAdvancePage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list[controller.arg_index.value].totalAdvance,itemAdvanceTotal))?.then((value){
                   // controller.getPlantripWithWayBillList(controller.current_page.value);
                   if(value!=null){
                     DayTripPlanTripGeneralController day_trip_controller = Get.find();
@@ -1382,7 +1382,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                         padding: const EdgeInsets.only(left:5.0),
                         child: InkWell(
                           onTap: (){
-                            Get.to(ExpenseCreate(),arguments: controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds[index]).then((value){
+                            Get.to(ExpenseCreate(),arguments: controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds[index])?.then((value){
                               if(value!=null){
                                 controller.getPlantripWithWayBillList(controller.current_page.value);
                               }
@@ -1823,7 +1823,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                           child: IconButton(
                             icon: Icon(Icons.edit),
                             onPressed: () {
-                              Get.to(AddFuelWayBillPage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fromDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].toDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fuelinIds[index])).then((value) {
+                              Get.to(AddFuelWayBillPage("PLanTripWaybill",controller.plantrip_waybill_id,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fromDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].toDatetime,controller.plantrip_with_waybill_list.value[controller.arg_index.value].fuelinIds[index]))?.then((value) {
                                 if(value!=null){
                                   controller.getPlantripWithWayBillList(controller.current_page.value);
                                 }
@@ -1844,6 +1844,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                         child: Container(
                           // width: 80,
                           child:  IconButton(
+                            onPressed: null,
                             icon: Icon(
                               Icons.arrow_circle_up,
                               size: 25,
@@ -2024,6 +2025,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                         child: Container(
                           // width: 80,
                           child:  IconButton(
+                            onPressed: null,
                             icon: Icon(
                               Icons.arrow_circle_up,
                               size: 25,
@@ -2069,7 +2071,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -2092,8 +2094,8 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (BaseRoute value) {
-                            controller.onChangeWayBillRouteDropdown(value);
+                          onChanged: (BaseRoute? value) {
+                            controller.onChangeWayBillRouteDropdown(value!);
                           },
                           items: controller.base_route_list
                               .map((BaseRoute route) {
@@ -2119,7 +2121,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
     );
   }
 
-  void showFuelAddDialog(int lineID,Consumption_ids consumption) {
+  void showFuelAddDialog(int lineID,Consumption_ids? consumption) {
     if(consumption!=null){
       controller.selectedBaseRoute = BaseRoute(id:consumption.routeId.id,name:consumption.routeId.name,fuel_liter: consumption.standardLiter);
       controller.actualAmountTextController.text = consumption.consumedLiter.toString();
@@ -2138,7 +2140,8 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
           //     .descriptionTextController.clear();
           return AlertDialog(
             content: Stack(
-              overflow: Overflow.visible,
+              // overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: <Widget>[
                 Positioned(
                   right: -40.0,
@@ -2256,16 +2259,16 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   final PlanTripController controller = Get.find();
   var box = GetStorage();
 
-  String image;
-  String img64;
-  List<TravelLineListModel> datalist;
+  late String image;
+  late String img64;
+  late List<TravelLineListModel> datalist;
   DateTime selectedFromDate = DateTime.now();
   final picker = ImagePicker();
   TextEditingController qtyController = TextEditingController(text: "1");
-  File imageFile;
-  String expenseValue;
-  Uint8List bytes;
-  WayBill_Expense_ids arguments;
+  late File imageFile;
+  late String expenseValue;
+  late Uint8List bytes;
+  late WayBill_Expense_ids arguments;
   bool show_image_container = true;
 
   Widget  routeExpenseDropDown() {
@@ -2280,7 +2283,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -2303,8 +2306,8 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (WayBill_Expense_ids value) {
-                            controller.onChangeWayBillRouteExpenseDropdown(value);
+                          onChanged: (WayBill_Expense_ids? value) {
+                            controller.onChangeWayBillRouteExpenseDropdown(value!);
                           },
                           items: controller.waybill_expense_list
                               .map((WayBill_Expense_ids category) {
@@ -2337,7 +2340,9 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
 
     return Scaffold(
       // resizeToAvoidBottomInset: true,
-      appBar: appbar(context, "Plan Trip WayBill Expense Form", image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "Plan Trip WayBill Expense Form", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -2387,7 +2392,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           controller: controller.wayBillexpenseActualTextController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: labels?.actual+ " "+ labels?.amount,
+                            hintText: labels.actual+ " "+ labels.amount,
                           ),
                           onChanged: (text) {
                             // setState(() {});
@@ -2550,7 +2555,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
         });
   }
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if(pickedFile!=null){
       File image = File(pickedFile.path);
       File compressedFile = await AppUtils.reduceImageFileSize(image);
@@ -2564,7 +2569,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
 
   }
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if(pickedFile!=null){
       File image = File(pickedFile.path);
       File compressedFile = await AppUtils.reduceImageFileSize(image);

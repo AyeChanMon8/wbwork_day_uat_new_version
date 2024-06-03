@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:developer';
@@ -12,16 +12,17 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/size/gf_size.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/warning_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import 'package:path_provider/path_provider.dart';
+import '../controllers/warning_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
 
 class WarningDetailsPage extends StatelessWidget {
-  int index;
+  int index = 0;
   final WarningController controller = Get.put(WarningController());
   final box = GetStorage();
 
@@ -41,7 +42,9 @@ class WarningDetailsPage extends StatelessWidget {
     index = Get.arguments;
     var date = AppUtils.changeDateFormat(controller.warnings[index].date);
     return Scaffold(
-      appBar: appbar(context, labels?.warning, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.warning, user_image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 20, left: 5, right: 20),
@@ -68,7 +71,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.employeeName,
+                        labels.employeeName,
                         // (("employee_name")),
                         style: datalistStyle(),
                       ),
@@ -92,7 +95,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.date,
+                        labels.date,
                         // (("date")),
                         style: datalistStyle(),
                       ),
@@ -116,7 +119,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.description,
+                        labels.description,
                         // "Warning type",
                         style: datalistStyle(),
                       ),
@@ -175,7 +178,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        labels?.warningTitle,
+                        labels.warningTitle,
                         // "Warning type",
                         style: datalistStyle(),
                       ),
@@ -205,7 +208,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.carriedForward,
+                        labels.carriedForward,
                         // (("carrier_forward")),
                         style: datalistStyle(),
                       ),
@@ -231,7 +234,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.thisYear,
+                        labels.thisYear,
                         // (("this_year")),
                         style: datalistStyle(),
                       ),
@@ -256,7 +259,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.total,
+                        labels.total,
                         // (("total")),
                         style: datalistStyle(),
                       ),
@@ -281,7 +284,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels?.marks,
+                        labels.marks,
                         // (("marks")),
                         style: datalistStyle(),
                       ),

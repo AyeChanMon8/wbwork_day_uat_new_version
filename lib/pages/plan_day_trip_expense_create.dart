@@ -1,10 +1,10 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/busiess_travel_controller.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
+import '../controllers/busiess_travel_controller.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/travel_expense_product.dart';
 
 class PlanDayTripExpenseCreate extends StatelessWidget {
   final BusinessTravelController controller = Get.put(BusinessTravelController());
@@ -23,7 +23,7 @@ class PlanDayTripExpenseCreate extends StatelessWidget {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -45,10 +45,10 @@ class PlanDayTripExpenseCreate extends StatelessWidget {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            print(value.display_name);
-                            print(value.id);
-                            controller.onChangeExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            print(value!.display_name);
+                            print(value!.id);
+                            controller.onChangeExpenseCategoryDropdown(value!);
                           },
                           items: controller.travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -84,7 +84,7 @@ class PlanDayTripExpenseCreate extends StatelessWidget {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -106,10 +106,10 @@ class PlanDayTripExpenseCreate extends StatelessWidget {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseProduct value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeExpenseProductDropdown(value);
+                          onChanged: (TravelExpenseProduct? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller.onChangeExpenseProductDropdown(value!);
                           },
                           items: controller.travel_expense_product_list
                               .map((TravelExpenseProduct product) {

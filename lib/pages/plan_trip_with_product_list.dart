@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +6,12 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/plan_trip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/plan_trip_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class PlantripWithProductListPage extends StatefulWidget {
   final String pageType;
@@ -28,7 +28,7 @@ class _PlantripWithProductListPage extends State<PlantripWithProductListPage>{
   @override
   void initState() {
     super.initState();
-    emp_id = int.tryParse(box.read('emp_id').toString());
+    emp_id = int.tryParse(box.read('emp_id').toString())!;
     if(widget.pageType=='open') {
       controller.getPlantripList('open');
     }
@@ -89,7 +89,7 @@ class _PlantripWithProductListPage extends State<PlantripWithProductListPage>{
                     //     controller.getPlantripList(widget.pageType);
                     //   }
                     // });
-                    Get.toNamed(Routes.PLANTRIP_DETAILS,arguments:index).then((value) {
+                    Get.toNamed(Routes.PLANTRIP_DETAILS,arguments:index)?.then((value) {
                       if(value!=null){
                         controller.offset.value =0;
                         controller.getPlantripList(widget.pageType);

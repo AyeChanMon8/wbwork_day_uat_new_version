@@ -1,10 +1,10 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_number_picker/flutter_number_picker.dart';
+// import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,16 +12,16 @@ import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:open_file/open_file.dart';
-import 'package:winbrother_hr_app/controllers/pms_employee_detail_controller.dart';
-import 'package:winbrother_hr_app/models/pms_detail_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/leave_detail.dart';
-import 'package:winbrother_hr_app/pages/pms_details.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/ui/components/textbox.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
-import 'package:winbrother_hr_app/utils/pdf_file_utils.dart';
+import '../controllers/pms_employee_detail_controller.dart';
+import '../models/pms_detail_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../pages/leave_detail.dart';
+import '../pages/pms_details.dart';
+import '../routes/app_pages.dart';
+import '../ui/components/textbox.dart';
+import '../utils/app_utils.dart';
+import '../utils/pdf_file_utils.dart';
 
 class PmsDoneDetails extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class PmsDoneDetails extends StatefulWidget {
 class _PmsDetailsState extends State<PmsDoneDetails>
     with SingleTickerProviderStateMixin {
   final box = GetStorage();
-  TabController _tabController;
+  late TabController _tabController;
   TextEditingController remarkTextController = TextEditingController();
 
   PMSEmployeeDetailController controller =
@@ -45,7 +45,7 @@ class _PmsDetailsState extends State<PmsDoneDetails>
     role = box.read('role_category');
     _tabController = TabController(length: 3, vsync: this);
     controller.detailModel.value = Get.arguments;
-    empID = int.tryParse(box.read('emp_id'));
+    empID = int.tryParse(box.read('emp_id'))!;
 
     if(controller.detailModel.value!=null){
       if(controller.detailModel.value.state == 'mid_year_self_assessment'|| controller.detailModel.value.state == 'year_end_self_assessment')
@@ -75,7 +75,9 @@ class _PmsDetailsState extends State<PmsDoneDetails>
     String user_image = box.read('emp_image');
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appbar(context, "PMS Details", user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, "PMS Details", user_image)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

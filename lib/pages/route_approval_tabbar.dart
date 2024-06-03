@@ -1,11 +1,11 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/approval_route_list.dart';
-import 'package:winbrother_hr_app/pages/approved_route_list.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/approval_route_list.dart';
+import '../pages/approved_route_list.dart';
 
 class RouteApprovalTabBar extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _StateRouteApprovalTabBar extends State<RouteApprovalTabBar> {
   List arrayList = [];
   List doneList = [];
   List data = [];
-  int tabbar;
+  int tabbar = 0;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _StateRouteApprovalTabBar extends State<RouteApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.route, style: appbarTextStyle()),
+              title: Text(labels.route, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,
