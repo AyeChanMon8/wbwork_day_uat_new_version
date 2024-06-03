@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/auth_controller.dart';
-import 'package:winbrother_hr_app/controllers/forget_password_controller.dart';
-import 'package:winbrother_hr_app/controllers/login_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/auth_controller.dart';
+import '../controllers/forget_password_controller.dart';
+import '../controllers/login_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class LoginPage extends StatelessWidget {
   final AuthController controller = Get.put(
@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
   final LoginController _loginController = Get.put(LoginController());
   ForgetPasswordController _forgetPasswordController =
       Get.put(ForgetPasswordController());
-  String barcode;
+  late String barcode;
   var box = GetStorage();
   @override
   Widget build(BuildContext context) {
@@ -128,7 +128,7 @@ class LoginPage extends StatelessWidget {
                           value: _loginController.rememberme.value,
                           onChanged: (value) {
                             box.write('rememberme', value);
-                            _loginController.rememberme.value = value;
+                            _loginController.rememberme.value = value!;
                           }),
                       Text(
                         labels.rememberMe,
@@ -145,14 +145,16 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     box.write('emp_image',"");
                     _loginController.apiLogin();
                   },
                   child: Text(
-                    (labels?.login),
+                    (labels.login),
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
@@ -170,7 +172,7 @@ class LoginPage extends StatelessWidget {
                           // _forgetPasswordController.forgetPassword(barcode);
                           Get.toNamed(Routes.FORGET_PASSWORD);
                         },
-                        child: Text(labels?.forgotPassword,
+                        child: Text(labels.forgotPassword,
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w400))),
                   ),

@@ -1,11 +1,11 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
 
 class NotificationDetails extends StatefulWidget {
   @override
@@ -14,13 +14,15 @@ class NotificationDetails extends StatefulWidget {
 
 class _NotificationDetailsState extends State<NotificationDetails> {
   final box = GetStorage();
-  String user_image;
+  late String user_image;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     user_image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.notifications,user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.notifications,user_image)),
       body: Container(
         margin: EdgeInsets.only(left: 20, top: 20, right: 20),
         child: Column(
@@ -28,7 +30,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
           children: [
             Container(
               child: Text(
-                labels?.notifications,
+                labels.notifications,
                 // ("notifications"),
                 style: maintitleStyle(),
               ),

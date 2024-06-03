@@ -1,20 +1,20 @@
-// @dart=2.9
+
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/overtime_request_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/depart_empids.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee_category.dart';
-import 'package:winbrother_hr_app/models/ot_department.dart';
-import 'package:winbrother_hr_app/models/overtime_category.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/overtime_request_controller.dart';
+import '../localization.dart';
+import '../models/depart_empids.dart';
+import '../models/department.dart';
+import '../models/employee_category.dart';
+import '../models/ot_department.dart';
+import '../models/overtime_category.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 
 class OverTimePage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _StateOverTimePage extends State<OverTimePage> {
   final timeFormat = TimeOfDay.now();
   String dropdownValue = 'Employee Tags';
   final box = GetStorage();
-  String user_image;
+  late String user_image;
   @override
   void initState() {
     print("initState");
@@ -160,7 +160,7 @@ class _StateOverTimePage extends State<OverTimePage> {
   // }
 
   Widget buildDeptChips(RxList<OTDepartment> chipValues) {
-    List<Widget> chips = new List();
+    List<Widget> chips = [];
     for (int i = 0; i < chipValues.length; i++) {
       InputChip actionChip = InputChip(
 
@@ -345,7 +345,7 @@ class _StateOverTimePage extends State<OverTimePage> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -368,8 +368,8 @@ class _StateOverTimePage extends State<OverTimePage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: controller.enableDropdown.value ? (OvertimeCategory value) {
-                            controller.onChangeCategoryDropdown(value);
+                          onChanged: controller.enableDropdown.value ? (OvertimeCategory? value) {
+                            controller.onChangeCategoryDropdown(value!);
                           } : null,
                           // hint: Text('Department'),
                           items: controller.category_list
@@ -407,7 +407,7 @@ class _StateOverTimePage extends State<OverTimePage> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -430,9 +430,9 @@ class _StateOverTimePage extends State<OverTimePage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: controller.enableDropdown.value ? (OTDepartment value) {
+                          onChanged: controller.enableDropdown.value ? (OTDepartment? value) {
                             setState(() {
-                              controller.onChangeDepartmentDropdown(value);
+                              controller.onChangeDepartmentDropdown(value!);
                             });
                             
                           } : null,
@@ -593,8 +593,11 @@ class _StateOverTimePage extends State<OverTimePage> {
       width: double.infinity,
       height: 45,
       margin: EdgeInsets.only(left: 40, right: 40, top: 16),
-      child: RaisedButton(
-        color: Color.fromRGBO(60, 47, 126, 1),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromRGBO(60, 47, 126, 1),
+        ),
+        // color: Color.fromRGBO(60, 47, 126, 1),
         onPressed: () {
           controller.createOverTime();
         },

@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/loan_page_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/loan_page_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
-import 'package:winbrother_hr_app/localization.dart';
+import '../localization.dart';
 
 class LoanListPage extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class LoanListPage extends StatefulWidget {
 class _LoanListPageState extends State<LoanListPage> {
   final LoanController controller = Get.put(LoanController());
   final box = GetStorage();
-  String image;
+  late String image;
   @override
   void initState() {
     super.initState();
@@ -44,7 +44,7 @@ class _LoanListPageState extends State<LoanListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels?.loanList,
+          labels.loanList,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -106,7 +106,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                   // controller.leaveList.value[index].start_date +
                                   //     "/" +
                                   //     controller.leaveList.value[index].end_date,
-                                  labels?.status,
+                                  labels.status,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -132,7 +132,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                   // controller.leaveList.value[index].start_date +
                                   //     "/" +
                                   //     controller.leaveList.value[index].end_date,
-                                  labels?.loanAmount,
+                                  labels.loanAmount,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -156,7 +156,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                     left: 20, bottom: 20, top: 5),
                                 child: Text(
                                   // controller.leaveList.value[index].description,
-                                  labels?.numberOfInstallments,
+                                  labels.numberOfInstallments,
                                   style: datalistStyle(),
                                 ),
                               ),
@@ -179,7 +179,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                     left: 20, bottom: 20, top: 5),
                                 child: Text(
                                   // controller.leaveList.value[index].description,
-                                  labels?.paymentStartDate,
+                                  labels.paymentStartDate,
                                   style: datalistStyle(),
                                 ),
                               ),

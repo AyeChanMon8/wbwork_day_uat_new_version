@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 //import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/leave_report_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/leave_report_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 
 class LeaveTripReport extends StatelessWidget{
   final box = GetStorage();
-  String image;
+  String image = '';
   final LeaveTripReportController controller = Get.put(
     LeaveTripReportController(),
   );
@@ -33,35 +33,35 @@ class LeaveTripReport extends StatelessWidget{
                 children: [
                   Expanded(
                     flex: 3,
-                    child: Text(labels?.employeeName,style: labelPrimaryHightlightTextStyle()),
+                    child: Text(labels.employeeName,style: labelPrimaryHightlightTextStyle()),
                   ),
 
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.center,
-                        child: Text(labels?.leaveType,style: labelPrimaryHightlightTextStyle(),)),
+                        child: Text(labels.leaveType,style: labelPrimaryHightlightTextStyle(),)),
                   ),
 
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.entitle,style: labelPrimaryHightlightTextStyle())),
+                        child: Text(labels.entitle,style: labelPrimaryHightlightTextStyle())),
                   ),
 
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.taken,style: labelPrimaryHightlightTextStyle())),
+                        child: Text(labels.taken,style: labelPrimaryHightlightTextStyle())),
                   ),
 
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(labels?.balance,style: labelPrimaryHightlightTextStyle())),
+                        child: Text(labels.balance,style: labelPrimaryHightlightTextStyle())),
                   ),
                 ],
               ),

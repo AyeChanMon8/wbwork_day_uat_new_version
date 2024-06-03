@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 // import 'dart:html';
@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../utils/app_utils.dart';
 import '../controllers/overtime_list_controller.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
@@ -18,18 +18,20 @@ import 'package:get/get.dart';
 import 'pre_page.dart';
 
 class OvertimeDetails extends StatelessWidget {
-  int index;
+  int index = 0;
   OverTimeListController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     var arguments = Get.arguments.toString();
     var data = arguments.split(',');
-    index = int.tryParse(data[0]);
+    index =  int.tryParse(data[0])!;
     final box = GetStorage();
     String user_image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels?.overtimeDetails, user_image),
+      appBar: PreferredSize(
+         preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.overtimeDetails, user_image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +66,7 @@ class OvertimeDetails extends StatelessWidget {
             margin: EdgeInsets.only(left: 10),
             // width: 80,
             child: Text(
-              labels?.employeeName + "/" + labels?.employeeMail,
+              labels.employeeName + "/" + labels.employeeMail,
               // labels?.startDate,
               style: subtitleStyle(),
             ),
@@ -74,7 +76,7 @@ class OvertimeDetails extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                labels?.status,
+                labels.status,
                 // labels?.endDate,
                 style: subtitleStyle(),
               ),
@@ -84,7 +86,7 @@ class OvertimeDetails extends StatelessWidget {
             margin: EdgeInsets.only(right: 10),
             // width: 50,
             child: Text(
-              labels?.reason,
+              labels.reason,
               // labels?.dayOff,
               style: subtitleStyle(),
             ),
@@ -196,7 +198,7 @@ class OvertimeDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.title,
+                  labels.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -219,7 +221,7 @@ class OvertimeDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "Start Date Time",
-                  labels?.startDate + " :",
+                  labels.startDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -241,7 +243,7 @@ class OvertimeDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "End Date Time",
-                  (labels?.endDate + " :"),
+                  (labels.endDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -263,7 +265,7 @@ class OvertimeDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -286,7 +288,7 @@ class OvertimeDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.category,
+                  labels.category,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -316,14 +318,16 @@ class OvertimeDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10,bottom: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     controller
                         .submitOvertime(controller.otList.value[index].id);
                   },
                   child: Text(
-                    labels?.submit,
+                    labels.submit,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -335,8 +339,10 @@ class OvertimeDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20,bottom: 10),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     controller
                         .cancelOvertime(controller.otList.value[index].id);

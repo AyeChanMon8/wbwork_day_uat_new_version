@@ -2,11 +2,11 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/controllers/overtime_response_list_controller.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../controllers/overtime_response_list_controller.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class OverTimeResponseListPage extends StatelessWidget {
   OverTimeResponseListController controller = Get.find();

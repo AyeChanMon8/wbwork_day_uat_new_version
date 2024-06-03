@@ -1,12 +1,11 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/maintenance_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/maintenance_list.dart';
+import '../controllers/maintenance_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/maintenance_list.dart';
 
 import 'approved_maintenance_list_page.dart';
 
@@ -44,7 +43,7 @@ class _StatePlanTripTabBar extends State<MaintenanceTabBar> {
       length: tabbar,
       child: Scaffold(
         appBar: AppBar(
-            title: Text(labels?.maintenanceList, style: appbarTextStyle()),
+            title: Text(labels.maintenanceList, style: appbarTextStyle()),
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

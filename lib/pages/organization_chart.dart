@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:winbrother_hr_app/models/partner.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/localization.dart';
+import '../models/partner.dart';
+import '../my_class/my_style.dart';
+import '../localization.dart';
 import 'package:graphite/core/matrix.dart';
 import 'package:graphite/core/typings.dart';
 import 'package:graphite/graphite.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:winbrother_hr_app/controllers/organization_chart_controller.dart';
+import '../controllers/organization_chart_controller.dart';
 
 // const employeeList =
 //     '['
@@ -94,7 +94,7 @@ class OrganizationChart extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50)),
-                                    child: value.image_128 == null
+                                    child: value!.image_128 == null
                                         ? Image.memory(
                                             base64Decode(
                                                 "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"),
@@ -270,7 +270,7 @@ class OrganizationChart extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50)),
-                                    child: value.image_128 == null
+                                    child: value!.image_128 == null
                                         ? Image.memory(
                                             base64Decode(
                                                 "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"),
@@ -477,7 +477,7 @@ class OrganizationChart extends StatelessWidget {
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(50)),
-                                                child: value.image_128 == null
+                                                child: value!.image_128 == null
                                                     ? Image.memory(
                                                         base64Decode(
                                                             "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"),
@@ -496,7 +496,7 @@ class OrganizationChart extends StatelessWidget {
                                             ),
                                             Center(
                                                 child: Text(
-                                              value.name,
+                                              value!.name,
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   color: backgroundIconColor,
@@ -507,7 +507,7 @@ class OrganizationChart extends StatelessWidget {
                                             ),
                                             Center(
                                                 child: Text(
-                                              value.job_id.name,
+                                              value!.job_id.name,
                                               style: datalistStyle(),
                                             )),
                                             Divider(
@@ -668,7 +668,7 @@ class OrganizationChart extends StatelessWidget {
 }
 
 class CustomPage extends StatefulWidget {
-  CustomPage({Key key}) : super(key: key);
+  CustomPage({Key? key}) : super(key: key);
 
   @override
   _CustomPageState createState() {
@@ -681,14 +681,14 @@ class _CustomPageState extends State<CustomPage> {
   int _selectedIndex = 1;
   Map<String, bool> selected = {};
 
-  void _onItemSelected(String nodeId) {
+  void _onItemSelected(String? nodeId) {
     setState(() {
-      selected[nodeId] =
-          selected[nodeId] == null || !selected[nodeId] ? true : false;
+      selected[nodeId!] =
+          selected[nodeId] == null || !selected[nodeId]! ? true : false;
     });
   }
 
-  Widget adminBox(BuildContext context, String emp_image, String emp_name) {
+  Widget? adminBox(BuildContext context, String emp_image, String emp_name) {
     Container(
       color: Colors.transparent,
       child: Row(
@@ -754,7 +754,7 @@ class _CustomPageState extends State<CustomPage> {
     );
   }
 
-  Widget employeeBox(BuildContext context, String emp_image, String emp_name) {
+  Widget? employeeBox(BuildContext context, String emp_image, String emp_name) {
     Container(
       color: Colors.transparent,
       child: Row(
@@ -844,7 +844,7 @@ class _CustomPageState extends State<CustomPage> {
         list: list,
         cellWidth: 180.0,
         // cellHeigh: ,
-        cellPadding: 20.0,
+        cellPadding: 20,
         contactEdgesDistance: 0.0,
         pathBuilder: customEdgePathBuilder,
         orientation: MatrixOrientation.Vertical,

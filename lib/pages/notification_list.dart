@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +9,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/notification_controller.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/notification_controller.dart';
+import '../my_class/my_app_bar.dart';
+import '../utils/app_utils.dart';
 
 import '../localization.dart';
 class NotificationMessageList extends StatefulWidget {
@@ -28,7 +28,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
     NotificationController(),
   );
   final box = GetStorage();
-  String image;
+  late String image;
   String selectall = "Select All";
   void initData() async {
     await controller.retrieveMsgs();
@@ -176,7 +176,9 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
     image = box.read('emp_image');
     return Material(
         child: Scaffold(
-          appBar: appbar(context, "Notifications",image),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(8.0),
+            child: appbar(context, "Notifications",image)),
           body: Stack(
             children: <Widget>[
               // new Container(
@@ -263,6 +265,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                            controller.isLoading.value = true;
                                            //_loadData();
                                       }
+                                      return true;
                                     },
                                     child: ListView.separated(
                                 separatorBuilder: (context, index) => Divider(

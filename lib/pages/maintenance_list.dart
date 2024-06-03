@@ -4,14 +4,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/controllers/maintenance_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/main.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/maintenance_controller.dart';
+import '../localization.dart';
+import '../main.dart';
+import '../models/maintenance_request_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class MaintenanceListPage extends StatefulWidget {
   final String pageType;

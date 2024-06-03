@@ -1,15 +1,15 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/controllers/overtime_response_controller.dart';
-import 'package:winbrother_hr_app/controllers/overtime_response_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/overtime_response.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/overtime_response_controller.dart';
+import '../controllers/overtime_response_list_controller.dart';
+import '../localization.dart';
+import '../models/employee_id.dart';
+import '../models/overtime_response.dart';
+import '../my_class/my_app_bar.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 import '../controllers/overtime_list_controller.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
@@ -18,14 +18,14 @@ import 'pre_page.dart';
 
 class OvertimeResponseDetails extends StatelessWidget {
   OverTimeResponseListController controller = Get.find();
-  int index;
-  String state;
-  var otcList = List<OvertimeResponse>();
+  late int index;
+  late String state;
+  late var otcList = <OvertimeResponse>[];
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     var arg = Get.arguments;
-    index = int.tryParse(arg.toString().split("state_")[0]);
+    index = int.tryParse(arg.toString().split("state_")[0])!;
     state = arg.toString().split("state_")[1];
     print("index$index");
     print("state$state");
@@ -43,7 +43,9 @@ class OvertimeResponseDetails extends StatelessWidget {
       }
    // }
     return Scaffold(
-      appBar: appbar(context, labels?.overtimeDetails,user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.overtimeDetails,user_image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +76,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.name,
+                  labels.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -100,7 +102,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.title,
+                  labels.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -122,7 +124,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.category,
+                  labels.category,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -146,7 +148,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "Start Date Time",
-                  labels?.startDate + " :",
+                  labels.startDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -169,7 +171,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "End Date Time",
-                  (labels?.endDate + " :"),
+                  (labels.endDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -190,7 +192,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -230,7 +232,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.name,
+                  labels.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -256,7 +258,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.title,
+                  labels.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -279,7 +281,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.category,
+                  labels.category,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -303,7 +305,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "Start Date Time",
-                  labels?.startDate + " :",
+                  labels.startDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -326,7 +328,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "End Date Time",
-                  (labels?.endDate + " :"),
+                  (labels.endDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -347,7 +349,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -386,7 +388,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.name,
+                  labels.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -413,7 +415,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.title,
+                  labels.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -435,7 +437,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.category,
+                  labels.category,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -459,7 +461,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "Start Date Time",
-                  labels?.startDate + " :",
+                  labels.startDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -482,7 +484,7 @@ class OvertimeResponseDetails extends StatelessWidget {
               Container(
                 child: Text(
                   // "End Date Time",
-                  (labels?.endDate + " :"),
+                  (labels.endDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -503,7 +505,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.duration,
+                  labels.duration,
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -537,15 +539,17 @@ class OvertimeResponseDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     if(state=='draft'){
                       controller.approveOvertime(controller.otDraftList[index].id);
                     }
                   },
                   child: Text(
-                    labels?.accept,
+                    labels.accept,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -557,8 +561,10 @@ class OvertimeResponseDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     Get.toNamed(Routes.OVERTIME_DECLINE, arguments: index);
 
@@ -566,7 +572,7 @@ class OvertimeResponseDetails extends StatelessWidget {
                     //     controller.travelLineList.value[index].id);
                   },
                   child: Text(
-                    labels?.decline,
+                    labels.decline,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -576,7 +582,7 @@ class OvertimeResponseDetails extends StatelessWidget {
     );
   }
 
-  Widget confirmDialog(BuildContext context, int index) {
+  Widget? confirmDialog(BuildContext context, int index) {
     final labels = AppLocalizations.of(context);
 
     //   AlertDialog(

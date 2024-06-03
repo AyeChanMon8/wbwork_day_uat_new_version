@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:io';
@@ -11,15 +10,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_request_controller.dart';
-import 'package:winbrother_hr_app/controllers/leave_request_update_controller.dart';
-import 'package:winbrother_hr_app/models/leave_list_response.dart';
-import 'package:winbrother_hr_app/models/leave_type.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/leave_list_controller.dart';
+import '../controllers/leave_request_controller.dart';
+import '../controllers/leave_request_update_controller.dart';
+import '../models/leave_list_response.dart';
+import '../models/leave_type.dart';
+import '../my_class/my_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../utils/app_utils.dart';
 
 class LeaveRequestUpdate extends StatefulWidget {
   static void showToast(String msg) {
@@ -37,31 +36,31 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
 
   int _value = 1;
 
-  File imageFile;
+  late File imageFile;
 
   bool keyboardOpen = false;
 
-  String starttime;
+  late String starttime;
 
-  String endtime;
+  late String endtime;
 
-  DateTime starttimeDate;
+  late DateTime starttimeDate;
 
-  DateTime endtimeDate;
+  late DateTime endtimeDate;
 
-  String duration;
+  late String duration;
 
   final picker = ImagePicker();
 
-  String img64;
+  late String img64;
 
-  Uint8List bytes;
+  late Uint8List bytes;
 
-  DateTime fromData;
+  late DateTime fromData;
 
-  File image;
+  late File image;
 
-  LeaveListResponse leavelistreponse;
+  late LeaveListResponse leavelistreponse;
 
   DateTime selectedDate = DateTime.now();
 
@@ -85,13 +84,13 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
 
   final box = GetStorage();
 
-  String user_image;
+  late String user_image;
 
-  LeaveType leaves;
+  late LeaveType leaves;
 
   bool checkLeave = true;
   bool updateTime = true;
-  String idData;
+  late String idData;
   @override
   void initState() {
 
@@ -106,9 +105,9 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
   }
 
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -179,12 +178,12 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
   }
 
   Future<Null> _selectDate(BuildContext context, String date) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: date == 'Start Date' ? DateTime.now() : selectedFromDate,
       firstDate: date == 'Start Date' ? DateTime.now() : selectedFromDate,
       lastDate: DateTime.now().add(Duration(days: 365)),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -193,9 +192,9 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -381,7 +380,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
                               ],
                               onChanged: (value) {
                                 updateTime = false;
-                                controller.updateLeaveInterval(index, value);
+                                controller.updateLeaveInterval(index, value!);
                               }),
                         ),
                       ),
@@ -419,7 +418,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -441,10 +440,10 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (LeaveType value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeLeaveTypeDropdown(value);
+                          onChanged: (LeaveType? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller.onChangeLeaveTypeDropdown(value!);
                           },
                           items:
                           controller.leavetype_list.map((LeaveType leave) {
@@ -617,7 +616,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
                         contentPadding: EdgeInsets.all(20.0),
                         hintText: "Description",
                         border: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.grey[50])),
+                            borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                       ),
                     ),
                   )),
@@ -649,7 +648,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
                                 Expanded(
                                     flex: 2,
                                     child: Image.file(
-                                        controller.selectedImage.value)),
+                                        controller.selectedImage.value!)),
                                 Expanded(
                                   flex: 1,
                                   child: InkWell(
@@ -718,8 +717,8 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    File image = File(pickedFile.path);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);

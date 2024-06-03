@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -8,24 +7,24 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:winbrother_hr_app/bindings/leave_request_update_bindings.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/leave_line.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/pages/leave_request_update.dart';
-import 'package:winbrother_hr_app/pages/pre_page.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../bindings/leave_request_update_bindings.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
+import '../models/leave_line.dart';
+import '../my_class/my_app_bar.dart';
+import '../pages/leave_request_update.dart';
+import '../pages/pre_page.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
 
 class LeaveDetails extends StatelessWidget {
   LeaveListController controller = Get.find();
-  int index;
-  String role_category;
+  int index = 0;
+  String role_category = '';
   final box = GetStorage();
-  String image;
+  String image = '';
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -49,7 +48,9 @@ class LeaveDetails extends StatelessWidget {
       }
     }
     return Scaffold(
-      appBar: appbar(context, labels?.leaveDetails, image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.leaveDetails, image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,21 +107,21 @@ class LeaveDetails extends StatelessWidget {
             margin: EdgeInsets.only(left: 20),
             // width: 80,
             child: Text(
-              labels?.startDate,
+              labels.startDate,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 80,
             child: Text(
-              labels?.endDate,
+              labels.endDate,
               style: subtitleStyle(),
             ),
           ),
           Container(
             // width: 50,
             child: Text(
-              labels?.dayOff,
+              labels.dayOff,
               style: subtitleStyle(),
             ),
           ),
@@ -205,7 +206,7 @@ class LeaveDetails extends StatelessWidget {
   }
 
   Widget leaveData(BuildContext context) {
-    Uint8List bytes;
+    late Uint8List bytes;
     if (controller.leaveList.value[index].attachment != null) {
       if (controller.leaveList.value[index].attachment.isNotEmpty) {
         bytes = base64Decode(controller.leaveList.value[index].attachment);
@@ -224,7 +225,7 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.leaveType + " :",
+                  labels.leaveType + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),
@@ -249,7 +250,7 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.fromDate + " :",
+                  labels.fromDate + " :",
                   style: datalistStyle(),
                 ),
               ),
@@ -271,7 +272,7 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.toDate + " :"),
+                  (labels.toDate + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -337,14 +338,14 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.description + " :"),
+                  (labels.description + " :"),
                   style: datalistStyle(),
                 ),
               ),
               Container(
                 child: controller.leaveList.value[index].description != null
                     ? Flexible(
-                      child: Text(controller.leaveList.value[index].description.capitalize,
+                      child: Text(controller.leaveList.value[index].description.capitalize!,
                           style: subtitleStyle()),
                     )
                     : Text('-'),
@@ -359,13 +360,13 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  (labels?.status + " :"),
+                  (labels.status + " :"),
                   style: datalistStyle(),
                 ),
               ),
               Container(
                 child: controller.leaveList.value[index].state != null
-                    ? Text(controller.leaveList.value[index].state.capitalize,
+                    ? Text(controller.leaveList.value[index].state.capitalize!,
                         style: subtitleStyle())
                     : Text('-'),
               ),
@@ -379,7 +380,7 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels?.attachment + " : ",
+                  labels.attachment + " : ",
                   // (labels?.description + " :"),
                   style: datalistStyle(),
                 ),
@@ -464,15 +465,17 @@ class LeaveDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     controller.approveLeave(
                       controller.leaveList.value[index].id,
                     );
                   },
                   child: Text(
-                    labels?.approve,
+                    labels.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -484,14 +487,16 @@ class LeaveDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: white,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: white,
+                  ),
                   onPressed: () {
                     controller
                         .declinedLeave(controller.leaveList.value[index].id);
                   },
                   child: Text(
-                    labels?.cancel,
+                    labels.cancel,
                     style: TextStyle(color: Color.fromRGBO(63, 51, 128, 1)),
                   ),
                 )),
@@ -511,8 +516,10 @@ class LeaveDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                     backgroundColor: textFieldTapColor,
+                    ),
                     onPressed: () {
                       //Get.toNamed(Routes.LEAVE_REQUEST, arguments: index);
                       Get.toNamed(Routes.LEAVE_REQUEST_UPDATE,
@@ -534,8 +541,10 @@ class LeaveDetails extends StatelessWidget {
                     border: Border.all(color: Color.fromRGBO(63, 51, 128, 1))),
                 height: 45,
                 margin: EdgeInsets.only(left: 10, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     confirmDialog(
                         controller.leaveList.value[index].id, context);
@@ -553,7 +562,7 @@ class LeaveDetails extends StatelessWidget {
   }
 
   confirmDialog(int id, BuildContext context) {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         "No",
         style: TextStyle(color: Colors.black),
@@ -562,7 +571,7 @@ class LeaveDetails extends StatelessWidget {
         Navigator.pop(context);
       },
     );
-    Widget continueButton = FlatButton(
+    Widget continueButton = TextButton(
       child: Text(
         "Yes",
         style: TextStyle(color: Colors.black),
@@ -600,14 +609,16 @@ class LeaveDetails extends StatelessWidget {
                 // width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 10),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: textFieldTapColor,
+                    ),
                     onPressed: () {
                       controller.submitLeave(
                           controller.leaveList.value[index].id, context);
                     },
                     child: Text(
-                      labels?.submit,
+                      labels.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),
@@ -637,8 +648,8 @@ class LeaveDetails extends StatelessWidget {
 }
 
 class ImageDialog extends StatelessWidget {
-  Uint8List bytes;
-  ImageDialog({this.bytes});
+  late Uint8List bytes;
+  ImageDialog({required this.bytes});
   @override
   Widget build(BuildContext context) {
     return Dialog(

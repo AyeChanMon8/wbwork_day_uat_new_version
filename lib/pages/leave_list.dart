@@ -6,12 +6,12 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/leave_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/leave_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class LeaveListPage extends StatefulWidget {
 
@@ -56,7 +56,7 @@ class _LeaveListPage extends State<LeaveListPage>{
                   margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.LEAVE_DETAILS, arguments: index).then((value) {
+                      Get.toNamed(Routes.LEAVE_DETAILS, arguments: index)!.then((value) {
                         if(value!=null){
                           controller.offset.value =0;
                           controller.getLeaveList();

@@ -1,18 +1,18 @@
-// @dart=2.9
+
 
 //import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/payslip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/payslip_controller.dart';
+import '../localization.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 class PayslipListPage extends StatefulWidget {
   @override
@@ -21,8 +21,8 @@ class PayslipListPage extends StatefulWidget {
 class _PayslipListPageState extends State<PayslipListPage> {
   final PayslipController controller = Get.put(PayslipController());
   final box = GetStorage();
-  String net;
-  String image;
+  late String net;
+  late String image;
   @override
   void initState() {
     super.initState();

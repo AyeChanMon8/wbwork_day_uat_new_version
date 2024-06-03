@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -13,16 +13,16 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/controllers/out_of_pocket_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_line.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_category.dart';
-import 'package:winbrother_hr_app/models/travel_expense/travel_expense_product.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/expense_travel_list/out_of_pocket_list.dart';
+import '../controllers/out_of_pocket_controller.dart';
+import '../localization.dart';
+import '../models/fleet_model.dart';
+import '../models/travel_expense/pocket_line.dart';
+import '../models/travel_expense/travel_expense_category.dart';
+import '../models/travel_expense/travel_expense_product.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 class OutOfPocketCreate extends StatefulWidget {
   static void showToast(String msg) {
@@ -39,17 +39,17 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
 
   int _value = 1;
 
-  File imageFile;
+  late File imageFile;
 
   bool keyboardOpen = false;
 
   final picker = ImagePicker();
-  List<PocketLine> datalist;
-  String img64;
-  int index;
-  Uint8List bytes;
+  late List<PocketLine> datalist;
+  late String img64;
+  late int index;
+  late Uint8List bytes;
 
-  File image;
+  late File image;
   var formatter = new NumberFormat("###,###", "en_US");
   DateTime selectedDate = DateTime.now();
 
@@ -71,20 +71,20 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
 
   TextEditingController qtyController = TextEditingController(text: "1");
 
-  String user_image;
+  late String user_image;
   var price_value = 0.0;
   var amount_value = 0.0;
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     controller.setCameraImage(compressedFile, img64);
   }
 
-  String expenseValue;
+  late String expenseValue;
   List expenseData = ["Breakfast", "Lunch", "Dinner"];
 
   nullPhoto() {
@@ -94,10 +94,10 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
   }
 
   Future getCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera ,maxHeight: 480,
+    final pickedFile = await picker.pickImage(source: ImageSource.camera ,maxHeight: 480,
         maxWidth: 640,imageQuality: 100);
     File rotatedImage =
-          await FlutterExifRotation.rotateImage(path: pickedFile.path);
+          await FlutterExifRotation.rotateImage(path: pickedFile!.path);
     File image = File(rotatedImage.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
@@ -141,12 +141,12 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
   }
 
   Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1988),
       lastDate: DateTime.now(),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             dialogBackgroundColor: Colors.white,
@@ -155,9 +155,9 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             ),
             buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
             highlightColor: Colors.grey[400],
-            textSelectionColor: Colors.grey,
+            // textSelectionColor: Colors.grey,
           ),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -177,6 +177,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
     } else {
      // return Image.file(imageFile, width: 50, height: 50);
     }
+    return SizedBox();
   }
 
   Widget expenseCategoryDropDown() {
@@ -189,7 +190,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -211,8 +212,8 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (TravelExpenseCategory value) {
-                            controller.onChangeExpenseCategoryDropdown(value);
+                          onChanged: (TravelExpenseCategory? value) {
+                            controller.onChangeExpenseCategoryDropdown(value!);
                           },
                           items: controller.travel_expense_category_list
                               .map((TravelExpenseCategory travel) {
@@ -303,7 +304,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -325,8 +326,8 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (controller.selectedExpenseCategory.fuel != null&&controller.selectedExpenseCategory.fuel) ? null :(TravelExpenseProduct value) {
-                            controller.onChangeExpenseProductDropdown(value);
+                          onChanged: (controller.selectedExpenseCategory.fuel != null&&controller.selectedExpenseCategory.fuel) ? null :(TravelExpenseProduct? value) {
+                            controller.onChangeExpenseProductDropdown(value!);
                           },
                           items: controller.travel_expense_product_list
                               .map((TravelExpenseProduct product) {
@@ -362,7 +363,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -384,8 +385,8 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            controller.onChangeVehicleDropdown(value);
+                          onChanged: (Fleet_model? value) {
+                            controller.onChangeVehicleDropdown(value!);
                           },
                           items: controller.fleetList
                               .map((Fleet_model vehicle) {
@@ -419,7 +420,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[350], width: 2),
+            border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
             borderRadius: const BorderRadius.all(
               const Radius.circular(1),
             ),
@@ -436,9 +437,9 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                       style: TextStyle(color: Colors.black),
                     ),
                     value: expenseValue,
-                    onChanged: (String newValue) {
+                    onChanged: (String? newValue) {
                       setState(() {
-                        expenseValue = newValue;
+                        expenseValue = newValue!;
                       });
                     },
                     items: expenseData.map((value) {
@@ -466,7 +467,9 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
     }
     user_image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels.outOfPocket, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.outOfPocket, user_image)),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -606,7 +609,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                                       Expanded(
                                           flex: 2,
                                           child: Image.file(
-                                              controller.selectedImage.value, width: 150, height: 150)),
+                                              controller.selectedImage.value!, width: 150, height: 150)),
                                       Expanded(
                                         flex: 1,
                                         child: InkWell(
@@ -662,7 +665,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                               AppUtils.showDialog(
                                   labels.warning, labels.canNotAddZeroPrice);
                             }
-                            else if(controller.image_base64==null||controller.image_base64.isEmpty){
+                            else if(controller.image_base64==null||controller.image_base64!.isEmpty){
                               AppUtils.showDialog(
                                   labels.warning, labels.addAttachment);
                             }
@@ -721,8 +724,10 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                 height: 45,
                 margin:
                     EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
-                child: RaisedButton(
-                    color: textFieldTapColor,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: textFieldTapColor,
+                    ),
                     onPressed: () {
                       if (controller.outofpocketList.length > 0)
                         controller.requestOutOfPocket();

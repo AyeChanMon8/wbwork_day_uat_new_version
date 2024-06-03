@@ -1,13 +1,12 @@
-// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/pages/approval_loan_list.dart';
-import 'package:winbrother_hr_app/pages/approval_route_list.dart';
-import 'package:winbrother_hr_app/pages/approved_loan_list.dart';
-import 'package:winbrother_hr_app/pages/approved_route_list.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../pages/approval_loan_list.dart';
+import '../pages/approval_route_list.dart';
+import '../pages/approved_loan_list.dart';
+import '../pages/approved_route_list.dart';
 
 class LoanApprovalTabBar extends StatefulWidget {
   @override
@@ -16,7 +15,7 @@ class LoanApprovalTabBar extends StatefulWidget {
 
 class _StateLoanApprovalTabBar extends State<LoanApprovalTabBar> {
 
-  int tabbar;
+  late int tabbar;
   @override
   void initState() {
     super.initState();
@@ -29,7 +28,7 @@ class _StateLoanApprovalTabBar extends State<LoanApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels?.loan, style: appbarTextStyle()),
+              title: Text(labels.loan, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/auth_controller.dart';
-import 'package:winbrother_hr_app/controllers/forget_password_controller.dart';
-import 'package:winbrother_hr_app/controllers/login_controller.dart';
-import 'package:winbrother_hr_app/controllers/otp_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
+import '../constants/globals.dart';
+import '../controllers/auth_controller.dart';
+import '../controllers/forget_password_controller.dart';
+import '../controllers/login_controller.dart';
+import '../controllers/otp_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
 
 class OtpConfirmPage extends StatelessWidget {
   OtpController controller = Get.put(OtpController());
@@ -20,8 +20,8 @@ class OtpConfirmPage extends StatelessWidget {
   bool _obscureText = true;
   // String barcode;
   var box = GetStorage();
-  String otp_code;
-  String emp_id;
+  late String otp_code;
+  late String emp_id;
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -65,14 +65,16 @@ class OtpConfirmPage extends StatelessWidget {
                 width: double.infinity,
                 height: 45,
                 margin: EdgeInsets.only(left: 20, right: 20),
-                child: RaisedButton(
-                  color: textFieldTapColor,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: textFieldTapColor,
+                  ),
                   onPressed: () {
                     // controller.forgetPassword();
                     controller.compareOtpCode(otp_code,emp_id);
                   },
                   child: Text(
-                    (labels?.submit),
+                    (labels.submit),
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),

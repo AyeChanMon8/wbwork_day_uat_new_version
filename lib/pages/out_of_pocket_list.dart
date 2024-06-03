@@ -1,17 +1,17 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/expense_travel_list/out_of_pocket_list.dart';
-import 'package:winbrother_hr_app/controllers/out_of_pocket_controller.dart';
-import 'package:winbrother_hr_app/controllers/travel_list_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/routes/app_pages.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/expense_travel_list/out_of_pocket_list.dart';
+import '../controllers/out_of_pocket_controller.dart';
+import '../controllers/travel_list_controller.dart';
+import '../localization.dart';
+import '../my_class/my_style.dart';
+import '../routes/app_pages.dart';
+import '../utils/app_utils.dart';
 
 import 'out_of_pocket_create.dart';
 
@@ -52,6 +52,7 @@ class _OutOfPocketListState extends State<OutOfPocketList> {
                 controller.isLoading.value = true;
                 _loadData();
               }
+              return true;
             },
             child: ListView.builder(
               shrinkWrap: true,
@@ -144,7 +145,7 @@ class _OutOfPocketListState extends State<OutOfPocketList> {
                                 Text("Finance approve", style: subtitleStyle(),):
                                 Text(
                                   controller.outofpocketExpenseList.value[index]
-                                      .state.capitalize,
+                                      .state.capitalize!,
                                   style: subtitleStyle(),
                                 ),
                               ),

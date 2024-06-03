@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 //import 'package:easy_localization/easy_localization.dart';
 import 'dart:convert';
@@ -15,50 +15,51 @@ import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:winbrother_hr_app/controllers/payslip_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/payslip.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/my_class/theme.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../controllers/payslip_controller.dart';
+import '../localization.dart';
+import '../models/payslip.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../my_class/theme.dart';
+import '../utils/app_utils.dart';
 class PaySlipPage extends StatefulWidget {
   @override
   _PaySlipPageState createState() => _PaySlipPageState();
 }
 
 class _PaySlipPageState extends State<PaySlipPage> {
-  int pindex;
+  late int pindex;
 
   final box = GetStorage();
 
-  String image;
+  late String image;
 
-  String basic;
+  late String basic;
 
-  String inc;
+  late String inc;
 
-  String ot;
+  late String ot;
 
-  String otdt;
+  late String otdt;
 
-  String ins;
+  late String ins;
 
-  String unpaid;
+  late String unpaid;
 
-  String eloan;
+  late String eloan;
 
-  String tloan;
+  late String tloan;
 
-  String ssb;
+  late String ssb;
 
-  String gross;
+  late String gross;
 
-  String ict;
+  late String ict;
 
-  String net;
+  late String net;
 
   var format = NumberFormat('#,###.#');
 
@@ -234,14 +235,16 @@ getCategoryList(){
     String user_image = box.read('emp_image');
     String usercompany = box.read('emp_company_name');
     return Scaffold(
-      appBar: appbar(context, labels?.paySlip, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels?.paySlip, user_image)),
       body: SingleChildScrollView(
         child: Container(
           margin : EdgeInsets.only(left: 20,top: 20,right: 20),
           child: Column(children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: FlatButton(
+                child: TextButton(
                   child: Icon(
                     Icons.download_sharp
                   ),
