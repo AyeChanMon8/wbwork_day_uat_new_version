@@ -12,6 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
@@ -40,7 +41,7 @@ class RemindersDetails extends StatelessWidget {
   }
   Widget pdfView(String pathPDF){
     print("pdfView");
-    return PDFViewerScaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Document"),
           actions: <Widget>[
@@ -50,7 +51,7 @@ class RemindersDetails extends StatelessWidget {
             ),
           ],
         ),
-        path: pathPDF.toString());
+        body: SfPdfViewer.network(pathPDF.toString()),);
   }
   @override
   Widget build(BuildContext context) {
@@ -153,10 +154,10 @@ class FullPdfViewerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PDFViewerScaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Document"),
         ),
-        path: pdfPath);
+        body: SfPdfViewer.network(pdfPath));
   }
 }

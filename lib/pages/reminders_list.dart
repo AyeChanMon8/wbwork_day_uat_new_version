@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:wb_workday_uat_new_version/ui/components/textbox.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
@@ -24,7 +25,6 @@ import '../my_class/my_style.dart';
 import '../pages/announcements_details.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
-import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 
 import 'leave_detail.dart';
 
@@ -44,7 +44,7 @@ class _RemindersListState extends State<RemindersList> {
   String selectall = "Select All";
 
   void initData() async {
-    await controller.getRemindersList();
+    controller.getRemindersList();
   }
 
   @override
@@ -68,16 +68,16 @@ class _RemindersListState extends State<RemindersList> {
           // String message =
           // event.notification.jsonRepresentation().replaceAll("\\n", "\n");
 
-          String message_type = null;
-          Map<String, dynamic> dataMap = event.notification.additionalData;
+          String message_type = "";
+          Map<String, dynamic> dataMap = event.notification.additionalData!;
           if (dataMap != null && dataMap.length > 0) {
             message_type = dataMap["type"];
           }
 
           if (message_type != null && message_type == "noti") {
             controller.getRemindersList();
-            String title = event.notification.title;
-            String body = event.notification.body;
+            String title = event.notification.title!;
+            String body = event.notification.body!;
             Get.snackbar("Notification $title", body);
           }
         } catch (error) {}
@@ -98,7 +98,7 @@ class _RemindersListState extends State<RemindersList> {
 
   Widget pdfView(String pathPDF) {
     print("pdfView");
-    return PDFViewerScaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Document"),
           actions: <Widget>[
@@ -108,7 +108,7 @@ class _RemindersListState extends State<RemindersList> {
             ),
           ],
         ),
-        path: pathPDF.toString());
+        body: SfPdfViewer.network(pathPDF.toString()));
   }
 
   @override
@@ -256,13 +256,13 @@ class _RemindersListState extends State<RemindersList> {
                                                             .reminderList[index]
                                                             .has_read
                                                         ? Icon(
-                                                            Entypo.dot_single,
+                                                            Icons.circle,
                                                             color: Colors
                                                                 .transparent,
                                                             size: 30,
                                                           )
                                                         : Icon(
-                                                            Entypo.dot_single,
+                                                            Icons.circle,
                                                             color: Color(
                                                                 0xff1D84F9),
                                                             size: 30,
@@ -424,8 +424,7 @@ class _RemindersListState extends State<RemindersList> {
                                                       index);
                                                 },
                                                 child: Icon(
-                                                  MaterialCommunityIcons
-                                                      .trash_can,
+                                                  Icons.delete,
                                                   color: Colors.red,
                                                 )),
                                             // SizedBox(width: 3,),
