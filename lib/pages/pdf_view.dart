@@ -3,7 +3,6 @@
 import 'dart:io';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import '../my_class/my_app_bar.dart';
 class PdfView extends StatefulWidget {
   String pathPDF;

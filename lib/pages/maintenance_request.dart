@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:io' as Io;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -13,18 +13,18 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/size/gf_size.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/controllers/maintenance_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/fleet_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_product_category_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
+import '../controllers/maintenance_controller.dart';
+import '../localization.dart';
+import '../models/fleet_model.dart';
+import '../models/maintenance_product_category_model.dart';
+import '../models/maintenance_request_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:winbrother_hr_app/ui/components/textbox.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../ui/components/textbox.dart';
+import '../utils/app_utils.dart';
 import '../my_class/my_style.dart';
 import 'leave_detail.dart';
 
@@ -40,17 +40,17 @@ class MaintenanceRequest extends StatefulWidget {
 class _MaintenanceRequestState extends State<MaintenanceRequest> {
   MaintenanceController controller = Get.find();
 
-  File imageFile;
+  late File imageFile;
 
   bool keyboardOpen = false;
 
   final picker = ImagePicker();
 
-  String img64;
+  late String img64;
 
-  Uint8List bytes;
+  late Uint8List bytes;
 
-  File image;
+  late File image;
 
 
   DateTime selectedDate = DateTime.now();
@@ -64,12 +64,12 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
   var date = new DateFormat.yMd().add_jm().format(new DateTime.now());
 
   final box = GetStorage();
-  String user_image;
+  late String user_image;
 
   Future getImage(String from) async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -139,9 +139,9 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
   }
 
   Future getCamera(String from) async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -244,7 +244,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -267,9 +267,9 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Maintenance_product_category_model value) {
-                            print(value.name);
-                            print(value.id);
+                          onChanged: (Maintenance_product_category_model? value) {
+                            print(value!.name);
+                            print(value!.id);
                             controller.onChangeProductCategoryDropdown(value);
                           },
                           items:
@@ -308,7 +308,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -331,9 +331,9 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Product_id value) {
-                            print(value.name);
-                            print(value.id);
+                          onChanged: (Product_id? value) {
+                            print(value!.name);
+                            print(value!.id);
                             controller.onChangeProductDropdown(value);
                           },
                           items:
@@ -372,7 +372,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -395,8 +395,8 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (String value) {
-                            controller.onChangeProductTypeDropdown(value);
+                          onChanged: (String? value) {
+                            controller.onChangeProductTypeDropdown(value!);
                           },
                           items:[
                             DropdownMenuItem<String>(
@@ -460,7 +460,9 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
     final labels = AppLocalizations.of(context);
     user_image = box.read('emp_image');
     return Scaffold(
-      appBar: appbar(context, labels.maintenance, user_image),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.maintenance, user_image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -504,7 +506,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                             hintText: labels.quantity,
                             hintStyle: middleHintLabelStyle(),
                             border: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.grey[50])),
+                                borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                           ),
                         ),
                       )),),
@@ -603,7 +605,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                         contentPadding: EdgeInsets.all(20.0),
                         hintText: labels.description,
                         border: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.grey[50])),
+                            borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                       ),
                     ),
                   )),
@@ -615,9 +617,6 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                 children: [
                   Text(labels.priority+' :',style: middleLabelStyle(),) ,
                   RatingBar.builder(
-                    onRatingUpdate: (rating) {
-                            print(rating);
-                    },
                     initialRating: 0,
                     minRating: 1,
                     direction: Axis.horizontal,
@@ -1156,7 +1155,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
             child: Container(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
                   ),
@@ -1178,8 +1177,8 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Fleet_model value) {
-                            print(value.name);
+                          onChanged: (Fleet_model? value) {
+                            print(value!.name);
                             print(value.id);
                             controller.onChangeVehicleDropdown(value);
                           },

@@ -2,7 +2,6 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,7 +15,7 @@ import '../utils/app_utils.dart';
 
 import '../localization.dart';
 class NotificationMessageList extends StatefulWidget {
-  NotificationMessageList({Key key}) : super(key: key);
+  NotificationMessageList({Key? key}) : super(key: key);
 
   @override
   _NotificationMessageListState createState() =>
@@ -31,7 +30,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
   late String image;
   String selectall = "Select All";
   void initData() async {
-    await controller.retrieveMsgs();
+    controller.retrieveMsgs();
   }
 
   @override
@@ -82,16 +81,16 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
           // String message =
           // event.notification.jsonRepresentation().replaceAll("\\n", "\n");
 
-          String message_type = null;
-          Map<String, dynamic> dataMap = event.notification.additionalData;
+          String message_type = '';
+          Map<String, dynamic> dataMap = event.notification.additionalData!;
           if (dataMap != null && dataMap.length > 0) {
             message_type = dataMap["type"];
           }
 
           if (message_type != null && message_type == "noti") {
             controller.retrieveMsgs();
-            String title = event.notification.title;
-            String body = event.notification.body;
+            String title = event.notification.title!;
+            String body = event.notification.body!;
             Get.snackbar("Notification $title", body);
           }
         } catch (error) {
@@ -313,12 +312,12 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                                  controller
                                                      .notificationList[index].has_read
                                                      ? Icon(
-                                                   Entypo.dot_single,
+                                                   Icons.circle,
                                                    color: Colors.transparent,
                                                    size: 30,
                                                  )
                                                      : Icon(
-                                                   Entypo.dot_single,
+                                                   Icons.circle,
                                                    color: Color(0xff1D84F9),
                                                    size: 30,
                                                  ),
@@ -363,8 +362,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                                               .notificationList[index],
                                                           index);
                                                     },
-                                                    child: Icon(MaterialCommunityIcons
-                                                        .trash_can,color: Colors.red,)),
+                                                    child: Icon(Icons.delete,color: Colors.red,)),
                                           ],
                                         ),
                                       ) ,
@@ -384,7 +382,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                                 content: Text(
                                                     "Are you sure you want to delete?"),
                                                 actions: <Widget>[
-                                                  FlatButton(
+                                                  TextButton(
                                                     child: Text(
                                                       "Cancel",
                                                       style: TextStyle(
@@ -394,7 +392,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                                       Navigator.of(context).pop();
                                                     },
                                                   ),
-                                                  FlatButton(
+                                                  TextButton(
                                                     child: Text(
                                                       "Delete",
                                                       style: TextStyle(

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
@@ -25,10 +26,10 @@ import 'leave_detail.dart';
 class AnnouncementsDetails extends StatelessWidget {
   final AnnouncementsController controller = Get.put(AnnouncementsController());
   final box = GetStorage();
-  int index;
-  String image;
-  List<String> announcement;
-  String announcementText;
+  late int index;
+  late String image;
+  late List<String> announcement;
+  late String announcementText;
   Future<String> _createFileFromString(String encodedStr) async {
     //final encodedStr = "put base64 encoded string here";
     Uint8List bytes = base64.decode(encodedStr);
@@ -119,7 +120,8 @@ class AnnouncementsDetails extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                child: Html(
+                child: 
+                Html(
                     onLinkTap: (link){
                       launch(link);
                     },

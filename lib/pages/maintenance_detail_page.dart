@@ -6,7 +6,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,14 +16,14 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:winbrother_hr_app/constants/globals.dart';
-import 'package:winbrother_hr_app/controllers/maintenance_controller.dart';
-import 'package:winbrother_hr_app/localization.dart';
-import 'package:winbrother_hr_app/models/maintenance_product_category_model.dart';
-import 'package:winbrother_hr_app/models/maintenance_request_model.dart';
-import 'package:winbrother_hr_app/my_class/my_app_bar.dart';
-import 'package:winbrother_hr_app/my_class/my_style.dart';
-import 'package:winbrother_hr_app/utils/app_utils.dart';
+import '../constants/globals.dart';
+import '../controllers/maintenance_controller.dart';
+import '../localization.dart';
+import '../models/maintenance_product_category_model.dart';
+import '../models/maintenance_request_model.dart';
+import '../my_class/my_app_bar.dart';
+import '../my_class/my_style.dart';
+import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
 
@@ -37,13 +37,13 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
   Maintenance_request_model maintenanceRequestModel = Get.arguments;
   final _formKey = GlobalKey<FormState>();
   final picker = ImagePicker();
-  String img64;
-  Uint8List bytes1;
-  Uint8List bytes2;
-  Uint8List bytes3;
-  Uint8List bytes4;
-  Uint8List bytes5;
-  Uint8List bytes6;
+  late String img64;
+  late Uint8List bytes1;
+  late Uint8List bytes2;
+  late Uint8List bytes3;
+  late Uint8List bytes4;
+  late Uint8List bytes5;
+  late Uint8List bytes6;
   var show_edit_image = true;
   var box = GetStorage();
   var emp_id = 0;
@@ -56,7 +56,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
 
     controller.getMaintenanceProductCategorys();
     controller.getMaintenanceProductList(0);
-    emp_id = int.tryParse(box.read("emp_id"));
+    emp_id = int.tryParse(box.read("emp_id"))!;
     print(maintenanceRequestModel.state);
     isDriver = box.read("is_driver");
     var employee_id = box.read('emp_id');
@@ -128,7 +128,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
     //controller.selectedFromDate.value = maintenanceRequestModel.startDate;
     var labels = AppLocalizations.of(context);
     return Scaffold(
-      appBar: appbar(context, labels.maintenance, ''),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: appbar(context, labels.maintenance, '')),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -379,7 +381,8 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             content: Stack(
-                              overflow: Overflow.visible,
+                              clipBehavior: Clip.none,
+                              // overflow: Overflow.visible,
                               children: <Widget>[
                                 Positioned(
                                   right: -40.0,
@@ -418,7 +421,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                                                       contentPadding: EdgeInsets.all(10.0),
                                                       hintText: "Qty",
                                                       border: OutlineInputBorder(
-                                                          borderSide: new BorderSide(color: Colors.grey[50])),
+                                                          borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                                                     ),
                                                   ),
                                                 )),),
@@ -429,10 +432,8 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                                               top: 14.0),
                                           child: GFButton(
                                             onPressed: () {
-                                              if (_formKey.currentState
-                                                  .validate()) {
-                                                _formKey.currentState
-                                                    .save();
+                                              if (_formKey.currentState!.validate()) {
+                                                _formKey.currentState!.save();
                                               }
                                               var product_ids = Maintenance_product_ids(
                                                   productId: controller.selectedProduct.value,
@@ -1158,7 +1159,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -1181,10 +1182,10 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Maintenance_product_category_model value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeProductCategoryDropdown(value);
+                          onChanged: (Maintenance_product_category_model? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller.onChangeProductCategoryDropdown(value!);
                           },
                           items:
                           controller.maintenanceProductCategorys.map((Maintenance_product_category_model model) {
@@ -1221,7 +1222,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -1244,10 +1245,10 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (Product_id value) {
-                            print(value.name);
-                            print(value.id);
-                            controller.onChangeProductDropdown(value);
+                          onChanged: (Product_id? value) {
+                            print(value!.name);
+                            print(value!.id);
+                            controller.onChangeProductDropdown(value!);
                           },
                           items:
                           controller.maintenanceProductList.map((Product_id product_id) {
@@ -1284,7 +1285,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
               // margin: EdgeInsets.only(right: 20),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[350], width: 2),
+                  border: Border.all(color: const Color.fromRGBO(214, 214, 214, 1), width: 2),
                   // Border.all(color: Colors.white, width: 2),
                   borderRadius: const BorderRadius.all(
                     const Radius.circular(1),
@@ -1307,8 +1308,8 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 30,
                           isExpanded: true,
-                          onChanged: (String value) {
-                            controller.onChangeProductTypeDropdown(value);
+                          onChanged: (String? value) {
+                            controller.onChangeProductTypeDropdown(value!);
                           },
                           items:[
                             DropdownMenuItem<String>(
@@ -1345,7 +1346,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
   }
   showOptions(var id,var from) {
     showModalBottomSheet(
-        context: Get.context,
+        context: Get.context!,
         builder: (BuildContext context) {
           return Container(
             height: 100,
@@ -1404,9 +1405,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
         });
   }
   Future getImage(int id,String from) async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     File compressedFile = await AppUtils.reduceImageFileSize(image);
     final bytes = Io.File(compressedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
@@ -1448,9 +1449,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
   }
 
   Future getCamera(int id,String from) async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    File image = File(pickedFile.path);
+    File image = File(pickedFile!.path);
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
     img64 = base64Encode(bytes);
     // setState(() {
@@ -1502,18 +1503,26 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                 alignment: Alignment.center,
                 child: Row(
                   children: [
-                    RaisedButton(
+                    ElevatedButton(
                         child: Text("Cancel",style: TextStyle(color: Colors.red),),
-                        color: Color.fromRGBO(
-                            255, 255, 255, 1.0),
+                        style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color.fromRGBO(
+                                          255, 255, 255, 1.0),
+                                ),
+                        // color: Color.fromRGBO(
+                        //     255, 255, 255, 1.0),
                         onPressed: () {
                           Get.back();
                         }),
                     SizedBox(width: 10,),
-                    RaisedButton(
+                    ElevatedButton(
                         child: Text("Update",style: TextStyle(color: Colors.white),),
-                        color: Color.fromRGBO(
-                            60, 47, 126, 1),
+                        style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromRGBO(
+                                        60, 47, 126, 1),
+                              ),
+                        // color: Color.fromRGBO(
+                        //     60, 47, 126, 1),
                         onPressed: () {
                           //controller.selectedToD
                           if(state=='start'){
@@ -1598,24 +1607,28 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
         title: labels.information,
         middleText: labels.wantDeletePhoto,
         actions: [
-          RaisedButton(onPressed: (){
+          ElevatedButton(onPressed: (){
             Get.back();
           },
             child: Text(labels.cancel,style: TextStyle(color: backgroundIconColor,fontWeight: FontWeight.bold),),
-            color: Colors.white,
+            style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                  ),
           ),
           maintenanceRequestModel.state=='done'||maintenanceRequestModel.state=='approve'||
               maintenanceRequestModel.state=='approved'||maintenanceRequestModel.state=='submit'?
           SizedBox():
-          RaisedButton(onPressed: (){
+          ElevatedButton(onPressed: (){
             Get.back();
             showOptions(maintenanceRequestModel.id,from);
 
           },
             child: Text(labels.edit,style: TextStyle(color:Colors.white),),
-            color: Colors.red,
+            style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
           ),
-          RaisedButton(onPressed: () async{
+          ElevatedButton(onPressed: () async{
             Get.back();
             await showDialog(
                 context: context,
@@ -1624,7 +1637,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                 ));
           },
             child: Text(labels.view,style: TextStyle(color:Colors.white),),
-            color: backgroundIconColor,
+            style: ElevatedButton.styleFrom(
+                    backgroundColor: backgroundIconColor,
+                  ),
           ),
         ]
     );
