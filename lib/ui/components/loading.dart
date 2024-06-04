@@ -41,14 +41,14 @@ class Loading extends StatelessWidget {
 
 OverlayState get _overlayState {
   final context = _tKey.currentContext;
-  if (context == null) return null;
+  if (context == null) return null!;
 
   NavigatorState? navigator;
   void visitor(Element element) {
     if (navigator != null) return;
 
     if (element.widget is Navigator) {
-      navigator = (element as StatefulElement).state;
+      navigator = (element as StatefulElement).state as NavigatorState?;
     } else {
       element.visitChildElements(visitor);
     }
@@ -57,7 +57,7 @@ OverlayState get _overlayState {
   context.visitChildElements(visitor);
 
   assert(navigator != null, '''unable to show overlay''');
-  return navigator.overlay;
+  return navigator!.overlay!;
 }
 
 /// To handle a loader for the application
@@ -115,7 +115,7 @@ Future<void> _showOverlay({Widget? child}) async {
     }
 
     final overlayEntry = OverlayEntry(
-      builder: (context) => child,
+      builder: (context) => child!,
     );
 
     overlay.insert(overlayEntry);
@@ -129,7 +129,7 @@ Future<void> _showOverlay({Widget? child}) async {
 
 Future<void> _hideOverlay() async {
   try {
-    _loaderEntry.remove();
+    _loaderEntry!.remove();
     _loaderShown = false;
   } catch (err) {
     debugPrint('Exception removing loading overlay\n${err.toString()}');

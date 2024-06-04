@@ -1,6 +1,6 @@
 
 
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+// import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../localization.dart';
@@ -25,7 +25,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int selectedIndex = 0;
-  String index;
+  late String index;
 
   PageController _controller = PageController(
     initialPage: 0,
@@ -76,40 +76,67 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             )
           : Container(
               color: Colors.white, child: Center(child: Text("no_internet"))),
-      bottomNavigationBar: FFNavigationBar(
-        theme: FFNavigationBarTheme(
-          barBackgroundColor: barBackgroundColorStyle,
-          selectedItemBorderColor: selectedItemBorderColorStyle,
-          selectedItemBackgroundColor: selectedItemBackgroundColorStyle,
-          selectedItemIconColor: selectedItemIconColorStyle,
-          selectedItemLabelColor: selectedItemLabelColorStyle,
-          showSelectedItemShadow: false,
-          barHeight: navigationBarHeightStyle,
-        ),
-        selectedIndex: selectedIndex,
-        onSelectTab: (index) {
+      // bottomNavigationBar: FFNavigationBar(
+      //   theme: FFNavigationBarTheme(
+      //     barBackgroundColor: barBackgroundColorStyle,
+      //     selectedItemBorderColor: selectedItemBorderColorStyle,
+      //     selectedItemBackgroundColor: selectedItemBackgroundColorStyle,
+      //     selectedItemIconColor: selectedItemIconColorStyle,
+      //     selectedItemLabelColor: selectedItemLabelColorStyle,
+      //     showSelectedItemShadow: false,
+      //     barHeight: navigationBarHeightStyle,
+      //   ),
+      //   selectedIndex: selectedIndex,
+      //   onSelectTab: (index) {
+      //     setState(() {
+      //       selectedIndex = index;
+      //       _controller.jumpToPage(index);
+      //     });
+      //   },
+      //   items: [
+      //     FFNavigationBarItem(
+      //       iconData: bottomNavigationIcon1,
+      //       label: (labels.home),
+      //     ),
+      //     FFNavigationBarItem(
+      //       iconData: bottomNavigationIcon2,
+      //       label: (labels.hr),
+      //     ),
+      //     FFNavigationBarItem(
+      //         iconData: bottomNavigationIcon3, label: (labels.admin)),
+      //     // FFNavigationBarItem(
+      //     //   iconData: bottomNavigationIcon4,
+      //     //   label: (labels.message),
+      //     // ),
+      //     FFNavigationBarItem(
+      //       iconData: bottomNavigationIcon5,
+      //       label: (labels.more),
+      //     ),
+      //   ],
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: (index) {
           setState(() {
             selectedIndex = index;
             _controller.jumpToPage(index);
           });
         },
         items: [
-          FFNavigationBarItem(
-            iconData: bottomNavigationIcon1,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
             label: (labels.home),
           ),
-          FFNavigationBarItem(
-            iconData: bottomNavigationIcon2,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
             label: (labels.hr),
           ),
-          FFNavigationBarItem(
-              iconData: bottomNavigationIcon3, label: (labels.admin)),
-          // FFNavigationBarItem(
-          //   iconData: bottomNavigationIcon4,
-          //   label: (labels.message),
-          // ),
-          FFNavigationBarItem(
-            iconData: bottomNavigationIcon5,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: (labels.admin),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more),
             label: (labels.more),
           ),
         ],

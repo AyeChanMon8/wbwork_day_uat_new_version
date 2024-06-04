@@ -99,7 +99,7 @@ class _PrePageState extends State<PrePage> {
   Widget build(BuildContext context) {
     return ThemeProvider(
       child: InternetProvider(
-        child: MyApp(),
+        // child: MyApp(),
         internet: internetConnected,
       ),
       nightMode: ThemeBloc(),
@@ -107,68 +107,68 @@ class _PrePageState extends State<PrePage> {
   }
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+// class MyApp extends StatefulWidget {
+//   @override
+//   _MyAppState createState() => _MyAppState();
+// }
 
-class _MyAppState extends State<MyApp> {
-  // AppTranslationsDelegate _newLocaleDelegate;
+// class _MyAppState extends State<MyApp> {
+//   // AppTranslationsDelegate _newLocaleDelegate;
 
-  @override
-  void initState() {
-    super.initState();
-    // _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
-    // application.onLocaleChanged = onLocaleChange;
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     // _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
+//     // application.onLocaleChanged = onLocaleChange;
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-  /*  var provider = ThemeProvider.of(context);
-    provider.nightMode.listenDarkMode();
+//   @override
+//   Widget build(BuildContext context) {
+//   /*  var provider = ThemeProvider.of(context);
+//     provider.nightMode.listenDarkMode();
 
-    return StreamBuilder(
-        stream: provider.nightMode.nightModeStream,
-        builder: (context, snapshot) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            supportedLocales: [
-              const Locale('en', 'US'),
-              const Locale('mm', 'MM')
-            ],
-            localizationsDelegates: [
-              // _newLocaleDelegate,
-              // const AppTranslationsDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            home: LoginPage(),
-            routes: <String, WidgetBuilder>{
-              '/home': (BuildContext context) => LoginPage(),
-              '/bottomNavigation': (BuildContext context) =>
-                  BottomNavigationWidget(),
-              '/request_list': (BuildContext context) => RequestListPage(),
-              './business_travel_list': (BuildContext context) =>
-                  BusinessTravelList(),
-            },
-            theme: snapshot.data == null || snapshot.data == "off"
-                ? firstTD()
-                : secondTD(),
-          );
-        });*/
-  }
+//     return StreamBuilder(
+//         stream: provider.nightMode.nightModeStream,
+//         builder: (context, snapshot) {
+//           return MaterialApp(
+//             debugShowCheckedModeBanner: false,
+//             supportedLocales: [
+//               const Locale('en', 'US'),
+//               const Locale('mm', 'MM')
+//             ],
+//             localizationsDelegates: [
+//               // _newLocaleDelegate,
+//               // const AppTranslationsDelegate(),
+//               GlobalMaterialLocalizations.delegate,
+//               GlobalWidgetsLocalizations.delegate,
+//             ],
+//             home: LoginPage(),
+//             routes: <String, WidgetBuilder>{
+//               '/home': (BuildContext context) => LoginPage(),
+//               '/bottomNavigation': (BuildContext context) =>
+//                   BottomNavigationWidget(),
+//               '/request_list': (BuildContext context) => RequestListPage(),
+//               './business_travel_list': (BuildContext context) =>
+//                   BusinessTravelList(),
+//             },
+//             theme: snapshot.data == null || snapshot.data == "off"
+//                 ? firstTD()
+//                 : secondTD(),
+//           );
+//         });*/
+//   }
 
-  void onLocaleChange(Locale locale) {
-    setState(() {
-      // _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
-    });
-  }
+//   void onLocaleChange(Locale locale) {
+//     setState(() {
+//       // _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+//     });
+//   }
 
-  ThemeData firstTD() => ThemeData(
-        fontFamily: 'Roboto',
-        primarySwatch: white,
-        brightness: Brightness.light,
-      );
-  ThemeData secondTD() => ThemeData(
-      fontFamily: 'Roboto', primarySwatch: white, brightness: Brightness.dark);
-}
+//   ThemeData firstTD() => ThemeData(
+//         fontFamily: 'Roboto',
+//         primarySwatch: white,
+//         brightness: Brightness.light,
+//       );
+//   ThemeData secondTD() => ThemeData(
+//       fontFamily: 'Roboto', primarySwatch: white, brightness: Brightness.dark);
+// }
