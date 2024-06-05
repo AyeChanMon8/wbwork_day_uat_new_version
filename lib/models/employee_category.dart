@@ -1,23 +1,22 @@
-// @dart=2.9
 
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
+import '../models/employee_id.dart';
 
 class EmployeeCategory {
    int id;
    String name;
    List<EmployeeID> employee_ids;
   EmployeeCategory({
-    this.id,
-    this.name,
-    this.employee_ids,
+    this.id = 0,
+    this.name = '',
+    required this.employee_ids,
   });
 
   EmployeeCategory copyWith({
-    int id,
-    String name,
-    List<EmployeeID> employee_ids,
+    int? id,
+    String? name,
+    List<EmployeeID>? employee_ids,
   }) {
     return EmployeeCategory(
       id: id ?? this.id,
@@ -35,7 +34,7 @@ class EmployeeCategory {
   }
 
   factory EmployeeCategory.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return EmployeeCategory(
       id: map['id'],

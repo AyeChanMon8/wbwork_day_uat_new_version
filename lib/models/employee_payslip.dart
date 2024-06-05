@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/partner.dart';
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/employee_id.dart';
+import '../models/partner.dart';
 
 import 'job.dart';
 
@@ -17,17 +17,17 @@ class EmployeeSlip {
   final Job job_id;
   final Department department_id;
   EmployeeSlip({
-    this.id,
-    this.name,
-    this.job_id,
-    this.department_id,
+    this.id = 0,
+    this.name = '',
+    required this.job_id,
+    required this.department_id,
   });
 
   EmployeeSlip copyWith({
-    int id,
-    String name,
-    Job job_id,
-    Department department_id,
+    int? id,
+    String? name,
+    Job? job_id,
+    Department? department_id,
   }) {
     return EmployeeSlip(
       id: id ?? this.id,
@@ -47,7 +47,7 @@ class EmployeeSlip {
   }
 
   factory EmployeeSlip.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return EmployeeSlip(
       id: map['id'],

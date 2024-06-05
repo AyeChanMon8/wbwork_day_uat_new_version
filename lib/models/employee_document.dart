@@ -1,4 +1,4 @@
-// @dart=2.9
+import 'dart:convert';
 
 /// id : 8
 /// name : "P001_WB Employee Information"
@@ -11,137 +11,226 @@
 /// description : null
 
 class Employee_document {
-  int _id;
-  String _name;
-  Employee_ref _employeeRef;
-  Document_type _documentType;
-  String _issueDate;
-  dynamic _expiryDate;
-  dynamic _notificationType;
-  int _beforeDays;
-  dynamic _description;
+  int id;
+  String name;
+  Employee_ref employeeRef;
+  Document_type documentType;
+  String issueDate;
+  dynamic expiryDate;
+  dynamic notificationType;
+  int beforeDays;
+  dynamic description;
+  Employee_document(
+      {this.id = 0,
+      this.name = '',
+      required this.employeeRef,
+      required this.documentType,
+      this.issueDate = '',
+      this.expiryDate = '',
+      this.notificationType = '',
+      this.beforeDays = 0,
+      this.description = ''});
 
-  int get id => _id;
-  String get name => _name;
-  Employee_ref get employeeRef => _employeeRef;
-  Document_type get documentType => _documentType;
-  String get issueDate => _issueDate;
-  dynamic get expiryDate => _expiryDate;
-  dynamic get notificationType => _notificationType;
-  int get beforeDays => _beforeDays;
-  dynamic get description => _description;
-
-  Employee_document({
-      int id, 
-      String name, 
-      Employee_ref employeeRef, 
-      Document_type documentType, 
-      String issueDate, 
-      dynamic expiryDate, 
-      dynamic notificationType, 
-      int beforeDays, 
-      dynamic description}){
-    _id = id;
-    _name = name;
-    _employeeRef = employeeRef;
-    _documentType = documentType;
-    _issueDate = issueDate;
-    _expiryDate = expiryDate;
-    _notificationType = notificationType;
-    _beforeDays = beforeDays;
-    _description = description;
-}
-
-  Employee_document.fromJson(dynamic json) {
-    _id = json['id'];
-    _name = json['name'];
-    _employeeRef = json['employee_ref'] != null ? Employee_ref.fromJson(json['employee_ref']) : null;
-    _documentType = json['document_type'] != null ? Document_type.fromJson(json['document_type']) : null;
-    _issueDate = json['issue_date'];
-    _expiryDate = json['expiry_date'];
-    _notificationType = json['notification_type'];
-    _beforeDays = json['before_days'];
-    _description = json['description'];
+  Employee_document copyWith({
+    int? id,
+    String? name,
+    Employee_ref? employeeRef,
+    Document_type? documentType,
+    String? issueDate,
+    dynamic? expiryDate,
+    dynamic? notificationType,
+    int? beforeDays,
+    dynamic? description,
+  }) {
+    return Employee_document(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        employeeRef: employeeRef ?? this.employeeRef,
+        documentType: documentType ?? this.documentType,
+        issueDate: issueDate ?? this.issueDate,
+        expiryDate: expiryDate ?? this.expiryDate,
+        notificationType: notificationType ?? this.notificationType,
+        beforeDays: beforeDays ?? this.beforeDays,
+        description: description ?? this.description,);
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    if (_employeeRef != null) {
-      map['employee_ref'] = _employeeRef.toJson();
-    }
-    if (_documentType != null) {
-      map['document_type'] = _documentType.toJson();
-    }
-    map['issue_date'] = _issueDate;
-    map['expiry_date'] = _expiryDate;
-    map['notification_type'] = _notificationType;
-    map['before_days'] = _beforeDays;
-    map['description'] = _description;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'employee_ref': employeeRef?.toMap(),
+      'document_type': documentType?.toMap(),
+      'issue_date': issueDate,
+      'expiry_date': expiryDate,
+      'notification_type': notificationType,
+      'before_days': beforeDays,
+      'description': description
+    };
   }
 
+  factory Employee_document.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Employee_document(
+        id: map['id'],
+        name: map['name'],
+        employeeRef: Employee_ref.fromMap(map['employee_ref']),
+        documentType: Document_type.fromMap(map['document_type']),
+        issueDate: map['issue_date'],
+        expiryDate: map['expiry_date'],
+        notificationType: map['notification_type'],
+        beforeDays: map['before_days'],
+        description: map['description']);
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Employee_document.fromJson(String source) =>
+      Employee_document.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Employee_document(id: $id, name: $name, employeeRef: $employeeRef, documentType: $documentType, issueDate: $issueDate, expiryDate: $expiryDate, notificationType: $notificationType, beforeDays: $beforeDays, description: $description)';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Employee_document &&
+        o.id == id &&
+        o.name == name &&
+        o.employeeRef == employeeRef &&
+        o.documentType == documentType &&
+        o.issueDate == issueDate &&
+        o.expiryDate == expiryDate &&
+        o.notificationType == notificationType &&
+        o.beforeDays == beforeDays &&
+        o.description == description;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        employeeRef.hashCode ^
+        documentType.hashCode ^
+        issueDate.hashCode ^
+        expiryDate.hashCode ^
+        notificationType.hashCode ^
+        beforeDays.hashCode ^
+        description.hashCode;
+  }
 }
 
 /// id : 6
 /// name : "WB Employee Information"
 
 class Document_type {
-  int _id;
-  String _name;
-
-  int get id => _id;
-  String get name => _name;
-
+  final int id;
+  final String name;
   Document_type({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = '',
+  });
 
-  Document_type.fromJson(dynamic json) {
-    _id = json['id'];
-    _name = json['name'];
+  Document_type copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Document_type(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 
+  factory Document_type.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Document_type(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Document_type.fromJson(String source) =>
+      Document_type.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Document_type(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Document_type && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
 
 /// id : 5098
 /// name : "Kham Nandar Phe"
 
 class Employee_ref {
-  int _id;
-  String _name;
-
-  int get id => _id;
-  String get name => _name;
-
+  final int id;
+  final String name;
   Employee_ref({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = '',
+  });
 
-  Employee_ref.fromJson(dynamic json) {
-    _id = json['id'];
-    _name = json['name'];
+  Employee_ref copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Employee_ref(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 
+  factory Employee_ref.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Employee_ref(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Employee_ref.fromJson(String source) =>
+      Employee_ref.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Employee_ref(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Employee_ref && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -42,25 +42,25 @@ class Employee_change_create {
   int newApprovedManagerId;
   String note;
   Employee_change_create({
-    this.type,
-    this.employeeId,
-    this.companyId,
-    this.branchId,
-    this.departmentId,
-    this.jobId,
-    this.jobGradeId,
-    this.salaryLevelId,
-    this.wage,
-    this.date,
-    this.newCompanyId,
-    this.newBranchId,
-    this.newDepartmentId,
-    this.newJobId,
-    this.newJobGradeId,
-    this.newSalaryLevelId,
-    this.newWage,
-    this.newApprovedManagerId,
-    this.note,
+    this.type = '',
+    this.employeeId = 0,
+    this.companyId = 0,
+    this.branchId = 0,
+    this.departmentId = 0,
+    this.jobId = 0,
+    this.jobGradeId = 0,
+    this.salaryLevelId = 0,
+    this.wage = 0.0,
+    this.date = '',
+    this.newCompanyId = 0,
+    this.newBranchId = 0,
+    this.newDepartmentId = 0,
+    this.newJobId = 0,
+    this.newJobGradeId = 0,
+    this.newSalaryLevelId = 0,
+    this.newWage = 0.0,
+    this.newApprovedManagerId = 0,
+    this.note = '',
 
   });
 

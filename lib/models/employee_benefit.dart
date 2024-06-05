@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'dart:convert';
 
 import 'employee_promotion.dart';
@@ -20,35 +18,35 @@ class EmployeeBenefit {
   List<Attachments> attachment_ids;
 
   EmployeeBenefit({
-    this.id,
-    this.description,
-    this.quantity,
-    this.state,
-    this.benefit_id,
-    this.hand_over_date,
-    this.date,
-    this.job_id,
-    this.company_id,
-    this.department_id,
-    this.branch_id,
-    this.onhand_date,
-    this.attachment_ids
+    this.id = 0,
+    this.description = '',
+    this.quantity = 0.0,
+    this.state = '',
+    required this.benefit_id,
+    this.hand_over_date = '',
+    this.date = '',
+    required this.job_id,
+    required this.company_id,
+    required this.department_id,
+    required this.branch_id,
+    this.onhand_date = '',
+    required this.attachment_ids
   });
 
   EmployeeBenefit copyWith({
-      int id,
-      String description,
-      double quantity,
-      String state,
-      Benefit benefit_id,
-      String hand_over_date,
-      String date,
-      String job_id,
-      String company_id,
-      String department_id,
-      String branch_id,
-      String onhand_date,
-      String attachment_ids
+      int? id,
+      String? description,
+      double? quantity,
+      String? state,
+      Benefit? benefit_id,
+      String? hand_over_date,
+      String? date,
+      Job_id? job_id,
+      Company_id? company_id,
+      Department_id? department_id,
+      Branch_id? branch_id,
+      String? onhand_date,
+      List<Attachments>? attachment_ids
   }) {
     return EmployeeBenefit(
       id: id ?? this.id,
@@ -87,20 +85,20 @@ class EmployeeBenefit {
   }
 
   factory EmployeeBenefit.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return EmployeeBenefit(
       id: map['id'],
       description: map['description'],
       quantity: map['quantity'],
       state: map['state'],
-      benefit_id: Benefit.fromMap(map['benefit_id']) ?? '',
+      benefit_id: map['benefit_id'],
       hand_over_date: map['hand_over_date'],
       date: map['date'],
-      job_id: Job_id.fromMap(map['job_id']) ?? '',
-      company_id: Company_id.fromMap(map['company_id']) ?? '',
-      department_id: Department_id.fromMap(map['department_id']) ?? '',
-      branch_id: Branch_id.fromMap(map['branch_id']) ?? '',
+      job_id: map['job_id'],
+      company_id: map['company_id'],
+      department_id: map['department_id'],
+      branch_id: map['branch_id'],
       onhand_date: map['onhand_date'],
       attachment_ids: List<Attachments>.from(
           map['attachment_ids']?.map((x) => Attachments.fromMap(x))),
@@ -158,13 +156,13 @@ class Benefit {
   int id = 0;
   String name = "";
   Benefit({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Benefit copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Benefit(
       id: id ?? this.id,
@@ -179,7 +177,7 @@ class Benefit {
     };
   }
   factory Benefit.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Benefit(
       id: map['id']??0,
@@ -216,13 +214,13 @@ class Company_id {
   int id = 0;
   String name = "";
   Company_id({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Company_id copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Company_id(
       id: id ?? this.id,
@@ -237,7 +235,7 @@ class Company_id {
     };
   }
   factory Company_id.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Company_id(
       id: map['id']??0,
@@ -274,13 +272,13 @@ class Job_id {
   int id = 0;
   String name = "";
   Job_id({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Job_id copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Job_id(
       id: id ?? this.id,
@@ -295,7 +293,7 @@ class Job_id {
     };
   }
   factory Job_id.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Job_id(
       id: map['id']??0,
@@ -332,13 +330,13 @@ class Branch_id {
   int id = 0;
   String name = "";
   Branch_id({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Branch_id copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Branch_id(
       id: id ?? this.id,
@@ -353,7 +351,7 @@ class Branch_id {
     };
   }
   factory Branch_id.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Branch_id(
       id: map['id']??0,
@@ -390,13 +388,13 @@ class Department_id {
   int id = 0;
   String name = "";
   Department_id({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Department_id copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Department_id(
       id: id ?? this.id,
@@ -411,7 +409,7 @@ class Department_id {
     };
   }
   factory Department_id.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Department_id(
       id: map['id']??0,
@@ -453,23 +451,23 @@ class Attachments {
   String mimetype;
   String index_content;
   Attachments({
-    this.id,
-    this.name,
-    this.type,
-    this.url,
-    this.datas,
-    this.mimetype,
-    this.index_content,
+    this.id = 0,
+    this.name = '',
+    this.type = '',
+    this.url = '',
+    this.datas = '',
+    this.mimetype = '',
+    this.index_content = '',
   });
 
   Attachments copyWith({
-    int id,
-    String name,
-    String type,
-    String url,
-    String datas,
-    String mimetype,
-    String index_content,
+    int? id,
+    String? name,
+    String? type,
+    String? url,
+    String? datas,
+    String? mimetype,
+    String? index_content,
   }) {
     return Attachments(
       id: id ?? this.id,
@@ -495,7 +493,7 @@ class Attachments {
   }
 
   factory Attachments.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Attachments(
       id: map['id'],

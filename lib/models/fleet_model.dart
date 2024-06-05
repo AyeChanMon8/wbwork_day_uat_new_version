@@ -323,33 +323,60 @@ class TypredHistory {
   }
 
 }
+
 class Incharge_id {
-  dynamic _id;
-  dynamic _name;
-
-  dynamic get id => _id;
-  dynamic get name => _name;
-
+  final int id;
+  final String name;
   Incharge_id({
-    dynamic id,
-    dynamic name}){
-    _id = id;
-    _name = name;
+    this.id = 0,
+    this.name = '',
+  });
+
+  Incharge_id copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Incharge_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Incharge_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  factory Incharge_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Incharge_id(
+      id: map['id'],
+      name: map['name'],
+    );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory Incharge_id.fromJson(String source) =>
+      Incharge_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Incharge_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Incharge_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
 /// id : 3
 /// name : "Management"
 

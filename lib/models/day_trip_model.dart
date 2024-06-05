@@ -757,25 +757,32 @@ class Driver_id {
 // }
 
 class Vehicle_id {
-  int id;
-  String name;
-  Incharge_id inchargeId;
+  final int id;
+  final String name;
+  final Incharge_id inchargeId;
+  Vehicle_id({
+    this.id = 0,
+    this.name = '',
+    required this.inchargeId
+  });
 
-  Vehicle_id({this.id = 0, this.name = '', required this.inchargeId});
-
-  Vehicle_id copyWith(
-      {int? id, String? name, required Incharge_id inchargeId}) {
+  Vehicle_id copyWith({
+    int? id,
+    String? name,
+    Incharge_id? inchargeId
+  }) {
     return Vehicle_id(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        inchargeId: inchargeId ?? this.inchargeId);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      inchargeId: inchargeId ?? this.inchargeId
+    );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
-      'incharge_id': inchargeId.toMap(),
+      'incharge_id': inchargeId?.toMap(),
     };
   }
 
@@ -785,7 +792,7 @@ class Vehicle_id {
     return Vehicle_id(
       id: map['id'],
       name: map['name'],
-      inchargeId: map['incharge_id'],
+      inchargeId: map['incharge_id']
     );
   }
 
@@ -795,23 +802,18 @@ class Vehicle_id {
       Vehicle_id.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'Vehicle_id(id: $id, name: $name, inchargeId: $inchargeId)';
+  String toString() => 'Vehicle_id(id: $id, name: $name, inchargeId: $inchargeId)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Vehicle_id &&
-        o.id == id &&
-        o.name == name &&
-        o.inchargeId == inchargeId;
+    return o is Vehicle_id && o.id == id && o.name == name && o.inchargeId == inchargeId;
   }
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ inchargeId.hashCode;
 }
-
 class Consumption_ids {
   double last_odometer;
   double current_odometer;
