@@ -1,43 +1,57 @@
-// @dart=2.9
-
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+
 class Daytrip_expense {
-  int _id;
-  String _name;
-
-  int get id => _id;
-  String get name => _name;
-
+  final int id;
+  final String name;
   Daytrip_expense({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = '',
+  });
 
-  Daytrip_expense.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
-  }
-
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
-  }
-
-  factory Daytrip_expense.fromMap(Map<String, dynamic> map) {
-    return new Daytrip_expense(
-      id: map['id'] as int,
-      name: map['name'] as String,
+  Daytrip_expense copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Daytrip_expense(
+      id: id ?? this.id,
+      name: name ?? this.name,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this._id,
-      'name': this._name,
-    } as Map<String, dynamic>;
+      'id': id,
+      'name': name,
+    };
   }
+
+  factory Daytrip_expense.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Daytrip_expense(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Daytrip_expense.fromJson(String source) =>
+      Daytrip_expense.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Daytrip_expense(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Daytrip_expense && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+

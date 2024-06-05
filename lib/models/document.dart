@@ -1,19 +1,17 @@
-// @dart=2.9
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/document_attachment.dart';
-import 'package:winbrother_hr_app/models/document_employee.dart';
-import 'package:winbrother_hr_app/models/document_type.dart';
+import '../models/document_attachment.dart';
+import '../models/document_employee.dart';
+import '../models/document_type.dart';
 
 class Documents {
-  var documentId;
-  var documentName;
-  var folderId;
-  var folderName;
-  var file_type;
+  final dynamic documentId;
+  final dynamic documentName;
+  final dynamic folderId;
+  final dynamic folderName;
+  final dynamic file_type;
 
   Documents({
     this.documentId,
@@ -23,10 +21,10 @@ class Documents {
   });
 
   Documents copyWith({
-    var documentId,
-    var documentName,
-    var folderId,
-    var folderName
+    dynamic? documentId,
+    dynamic? documentName,
+    dynamic? folderId,
+    dynamic? folderName
   }) {
     return Documents(
       documentId: documentId ?? this.documentId,
@@ -46,7 +44,7 @@ class Documents {
   }
 
   factory Documents.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Documents(
       documentId: map['document_id'],

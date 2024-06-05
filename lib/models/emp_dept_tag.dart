@@ -1,17 +1,16 @@
-// @dart=2.9
 
 import 'dart:convert';
 class EmployeeDeptTag {
-  int category_id;
-  int emp_id;
+  final int category_id;
+  final int emp_id;
   EmployeeDeptTag({
-    this.category_id,
-    this.emp_id,
+    this.category_id = 0,
+    this.emp_id = 0,
   });
 
   EmployeeDeptTag copyWith({
-    int category_id,
-    int emp_id,
+    int? category_id,
+    int? emp_id,
   }) {
     return EmployeeDeptTag(
       category_id: category_id ?? this.category_id,
@@ -27,7 +26,7 @@ class EmployeeDeptTag {
   }
 
   factory EmployeeDeptTag.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return EmployeeDeptTag(
       category_id: map['category_id'],

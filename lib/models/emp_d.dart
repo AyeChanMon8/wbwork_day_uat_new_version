@@ -1,27 +1,51 @@
-// @dart=2.9
 
 import 'dart:convert';
 
 /// id : 1
-
 class Emp_ID {
-  int _id;
-
-  int get id => _id;
-
+  final int id;
   Emp_ID({
-      int id}){
-    _id = id;
-}
+    this.id = 0,
+  });
 
-  Emp_ID.fromJson(dynamic json) {
-    _id = json["id"];
+  Emp_ID copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Emp_ID(
+      id: id ?? this.id,
+    );
   }
 
-  String toJson() => json.encode(toMap());
   Map<String, dynamic> toMap() {
     return {
       'id': id,
     };
   }
+
+  factory Emp_ID.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Emp_ID(
+      id: map['id'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Emp_ID.fromJson(String source) =>
+      Emp_ID.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Emp_ID(id: $id)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Emp_ID && o.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

@@ -775,7 +775,7 @@ class Vehicle_id {
     return {
       'id': id,
       'name': name,
-      'incharge_id': inchargeId?.toMap(),
+      'incharge_id': inchargeId.toMap(),
     };
   }
 
