@@ -1,9 +1,8 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_line_model.dart';
+import 'travel_line_model.dart';
 
 class TravelExpenseModel {
   int id;
@@ -17,45 +16,44 @@ class TravelExpenseModel {
   String number;
 
   TravelExpenseModel({
-    this.id,
-    this.date,
-    this.mobile_user_id,
-    this.employee_id,
-    this.company_id,
-    this.travel_id,
-    this.advanced_money,
-    this.travel_line,
-    this.number,
+    this.id = 0,
+    this.date = '',
+    this.mobile_user_id = 0,
+    this.employee_id = 0,
+    this.company_id = 0,
+    this.travel_id = 0,
+    this.advanced_money = 0.0,
+    required this.travel_line,
+    this.number = '',
   });
 
   TravelExpenseModel copyWith({
-    int id,
-    String date,
-    int mobile_user_id,
-    int employee_id,
-    int company_id,
-    int travel_id,
-    double advanced_money,
-    List<TravelLineModel> travel_line,
+    int? id,
+    String? date,
+    int? mobile_user_id,
+    int? employee_id,
+    int? company_id,
+    int? travel_id,
+    double? advanced_money,
+    List<TravelLineModel>? travel_line,
   }) {
     return TravelExpenseModel(
-      id: id ?? this.id,
-      date: date ?? this.date,
-      mobile_user_id : mobile_user_id ?? this.mobile_user_id,
-      employee_id: employee_id ?? this.employee_id,
-      company_id: company_id ?? this.company_id,
-      travel_id: travel_id ?? this.travel_id,
-      advanced_money: advanced_money ?? this.advanced_money,
-      travel_line: travel_line ?? this.travel_line,
-      number: number?? this.number
-    );
+        id: id ?? this.id,
+        date: date ?? this.date,
+        mobile_user_id: mobile_user_id ?? this.mobile_user_id,
+        employee_id: employee_id ?? this.employee_id,
+        company_id: company_id ?? this.company_id,
+        travel_id: travel_id ?? this.travel_id,
+        advanced_money: advanced_money ?? this.advanced_money,
+        travel_line: travel_line ?? this.travel_line,
+        number: number ?? this.number);
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'date': date,
-      'mobile_user_id' : mobile_user_id,
+      'mobile_user_id': mobile_user_id,
       'employee_id': employee_id,
       'company_id': company_id,
       'travel_id': travel_id,
@@ -65,12 +63,12 @@ class TravelExpenseModel {
   }
 
   factory TravelExpenseModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return TravelExpenseModel(
       id: map['id'],
       date: map['date'],
-      mobile_user_id:map['mobile_user_id'],
+      mobile_user_id: map['mobile_user_id'],
       employee_id: map['employee_id'],
       company_id: map['company_id'],
       travel_id: map['travel_id'],

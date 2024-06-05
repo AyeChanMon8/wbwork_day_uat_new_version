@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,13 +6,13 @@ class Company {
   final int id;
   final String name;
   Company({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   Company copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Company(
       id: id ?? this.id,
@@ -29,7 +28,7 @@ class Company {
   }
 
   factory Company.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Company(
       id: map['id'],

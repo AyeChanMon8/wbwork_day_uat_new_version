@@ -1,19 +1,18 @@
-// @dart=2.9
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:winbrother_hr_app/models/attendance.dart';
+import '../models/attendance.dart';
 
 class AttendanceCustomReport {
   final String date;
   List<Attendance> attendance_list;
   AttendanceCustomReport({
-    this.date,
-    this.attendance_list,
+    this.date = '',
+    required this.attendance_list,
   });
 
   AttendanceCustomReport copyWith({
-    String date,
-    List<Attendance> attendance_list,
+    String? date,
+    required List<Attendance> attendance_list,
   }) {
     return AttendanceCustomReport(
       date: date ?? this.date,
@@ -29,20 +28,23 @@ class AttendanceCustomReport {
   }
 
   factory AttendanceCustomReport.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return AttendanceCustomReport(
-      date: map['date']??'',
-      attendance_list: List<Attendance>.from(map['attendance_list']?.map((x) => Attendance.fromMap(x))??''),
+      date: map['date'] ?? '',
+      attendance_list: List<Attendance>.from(
+          map['attendance_list']?.map((x) => Attendance.fromMap(x)) ?? ''),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory AttendanceCustomReport.fromJson(String source) => AttendanceCustomReport.fromMap(json.decode(source));
+  factory AttendanceCustomReport.fromJson(String source) =>
+      AttendanceCustomReport.fromMap(json.decode(source));
 
   @override
-  String toString() => 'AttendanceCustomReport(date: $date, attendance_list: $attendance_list)';
+  String toString() =>
+      'AttendanceCustomReport(date: $date, attendance_list: $attendance_list)';
 
   @override
   bool operator ==(Object o) {
@@ -54,5 +56,5 @@ class AttendanceCustomReport {
   }
 
   @override
-  int get hashCode =>date.hashCode ^ attendance_list.hashCode;
+  int get hashCode => date.hashCode ^ attendance_list.hashCode;
 }

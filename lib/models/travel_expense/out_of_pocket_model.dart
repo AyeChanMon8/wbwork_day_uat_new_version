@@ -1,13 +1,12 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/travel_expense/pocket_model.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_expense_model.dart';
+import '../../models/company.dart';
+import '../../models/employee.dart';
+import '../../models/employee_id.dart';
+import '../../models/travel_expense/pocket_model.dart';
+import '../../models/travel_expense/create/travel_expense_model.dart';
 
 class OutofPocketModel {
   int id;
@@ -17,31 +16,30 @@ class OutofPocketModel {
   int company_id;
   List<PockectModel> pocket_line;
   String number;
-  OutofPocketModel({
-    this.id,
-    this.date,
-    this.mobile_user_id,
-    this.employee_id,
-    this.company_id,
-    this.pocket_line,
-    this.number
-  });
+  OutofPocketModel(
+      {this.id = 0,
+      this.date = '',
+      this.mobile_user_id = 0,
+      this.employee_id = 0,
+      this.company_id = 0,
+      required this.pocket_line,
+      this.number = ''});
 
   OutofPocketModel copyWith({
-    int id,
-    String date,
-    int mobile_user_id,
-    int employee_id,
-    int company_id,
-    List<PockectModel> pocket_line,
+    int? id,
+    String? date,
+    int? mobile_user_id,
+    int? employee_id,
+    int? company_id,
+    required List<PockectModel> pocket_line,
   }) {
     return OutofPocketModel(
       id: id ?? this.id,
       date: date ?? this.date,
-      mobile_user_id:mobile_user_id??this.mobile_user_id,
+      mobile_user_id: mobile_user_id ?? this.mobile_user_id,
       employee_id: employee_id ?? this.employee_id,
       company_id: company_id ?? this.company_id,
-      number: number?? this.number,
+      number: number ?? this.number,
       pocket_line: pocket_line ?? this.pocket_line,
     );
   }
@@ -50,7 +48,7 @@ class OutofPocketModel {
     return {
       'id': id,
       'date': date,
-      'mobile_user_id' : mobile_user_id,
+      'mobile_user_id': mobile_user_id,
       'employee_id': employee_id,
       'company_id': company_id,
       'pocket_line': pocket_line?.map((x) => x?.toMap())?.toList(),
@@ -58,7 +56,7 @@ class OutofPocketModel {
   }
 
   factory OutofPocketModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OutofPocketModel(
       id: map['id'],

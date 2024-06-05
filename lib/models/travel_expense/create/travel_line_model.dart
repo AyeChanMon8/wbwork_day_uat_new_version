@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 class TravelLineModel {
@@ -24,76 +23,76 @@ class TravelLineModel {
   String attached_filename;
   int vehicle_id;
   bool attachment_include;
-  TravelLineModel({
-    this.id,
-    this.date,
-    this.categ_id,
-    this.expense_category,
-    this.product_id,
-    this.description,
-    this.qty,
-    this.price_unit,
-    this.price_subtotal,
-    this.attached_file,
-    this.image1,
-    this.image2,
-    this.image3,
-    this.image4,
-    this.image5,
-    this.image6,
-    this.image7,
-    this.image8,
-    this.image9,
-    this.attached_filename,
-    this.vehicle_id,this.attachment_include
-  });
+  TravelLineModel(
+      {this.id = 0,
+      this.date = '',
+      this.categ_id = 0,
+      this.expense_category = '',
+      this.product_id = 0,
+      this.description = '',
+      this.qty = 0.0,
+      this.price_unit = 0.0,
+      this.price_subtotal = 0.0,
+      this.attached_file = '',
+      this.image1 = '',
+      this.image2 = '',
+      this.image3 = '',
+      this.image4 = '',
+      this.image5 = '',
+      this.image6 = '',
+      this.image7 = '',
+      this.image8 = '',
+      this.image9 = '',
+      this.attached_filename = '',
+      this.vehicle_id = 0,
+      this.attachment_include = false});
 
   TravelLineModel copyWith({
-    int id,
-    String date,
-    int categ_id,
-    String expense_category,
-    int product_id,
-    String description,
-    double qty,
-    double price_unit,
-    double price_subtotal,
-    String attached_file,
-    String image1,
-    String image2,
-    String image3,
-    String image4,
-    String image5,
-    String image6,
-    String image7,
-    String image8,
-    String image9,
-    String attached_filename,
-    int vehicle_id,
+    int? id,
+    String? date,
+    int? categ_id,
+    String? expense_category,
+    int? product_id,
+    String? description,
+    double? qty,
+    double? price_unit,
+    double? price_subtotal,
+    String? attached_file,
+    String? image1,
+    String? image2,
+    String? image3,
+    String? image4,
+    String? image5,
+    String? image6,
+    String? image7,
+    String? image8,
+    String? image9,
+    String? attached_filename,
+    int? vehicle_id,
   }) {
     return TravelLineModel(
-      id: id ?? this.id,
-      date: date ?? this.date,
-      categ_id: categ_id ?? this.categ_id,
-      expense_category: expense_category ?? this.expense_category,
-      product_id: product_id ?? this.product_id,
-      description: description ?? this.description,
-      qty: qty ?? this.qty,
-      price_unit: price_unit ?? this.price_unit,
-      price_subtotal: price_subtotal ?? this.price_subtotal,
-      attached_file: attached_file ?? this.attached_file,
-      image1: image1 ?? this.image1,
-      image2: image2 ?? this.image2,
-      image3: image3 ?? this.image3,
-      image4: image4 ?? this.image4,
-      image5: image5 ?? this.image5,
-      image6: image6 ?? this.image6,
-      image7: image7 ?? this.image7,
-      image8: image8 ?? this.image8,
-      image9: image9 ?? this.image9,
-      attached_filename: attached_filename ?? this.attached_filename,
-      vehicle_id: vehicle_id ?? this.vehicle_id,attachment_include: this.attachment_include
-    );
+        id: id ?? this.id,
+        date: date ?? this.date,
+        categ_id: categ_id ?? this.categ_id,
+        expense_category: expense_category ?? this.expense_category,
+        product_id: product_id ?? this.product_id,
+        description: description ?? this.description,
+        qty: qty ?? this.qty,
+        price_unit: price_unit ?? this.price_unit,
+        price_subtotal: price_subtotal ?? this.price_subtotal,
+        attached_file: attached_file ?? this.attached_file,
+        image1: image1 ?? this.image1,
+        image2: image2 ?? this.image2,
+        image3: image3 ?? this.image3,
+        image4: image4 ?? this.image4,
+        image5: image5 ?? this.image5,
+        image6: image6 ?? this.image6,
+        image7: image7 ?? this.image7,
+        image8: image8 ?? this.image8,
+        image9: image9 ?? this.image9,
+        attached_filename: attached_filename ?? this.attached_filename,
+        vehicle_id: vehicle_id ?? this.vehicle_id,
+        attachment_include: this.attachment_include);
   }
 
   Map<String, dynamic> toMap() {
@@ -119,15 +118,15 @@ class TravelLineModel {
       'image9': image9,
       'attached_filename': attached_filename,
       'vehicle_id': vehicle_id,
-      'image1_filename':'',
-      'image2_filename':'',
-      'image3_filename':'',
-      'image4_filename':'',
-      'image5_filename':'',
-      'image6_filename':'',
-      'image7_filename':'',
-      'image8_filename':'',
-      'image9_filename':'',
+      'image1_filename': '',
+      'image2_filename': '',
+      'image3_filename': '',
+      'image4_filename': '',
+      'image5_filename': '',
+      'image6_filename': '',
+      'image7_filename': '',
+      'image8_filename': '',
+      'image9_filename': '',
       'attachment_include': attachment_include,
     };
   }
@@ -155,7 +154,7 @@ class TravelLineModel {
       image9: map['image9'],
       attached_filename: map['attached_filename'],
       vehicle_id: map['vehicle_id'],
-      attachment_include:  map['attachment_include'],
+      attachment_include: map['attachment_include'],
     );
   }
 
@@ -224,13 +223,13 @@ class TravelLineModel {
 }
 
 class Vehicle_id {
-  int _id;
-  String _name;
+  int _id = 0;
+  String _name = '';
 
   int get id => _id;
   String get name => _name;
 
-  Vehicle_id({int id, String name}) {
+  Vehicle_id({int id = 0, String name = ''}) {
     _id = id;
     _name = name;
   }

@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 class Attandanceuser {
@@ -8,17 +7,18 @@ class Attandanceuser {
   String search_date;
   String status;
   Attandanceuser({
-    this.employee_id,
-    this.employee_name,
-    this.count,
-    this.search_date,this.status,
+    this.employee_id = 0,
+    this.employee_name = '',
+    this.count = 0,
+    this.search_date = '',
+    this.status = '',
   });
 
   Attandanceuser copyWith({
-    int employee_id,
-    String employee_name,
-    int count,
-    String search_date,
+    int? employee_id,
+    String? employee_name,
+    int? count,
+    String? search_date,
   }) {
     return Attandanceuser(
       employee_id: employee_id ?? this.employee_id,
@@ -38,7 +38,7 @@ class Attandanceuser {
   }
 
   factory Attandanceuser.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Attandanceuser(
       employee_id: map['employee_id'],
@@ -46,7 +46,6 @@ class Attandanceuser {
       count: map['count'],
       search_date: map['search_date'],
       status: map['status'],
-
     );
   }
 

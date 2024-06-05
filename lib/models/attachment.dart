@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 class Attachment {
@@ -10,23 +9,23 @@ class Attachment {
   String mimetype;
   String index_content;
   Attachment({
-    this.id,
-    this.name,
-    this.type,
-    this.url,
-    this.datas,
-    this.mimetype,
-    this.index_content,
+    this.id = 0,
+    this.name = '',
+    this.type = '',
+    this.url = '',
+    this.datas = '',
+    this.mimetype = '',
+    this.index_content = '',
   });
 
   Attachment copyWith({
-    int id,
-    String name,
-    String type,
-    String url,
-    String datas,
-    String mimetype,
-    String index_content,
+    int? id,
+    String? name,
+    String? type,
+    String? url,
+    String? datas,
+    String? mimetype,
+    String? index_content,
   }) {
     return Attachment(
       id: id ?? this.id,
@@ -52,7 +51,7 @@ class Attachment {
   }
 
   factory Attachment.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Attachment(
       id: map['id'],

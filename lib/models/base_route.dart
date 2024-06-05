@@ -1,10 +1,9 @@
-// @dart=2.9
 import 'dart:convert';
 
 class BaseRoute {
   int id;
   String name;
-  int fuel_liter;
+  double fuel_liter;
   String from_street;
   String to_street;
   List<Expense> expenseIds;
@@ -17,28 +16,28 @@ class BaseRoute {
   Branch_id get _branch_id => branch_id;
   Branch_id get _company_id => company_id;
   BaseRoute(
-      {this.id,
-      this.name,
-      this.fuel_liter,
-      this.from_street,
-      this.to_street,
-      this.expenseIds,
-      this.duration_days,
-      this.code_ref,
-      this.branch_id,
-      this.company_id});
+      {this.id = 0,
+      this.name = '',
+      this.fuel_liter = 0,
+      this.from_street = '',
+      this.to_street = '',
+      required this.expenseIds,
+      this.duration_days = 0.0,
+      this.code_ref = '',
+      required this.branch_id,
+      required this.company_id});
 
   BaseRoute copyWith(
-      {int id,
-      String name,
-      double fuel_liter,
-      String from_street,
-      String to_street,
-      List<Expense> expenseIds,
-      double duration_days,
-      String code,
-      Branch_id branchId,
-      Branch_id companyId}) {
+      {int? id,
+      String? name,
+      double? fuel_liter,
+      String? from_street,
+      String? to_street,
+      required List<Expense> expenseIds,
+      double? duration_days,
+      String? code,
+      Branch_id? branchId,
+      Branch_id? companyId}) {
     return BaseRoute(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -63,7 +62,7 @@ class BaseRoute {
   }
 
   factory BaseRoute.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return BaseRoute(
       id: map['id'],
@@ -75,8 +74,8 @@ class BaseRoute {
           map['expense_ids']?.map((x) => Expense.fromJson(x))),
       duration_days: map['duration_days'] == null ? 0.0 : map['duration_days'],
       code_ref: map['code'] == null ? '' : map['code'],
-      branch_id: Branch_id.fromJson(map['branch_id']) ?? '',
-      company_id: Branch_id.fromJson(map['company_id']) ?? '',
+      branch_id: Branch_id.fromJson(map['branch_id']),
+      company_id: Branch_id.fromJson(map['company_id']),
     );
   }
 
@@ -99,85 +98,209 @@ class BaseRoute {
   int get hashCode => id.hashCode ^ name.hashCode;
 }
 
+// class Expense {
+//   String _name;
+//   Route_Product_id _productId;
+//   double _amount;
+//   String _remark;
+
+//   String get name => _name;
+//   Route_Product_id get routeId => _productId;
+//   double get amount => _amount;
+//   String get remark => _remark;
+
+//   Expense({
+//     String name = '',
+//     required Route_Product_id productId,
+//     double amount = 0.0,
+//     String remark = '',
+//   }) {
+//     _name = name;
+//     _productId = productId;
+//     _amount = amount;
+//     _remark = remark;
+//   }
+
+//   Expense.fromJson(dynamic json) {
+//     _name = json["name"];
+//     _productId = json["product_id"] != null
+//         ? Route_Product_id.fromJson(json["product_id"])
+//         : null;
+//     _amount = json["amount"] == null ? 0 : json["amount"];
+//     _remark = json["remark"] == null ? '' : json["remark"];
+//   }
+// }
+
 class Expense {
-  String _name;
-  Route_Product_id _productId;
-  double _amount;
-  String _remark;
+  String name;
+  Route_Product_id productId;
+  double amount;
+  String remark;
+  Expense(
+      {this.name = '',
+      required this.productId,
+      this.amount = 0.0,
+      this.remark = ''});
 
-  String get name => _name;
-  Route_Product_id get routeId => _productId;
-  double get amount => _amount;
-  String get remark => _remark;
-
-  Expense({
-    String name,
-    Route_Product_id productId,
-    double amount,
-    String remark,
+  Expense copyWith({
+    String? name,
+    required Route_Product_id productId,
+    double? amount,
+    String? remark,
   }) {
-    _name = name;
-    _productId = productId;
-    _amount = amount;
-    _remark = remark;
+    return Expense(
+        name: name ?? this.name,
+        productId: productId ?? this.productId,
+        amount: amount ?? this.amount,
+        remark: remark ?? this.remark);
   }
 
-  Expense.fromJson(dynamic json) {
-    _name = json["name"];
-    _productId = json["product_id"] != null
-        ? Route_Product_id.fromJson(json["product_id"])
-        : null;
-    _amount = json["amount"] == null ? 0 : json["amount"];
-    _remark = json["remark"] == null ? '' : json["remark"];
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'productId': productId,
+      'amount': amount,
+      'remark': remark
+    };
   }
+
+  factory Expense.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Expense(
+        name: map['name'],
+        productId: map['productId'],
+        amount: map['amount'],
+        remark: map['remark']);
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Expense.fromJson(String source) =>
+      Expense.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'AnnouncementPosition(name: $name, productId: $productId, amount: $amount, remark: $remark)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Expense &&
+        o.name == name &&
+        o.productId == productId &&
+        o.amount == amount &&
+        o.remark == remark;
+  }
+
+  @override
+  int get hashCode =>
+      name.hashCode ^ productId.hashCode ^ amount.hashCode ^ remark.hashCode;
 }
 
 class Route_Product_id {
-  int _id;
-  String _name;
+  int id;
+  String name;
+  Route_Product_id({
+    this.id = 0,
+    this.name = '',
+  });
 
-  int get id => _id;
-  String get name => _name;
-
-  Route_Product_id({int id, String name}) {
-    _id = id;
-    _name = name;
+  Route_Product_id copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Route_Product_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Route_Product_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  factory Route_Product_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Route_Product_id(
+      id: map['id'],
+      name: map['name'],
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory Route_Product_id.fromJson(String source) =>
+      Route_Product_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Route_Product_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Route_Product_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
 
 class Branch_id {
-  int _id;
-  String _name;
+  int id;
+  String name;
+  Branch_id({
+    this.id = 0,
+    this.name = '',
+  });
 
-  int get id => _id;
-  String get name => _name;
-
-  Branch_id({int id, String name}) {
-    _id = id;
-    _name = name;
+  Branch_id copyWith({
+    int? id,
+    String? name,
+  }) {
+    return Branch_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Branch_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  factory Branch_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Branch_id(
+      id: map['id'],
+      name: map['name'],
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory Branch_id.fromJson(String source) =>
+      Branch_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Branch_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Branch_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

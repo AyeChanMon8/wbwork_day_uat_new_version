@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'dart:convert';
 
 class CategoryEmployeeID {
   int id;
   String name;
   CategoryEmployeeID({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   CategoryEmployeeID copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return CategoryEmployeeID(
       id: id ?? this.id,
@@ -27,8 +26,8 @@ class CategoryEmployeeID {
   }
 
   factory CategoryEmployeeID.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
+    // if (map == null) return null;
+
     return CategoryEmployeeID(
       id: map['id'],
       name: map['name'],
@@ -37,7 +36,8 @@ class CategoryEmployeeID {
 
   String toJson() => json.encode(toMap());
 
-  factory CategoryEmployeeID.fromJson(String source) => CategoryEmployeeID.fromMap(json.decode(source));
+  factory CategoryEmployeeID.fromJson(String source) =>
+      CategoryEmployeeID.fromMap(json.decode(source));
 
   @override
   String toString() => 'CategoryEmployeeID(id: $id, name: $name)';
@@ -45,10 +45,8 @@ class CategoryEmployeeID {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is CategoryEmployeeID &&
-      o.id == id &&
-      o.name == name;
+
+    return o is CategoryEmployeeID && o.id == id && o.name == name;
   }
 
   @override

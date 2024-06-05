@@ -358,8 +358,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                       controller.plantrip_id,
                       controller.plantrip_with_product_list[arg_index]
                           .totalAdvance,
-                      itemAdvanceTotal))
-                  .then((value) {
+                      itemAdvanceTotal))?.then((value) {
                 //controller.getPlantripList(controller.current_page.value);
                 if (value != null) {
                   DayTripPlanTripGeneralController day_trip_controller =
@@ -649,7 +648,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           .fromDatetime,
                       controller.plantrip_with_product_list[arg_index]
                           .toDatetime,
-                      null))?.then((value) {
+                      null as Fuelin_ids))?.then((value) {
                 if (value != null) {
                   DayTripPlanTripGeneralController general_controller =
                       Get.find();

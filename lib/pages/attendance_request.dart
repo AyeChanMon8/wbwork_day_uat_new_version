@@ -377,12 +377,12 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
   }
 
   Future<void> _getLocation() async{
-     _locationData = await location.getLocation().then((value) {
+     await location.getLocation().then((value) {
       print('locationReceived');
       print(value.latitude);
       print(value.longitude);
-      controller.user_latitude.value = value.latitude;
-      controller.user_longitude.value = value.longitude;
+      controller.user_latitude.value = value.latitude!;
+      controller.user_longitude.value = value.longitude!;
     });
   }
 

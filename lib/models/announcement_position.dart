@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'dart:convert';
 
 class AnnouncementPosition {
   int id;
   String name;
   AnnouncementPosition({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   AnnouncementPosition copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return AnnouncementPosition(
       id: id ?? this.id,
@@ -27,7 +26,7 @@ class AnnouncementPosition {
   }
 
   factory AnnouncementPosition.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return AnnouncementPosition(
       id: map['id'],

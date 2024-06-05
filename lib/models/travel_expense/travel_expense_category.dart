@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 class TravelExpenseCategory {
@@ -10,22 +9,22 @@ class TravelExpenseCategory {
   bool is_vehicle_selected;
   bool fuel;
   TravelExpenseCategory({
-    this.id,
-    this.display_name,
-    this.out_of_pocket_expense,
-    this.travel_expense,
-    this.trip_expense,
-    this.is_vehicle_selected,
-    this.fuel
+    this.id = 0,
+    this.display_name = '',
+    this.out_of_pocket_expense = false,
+    this.travel_expense = false,
+    this.trip_expense = false,
+    this.is_vehicle_selected = false,
+    this.fuel = false
   });
 
   TravelExpenseCategory copyWith({
-    int id,
-    String display_name,
-    bool out_of_pocket_expense,
-    bool travel_expense,
-    bool trip_expense,
-    bool fuel
+    int? id,
+    String? display_name,
+    bool? out_of_pocket_expense,
+    bool? travel_expense,
+    bool? trip_expense,
+    bool? fuel
   }) {
     return TravelExpenseCategory(
       id: id ?? this.id,
@@ -50,7 +49,7 @@ class TravelExpenseCategory {
   }
 
   factory TravelExpenseCategory.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return TravelExpenseCategory(
       id: map['id'],

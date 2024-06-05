@@ -1,18 +1,17 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/travel_expense/pocket_model.dart';
+import '../../models/travel_expense/pocket_model.dart';
 
 class EditPocketModel {
   List<PockectModel> pocket_line;
   EditPocketModel({
-    this.pocket_line,
+    required this.pocket_line,
   });
 
   EditPocketModel copyWith({
-    List<PockectModel> pocket_line,
+    required List<PockectModel> pocket_line,
   }) {
     return EditPocketModel(
       pocket_line: pocket_line ?? this.pocket_line,
@@ -26,16 +25,18 @@ class EditPocketModel {
   }
 
   factory EditPocketModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
+    // if (map == null) return null;
+
     return EditPocketModel(
-      pocket_line: List<PockectModel>.from(map['pocket_line']?.map((x) => PockectModel.fromMap(x))),
+      pocket_line: List<PockectModel>.from(
+          map['pocket_line']?.map((x) => PockectModel.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory EditPocketModel.fromJson(String source) => EditPocketModel.fromMap(json.decode(source));
+  factory EditPocketModel.fromJson(String source) =>
+      EditPocketModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'EditPocketModel(pocket_line: $pocket_line)';
@@ -43,9 +44,8 @@ class EditPocketModel {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is EditPocketModel &&
-      listEquals(o.pocket_line, pocket_line);
+
+    return o is EditPocketModel && listEquals(o.pocket_line, pocket_line);
   }
 
   @override

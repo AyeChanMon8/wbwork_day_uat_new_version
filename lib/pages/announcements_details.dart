@@ -1,18 +1,18 @@
-
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+// import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
@@ -39,35 +39,44 @@ class AnnouncementsDetails extends StatelessWidget {
     await file.writeAsBytes(bytes);
     return file.path.toString();
   }
-  Widget pdfView(String pathPDF){
+
+  Widget pdfView(String pathPDF) {
     print("pdfView");
-    return PDFViewerScaffold(
-        appBar: AppBar(
-          title: Text("Document"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.share),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        path: pathPDF.toString());
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Document"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: SfPdfViewer.network(pathPDF.toString()),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     index = Get.arguments;
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
-    if(controller.announcementList.value[index].announcement.contains("src=\"/web/image/")){
-      announcement = controller.announcementList.value[index].announcement.split('src=\"/web/image/');
-      announcementText = announcement[0]+'src=\"'+Globals.baseURL.split('/api')[0]+'/web/image/'+announcement[1];
-    }else{
+    if (controller.announcementList.value[index].announcement
+        .contains("src=\"/web/image/")) {
+      announcement = controller.announcementList.value[index].announcement
+          .split('src=\"/web/image/');
+      announcementText = announcement[0] +
+          'src=\"' +
+          Globals.baseURL.split('/api')[0] +
+          '/web/image/' +
+          announcement[1];
+    } else {
       announcementText = controller.announcementList.value[index].announcement;
     }
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, "Announcements Details", image)),
+          preferredSize: const Size.fromHeight(8.0),
+          child: appbar(context, "Announcements Details", image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: 20, top: 20, right: 20),
@@ -120,13 +129,18 @@ class AnnouncementsDetails extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                child: 
-                Html(
-                    onLinkTap: (link){
-                      launch(link);
-                    },
-                    data:
-                        announcementText),
+                child: HtmlWidget(
+                  announcementText,
+
+                  // this callback will be triggered when user taps a link
+                  onTapUrl: (url) => launchUrl(Uri.parse(url)),
+                ),
+                // Html(
+                //     onLinkTap: (link){
+                //       launch(link);
+                //     },
+                //     data:
+                //         announcementText),
               ),
               /*SizedBox(
                         // paddingOnly(left: 30),
@@ -153,7 +167,8 @@ class AnnouncementsDetails extends StatelessWidget {
 
               SizedBox(
                 child: GridView.builder(
-                    itemCount: controller.announcementList.value[index].attachment_id.length,
+                    itemCount: controller
+                        .announcementList.value[index].attachment_id.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -162,30 +177,41 @@ class AnnouncementsDetails extends StatelessWidget {
                       mainAxisSpacing: 1,
                       crossAxisCount: 4,
                     ),
-                    itemBuilder: (context,fileIndex) {
-
+                    itemBuilder: (context, fileIndex) {
                       return InkWell(
-                        onTap: () async{
-                          !controller.announcementList.value[index].attachment_id[fileIndex].name.toString().contains('pdf')?
-                          await showDialog(
-                              context: context,
-                              builder: (_) {
-                                return ImageDialog(
-                                  bytes: base64Decode(controller.announcementList.value[index].attachment_id[fileIndex].datas),
-                                );
-                              }
-                          ):
-                          _createFileFromString(controller.announcementList.value[index].attachment_id[fileIndex].datas.toString()).then((path) async{
-                            print("FilePath");
-                            await OpenFile.open(path);
-                             print(path.toString());
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => FullPdfViewerScreen(path)),
-                            // );
-                           // Get.to(PdfView(path,controller.announcementList.value[index].attachment_id[fileIndex].name));
-                          });
+                        onTap: () async {
+                          !controller.announcementList.value[index]
+                                  .attachment_id[fileIndex].name
+                                  .toString()
+                                  .contains('pdf')
+                              ? await showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return ImageDialog(
+                                      bytes: base64Decode(controller
+                                          .announcementList
+                                          .value[index]
+                                          .attachment_id[fileIndex]
+                                          .datas),
+                                    );
+                                  })
+                              : _createFileFromString(controller
+                                      .announcementList
+                                      .value[index]
+                                      .attachment_id[fileIndex]
+                                      .datas
+                                      .toString())
+                                  .then((path) async {
+                                  print("FilePath");
+                                  await OpenFile.open(path);
+                                  print(path.toString());
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => FullPdfViewerScreen(path)),
+                                  // );
+                                  // Get.to(PdfView(path,controller.announcementList.value[index].attachment_id[fileIndex].name));
+                                });
                         },
                         // child: controller.announcementList.value[index].attachment_id[fileIndex].name.contains('pdf')?
                         // FlatButton(
@@ -212,10 +238,12 @@ class AnnouncementsDetails extends StatelessWidget {
                           elevation: 10,
                           child: Container(
                             height: 120,
-                            width: MediaQuery.of(context).size.width*0.8,
+                            width: MediaQuery.of(context).size.width * 0.8,
                             padding: EdgeInsets.all(10),
                             child: AutoSizeText(
-                              controller.announcementList.value[index].attachment_id[fileIndex].name.toString(),
+                              controller.announcementList.value[index]
+                                  .attachment_id[fileIndex].name
+                                  .toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   color: Colors.blueGrey,
@@ -224,8 +252,7 @@ class AnnouncementsDetails extends StatelessWidget {
                           ),
                         ),
                       );
-                    }
-                       ),
+                    }),
               )
             ],
           ),
@@ -233,8 +260,8 @@ class AnnouncementsDetails extends StatelessWidget {
       ),
     );
   }
-
 }
+
 class FullPdfViewerScreen extends StatelessWidget {
   final String pdfPath;
 
@@ -242,10 +269,10 @@ class FullPdfViewerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PDFViewerScaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Document"),
         ),
-        path: pdfPath);
+        body: SfPdfViewer.network(pdfPath));
   }
 }

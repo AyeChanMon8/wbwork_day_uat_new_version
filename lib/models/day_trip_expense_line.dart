@@ -1,73 +1,136 @@
-// @dart=2.9
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class DayTripExpenseLine {
-  List<Expense> _expenseIds;
-
-  List<Expense> get expenseIds => _expenseIds;
-
+  List<Expense> expenseIds;
   DayTripExpenseLine({
-      List<Expense> expenseIds}){
-    _expenseIds = expenseIds;
-}
+    required this.expenseIds,
+  });
 
-  DayTripExpenseLine.fromJson(dynamic json) {
-    if (json["expense_ids"] != null) {
-      _expenseIds = [];
-      json["expense_ids"].forEach((v) {
-        _expenseIds.add(Expense.fromJson(v));
-      });
-    }
+  DayTripExpenseLine copyWith({
+    required List<Expense> expenseIds,
+  }) {
+    return DayTripExpenseLine(
+      expenseIds: expenseIds ?? this.expenseIds,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    if (_expenseIds != null) {
-      map["expense_ids"] = _expenseIds.map((v) => v.toJson()).toList();
-    }
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'expense_ids': expenseIds?.map((x) => x?.toMap())?.toList(),
+    };
   }
 
-}
-class Expense {
-  int _productId;
-  String _name;
-  double _amount;
-  int _day_trip_id;
-  String _image;
+  factory DayTripExpenseLine.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
 
-  int get productId => _productId;
-  String get name => _name;
-  double get amount => _amount;
-  int get day_trip_id => _day_trip_id;
-
-  Expense({
-      int productId, 
-      String name, 
-      double amount,int day_trip_id,String image}){
-    _productId = productId;
-    _name = name;
-    _amount = amount;
-    _day_trip_id = day_trip_id;
-    _image = image;
-}
-
-  Expense.fromJson(dynamic json) {
-    _productId = json["product_id"];
-    _name = json["name"];
-    _amount = json["amount"];
+    return DayTripExpenseLine(
+      expenseIds: List<Expense>.from(
+          map['expense_ids']?.map((x) => Expense.fromMap(x))),
+    );
   }
 
   String toJson() => json.encode(toMap());
 
+  factory DayTripExpenseLine.fromJson(String source) =>
+      DayTripExpenseLine.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'DayTripExpenseLine(expenseIds: $expenseIds)';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is DayTripExpenseLine && listEquals(o.expenseIds, expenseIds);
+  }
+
+  @override
+  int get hashCode {
+    return expenseIds.hashCode;
+  }
+}
+
+class Expense {
+  int productId;
+  String name;
+  double amount;
+  int day_trip_id;
+  String image;
+
+  Expense(
+      {this.productId = 0,
+      this.name = '',
+      this.amount = 0.0,
+      this.day_trip_id = 0,
+      this.image = ''});
+
+  Expense copyWith(
+      {int? productId,
+      String? name,
+      double? amount,
+      int? day_trip_id,
+      String? image}) {
+    return Expense(
+        productId: productId ?? this.productId,
+        name: name ?? this.name,
+        amount: amount ?? this.amount,
+        day_trip_id: day_trip_id ?? this.day_trip_id,
+        image: image ?? this.image);
+  }
+
   Map<String, dynamic> toMap() {
     return {
-      'product_id': _productId,
-      'name': _name,
-      'amount': _amount,
-      'day_trip_id': _day_trip_id,
-      'attached_file' : _image,
+      'product_id': productId,
+      'name': name,
+      'amount': amount,
+      'day_trip_id': day_trip_id,
+      'attached_file': image
     };
   }
 
+  factory Expense.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Expense(
+        productId: map['product_id'],
+        name: map['name'],
+        amount: map['amount'],
+        day_trip_id: map['day_trip_id'],
+        image: map['attached_file']);
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Expense.fromJson(String source) =>
+      Expense.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Expense(productId: $productId, name: $name, amount: $amount, day_trip_id: $day_trip_id, image: $image)';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Expense &&
+        o.productId == productId &&
+        o.name == name &&
+        o.amount == amount &&
+        o.day_trip_id == day_trip_id &&
+        o.image == image;
+  }
+
+  @override
+  int get hashCode {
+    return productId.hashCode ^
+        name.hashCode ^
+        amount.hashCode ^
+        day_trip_id.hashCode ^
+        image.hashCode;
+  }
 }

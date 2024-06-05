@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'dart:convert';
 
 class EmployeeModel {
   int id;
   String name;
   EmployeeModel({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   EmployeeModel copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return EmployeeModel(
       id: id ?? this.id,
@@ -27,7 +26,7 @@ class EmployeeModel {
   }
 
   factory EmployeeModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return EmployeeModel(
       id: map['id'],

@@ -1,11 +1,10 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/travel_expense/create/travel_expense_model.dart';
+import '../../models/company.dart';
+import '../../models/employee_id.dart';
+import '../../models/travel_expense/create/travel_expense_model.dart';
 
 class TravelExpenseListModel {
   int id;
@@ -15,21 +14,21 @@ class TravelExpenseListModel {
   Company companyId;
   List<TravelExpenseModel> travel_line;
   TravelExpenseListModel({
-    this.id,
-    this.date,
-    this.state,
-    this.employee_id,
-    this.companyId,
-    this.travel_line,
+    this.id = 0,
+    this.date = '',
+    this.state = '',
+    required this.employee_id,
+    required this.companyId,
+    required this.travel_line,
   });
 
   TravelExpenseListModel copyWith({
-    int id,
-    String date,
-    String state,
-    EmployeeID employee_id,
-    Company companyId,
-    List<TravelExpenseModel> travel_line,
+    int? id,
+    String? date,
+    String? state,
+    required EmployeeID employee_id,
+    required Company companyId,
+    required List<TravelExpenseModel> travel_line,
   }) {
     return TravelExpenseListModel(
       id: id ?? this.id,
@@ -53,7 +52,7 @@ class TravelExpenseListModel {
   }
 
   factory TravelExpenseListModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return TravelExpenseListModel(
       id: map['id'],

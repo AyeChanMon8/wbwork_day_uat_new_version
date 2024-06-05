@@ -1,17 +1,16 @@
-// @dart=2.9
 import 'dart:convert';
 
 class ProductModel {
   int id;
   String name;
   ProductModel({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
   ProductModel copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -27,7 +26,7 @@ class ProductModel {
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return ProductModel(
       id: map['id'],

@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 class OutofPocketExpenseLine {
@@ -11,25 +10,25 @@ class OutofPocketExpenseLine {
   double price_unit;
   double price_subtotal;
   OutofPocketExpenseLine({
-    this.line_id,
-    this.date,
-    this.categ_id,
-    this.product_id,
-    this.description,
-    this.qty,
-    this.price_unit,
-    this.price_subtotal,
+    this.line_id = 0,
+    this.date = '',
+    this.categ_id = 0,
+    this.product_id = 0,
+    this.description = '',
+    this.qty = 0.0,
+    this.price_unit = 0.0,
+    this.price_subtotal = 0.0,
   });
 
   OutofPocketExpenseLine copyWith({
-    int line_id,
-    String date,
-    int categ_id,
-    int product_id,
-    String description,
-    double qty,
-    double price_unit,
-    double price_subtotal,
+    required int line_id,
+    required String date,
+    required int categ_id,
+    required int product_id,
+    required String description,
+    required double qty,
+    required double price_unit,
+    required double price_subtotal,
   }) {
     return OutofPocketExpenseLine(
       line_id: line_id ?? this.line_id,
@@ -57,7 +56,7 @@ class OutofPocketExpenseLine {
   }
 
   factory OutofPocketExpenseLine.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OutofPocketExpenseLine(
       line_id: map['line_id'],

@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:convert';
 
 import 'employee_id.dart';
@@ -22,33 +21,44 @@ class Attendance {
   bool plan_trip;
   bool day_trip;
   bool leave;
-  Attendance({
-    this.approved,
-    this.check_in,
-    this.check_out,
-    this.early_out_minutes,
-    this.employee_id,
-    this.id,
-    this.late_minutes,
-    this.ot_hour,
-    this.worked_hours,
-    this.check,
-    this.state,
-    this.is_absent,this.missed,this.no_worked_day,this.travel,this.plan_trip,this.day_trip,this.leave
-  });
+  Attendance(
+      {this.approved = false,
+      this.check_in = '',
+      this.check_out = '',
+      this.early_out_minutes = 0.0,
+      required this.employee_id,
+      this.id = 0,
+      this.late_minutes = 0.0,
+      this.ot_hour = 0.0,
+      this.worked_hours = 0.0,
+      this.check = false,
+      this.state = '',
+      this.is_absent = false,
+      this.missed = false,
+      this.no_worked_day = false,
+      this.travel = false,
+      this.plan_trip = false,
+      this.day_trip = false,
+      this.leave = false});
 
   Attendance copyWith({
-    bool approved,
-    String check_in,
-    String check_out,
-    double early_out_minutes,
-    EmployeeID employee_id,
-    int id,
-    double late_minutes,
-    double ot_hour,
-    double worked_hours,
-    bool check,
-    String state,bool is_absent,bool missed,bool no_worked_day,bool travel,bool plan_trip,bool day_trip,
+    bool? approved,
+    String? check_in,
+    String? check_out,
+    double? early_out_minutes,
+    required EmployeeID employee_id,
+    int? id,
+    double? late_minutes,
+    double? ot_hour,
+    double? worked_hours,
+    bool? check,
+    String? state,
+    bool? is_absent,
+    bool? missed,
+    bool? no_worked_day,
+    bool? travel,
+    bool? plan_trip,
+    bool? day_trip,
   }) {
     return Attendance(
       approved: approved ?? this.approved,
@@ -88,14 +98,14 @@ class Attendance {
   }
 
   factory Attendance.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Attendance(
       approved: map['approved'] ?? false,
       check_in: map['check_in'] ?? '',
       check_out: map['check_out'] ?? '',
       early_out_minutes: map['early_out_minutes'] ?? 0.0,
-      employee_id: EmployeeID.fromMap(map['employee_id']) ?? '',
+      employee_id: EmployeeID.fromMap(map['company_id']),
       id: map['id'] ?? 0,
       late_minutes: map['late_minutes'] ?? 0.0,
       ot_hour: map['ot_hour'] ?? 0.0,
@@ -109,7 +119,6 @@ class Attendance {
       plan_trip: map['plan_trip'] ?? false,
       day_trip: map['day_trip'] ?? false,
       leave: map['leave'] ?? false,
-
     );
   }
 
