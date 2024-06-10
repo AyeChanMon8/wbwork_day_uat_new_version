@@ -85,7 +85,7 @@ class AnnouncementsDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  controller.announcementList.value[index].company_id.name,
+                  controller.announcementList.value[index].company_id!.name,
                   style: maintitleStyle(),
                 ),
               ),
@@ -168,7 +168,7 @@ class AnnouncementsDetails extends StatelessWidget {
               SizedBox(
                 child: GridView.builder(
                     itemCount: controller
-                        .announcementList.value[index].attachment_id.length,
+                        .announcementList.value[index].attachment_id!.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -181,7 +181,7 @@ class AnnouncementsDetails extends StatelessWidget {
                       return InkWell(
                         onTap: () async {
                           !controller.announcementList.value[index]
-                                  .attachment_id[fileIndex].name
+                                  .attachment_id![fileIndex].name
                                   .toString()
                                   .contains('pdf')
                               ? await showDialog(
@@ -191,14 +191,14 @@ class AnnouncementsDetails extends StatelessWidget {
                                       bytes: base64Decode(controller
                                           .announcementList
                                           .value[index]
-                                          .attachment_id[fileIndex]
+                                          .attachment_id![fileIndex]
                                           .datas),
                                     );
                                   })
                               : _createFileFromString(controller
                                       .announcementList
                                       .value[index]
-                                      .attachment_id[fileIndex]
+                                      .attachment_id![fileIndex]
                                       .datas
                                       .toString())
                                   .then((path) async {
@@ -242,7 +242,7 @@ class AnnouncementsDetails extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: AutoSizeText(
                               controller.announcementList.value[index]
-                                  .attachment_id[fileIndex].name
+                                  .attachment_id![fileIndex].name
                                   .toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,

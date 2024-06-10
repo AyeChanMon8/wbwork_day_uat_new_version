@@ -89,7 +89,7 @@ class _AnnouncementApprovalPageState extends State<AnnouncementApprovalPage> {
                             ],
                           ),
                           subtitle: Text(controller
-                              .announcementList.value[index].company_id.name
+                              .announcementList.value[index].company_id!.name
                               .toString()),
                           trailing: arrowforwardIcon),
                     ),

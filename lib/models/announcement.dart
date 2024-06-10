@@ -11,13 +11,13 @@ class Announcement {
   String announcement_reason;
   String state;
   String requested_date;
-  List<Attachment> attachment_id;
-  Company company_id;
+  List<Attachment>? attachment_id;
+  Company? company_id;
   bool is_announcement;
   String announcement_type;
-  List<AnnouncementEmployee> employee_ids;
-  List<AnnouncementDepartment> department_ids;
-  List<AnnouncementPosition> position_ids;
+  List<AnnouncementEmployee>? employee_ids;
+  List<AnnouncementDepartment>? department_ids;
+  List<AnnouncementPosition>? position_ids;
   String announcement;
   String date_start;
   String date_end;
@@ -27,13 +27,13 @@ class Announcement {
     this.announcement_reason = '',
     this.state = '',
     this.requested_date = '',
-    required this.attachment_id,
-    required this.company_id,
+    this.attachment_id,
+    this.company_id,
     this.is_announcement = false,
     this.announcement_type = '',
-    required this.employee_ids,
-    required this.department_ids,
-    required this.position_ids,
+    this.employee_ids,
+    this.department_ids,
+    this.position_ids,
     this.announcement = '',
     this.date_start = '',
     this.date_end = '',

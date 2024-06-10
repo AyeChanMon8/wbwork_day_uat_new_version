@@ -32,7 +32,7 @@ class AnnouncementApprovalDetails extends StatelessWidget {
     announcement = Get.arguments;
     final labels = AppLocalizations.of(context);
     image = box.read('emp_image');
-    print("announcement.attachment_id ${announcement!.attachment_id.length}");
+    print("announcement.attachment_id ${announcement!.attachment_id!.length}");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
@@ -54,7 +54,7 @@ class AnnouncementApprovalDetails extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  announcement.company_id.name,
+                  announcement.company_id!.name,
                   style: maintitleStyle(),
                 ),
               ),
@@ -127,7 +127,7 @@ class AnnouncementApprovalDetails extends StatelessWidget {
                   ? Container()
                   : SizedBox(
                       child: GridView.builder(
-                          itemCount: announcement.attachment_id.length,
+                          itemCount: announcement.attachment_id!.length,
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
@@ -143,21 +143,21 @@ class AnnouncementApprovalDetails extends StatelessWidget {
                                       context: context,
                                       builder: (_) => ImageDialog(
                                             bytes: base64Decode(announcement
-                                                .attachment_id[fileIndex]
+                                                .attachment_id![fileIndex]
                                                 .datas),
                                           ));
                                 },
-                                child: announcement.attachment_id[fileIndex]
+                                child: announcement.attachment_id![fileIndex]
                                                 .datas ==
                                             null ||
-                                        announcement.attachment_id[fileIndex]
+                                        announcement.attachment_id![fileIndex]
                                                 .datas ==
                                             "null"
                                     ? SizedBox()
-                                    : announcement.attachment_id[fileIndex].name.contains("pdf")?
+                                    : announcement.attachment_id![fileIndex].name.contains("pdf")?
 
                                       InkWell(onTap:(){
-                                        _createFileFromString(announcement.attachment_id[fileIndex].datas.toString()).then((path) async{
+                                        _createFileFromString(announcement.attachment_id![fileIndex].datas.toString()).then((path) async{
                                           await OpenFile.open(path);
                                           print(path.toString());
                                           // Navigator.push(
@@ -170,12 +170,12 @@ class AnnouncementApprovalDetails extends StatelessWidget {
                                       },child: Card(
                                           child: Padding(
                                         padding: const EdgeInsets.all(10.0),
-                                        child: Text(announcement.attachment_id[fileIndex].name),
+                                        child: Text(announcement.attachment_id![fileIndex].name),
                                       )))
                                     : Card(
                                       child: Image.memory(
                                           base64Decode(announcement
-                                              .attachment_id[fileIndex].datas),
+                                              .attachment_id![fileIndex].datas),
                                           width: 50,
                                           height: 50),
                                     ),
