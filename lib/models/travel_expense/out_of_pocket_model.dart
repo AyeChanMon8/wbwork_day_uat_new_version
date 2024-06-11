@@ -14,7 +14,7 @@ class OutofPocketModel {
   int mobile_user_id;
   int employee_id;
   int company_id;
-  List<PockectModel> pocket_line;
+  List<PockectModel>? pocket_line;
   String number;
   OutofPocketModel(
       {this.id = 0,
@@ -22,7 +22,7 @@ class OutofPocketModel {
       this.mobile_user_id = 0,
       this.employee_id = 0,
       this.company_id = 0,
-      required this.pocket_line,
+      this.pocket_line,
       this.number = ''});
 
   OutofPocketModel copyWith({

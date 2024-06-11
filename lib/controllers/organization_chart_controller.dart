@@ -70,11 +70,11 @@ class OrganizationalChartController extends GetxController {
     List<String> parent_name_list = <String>[];
     parent_name_list.add(data.name);
 
-    for (int i = 0; i < data.child_ids.length; i++) {
-      emp_name_list.add(data.child_ids[i].name);
+    for (int i = 0; i < data.child_ids!.length; i++) {
+      emp_name_list.add(data.child_ids![i].name);
     }
     var parent_data = OrganizationChart(
-            id: data.parent_id.name, email: '', next: parent_name_list)
+            id: data.parent_id!.name, email: '', next: parent_name_list)
         .toJson();
     //array.add(parent_data);
     var child_data = OrganizationChart(

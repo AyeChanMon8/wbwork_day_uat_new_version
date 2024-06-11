@@ -116,12 +116,12 @@ class _DayTripListPageState extends State<DayTripListPage> {
                               children: [
                                 Expanded(
                                   child: AutoSizeText(
-                                    dayTripModel.vehicleId.name,
+                                    dayTripModel.vehicleId!.name,
                                     style: subtitleStyle(),
                                   ),
                                 ),
                                 dayTripModel.state=='open'?
-                                dayTripModel.driverId.id==emp_id?AutoSizeText(
+                                dayTripModel.driverId!.id==emp_id?AutoSizeText(
                                   dayTripModel.state.toUpperCase()+" >>",
                                   style: subtitleStyle(),
                                 ):AutoSizeText(

@@ -89,14 +89,14 @@ import 'dart:convert';
 class Document_detail {
   final int id;
   final String name;
-  final Folder_id folderId;
+  final Folder_id? folderId;
   final String datas;
   final String displayName;
   final String type;
   Document_detail({
     this.id = 0,
     this.name = '',
-    required this.folderId,
+    this.folderId,
     this.datas = '',
     this.displayName = '',
     this.type = ''

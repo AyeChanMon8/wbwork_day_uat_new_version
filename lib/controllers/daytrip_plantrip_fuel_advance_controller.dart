@@ -443,7 +443,7 @@ class DayTripPlanTripGeneralController extends GetxController{
       AppUtils.showConfirmCancelDialog('Warning', 'Are you sure?', () async {
         isAdvanceButton.value = true;
         if(arg=="DayTrip"){
-          var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),total_amount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
+          var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text)!,amount: int.tryParse(amountTextController.text)!,total_amount: int.tryParse(totalAmountController.text)!,remark: remarkTextController.text);
           await dayTripServie?.addAdvance(advance).then((data) {
             isAdvanceButton.value = false;
             if (data != 0) {
@@ -499,7 +499,7 @@ class DayTripPlanTripGeneralController extends GetxController{
   }
   deleteAdvance(String arg, int tripID) async {
     if(arg=="DayTrip"){
-      var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),total_amount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
+      var advance  = Advance_line(dayTripId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text)!,amount: int.tryParse(amountTextController.text)!,total_amount: int.tryParse(totalAmountController.text)!,remark: remarkTextController.text);
       await dayTripServie?.addAdvance(advance).then((data) {
         if (data != 0) {
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){

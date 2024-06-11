@@ -218,10 +218,10 @@ class OutOfPocketController extends GetxController {
           // category_name: selectedExpenseCategory.display_name,
           product_id: selectedExpenseProduct.id,
           description: descriptionController.text,
-          qty: double.tryParse(qtyController.text),
-          price_unit: double.tryParse(priceController.text),
-          price_subtotal: double.tryParse(totalAmountController.text),
-          attached_file: image_base64,
+          qty: double.tryParse(qtyController.text)!,
+          price_unit: double.tryParse(priceController.text)!,
+          price_subtotal: double.tryParse(totalAmountController.text)!,
+          attached_file: image_base64!,
           vehicle_id: vehicleID,
           attachment_include: attachment_include);
       outofpocketList.add(travelExpense);
@@ -372,7 +372,7 @@ class OutOfPocketController extends GetxController {
 
     OutofPocketModel outRequest = OutofPocketModel(
         date: formattedDate,
-        mobile_user_id: employee_id,
+        mobile_user_id: employee_id!,
         employee_id: employee_id,
         company_id: int.parse(employee_company.toString()),
         pocket_line: outofpocketList);

@@ -28,40 +28,40 @@ class DayTripModel {
   String fromDatetime;
   String toDatetime;
   double duration;
-  Vehicle_id vehicleId;
+  Vehicle_id? vehicleId;
   dynamic fuelType;
   double odometer;
   String odometerUnit;
-  Driver_id driverId;
-  Spare1_id spare1Id;
-  Spare2_id spare2Id;
+  Driver_id? driverId;
+  Spare1_id? spare1Id;
+  Spare2_id? spare2Id;
   double advancedRequest;
-  List<DayTrip_Expense_ids> expenseIds;
-  List<FuelIn_ids> fuelInIds;
-  List<Product_ids> product_lines;
-  List<Advance_ids> advance_lines;
-  List<Consumption_ids> consumption_ids;
+  List<DayTrip_Expense_ids>? expenseIds;
+  List<FuelIn_ids>? fuelInIds;
+  List<Product_ids>? product_lines;
+  List<Advance_ids>? advance_lines;
+  List<Consumption_ids>? consumption_ids;
 
   DayTripModel(
-      {required this.id,
+      {this.id = 0,
       this.code = '',
       this.state = '',
       this.fromDatetime = '',
       this.toDatetime = '',
       this.duration = 0.0,
-      required this.vehicleId,
-      required this.fuelType,
+      this.vehicleId,
+      this.fuelType,
       this.odometer = 0.0,
       this.odometerUnit = '',
-      required this.driverId,
-      required this.spare1Id,
-      required this.spare2Id,
+      this.driverId,
+      this.spare1Id,
+      this.spare2Id,
       this.advancedRequest = 0.0,
-      required this.expenseIds,
-      required this.fuelInIds,
-      required this.product_lines,
-      required this.advance_lines,
-      required this.consumption_ids});
+      this.expenseIds,
+      this.fuelInIds,
+      this.product_lines,
+      this.advance_lines,
+      this.consumption_ids});
 
   DayTripModel copyWith(
       {int? id,

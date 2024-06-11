@@ -754,7 +754,7 @@ class _FleetPageState extends State<FleetPage> {
                 child: Text(labels.model),
               ),
               Container(
-                child: Text(controller.fleetModel.value.modelId.name),
+                child: Text(controller.fleetModel.value.modelId!.name),
               )
             ],
           ),

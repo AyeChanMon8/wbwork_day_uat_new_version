@@ -66,13 +66,13 @@ class Department {
 
   final int id;
   final String name;
-  final String complete_name;
-  final List<EmployeeID> employee_ids;
+  final String? complete_name;
+  final List<EmployeeID>? employee_ids;
   Department({
     this.id = 0,
     this.name = '',
-    required this.complete_name,
-    required this.employee_ids,
+    this.complete_name,
+    this.employee_ids,
   });
 
   Department copyWith({

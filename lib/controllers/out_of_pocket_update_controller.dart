@@ -221,10 +221,10 @@ class OutOfPocketUpdateController extends GetxController {
           // category_name: selectedExpenseCategory.display_name,
           product_id: selectedExpenseProduct.id,
           description: descriptionController.text,
-          qty: double.tryParse(qtyController.text),
-          price_unit: double.tryParse(priceController.text),
-          price_subtotal: double.tryParse(totalAmountController.text),
-          attached_file: image_base64,
+          qty: double.tryParse(qtyController.text)!,
+          price_unit: double.tryParse(priceController.text)!,
+          price_subtotal: double.tryParse(totalAmountController.text)!,
+          attached_file: image_base64!,
           vehicle_id:vehicleID,
           line_id: lineId,attachment_include: attach_include
       );

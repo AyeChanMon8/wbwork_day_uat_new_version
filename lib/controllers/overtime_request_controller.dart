@@ -125,7 +125,7 @@ class OvertimeRequestController extends GetxController {
             .then((data) {
           Get.back();
           for (int i = 0; i < data.length; i++) {
-            print(data[i].department_id.id);
+            print(data[i].department_id!.id);
             var from_date = DateFormat('yyyy-MM-dd HH:mm').parse(selectedFromDate.toString().split('.')[0]).subtract(Duration(hours: 6,minutes: 30)).toString().split('.')[0];
             var to_date = DateFormat('yyyy-MM-dd HH:mm').parse(selectedEndDate.toString().split('.')[0]).subtract(Duration(hours: 6,minutes: 30)).toString().split('.')[0];
 
@@ -138,8 +138,8 @@ class OvertimeRequestController extends GetxController {
                 email: data[i].work_email,
                 state: 'draft',
                 emp_name: data[i].name,
-                dept_id: data[i].department_id.id,
-                branch_id: data[i].branch_id.id
+                dept_id: data[i].department_id!.id,
+                branch_id: data[i].branch_id!.id
               ),
             );
           }

@@ -234,7 +234,7 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           File? file = await AppUtils.createPDF(
-                              insurance.attachmentId,
+                              insurance.attached_file,
                               "attachmentId.png",
                               "application/png");
                           if (AppUtils.isImage(file!.path)) {

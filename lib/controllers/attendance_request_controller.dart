@@ -56,7 +56,7 @@ class AttendanceRequestController extends GetxController {
             barrierDismissible: false));
     AttendanceRequest attendanceRequest = AttendanceRequest(
         fingerprint_id: fingerprint_id,
-        employee_id: int.tryParse(emp_id),
+        employee_id: int.tryParse(emp_id)!,
         check_in: current_date_time,latitude: user_latitude.value,longitude: user_longitude.value);
 
     await attendanceService?.createAttendanceCheckIn(attendanceRequest)

@@ -6,11 +6,11 @@ import '../models/employee_id.dart';
 class EmployeeCategory {
    int id;
    String name;
-   List<EmployeeID> employee_ids;
+   List<EmployeeID>? employee_ids;
   EmployeeCategory({
     this.id = 0,
     this.name = '',
-    required this.employee_ids,
+    this.employee_ids,
   });
 
   EmployeeCategory copyWith({

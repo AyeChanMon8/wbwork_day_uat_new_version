@@ -347,7 +347,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  dept.complete_name,
+                                  dept.complete_name!,
                                   style: TextStyle(),
                                 ),
                               ),

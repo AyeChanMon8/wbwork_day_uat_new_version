@@ -16,13 +16,13 @@ class Employee {
   String name;
   final String image_128;
   final String job_title;
-  final Department department_id;
-  final Job job_id;
+  final Department? department_id;
+  final Job? job_id;
   String work_location = "";
   String mobile_phone = "";
   String work_email = "";
-  final Company company_id;
-  final Partner parent_id;
+  final Company? company_id;
+  final Partner? parent_id;
   final String ssb_no;
   final String ssb_issue_date;
   final String ssb_temporary_card;
@@ -31,7 +31,7 @@ class Employee {
   final String smart_card_issue_date;
   final String smart_card_no;
   final String fingerprint_id;
-  final List<EmployeeID> child_ids;
+  final List<EmployeeID>? child_ids;
   final bool allow_leave_report;
   final bool allow_leave_request;
   final bool allow_attendance_report;
@@ -60,19 +60,19 @@ class Employee {
   bool allow_employee_change = true;
   final bool allow_purchase_order_approval;
   final bool allow_employee_benefit;
-  Company branch_id;
+  Company? branch_id;
   Employee({
     this.id = 0,
     this.name = "",
     this.image_128 = '',
     this.job_title = '',
-    required this.department_id,
-    required this.job_id,
+    this.department_id,
+    this.job_id,
     this.work_location = "",
     this.mobile_phone = "",
     this.work_email = "",
-    required this.company_id,
-    required this.parent_id,
+    this.company_id,
+    this.parent_id,
     this.ssb_no = '',
     this.ssb_issue_date = '',
     this.ssb_temporary_card = '',
@@ -81,7 +81,7 @@ class Employee {
     this.smart_card_issue_date = '',
     this.smart_card_no = '',
     this.fingerprint_id = '',
-    required this.child_ids,
+    this.child_ids,
     this.allow_leave_report = false,
     this.allow_leave_request = false,
     this.allow_attendance_report = false,
@@ -110,7 +110,7 @@ class Employee {
     this.allow_employee_change = true,
     this.allow_purchase_order_approval = false,
     this.allow_employee_benefit = false,
-    required this.branch_id
+    this.branch_id
   });
 
   Employee copyWith({

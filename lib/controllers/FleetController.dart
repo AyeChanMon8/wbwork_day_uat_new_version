@@ -65,8 +65,8 @@ class FleetController extends GetxController{
     await fleetService?.getFleetList(empId).then((value){
       fleetList.value = value;
       if(value.length!=0){
-        fueComsumptionList.value =  value[0].consumption_average_history;
-        tiredList.value = value[0].tire_history;
+        fueComsumptionList.value =  value[0].consumption_average_history!;
+        tiredList.value = value[0].tire_history!;
       }
     });
     Get.back();
@@ -91,7 +91,7 @@ class FleetController extends GetxController{
       fleetModel.value = fleetList[index];
       var total_odoometer = 0.0;
       var total_liters = 0.0;
-      fleetList[index].consumption_average_history.forEach((element) {
+      fleetList[index].consumption_average_history?.forEach((element) {
         total_liters+=element.consumption_liter;
         total_odoometer+=element.odometer;
       });
@@ -105,8 +105,8 @@ class FleetController extends GetxController{
       getMaintenanceList(fleetList[index].id);
       getFuelLogList(fleetList[index].id);
 
-      if(fleetList[index].fuelTank.id!=null){
-        getFuelTankList(fleetList[index].fuelTank.id);
+      if(fleetList[index].fuelTank!.id!=null){
+        getFuelTankList(fleetList[index].fuelTank!.id);
       }
 
     }
@@ -126,7 +126,7 @@ class FleetController extends GetxController{
       // value[0].fuel_history.sort((a,b) {
       //   return a.filling_date.compareTo(b.filling_date);
       // });
-      value[0].fuel_history.forEach((element) {
+      value[0].fuel_history?.forEach((element) {
         String datebefore = AppUtils.onemonthago();
         if(element.filling_date!=null){
           if(element.filling_date.compareTo(datebefore)>0){

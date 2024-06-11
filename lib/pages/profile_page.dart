@@ -239,7 +239,7 @@ class ProfilePage extends StatelessWidget {
                       Container(
                         child: controller.empData.value == null
                             ? Text("-")
-                            : Text(controller.empData.value.department_id.name,
+                            : Text(controller.empData.value.department_id!.name,
                                 style: datalistStyle()),
                       ),
                       Container(
@@ -676,7 +676,7 @@ class ProfilePage extends StatelessWidget {
                           child: Text(
                             controller.empData.value.company_id == null
                                 ? '-'
-                                : controller.empData.value.company_id.name,
+                                : controller.empData.value.company_id!.name,
                             style: subtitleStyle(),
                           ),
                         ),
@@ -699,9 +699,9 @@ class ProfilePage extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 70),
                           child: Text(
-                            controller.empData.value.department_id.name == null
+                            controller.empData.value.department_id!.name == null
                                 ? '-'
-                                : controller.empData.value.department_id.name,
+                                : controller.empData.value.department_id!.name,
                             style: subtitleStyle(),
                           ),
                         ),
@@ -749,9 +749,9 @@ class ProfilePage extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 70),
                           child: Text(
-                            controller.empData.value.parent_id.name == null
+                            controller.empData.value.parent_id!.name == null
                                 ? '-'
-                                : controller.empData.value.parent_id.name,
+                                : controller.empData.value.parent_id!.name,
                             style: subtitleStyle(),
                           ),
                         ),

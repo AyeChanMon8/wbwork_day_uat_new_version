@@ -556,8 +556,8 @@ class EmployeeChangeController extends GetxController {
         branchId: selectedOldBranch.id,
         departmentId: selectedOldDepartment.id,
         jobId: selectedEmployee.job_id,
-        jobGradeId: int.tryParse(old_jobgrade.value),
-        salaryLevelId: int.tryParse(old_salary_level.value),
+        jobGradeId: int.tryParse(old_jobgrade.value)!,
+        salaryLevelId: int.tryParse(old_salary_level.value)!,
         wage:_selectedEmployeeJobInfo.value.wage,
         date:effectiveDateTextController.text,
         newCompanyId:selectedCompany.id,
@@ -566,7 +566,7 @@ class EmployeeChangeController extends GetxController {
         newJobId:selectedJobPosition.id ,
         newJobGradeId: selectedJobGrade.id,
         newSalaryLevelId: selectedSalaryLevel.id,
-        newWage: double.tryParse(new_wage),
+        newWage: double.tryParse(new_wage)!,
         note:noteTextController.text,
         newApprovedManagerId: selectedManagerEmployee.id);
        this.employeeService = await EmployeeService().init();

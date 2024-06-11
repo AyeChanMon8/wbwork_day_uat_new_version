@@ -255,11 +255,11 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.routeApprovedList[index].expenseIds.length,
+        itemCount: controller.routeApprovedList[index].expenseIds!.length,
         itemBuilder: (BuildContext context, int pos) {
           var amount = "";
           amount = AppUtils.removeNullString(controller
-              .routeApprovedList[index].expenseIds[pos].amount
+              .routeApprovedList[index].expenseIds![pos].amount
               .toString());
           if (amount.isNotEmpty) {
             amount = AppUtils.addThousnadSperator(double.tryParse(amount)!);
@@ -276,7 +276,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
                       child: Container(
                         // width: 80,
                         child: Text(controller
-                            .routeApprovedList[index].expenseIds[pos].name
+                            .routeApprovedList[index].expenseIds![pos].name
                             .toString()),
                       ),
                     ),
@@ -292,7 +292,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
                       child: Container(
                         // width: 80,
                         child: Text(controller
-                            .routeApprovedList[index].expenseIds[pos].remark
+                            .routeApprovedList[index].expenseIds![pos].remark
                             .toString()),
                       ),
                     ),

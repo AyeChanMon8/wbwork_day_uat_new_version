@@ -33,7 +33,7 @@ class CalendarControllers extends GetxController{
     var employee_id = int.tryParse(box.read('emp_id'));
     calendarService?.getCalendarInformation(employee_id!).then((calendardata){
       calendarData = calendardata as CalendarData;
-      for(Travel travel in calendarData.travel){
+      for(Travel travel in calendarData.travel!){
         appointmentsList.add(Appointment(
           subject: travel.name,
           startTime: DateTime.parse(travel.startDate),
@@ -42,7 +42,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel travel in calendarData.leave){
+      for(Travel travel in calendarData.leave!){
         StringBuffer sb = new StringBuffer();
         if(travel.purpose.isEmpty){
           sb.write(travel.name);
@@ -59,7 +59,7 @@ class CalendarControllers extends GetxController{
           isAllDay: true,
         ));
       }
-      for(Travel travel in calendarData.training){
+      for(Travel travel in calendarData.training!){
         appointmentsList.add(Appointment(
           subject: travel.name,
           startTime: DateTime.parse(travel.startDate),
@@ -68,7 +68,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel travel in calendarData.tripBill){
+      for(Travel travel in calendarData.tripBill!){
         appointmentsList.add(Appointment(
           subject: travel.name,
           startTime: DateTime.parse(travel.startDate),
@@ -77,7 +77,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel travel in calendarData.tripProduct){
+      for(Travel travel in calendarData.tripProduct!){
         appointmentsList.add(Appointment(
           subject: travel.name,
           startTime: DateTime.parse(travel.startDate),
@@ -86,7 +86,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel pms in calendarData.pms){
+      for(Travel pms in calendarData.pms!){
         appointmentsList.add(Appointment(
           subject: pms.name,
           startTime: DateTime.parse(pms.startDate),
@@ -95,7 +95,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel attendance in calendarData.attendance){
+      for(Travel attendance in calendarData.attendance!){
         appointmentsList.add(Appointment(
           subject: attendance.name,
           startTime: DateTime.parse(attendance.startDate),
@@ -104,7 +104,7 @@ class CalendarControllers extends GetxController{
           isAllDay: false,
         ));
       }
-      for(Travel dayTrip in calendarData.dayTrip){
+      for(Travel dayTrip in calendarData.dayTrip!){
         appointmentsList.add(Appointment(
           subject: dayTrip.name,
           startTime: DateTime.parse(dayTrip.startDate),

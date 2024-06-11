@@ -143,10 +143,10 @@ class UserProfileController extends GetxController {
         empData.value = emp;
         box.write('emp_name', emp.name);
         box.write('emp_image', emp.image_128);
-        box.write('emp_dep', emp.department_id.id.toString());
-        box.write('emp_pos', emp.job_id.id.toString());
-        box.write('emp_company', emp.company_id.id.toString());
-        box.write('emp_company_name', emp.company_id.name.toString());
+        box.write('emp_dep', emp.department_id!.id.toString());
+        box.write('emp_pos', emp.job_id!.id.toString());
+        box.write('emp_company', emp.company_id!.id.toString());
+        box.write('emp_company_name', emp.company_id!.name.toString());
         box.write("allow_leave_report", emp.allow_leave_report);
         box.write("allow_leave_request", data.allow_leave_request);
         box.write("allow_attendance_report", emp.allow_attendance_report);
@@ -172,7 +172,7 @@ class UserProfileController extends GetxController {
         box.write("allow_day_trip", emp.allow_day_trip);
         box.write("allow_out_of_pocket", emp.allow_out_of_pocket);
         box.write("allow_travel_expense", emp.allow_travel_expense);
-        box.write("branch_id", emp.branch_id.id);
+        box.write("branch_id", emp.branch_id!.id);
         box.write("allow_purchase_order_approval", emp.allow_purchase_order_approval);
         box.write("allow_employee_benefit", emp.allow_employee_benefit);
 
@@ -201,20 +201,20 @@ class UserProfileController extends GetxController {
     }
     parent_name_list.add(data.name.toString() + "#image" );//+ image
 
-    for (int i = 0; i < data.child_ids.length; i++) {
+    for (int i = 0; i < data.child_ids!.length; i++) {
       var image = "";
       if (!data.image_128.isNull) {
         image = data.image_128.toString();
       }
-      emp_name_list.add(data.child_ids[i].name.toString() + "#image" );//+ image
+      emp_name_list.add(data.child_ids![i].name.toString() + "#image" );//+ image
     }
     var parent_data = OrganizationChart(
-            id: data.parent_id.name + "#image",
+            id: data.parent_id!.name + "#image",
             email: '',
             next: parent_name_list)
         .toJson();
     box.write('emp', OrganizationChart(
-        id: data.parent_id.name + "#image",
+        id: data.parent_id!.name + "#image",
         email: '',
         next: parent_name_list));
     var data_id = data.name.toString() + "#image" ;//+ image
@@ -223,12 +223,12 @@ class UserProfileController extends GetxController {
         .toJson();
     array.add(parent_data);
     array.add(child_data);
-    for (int k = 0; k < data.child_ids.length; k++) {
-      var data_id = data.child_ids[k].name.toString() +
+    for (int k = 0; k < data.child_ids!.length; k++) {
+      var data_id = data.child_ids![k].name.toString() +
           "#image";// +data.child_ids[k].image_128.toString()
       array.add(OrganizationChart(
               id: data_id.toString(),
-              email: data.child_ids[k].work_email,
+              email: data.child_ids![k].work_email,
               next: child_list)
           .toJson());
 

@@ -73,7 +73,7 @@ class OrganizationChart extends StatelessWidget {
             onTap: () {
               controller
                   .getEmployeeInfo(
-                      controller.empData.value.parent_id.id.toString())
+                      controller.empData.value.parent_id!.id.toString())
                   .then((value) => showBarModalBottomSheet(
                   expand: true,
                   context: context,
@@ -123,7 +123,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.job_id.name,
+                                  value.job_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 Divider(
@@ -131,7 +131,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.company_id.name,
+                                  value.company_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 Divider(
@@ -139,7 +139,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.department_id.name,
+                                  value.department_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 SizedBox(
@@ -204,7 +204,7 @@ class OrganizationChart extends StatelessWidget {
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: Text(
-                                      value.child_ids.length.toString(),
+                                      value.child_ids!.length.toString(),
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: backgroundIconColor,
@@ -223,7 +223,7 @@ class OrganizationChart extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Obx(() => Row(
                     children: [
-                      controller.empData.value.parent_id==null||controller.empData.value.parent_id.name== null ? SizedBox() : Container(
+                      controller.empData.value.parent_id==null||controller.empData.value.parent_id!.name== null ? SizedBox() : Container(
                         padding: EdgeInsets.only(right: 5),
                         child: CircleAvatar(
                           backgroundColor: Color.fromRGBO(216, 181, 0, 1),
@@ -239,9 +239,9 @@ class OrganizationChart extends StatelessWidget {
                           ),
                         ),
                       ),
-                      controller.empData.value.parent_id==null||controller.empData.value.parent_id.name== null
+                      controller.empData.value.parent_id==null||controller.empData.value.parent_id!.name== null
                           ? SizedBox()
-                          : Text(controller.empData.value.parent_id.name),
+                          : Text(controller.empData.value.parent_id!.name),
                     ],
                   )),
             ),
@@ -299,7 +299,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.job_id.name,
+                                  value.job_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 Divider(
@@ -307,7 +307,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.company_id.name,
+                                  value.company_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 Divider(
@@ -315,7 +315,7 @@ class OrganizationChart extends StatelessWidget {
                                 ),
                                 Center(
                                     child: Text(
-                                  value.department_id.name,
+                                  value.department_id!.name,
                                   style: datalistStyle(),
                                 )),
                                 SizedBox(
@@ -380,7 +380,7 @@ class OrganizationChart extends StatelessWidget {
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: Text(
-                                      value.child_ids.length.toString(),
+                                      value.child_ids!.length.toString(),
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: backgroundIconColor,
@@ -401,12 +401,12 @@ class OrganizationChart extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        controller.empData.value.parent_id==null||controller.empData.value.parent_id.name== null ? SizedBox() : VerticalDivider(
+                        controller.empData.value.parent_id==null||controller.empData.value.parent_id!.name== null ? SizedBox() : VerticalDivider(
                           color: Colors.black,
                           thickness: 1,
                           width: 1,
                         ),
-                        controller.empData.value.parent_id==null||controller.empData.value.parent_id.name== null ? SizedBox() : Text('___'),
+                        controller.empData.value.parent_id==null||controller.empData.value.parent_id!.name== null ? SizedBox() : Text('___'),
                         Container(
                           padding: EdgeInsets.only(right: 5),
                           child: CircleAvatar(
@@ -434,7 +434,7 @@ class OrganizationChart extends StatelessWidget {
                                   children: [
                                     Text(controller.empData.value.name),
                                     Text(controller
-                                        .empData.value.department_id.name??''),
+                                        .empData.value.department_id!.name??''),
                                   ],
                                 ),
                               ),
@@ -449,12 +449,12 @@ class OrganizationChart extends StatelessWidget {
             child: Obx(() => ListView.builder(
                 itemCount: controller.empData.value.child_ids == null
                     ? 0
-                    : controller.empData.value.child_ids.length,
+                    : controller.empData.value.child_ids!.length,
                 itemBuilder: (context, index) => InkWell(
                       onTap: () {
                         controller
                             .getEmployeeInfo(controller
-                                .empData.value.child_ids[index].id
+                                .empData.value.child_ids![index].id
                                 .toString())
                             .then((value) => showBarModalBottomSheet(
                               expand: true,
@@ -507,7 +507,7 @@ class OrganizationChart extends StatelessWidget {
                                             ),
                                             Center(
                                                 child: Text(
-                                              value!.job_id.name,
+                                              value!.job_id!.name,
                                               style: datalistStyle(),
                                             )),
                                             Divider(
@@ -515,7 +515,7 @@ class OrganizationChart extends StatelessWidget {
                                             ),
                                             Center(
                                                 child: Text(
-                                              value.company_id.name,
+                                              value.company_id!.name,
                                               style: datalistStyle(),
                                             )),
                                             Divider(
@@ -523,7 +523,7 @@ class OrganizationChart extends StatelessWidget {
                                             ),
                                             Center(
                                                 child: Text(
-                                              value.department_id.name??'',
+                                              value.department_id!.name??'',
                                               style: datalistStyle(),
                                             )),
                                             SizedBox(
@@ -591,7 +591,7 @@ class OrganizationChart extends StatelessWidget {
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 20),
                                                 child: Text(
-                                                  value.child_ids.length
+                                                  value.child_ids!.length
                                                       .toString(),
                                                   style: TextStyle(
                                                       fontSize: 14,
@@ -648,9 +648,9 @@ class OrganizationChart extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          '${controller.empData.value.child_ids[index].name}'),
+                                          '${controller.empData.value.child_ids![index].name}'),
                                       Text(
-                                          '${controller.empData.value.child_ids[index].work_email}'),
+                                          '${controller.empData.value.child_ids![index].work_email}'),
                                     ],
                                   ),
                                 ),

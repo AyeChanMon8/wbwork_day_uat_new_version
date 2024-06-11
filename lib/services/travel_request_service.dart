@@ -604,9 +604,9 @@ class TravelRequestService extends OdooService {
       if(response.data!=null){
         code = response.data['number'];
       }
-      for(int i=0;i<outofPocket.pocket_line.length;i++){
-        if(outofPocket.pocket_line[i].vehicle_id!=null&&outofPocket.pocket_line[i].vehicle_id!=0){
-          create_vehicle_cost(outofPocket.pocket_line[i].vehicle_id,outofPocket.pocket_line[i].date,outofPocket.pocket_line[i].price_subtotal,outofPocket.pocket_line[i].description,code,outofPocket.pocket_line[i].price_unit,outofPocket.pocket_line[i].qty,outofPocket.employee_id,outofPocket.pocket_line[i].categ_id);
+      for(int i=0;i<outofPocket.pocket_line!.length;i++){
+        if(outofPocket.pocket_line![i].vehicle_id!=null&&outofPocket.pocket_line![i].vehicle_id!=0){
+          create_vehicle_cost(outofPocket.pocket_line![i].vehicle_id,outofPocket.pocket_line![i].date,outofPocket.pocket_line![i].price_subtotal,outofPocket.pocket_line![i].description,code,outofPocket.pocket_line![i].price_unit,outofPocket.pocket_line![i].qty,outofPocket.employee_id,outofPocket.pocket_line![i].categ_id);
         }
       }
       // outofPocket.pocket_line.forEach((element) {
@@ -692,9 +692,9 @@ class TravelRequestService extends OdooService {
       if(response.data!=null){
         code = response.data["number"];
       }
-      for(int i=0;i<traveldata.travel_line.length;i++){
-        if(traveldata.travel_line[i].vehicle_id!=null&&traveldata.travel_line[i].vehicle_id!=0){
-          travel_create_vehicle_cost(traveldata.travel_line[i].vehicle_id, traveldata.travel_line[i].date, traveldata.travel_line[i].price_subtotal, traveldata.travel_line[i].description, code,traveldata.travel_line[i].price_unit,traveldata.travel_line[i].qty,traveldata.employee_id,traveldata.travel_line[i].categ_id);
+      for(int i=0;i<traveldata.travel_line!.length;i++){
+        if(traveldata.travel_line![i].vehicle_id!=null&&traveldata.travel_line![i].vehicle_id!=0){
+          travel_create_vehicle_cost(traveldata.travel_line![i].vehicle_id, traveldata.travel_line![i].date, traveldata.travel_line![i].price_subtotal, traveldata.travel_line![i].description, code,traveldata.travel_line![i].price_unit,traveldata.travel_line![i].qty,traveldata.employee_id,traveldata.travel_line![i].categ_id);
         }
       }
       // traveldata.travel_line.forEach((element) {

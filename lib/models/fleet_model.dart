@@ -3,12 +3,12 @@ import 'dart:convert';
 class Fleet_model {
   int id;
   String name;
-  Model_id modelId;
+  Model_id? modelId;
   String licensePlate;
-  List<Tag_ids> tagIds;
+  List<Tag_ids>? tagIds;
   dynamic lastEngineOff;
   String image128;
-  Driver_id driverId;
+  Driver_id? driverId;
   double odometer;
   String odometerUnit;
   dynamic fuelType;
@@ -17,36 +17,36 @@ class Fleet_model {
   dynamic vinSn;
   dynamic traccarUniqueID;
   dynamic color;
-  Company_id companyId;
-  Branch_id branchId;
-  Incharge_id inchargeId;
-  FuelTank fuelTank;
-  List<ConsumptionAverageHistory> consumption_average_history;
-  List<TypredHistory> tire_history;
+  Company_id? companyId;
+  Branch_id? branchId;
+  Incharge_id? inchargeId;
+  FuelTank? fuelTank;
+  List<ConsumptionAverageHistory>? consumption_average_history;
+  List<TypredHistory>? tire_history;
 
   Fleet_model(
       {this.id = 0,
       this.name = '',
-      required this.modelId,
+      this.modelId,
       this.licensePlate = '',
-      required this.tagIds,
-      required this.lastEngineOff,
+      this.tagIds,
+      this.lastEngineOff,
       this.image128 = '',
-      required this.driverId,
+      this.driverId,
       this.odometer = 0.0,
       this.odometerUnit = '',
-      required this.fuelType,
+      this.fuelType,
       this.acquisitionDate = '',
       this.horsepower = 0,
-      required this.vinSn,
-      required this.traccarUniqueID,
-      required this.color,
-      required this.companyId,
-      required this.branchId,
-      required this.inchargeId,
-      required this.fuelTank,
-      required this.consumption_average_history,
-      required this.tire_history});
+      this.vinSn,
+      this.traccarUniqueID,
+      this.color,
+      this.companyId,
+      this.branchId,
+      this.inchargeId,
+      this.fuelTank,
+      this.consumption_average_history,
+      this.tire_history});
 
   Fleet_model copyWith(
       {int? id,

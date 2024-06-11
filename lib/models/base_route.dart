@@ -6,26 +6,26 @@ class BaseRoute {
   double fuel_liter;
   String from_street;
   String to_street;
-  List<Expense> expenseIds;
+  List<Expense>? expenseIds;
   double duration_days;
   String code_ref = "";
-  Branch_id branch_id;
-  Branch_id company_id;
-  List<Expense> get _expenseIds => expenseIds;
+  Branch_id? branch_id;
+  Branch_id? company_id;
+  List<Expense>? get _expenseIds => expenseIds;
   String get code => code_ref;
-  Branch_id get _branch_id => branch_id;
-  Branch_id get _company_id => company_id;
+  Branch_id? get _branch_id => branch_id;
+  Branch_id? get _company_id => company_id;
   BaseRoute(
       {this.id = 0,
       this.name = '',
       this.fuel_liter = 0,
       this.from_street = '',
       this.to_street = '',
-      required this.expenseIds,
+      this.expenseIds,
       this.duration_days = 0.0,
       this.code_ref = '',
-      required this.branch_id,
-      required this.company_id});
+      this.branch_id,
+      this.company_id});
 
   BaseRoute copyWith(
       {int? id,

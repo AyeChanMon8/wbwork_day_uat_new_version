@@ -142,23 +142,25 @@ import 'package:flutter/foundation.dart';
 // }
 
 class CalendarData {
-  List<Travel> travel;
-  List<Travel> leave;
-  List<Travel> tripProduct;
-  List<Travel> tripBill;
-  List<Travel> calendar;
-  List<Travel> pms;
-  List<Travel> attendance;
-  List<Travel> dayTrip;
+  List<Travel>? travel;
+  List<Travel>? leave;
+  List<Travel>? tripProduct;
+  List<Travel>? tripBill;
+  List<Travel>? calendar;
+  List<Travel>? pms;
+  List<Travel>? attendance;
+  List<Travel>? dayTrip;
+  List<Travel>? training;
   CalendarData({
-    required this.travel,
-    required this.leave,
-    required this.tripProduct,
-    required this.tripBill,
-    required this.calendar,
-    required this.pms,
-    required this.attendance,
-    required this.dayTrip,
+    this.travel,
+    this.leave,
+    this.tripProduct,
+    this.tripBill,
+    this.calendar,
+    this.pms,
+    this.attendance,
+    this.dayTrip,
+    this.training
   });
 
   CalendarData copyWith({
@@ -170,6 +172,7 @@ class CalendarData {
     required List<Travel> pms,
     required List<Travel> attendance,
     required List<Travel> dayTrip,
+    List<Travel>? training,
   }) {
     return CalendarData(
       travel: travel ?? this.travel,
@@ -180,6 +183,7 @@ class CalendarData {
       pms: pms ?? this.pms,
       attendance: attendance ?? this.attendance,
       dayTrip: dayTrip ?? this.dayTrip,
+      training: training ?? this.training,
     );
   }
 
@@ -193,6 +197,7 @@ class CalendarData {
       'pms': pms?.map((x) => x?.toMap())?.toList(),
       'day_trip': dayTrip?.map((x) => x?.toMap())?.toList(),
       'attendance': attendance?.map((x) => x?.toMap())?.toList(),
+      'training': training?.map((x) => x?.toMap())?.toList(),
     };
   }
 
@@ -213,6 +218,8 @@ class CalendarData {
           List<Travel>.from(map['day_trip']?.map((x) => Travel.fromMap(x))),
       attendance:
           List<Travel>.from(map['attendance']?.map((x) => Travel.fromMap(x))),
+      training:
+          List<Travel>.from(map['training']?.map((x) => Travel.fromMap(x))),
     );
   }
 
@@ -223,7 +230,7 @@ class CalendarData {
 
   @override
   String toString() {
-    return 'CalendarData(travel: $travel, leave: $leave, tripProduct: $tripProduct, tripBill: $tripBill, calendar: $calendar, pms: $pms, dayTrip: $dayTrip, attendance: $attendance)';
+    return 'CalendarData(travel: $travel, leave: $leave, tripProduct: $tripProduct, tripBill: $tripBill, calendar: $calendar, pms: $pms, dayTrip: $dayTrip, attendance: $attendance,training: $training)';
   }
 
   @override
@@ -238,7 +245,8 @@ class CalendarData {
         listEquals(o.calendar, calendar) &&
         listEquals(o.pms, pms) &&
         listEquals(o.dayTrip, dayTrip) &&
-        listEquals(o.attendance, attendance);
+        listEquals(o.attendance, attendance) &&
+        listEquals(o.training, training);
   }
 
   @override
@@ -250,7 +258,8 @@ class CalendarData {
         calendar.hashCode ^
         pms.hashCode ^
         dayTrip.hashCode ^
-        attendance.hashCode;
+        attendance.hashCode ^
+        training.hashCode;
   }
 }
 

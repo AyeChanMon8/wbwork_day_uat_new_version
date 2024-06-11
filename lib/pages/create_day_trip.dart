@@ -72,7 +72,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
     _tabController = TabController(length: 4, vsync: this):_tabController = TabController(length: 5, vsync: this);
     controller.fetchExpenseStatusData(daytrip_controller.dayTripList[arg_index].id);
     controller.calculateTotalExpense(daytrip_controller
-        .dayTripList[arg_index].expenseIds);
+        .dayTripList[arg_index].expenseIds!);
     super.initState();
   }
   @override
@@ -86,13 +86,13 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
     //DayTripModel dayTripModel = Get.arguments;
     if(Get.arguments!=null){
       arg_index = Get.arguments;
-      print(daytrip_controller.dayTripList[arg_index].product_lines.length);
-      controller.expense_list.value = daytrip_controller.dayTripList[arg_index].expenseIds;
-      controller.fuel_list.value = daytrip_controller.dayTripList[arg_index].fuelInIds;
-      controller.product_ids_list.value = daytrip_controller.dayTripList[arg_index].product_lines;
-      controller.advance_ids_list.value = daytrip_controller.dayTripList[arg_index].advance_lines;
-      controller.consumption_ids_list.value = daytrip_controller.dayTripList[arg_index].consumption_ids;
-      if(daytrip_controller.dayTripList[arg_index].vehicleId.inchargeId !=null && daytrip_controller.dayTripList[arg_index].vehicleId.inchargeId.id == int.parse(employee_id)){
+      print(daytrip_controller.dayTripList[arg_index].product_lines!.length);
+      controller.expense_list.value = daytrip_controller.dayTripList[arg_index].expenseIds!;
+      controller.fuel_list.value = daytrip_controller.dayTripList[arg_index].fuelInIds!;
+      controller.product_ids_list.value = daytrip_controller.dayTripList[arg_index].product_lines!;
+      controller.advance_ids_list.value = daytrip_controller.dayTripList[arg_index].advance_lines!;
+      controller.consumption_ids_list.value = daytrip_controller.dayTripList[arg_index].consumption_ids!;
+      if(daytrip_controller.dayTripList[arg_index].vehicleId!.inchargeId !=null && daytrip_controller.dayTripList[arg_index].vehicleId!.inchargeId.id == int.parse(employee_id)){
                 isIncharge = true;
       }
     }
@@ -201,7 +201,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       AutoSizeText(labels.vehicle+':',style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${dayTripModel.vehicleId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${dayTripModel.vehicleId!.name}',style: maintitleStyle(),)
                     ],)),
                   SizedBox(width: 10,),
                   Expanded(child: Column(
@@ -209,7 +209,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       AutoSizeText(labels.driver+':',style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${dayTripModel.driverId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${dayTripModel.driverId!.name}',style: maintitleStyle(),)
                     ],)),
 
                 ],),
@@ -222,7 +222,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       AutoSizeText(labels.spare1+':',style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${AppUtils.removeNullString(dayTripModel.spare1Id.name)}',style: maintitleStyle(),)
+                      AutoSizeText('${AppUtils.removeNullString(dayTripModel.spare1Id!.name)}',style: maintitleStyle(),)
                     ],)),
                   SizedBox(width: 10,),
                   Expanded(child: Column(
@@ -230,9 +230,9 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       AutoSizeText(labels.spare2+' :',style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      dayTripModel.spare2Id.name==null?
+                      dayTripModel.spare2Id!.name==null?
                       Text("-"):
-                      AutoSizeText('${AppUtils.removeNullString(dayTripModel.spare2Id.name)}',style: maintitleStyle(),)
+                      AutoSizeText('${AppUtils.removeNullString(dayTripModel.spare2Id!.name)}',style: maintitleStyle(),)
                     ],)),
                 ],),
 
@@ -502,18 +502,18 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
           margin: EdgeInsets.only(left: 10, right: 10),
           child: Obx(()=>ListView.builder(
             shrinkWrap: true,
-            itemCount: daytrip_controller.dayTripList[arg_index].expenseIds.length,
+            itemCount: daytrip_controller.dayTripList[arg_index].expenseIds!.length,
             itemBuilder: (BuildContext context, int index) {
               late Uint8List bytes;
-              if(daytrip_controller.dayTripList[arg_index].expenseIds[index].attachement_image!=null){
-                 bytes = base64Decode(daytrip_controller.dayTripList[arg_index].expenseIds[index].attachement_image);
+              if(daytrip_controller.dayTripList[arg_index].expenseIds![index].attachement_image!=null){
+                 bytes = base64Decode(daytrip_controller.dayTripList[arg_index].expenseIds![index].attachement_image);
               }
               var formatter = NumberFormat(',000.0');
               var amount = "0";
-              if(daytrip_controller.dayTripList[arg_index].expenseIds[index].amount.round().toString().length>=4){
-                amount = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].expenseIds[index].amount.toString()));
+              if(daytrip_controller.dayTripList[arg_index].expenseIds![index].amount.round().toString().length>=4){
+                amount = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].expenseIds![index].amount.toString()));
               }else{
-                amount = daytrip_controller.dayTripList[arg_index].expenseIds[index].amount.toString();
+                amount = daytrip_controller.dayTripList[arg_index].expenseIds![index].amount.toString();
               }
               return Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -526,7 +526,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                           flex: 1,
                           child: Container(
                             // width: 80,
-                            child: Text(daytrip_controller.dayTripList[arg_index].expenseIds[index].productId.name
+                            child: Text(daytrip_controller.dayTripList[arg_index].expenseIds![index].productId.name
                                 .toString(),style: TextStyle(fontSize: 11),
                             ),
                           ),
@@ -535,7 +535,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                           flex: 1,
                           child: Container(
                             // width: 80,
-                            child: Text(daytrip_controller.dayTripList[arg_index].expenseIds[index].name
+                            child: Text(daytrip_controller.dayTripList[arg_index].expenseIds![index].name
                                 .toString(),style: TextStyle(fontSize: 11)),
                           ),
                         ),
@@ -579,7 +579,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                             child: IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
-                                daytrip_controller.deleteExpenseLine(daytrip_controller.dayTripList[arg_index].expenseIds[index].id);
+                                daytrip_controller.deleteExpenseLine(daytrip_controller.dayTripList[arg_index].expenseIds![index].id);
                               },
                             )):Expanded(flex: 1,child: Text('')),
                       ],
@@ -761,7 +761,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       // margin: EdgeInsets.only(left: 10, right: 10),
       child: Obx(()=>ListView.builder(
         shrinkWrap: true,
-        itemCount: daytrip_controller.dayTripList[arg_index].fuelInIds.length,
+        itemCount: daytrip_controller.dayTripList[arg_index].fuelInIds!.length,
         itemBuilder: (BuildContext context, int index) {
           //fields = controller.travelLineModel.length;
           //create dynamic destination textfield controller
@@ -773,22 +773,22 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
           var formatter = NumberFormat(',000.0');
           var totalAmt = "0";
           var price_unit = "0";
-          if(daytrip_controller.dayTripList[arg_index].fuelInIds[index].amount.round().toString().length>=4){
-            totalAmt = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].fuelInIds[index].amount.toString()));
+          if(daytrip_controller.dayTripList[arg_index].fuelInIds![index].amount.round().toString().length>=4){
+            totalAmt = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].fuelInIds![index].amount.toString()));
           }else{
-            totalAmt = daytrip_controller.dayTripList[arg_index].fuelInIds[index].amount.toString();
+            totalAmt = daytrip_controller.dayTripList[arg_index].fuelInIds![index].amount.toString();
           }
-          if(daytrip_controller.dayTripList[arg_index].fuelInIds[index].price_unit.round().toString().length>=4){
-            price_unit = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].fuelInIds[index].price_unit.toString()));
+          if(daytrip_controller.dayTripList[arg_index].fuelInIds![index].price_unit.round().toString().length>=4){
+            price_unit = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].fuelInIds![index].price_unit.toString()));
           }else{
-            price_unit = daytrip_controller.dayTripList[arg_index].fuelInIds[index].price_unit.toString();
+            price_unit = daytrip_controller.dayTripList[arg_index].fuelInIds![index].price_unit.toString();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
                 onTap: (){
-                  fuelInBottomSheet(context,daytrip_controller.dayTripList[arg_index].fuelInIds[index]);
+                  fuelInBottomSheet(context,daytrip_controller.dayTripList[arg_index].fuelInIds![index]);
                 },
                 child: Container(
                   child: Row(
@@ -799,7 +799,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         child: Container(
                           // width: 80,
                           child: Text(
-                            AppUtils.changeDateFormat(daytrip_controller.dayTripList[arg_index].fuelInIds[index].date),style: TextStyle(fontSize: 11)
+                            AppUtils.changeDateFormat(daytrip_controller.dayTripList[arg_index].fuelInIds![index].date),style: TextStyle(fontSize: 11)
                           ),
                         ),
                       ),
@@ -808,7 +808,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         child: Container(
                           // width: 80,
                           padding: EdgeInsets.only(left:5),
-                          child: Text(daytrip_controller.dayTripList[arg_index].fuelInIds[index].productId.name != null ? daytrip_controller.dayTripList[arg_index].fuelInIds[index].productId.name:''
+                          child: Text(daytrip_controller.dayTripList[arg_index].fuelInIds![index].productId.name != null ? daytrip_controller.dayTripList[arg_index].fuelInIds![index].productId.name:''
                               .toString(),style: TextStyle(fontSize: 11)),
                         ),
                       ),
@@ -816,7 +816,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         flex: 1,
                         child: Container(
                           // width: 80,
-                          child: Text(daytrip_controller.dayTripList[arg_index].fuelInIds[index].liter
+                          child: Text(daytrip_controller.dayTripList[arg_index].fuelInIds![index].liter
                               .toString(),style: TextStyle(fontSize: 11)),
                         ),
                       ),
@@ -840,25 +840,25 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         ),
                       ),
                       daytrip_controller.dayTripList[arg_index].state=="close"?SizedBox():
-                      (daytrip_controller.dayTripList[arg_index].state=='running'&&daytrip_controller.dayTripList[arg_index].fuelInIds[index].add_from_office==null&&(isDriver==true||is_spare==true)&&is_branch_manager==false)?
+                      (daytrip_controller.dayTripList[arg_index].state=='running'&&daytrip_controller.dayTripList[arg_index].fuelInIds![index].add_from_office==null&&(isDriver==true||is_spare==true)&&is_branch_manager==false)?
                           Expanded(
                             flex: 1,
                               child: IconButton(
                                 icon: Icon(Icons.edit),
                                 onPressed: () {
-                                   Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,daytrip_controller.dayTripList[arg_index].fuelInIds[index]))?.then((value) {
+                                   Get.to(AddFuelDaytripPage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].fromDatetime,daytrip_controller.dayTripList[arg_index].toDatetime,daytrip_controller.dayTripList[arg_index].fuelInIds![index]))?.then((value) {
                                       daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
                                     });
                                 },
                               )):Expanded(flex:1,child: SizedBox()),
                       daytrip_controller.dayTripList[arg_index].state=="close"?SizedBox():
-                      (daytrip_controller.dayTripList[arg_index].state=='running'&&daytrip_controller.dayTripList[arg_index].fuelInIds[index].add_from_office==null&&isDriver==true||is_spare==true&&is_branch_manager==false)?
+                      (daytrip_controller.dayTripList[arg_index].state=='running'&&daytrip_controller.dayTripList[arg_index].fuelInIds![index].add_from_office==null&&isDriver==true||is_spare==true&&is_branch_manager==false)?
                           Expanded(
                             flex: 1,
                               child: IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () {
-                                  daytrip_controller.deleteFuelInLine(daytrip_controller.dayTripList[arg_index].fuelInIds[index].id);
+                                  daytrip_controller.deleteFuelInLine(daytrip_controller.dayTripList[arg_index].fuelInIds![index].id);
                                 },
                               )):Expanded(flex:1,child: SizedBox()),
                       Expanded(
@@ -901,21 +901,21 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       child: Obx((){
         return ListView.builder(
         shrinkWrap: true,
-        itemCount: daytrip_controller.dayTripList[arg_index].product_lines.length,
+        itemCount: daytrip_controller.dayTripList[arg_index].product_lines!.length,
         itemBuilder: (BuildContext context, int index) {
-          fields = daytrip_controller.dayTripList[arg_index].product_lines.length;
+          fields = daytrip_controller.dayTripList[arg_index].product_lines!.length;
           //create dynamic destination textfield controller
           qty_controllers = List.generate(
               fields,
                   (index) => TextEditingController(
-                  text: daytrip_controller.dayTripList[arg_index].product_lines[index].quantity
+                  text: daytrip_controller.dayTripList[arg_index].product_lines![index].quantity
                       .toString()));
           var formatter = NumberFormat(',000.0');
           var quantity = "0";
-          if(daytrip_controller.dayTripList[arg_index].product_lines[index].quantity.round().toString().length>=4){
-            quantity = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].product_lines[index].quantity.toString()));
+          if(daytrip_controller.dayTripList[arg_index].product_lines![index].quantity.round().toString().length>=4){
+            quantity = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].product_lines![index].quantity.toString()));
           }else{
-            quantity = daytrip_controller.dayTripList[arg_index].product_lines[index].quantity.toInt().toString();
+            quantity = daytrip_controller.dayTripList[arg_index].product_lines![index].quantity.toInt().toString();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -928,7 +928,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                       flex: 1,
                       child: Container(
                         // width: 80,
-                        child: Text(daytrip_controller.dayTripList[arg_index].product_lines[index].productId.name
+                        child: Text(daytrip_controller.dayTripList[arg_index].product_lines![index].productId.name
                             .toString(),style: TextStyle(fontSize: 11),
                         ),
                       ),
@@ -939,8 +939,8 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         padding: const EdgeInsets.only(left:8.0),
                         child: Container(
                           // width: 80,
-                          child: daytrip_controller.dayTripList[arg_index].product_lines[index].uom!=null&&daytrip_controller.dayTripList[arg_index].product_lines[index].uom.name!=null?
-                          Text(daytrip_controller.dayTripList[arg_index].product_lines[index].uom.name,style: TextStyle(fontSize: 11)
+                          child: daytrip_controller.dayTripList[arg_index].product_lines![index].uom!=null&&daytrip_controller.dayTripList[arg_index].product_lines![index].uom.name!=null?
+                          Text(daytrip_controller.dayTripList[arg_index].product_lines![index].uom.name,style: TextStyle(fontSize: 11)
                           ):Text(''),
                         ),
                       ),
@@ -1017,7 +1017,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                                                 // color: Color.fromRGBO(
                                                 //     60, 47, 126, 1),
                                                 onPressed: () {
-                                                  controller.updateQty(daytrip_controller.dayTripList[arg_index].product_lines[index].id);
+                                                  controller.updateQty(daytrip_controller.dayTripList[arg_index].product_lines![index].id);
                                                 }),
                                           ),
                                         ],
@@ -1180,7 +1180,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       // margin: EdgeInsets.only(left: 10, right: 10),
       child: Obx(()=>ListView.builder(
         shrinkWrap: true,
-        itemCount: daytrip_controller.dayTripList[arg_index].consumption_ids.length,
+        itemCount: daytrip_controller.dayTripList[arg_index].consumption_ids!.length,
         itemBuilder: (BuildContext context, int index) {
           var formatter = NumberFormat(',000.0');
           var trip_distance = "0";
@@ -1188,18 +1188,18 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
           var last_odometer = "0";
           var avg_calculation = "0";
           var consumed_liter = "0";
-          trip_distance = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids[index].trip_distance.toString()));
-          current_odometer = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids[index].current_odometer.toString()));
-          last_odometer = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids[index].last_odometer.toString()));
-          avg_calculation = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids[index].avg_calculation.toString()));
-          consumed_liter = NumberFormat('#,###.##').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids[index].consumed_liter.toString()));
+          trip_distance = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids![index].trip_distance.toString()));
+          current_odometer = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids![index].current_odometer.toString()));
+          last_odometer = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids![index].last_odometer.toString()));
+          avg_calculation = NumberFormat('#,###').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids![index].avg_calculation.toString()));
+          consumed_liter = NumberFormat('#,###.##').format(double.tryParse(daytrip_controller.dayTripList[arg_index].consumption_ids![index].consumed_liter.toString()));
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
                 onTap: (){
-                  consumptionBottomSheet(context, daytrip_controller.dayTripList[arg_index].consumption_ids[index]);
+                  consumptionBottomSheet(context, daytrip_controller.dayTripList[arg_index].consumption_ids![index]);
                 },
                 child: Container(
                   child: Row(
@@ -1268,7 +1268,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         padding: const EdgeInsets.only(left:12.0),
                         child: InkWell(
                           onTap: (){
-                            showFuelAddDialog(daytrip_controller.dayTripList[arg_index].consumption_ids[index].id,daytrip_controller.dayTripList[arg_index].consumption_ids[index]);
+                            showFuelAddDialog(daytrip_controller.dayTripList[arg_index].consumption_ids![index].id,daytrip_controller.dayTripList[arg_index].consumption_ids![index]);
                           },
                           child: Container(
                             child: Icon(
@@ -1285,7 +1285,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                           child: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              daytrip_controller.deleteConsumptionLine(daytrip_controller.dayTripList[arg_index].consumption_ids[index].id,daytrip_controller.dayTripList[arg_index].id);
+                              daytrip_controller.deleteConsumptionLine(daytrip_controller.dayTripList[arg_index].consumption_ids![index].id,daytrip_controller.dayTripList[arg_index].id);
                             },
                           )):SizedBox(),
 
@@ -1428,7 +1428,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       child: Obx(()=>ListView.builder(
         shrinkWrap: true,
         //physics: NeverScrollableScrollPhysics(),
-        itemCount: daytrip_controller.dayTripList[arg_index].advance_lines.length,
+        itemCount: daytrip_controller.dayTripList[arg_index].advance_lines!.length,
         itemBuilder: (BuildContext context, int index) {
           //fields = controller.travelLineModel.length;
           //create dynamic destination textfield controller
@@ -1441,27 +1441,27 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
           var totalAmt = "0";
           var amount = "0";
           var quantity = "0";
-          if(daytrip_controller.dayTripList[arg_index].advance_lines[index].amount.round().toString().length>=4){
-            amount = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines[index].amount.toString()));
+          if(daytrip_controller.dayTripList[arg_index].advance_lines![index].amount.round().toString().length>=4){
+            amount = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines![index].amount.toString()));
           }else{
-            amount = daytrip_controller.dayTripList[arg_index].advance_lines[index].amount.toString();
+            amount = daytrip_controller.dayTripList[arg_index].advance_lines![index].amount.toString();
           }
-          if(daytrip_controller.dayTripList[arg_index].advance_lines[index].total_amount.round().toString().length>=4){
-            totalAmt = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines[index].total_amount.toString()));
+          if(daytrip_controller.dayTripList[arg_index].advance_lines![index].total_amount.round().toString().length>=4){
+            totalAmt = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines![index].total_amount.toString()));
           }else{
-            totalAmt = daytrip_controller.dayTripList[arg_index].advance_lines[index].total_amount.toString();
+            totalAmt = daytrip_controller.dayTripList[arg_index].advance_lines![index].total_amount.toString();
           }
-          if(daytrip_controller.dayTripList[arg_index].advance_lines[index].quantity.round().toString().length>=4){
-            quantity = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines[index].quantity.toString()));
+          if(daytrip_controller.dayTripList[arg_index].advance_lines![index].quantity.round().toString().length>=4){
+            quantity = formatter.format(double.tryParse(daytrip_controller.dayTripList[arg_index].advance_lines![index].quantity.toString()));
           }else{
-            quantity = daytrip_controller.dayTripList[arg_index].advance_lines[index].quantity.toInt().toString();
+            quantity = daytrip_controller.dayTripList[arg_index].advance_lines![index].quantity.toInt().toString();
           }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
                 onTap: (){
-                  advanceBottomSheet(context,daytrip_controller.dayTripList[arg_index].advance_lines[index]);
+                  advanceBottomSheet(context,daytrip_controller.dayTripList[arg_index].advance_lines![index]);
                 },
                 child: Container(
                   child: Row(
@@ -1471,7 +1471,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                         flex: 2,
                         child: Container(
                           // width: 80,
-                          child: Text(daytrip_controller.dayTripList[arg_index].advance_lines[index].expense_categ_id.name
+                          child: Text(daytrip_controller.dayTripList[arg_index].advance_lines![index].expense_categ_id.name
                               .toString(),style: TextStyle(fontSize: 11)
                           ),
                         ),
@@ -1509,7 +1509,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                           padding: const EdgeInsets.only(left:8.0),
                           child: Container(
                             // width: 80,
-                            child: Text(AppUtils.removeNullString(daytrip_controller.dayTripList[arg_index].advance_lines[index].remark)
+                            child: Text(AppUtils.removeNullString(daytrip_controller.dayTripList[arg_index].advance_lines![index].remark)
                                 ,style: TextStyle(fontSize: 11)),
                           ),
                         ),
@@ -1518,7 +1518,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                           child: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              daytrip_controller.deleteAdvanceLine(daytrip_controller.dayTripList[arg_index].advance_lines[index].id);
+                              daytrip_controller.deleteAdvanceLine(daytrip_controller.dayTripList[arg_index].advance_lines![index].id);
                             },
                           )):SizedBox(),
                       Expanded(
@@ -1601,7 +1601,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
               padding: const EdgeInsets.only(top: 10,right: 0,left: 0),
               child: Divider(height: 1,thickness: 1,color: backgroundIconColor,),
             ),
-            daytrip_controller.dayTripList[arg_index].advance_lines.length>0?
+            daytrip_controller.dayTripList[arg_index].advance_lines!.length>0?
             Expanded(
               child: Padding(padding: const EdgeInsets.only(top:10),
                 child: advnaceListWidget(context),
@@ -1612,14 +1612,14 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
               alignment:Alignment.topRight,
               child: FloatingActionButton(onPressed: (){
                 var itemTotalAmount = 0.0;
-                daytrip_controller.dayTripList[arg_index].advance_lines.forEach((element) {
+                daytrip_controller.dayTripList[arg_index].advance_lines?.forEach((element) {
                   itemTotalAmount +=element.total_amount;
                 });
                 Get.to(AddAdvancePage("DayTrip",controller.daytrip_id,daytrip_controller.dayTripList[arg_index].advancedRequest,itemTotalAmount))?.then((value){
                   //daytrip_controller.getDayTripList(daytrip_controller.current_page.value);
                   if(value!=null){
                     DayTripPlanTripGeneralController day_trip_controller = Get.find();
-                    daytrip_controller.dayTripList[arg_index].advance_lines.add(Advance_ids(id:value,expense_categ_id: ExpenseCategory_id(id:day_trip_controller.selectedExpenseCategory.id,name: day_trip_controller.selectedExpenseCategory.displayName),quantity: double.tryParse(day_trip_controller.quantityTextController.text),amount: double.tryParse(day_trip_controller.amountTextController.text),total_amount: double.tryParse(day_trip_controller.totalAmountController.text),remark: day_trip_controller.remarkTextController.text));
+                    daytrip_controller.dayTripList[arg_index].advance_lines!.add(Advance_ids(id:value,expense_categ_id: ExpenseCategory_id(id:day_trip_controller.selectedExpenseCategory.id,name: day_trip_controller.selectedExpenseCategory.displayName),quantity: double.tryParse(day_trip_controller.quantityTextController.text)!,amount: double.tryParse(day_trip_controller.amountTextController.text)!,total_amount: double.tryParse(day_trip_controller.totalAmountController.text)!,remark: day_trip_controller.remarkTextController.text));
                   }
                 });
               },
@@ -1917,7 +1917,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
               padding: const EdgeInsets.only(top: 35,right: 0,left: 0),
               child: Divider(height: 1,thickness: 1,color: backgroundIconColor,),
             ),
-            daytrip_controller.dayTripList[arg_index].product_lines.length>0?
+            daytrip_controller.dayTripList[arg_index].product_lines!.length>0?
             Padding(padding: const EdgeInsets.only(top:45),
               child: productListWidget(context),
             ):new Container(),

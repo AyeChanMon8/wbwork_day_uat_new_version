@@ -263,7 +263,7 @@ class DayTripExpenseController extends GetxController{
     }
     else{
       AppUtils.showConfirmCancelDialog('Warning', 'Are you sure?', () async {
-        var expense  = Expense(image:image_base64,productId: this.selectedExpenseType.id,name: descriptionController.text,amount:double.tryParse(totalAmountController.text),day_trip_id: daytrip_id);
+        var expense  = Expense(image:image_base64,productId: this.selectedExpenseType.id,name: descriptionController.text,amount:double.tryParse(totalAmountController.text)!,day_trip_id: daytrip_id);
         Future.delayed(
             Duration.zero,
                 () => Get.dialog(
@@ -276,7 +276,7 @@ class DayTripExpenseController extends GetxController{
         await dayTripServie?.addExpense(expense,daytrip_id.toString(),int.tryParse(employee_id)!).then((data) {
           image_base64 = "";
           // if (data != 0) {
-          expense_list.add(DayTrip_Expense_ids(productId: DayTrip_Product_id(id:this.selectedExpenseType.id,name: this.selectedExpenseType.name),name: descriptionController.text,amount: double.tryParse(totalAmountController.text)));
+          expense_list.add(DayTrip_Expense_ids(productId: DayTrip_Product_id(id:this.selectedExpenseType.id,name: this.selectedExpenseType.name),name: descriptionController.text,amount: double.tryParse(totalAmountController.text)!));
 
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){
             Get.back();

@@ -12,7 +12,7 @@ class TravelExpenseModel {
   int company_id;
   int travel_id;
   double advanced_money;
-  List<TravelLineModel> travel_line;
+  List<TravelLineModel>? travel_line;
   String number;
 
   TravelExpenseModel({
@@ -23,7 +23,7 @@ class TravelExpenseModel {
     this.company_id = 0,
     this.travel_id = 0,
     this.advanced_money = 0.0,
-    required this.travel_line,
+    this.travel_line,
     this.number = '',
   });
 

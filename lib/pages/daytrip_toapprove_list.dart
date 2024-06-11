@@ -76,7 +76,7 @@ class DayTripToApproveListPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AutoSizeText(
-                                  dayTripModel.vehicleId.name,
+                                  dayTripModel.vehicleId!.name,
                                   style: subtitleStyle(),
                                 ),
                                 AutoSizeText(

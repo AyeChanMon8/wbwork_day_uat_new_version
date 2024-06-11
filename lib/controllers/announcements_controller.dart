@@ -180,10 +180,10 @@ class AnnouncementsController extends GetxController {
 
   
    getFile(int index, int fileid) async {
-    String encodedStr = announcementList[index].attachment_id[fileid].datas;
+    String encodedStr = announcementList[index].attachment_id![fileid].datas;
     Uint8List bytes = base64.decode(encodedStr);
     String dir = (await getApplicationDocumentsDirectory()).path;
-    String fullPath = "$dir/${announcementList[index].attachment_id[fileid].name}";
+    String fullPath = "$dir/${announcementList[index].attachment_id![fileid].name}";
     final File file = File(fullPath);
     await file.writeAsBytes(bytes);
     await OpenFile.open(file.path);
