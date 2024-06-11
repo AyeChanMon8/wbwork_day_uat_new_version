@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 class HomeFunction{
   IconData iconData;
@@ -20,14 +18,14 @@ class HomeFunction{
 }
 
 class HomeFunctionList{
-  List<HomeFunction> items;
+  List<HomeFunction>? items;
 
   HomeFunctionList() {
-    items = new List();
+    items = [];
   }
 
   toJSONEncodable() {
-    return items.map((item) {
+    return items!.map((item) {
       return item.toJSONEncodable();
     }).toList();
   }
