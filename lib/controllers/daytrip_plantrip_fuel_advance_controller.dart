@@ -347,13 +347,13 @@ class DayTripPlanTripGeneralController extends GetxController{
         var fuelin;
         var employee_id = box.read('emp_id');
         if(arg=="DayTrip"){
-           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text),priceUnit:double.tryParse(priceController.text),dayTripId: trip_id,status: 'day_trip',employeeId: int.parse(employee_id), lineId: line_id);
+           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text)!,priceUnit:double.tryParse(priceController.text)!,dayTripId: trip_id,status: 'day_trip',employeeId: int.parse(employee_id), lineId: line_id);
         }
         else if(arg=="PlanTripProduct"){
-           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text),priceUnit:double.tryParse(priceController.text),dayTripId: trip_id,status: 'plantrip_product',employeeId: int.parse(employee_id), lineId: line_id);
+           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text)!,priceUnit:double.tryParse(priceController.text)!,dayTripId: trip_id,status: 'plantrip_product',employeeId: int.parse(employee_id), lineId: line_id);
         }
         else{
-           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text),priceUnit:double.tryParse(priceController.text),dayTripId: trip_id,status: 'plantrip_waybill',employeeId: int.parse(employee_id), lineId: line_id);
+           fuelin  = Fuelin_line(date:dateTextController.text,shop:shopNameTextController.text,productId: product_id,locationId: location_id,slipNo:slipNoTextController.text,liter:double.tryParse(qtyController.text)!,priceUnit:double.tryParse(priceController.text)!,dayTripId: trip_id,status: 'plantrip_waybill',employeeId: int.parse(employee_id), lineId: line_id);
 
         }
       await dayTripServie?.addFuelIn(fuelin).then((data) {
