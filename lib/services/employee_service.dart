@@ -287,8 +287,8 @@ class EmployeeService extends OdooService {
         <Claiminsurancemodel>[];
     Response response = await dioClient.post(url,
         data: jsonEncode({
-          "insurance_type_id": insurancemodel.insuranceTypeId.id,
-          "employee_id": insurancemodel.employeeId.id,
+          "insurance_type_id": insurancemodel.insuranceTypeId!.id,
+          "employee_id": insurancemodel.employeeId!.id,
           "insurance_id": insurancemodel.id,
           'coverage_amount': insurancemodel.coverageAmount,
           "claim_amount": claimAmount,
@@ -300,7 +300,7 @@ class EmployeeService extends OdooService {
     if (response.statusCode == 200) {
       String url = Globals.baseURL +
           "/hr.claims?filters=[('employee_id','='," +
-          insurancemodel.employeeId.id.toString() +
+          insurancemodel.employeeId!.id.toString() +
           ")]";
       Response response = await dioClient.get(url);
       if (response.statusCode == 200) {

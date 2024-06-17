@@ -158,7 +158,7 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(insurance.employeeId.name)}',
+                          '${AppUtils.removeNullString(insurance.employeeId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -173,7 +173,7 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(insurance.employeeId.jobId.name)}',
+                          '${AppUtils.removeNullString(insurance.employeeId!.jobId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -188,7 +188,7 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(insurance.employeeId.companyId.name)}',
+                          '${AppUtils.removeNullString(insurance.employeeId!.companyId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -203,7 +203,7 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(insurance.employeeId.branchId.name)}',
+                          '${AppUtils.removeNullString(insurance.employeeId!.branchId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -218,7 +218,7 @@ class EmployeeInsuranceDetailPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(insurance.insuranceTypeId.policy_type)}',
+                          '${AppUtils.removeNullString(insurance.insuranceTypeId!.policy_type)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),

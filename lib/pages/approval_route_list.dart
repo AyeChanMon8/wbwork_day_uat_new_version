@@ -91,7 +91,7 @@ class _ApprovalRouteListState extends State<ApprovalRouteList> {
                                       "null"
                                   ? ""
                                   : controller.routeApprovalList.value[index]
-                                      .branch_id.name
+                                      .branch_id!.name
                                       .toString(),
                               style: TextStyle(color: backgroundIconColor),
                             ),

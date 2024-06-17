@@ -95,7 +95,6 @@ dependencies:
   easy_localization: ^3.0.7
   syncfusion_flutter_pdfviewer:
   flutter_widget_from_html: ^0.8.5
-  ext_storage: ^1.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

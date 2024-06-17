@@ -61,7 +61,7 @@ class _ApprovedInsuranceListState extends State<ApprovedInsuranceList> {
                     title: Text(
                         // "Approval 1",
                           controller.insuranceApprovedList
-                              .value[index].employeeId.name),
+                              .value[index].employeeId!.name),
                     subtitle: Text(
                         controller.insuranceApprovedList
                               .value[index].coverageAmount.toString()),

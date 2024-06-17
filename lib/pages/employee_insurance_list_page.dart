@@ -46,12 +46,12 @@ class EmployeeInsuranceListPage extends StatelessWidget {
                               SizedBox(height: 10,),
                               Row(children: [
                                 AutoSizeText(labels.insuranceType,style: detailsStyle()),
-                                AutoSizeText(' : ${insurance.insuranceTypeId.policy_type}',style: maintitleStyle()),
+                                AutoSizeText(' : ${insurance.insuranceTypeId!.policy_type}',style: maintitleStyle()),
                               ],),
                               SizedBox(height: 10,),
                               Row(children: [
                                 AutoSizeText(labels.employeeName,style: detailsStyle()),
-                                AutoSizeText(' : ${insurance.employeeId.name}',style: maintitleStyle()),
+                                AutoSizeText(' : ${insurance.employeeId!.name}',style: maintitleStyle()),
                               ],),
                               SizedBox(height: 10,),
                               Row(children: [

@@ -285,7 +285,7 @@ class _ApprovedInsuranceDetailsPageState
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId.name)}',
+                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -300,7 +300,7 @@ class _ApprovedInsuranceDetailsPageState
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId.jobId.name)}',
+                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId!.jobId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -315,7 +315,7 @@ class _ApprovedInsuranceDetailsPageState
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId.companyId.name)}',
+                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId!.companyId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -330,7 +330,7 @@ class _ApprovedInsuranceDetailsPageState
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId.branchId.name)}',
+                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].employeeId!.branchId!.name)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -345,7 +345,7 @@ class _ApprovedInsuranceDetailsPageState
                     Padding(
                       padding: const EdgeInsets.all(7.0),
                       child: Text(
-                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].insuranceTypeId.policy_type)}',
+                          '${AppUtils.removeNullString(controller.insuranceApprovedList.value[index].insuranceTypeId!.policy_type)}',
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),

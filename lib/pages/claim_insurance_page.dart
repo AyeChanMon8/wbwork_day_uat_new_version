@@ -306,8 +306,8 @@ class _ClaimInsurancePageState extends State<ClaimInsurancePage> {
                               value: insurancetypemodel,
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: insurancetypemodel.insuranceTypeId.policy_type!=null ? Text(
-                                  insurancetypemodel.insuranceTypeId.policy_type,
+                                child: insurancetypemodel.insuranceTypeId!.policy_type!=null ? Text(
+                                  insurancetypemodel.insuranceTypeId!.policy_type,
                                   style: maintitleStyle(),
                                 ):Text('-'),
                               ),

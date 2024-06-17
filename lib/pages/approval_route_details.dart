@@ -192,7 +192,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
             children: [
               Container(
                 child: Text(
-                  controller.routeApprovalList.value[index].company_id.name
+                  controller.routeApprovalList.value[index].company_id!.name
                       .toString(),
                   // ("From Date : "),
                   style: datalistStyle(),
@@ -200,7 +200,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
               ),
               Container(
                 child: Text(
-                  controller.routeApprovalList.value[index].branch_id.name
+                  controller.routeApprovalList.value[index].branch_id!.name
                       .toString(),
                   style: subtitleStyle(),
                 ),
@@ -395,15 +395,15 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount:
-                controller.routeApprovalList.value[index].expenseIds.length,
+                controller.routeApprovalList.value[index].expenseIds!.length,
             itemBuilder: (BuildContext context, int pos) {
               var amt = AppUtils.removeNullString(controller
-                  .routeApprovalList.value[index].expenseIds[pos].amount
+                  .routeApprovalList.value[index].expenseIds![pos].amount
                   .toString());
               var amount = '';
               if (amt.isNotEmpty) {
                 amount = AppUtils.addThousnadSperator(controller
-                    .routeApprovalList.value[index].expenseIds[pos].amount);
+                    .routeApprovalList.value[index].expenseIds![pos].amount);
               }
 
               return Column(
@@ -418,7 +418,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
                           child: Container(
                             // width: 80,
                             child: Text(controller.routeApprovalList
-                                .value[index].expenseIds[pos].name
+                                .value[index].expenseIds![pos].name
                                 .toString()),
                           ),
                         ),
@@ -427,7 +427,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
                           child: Container(
                             // width: 80,
                             child: Text(controller.routeApprovalList
-                                .value[index].expenseIds[pos].remark
+                                .value[index].expenseIds![pos].remark
                                 .toString()),
                           ),
                         ),
