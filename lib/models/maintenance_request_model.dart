@@ -1,4 +1,4 @@
-// @dart=2.9
+import 'dart:convert';
 
 /// id : 4
 /// name : "Test Maintenance Request"
@@ -29,274 +29,728 @@
 /// qty : 0.0
 
 class Maintenance_request_model {
-  int _id;
-  String _name;
-  String _code;
-  Vehicle_id _vehicleId;
-  Driver_id _driverId;
-  Spare_id _spareId;
-  Spare_id _spare2Id;
-  String _requestDate;
-  String _maintenanceType;
-  String _state;
-  String _image;
-  String _image1;
-  String _image2;
-  String _image3;
-  String _image4;
-  String _image5;
-  Maintenance_team_id _maintenanceTeamId;
-  User_id _userId;
-  String _startDate;
-  String _endDate;
-  double _actualDuration;
-  String _priority;
-  String _emailCc;
-  Company_id _companyId;
-  String _description;
-  List<Purchase_line> _purchaseLine;
-  List<Warehouse_ids> _warehouseIds;
-  List<Maintenance_product_ids> _maintenanceProductIds;
-  List<Maintenance_purchase_line> _maintenancePurchaseline;
-  Location_id _locationId;
-  double _qty;
-  String _title;
-  double _duration_days;
-  double _duration_hours;
+  int? id;
+  String? name;
+  String? code;
+  Vehicle_id? vehicleId;
+  Driver_id? driverId;
+  Spare_id? spareId;
+  Spare_id? spare2Id;
+  String? requestDate;
+  String? maintenanceType;
+  String? state;
+  String? image;
+  String? image1;
+  String? image2;
+  String? image3;
+  String? image4;
+  String? image5;
+  Maintenance_team_id? maintenanceTeamId;
+  User_id? userId;
+  String? startDate;
+  String? endDate;
+  double? actualDuration;
+  String? priority;
+  String? emailCc;
+  Company_id? companyId;
+  String? description;
+  List<Purchase_line>? purchaseLine;
+  List<Warehouse_ids>? warehouseIds;
+  List<Maintenance_product_ids>? maintenanceProductIds;
+  List<Maintenance_purchase_line>? maintenancePurchaseline;
+  Location_id? locationId;
+  double? qty;
+  String? title;
+  double? duration_days;
+  double? duration_hours;
+  Maintenance_request_model(
+      {this.id,
+      this.name,
+      this.code,
+      this.vehicleId,
+      this.driverId,
+      this.spareId,
+      this.spare2Id,
+      this.requestDate,
+      this.maintenanceType,
+      this.state,
+      this.image,
+      this.image1,
+      this.image2,
+      this.image3,
+      this.image4,
+      this.image5,
+      this.maintenanceTeamId,
+      this.userId,
+      this.startDate,
+      this.endDate,
+      this.actualDuration,
+      this.priority,
+      this.emailCc,
+      this.companyId,
+      this.description,
+      this.purchaseLine,
+      this.warehouseIds,
+      this.maintenanceProductIds,
+      this.maintenancePurchaseline,
+      this.locationId,
+      this.qty,
+      this.title,
+      this.duration_days,
+      this.duration_hours});
 
-  String get title => _title;
-  int get id => _id;
-  String get name => _name;
-  String get code => _code;
-  Vehicle_id get vehicleId => _vehicleId;
-  Driver_id get driverId => _driverId;
-  Spare_id get spareId => _spareId;
-  Spare_id get spare2Id => _spare2Id;
-  String get requestDate => _requestDate;
-  String get maintenanceType => _maintenanceType;
-  String get state => _state;
-  String get image => _image;
-  String get image1 => _image1;
-  String get image2 => _image2;
-  String get image3 => _image3;
-  String get image4 => _image4;
-  String get image5 => _image5;
-  Maintenance_team_id get maintenanceTeamId => _maintenanceTeamId;
-  User_id get userId => _userId;
-  String get startDate => _startDate;
-  String get endDate => _endDate;
-  double get actualDuration => _actualDuration;
-  String get priority => _priority;
-  String get emailCc => _emailCc;
-  Company_id get companyId => _companyId;
-  String get description => _description;
-  List<Purchase_line> get purchaseLine => _purchaseLine;
-  List<Warehouse_ids> get warehouseIds => _warehouseIds;
-  List<Maintenance_product_ids> get maintenanceProductIds => _maintenanceProductIds;
-  Location_id get locationId => _locationId;
-  double get qty => _qty;
-  double get duration_days => _duration_days;
-  double get duration_hours => _duration_hours;
-  Maintenance_request_model({
-      int id, 
-      String name, 
-      String code, 
-      Vehicle_id vehicleId, 
-      Driver_id driverId,
-      Spare_id spareId,
-      String requestDate, 
-      String maintenanceType,
-      String state,
-      String image, 
-      String image1, 
-      String image2, 
-      String image3, 
-      String image4, 
-      String image5, 
-      Maintenance_team_id maintenanceTeamId, 
-      User_id userId, 
-      String startDate, 
-      String endDate, 
-      double actualDuration, 
-      String priority, 
-      String emailCc,
-      Company_id companyId,
-      String description, 
-      List<Purchase_line> purchaseLine, 
-      List<Warehouse_ids> warehouseIds, 
-      List<Maintenance_product_ids> maintenanceProductIds, 
-      Location_id locationId, 
-      double qty}){
-    _id = id;
-    _name = name;
-    _code = code;
-    _vehicleId = vehicleId;
-    _driverId = driverId;
-    _spareId = spareId;
-    _spare2Id = spare2Id;
-    _requestDate = requestDate;
-    _maintenanceType = maintenanceType;
-    _state = state;
-    _image = image;
-    _image1 = image1;
-    _image2 = image2;
-    _image3 = image3;
-    _image4 = image4;
-    _image5 = image5;
-    _maintenanceTeamId = maintenanceTeamId;
-    _userId = userId;
-    _startDate = startDate;
-    _endDate = endDate;
-    _actualDuration = actualDuration;
-    _priority = priority;
-    _emailCc = emailCc;
-    _companyId = companyId;
-    _description = description;
-    _purchaseLine = purchaseLine;
-    _warehouseIds = warehouseIds;
-    _maintenanceProductIds = maintenanceProductIds;
-    _locationId = locationId;
-    _qty = qty;
-}
-
-  Maintenance_request_model.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"]??'';
-    _code = json["code"];
-    _vehicleId = json["vehicle_id"] != null ? Vehicle_id.fromJson(json["vehicle_id"]) : null;
-    _driverId = json["driver_id"] != null ? Driver_id.fromJson(json["driver_id"]) : null;
-    _spareId = json["spare1_id"] != null ? Spare_id.fromJson(json["spare1_id"]) : null;
-    _spare2Id = json["spare2_id"] != null ? Spare_id.fromJson(json["spare2_id"]) : null;
-    _requestDate = json["request_date"];
-    _maintenanceType = json["maintenance_type"];
-    _state = json['state'];
-    _image = json["image"];
-    _image1 = json["image1"];
-    _image2 = json["image2"];
-    _image3 = json["image3"];
-    _image4 = json["image4"];
-    _image5 = json["image5"];
-    _maintenanceTeamId = json["maintenance_team_id"] != null ? Maintenance_team_id.fromJson(json["maintenance_team_id"]) : null;
-    _userId = json["user_id"] != null ? User_id.fromJson(json["user_id"]) : null;
-    _startDate = json["start_date"];
-    _endDate = json["end_date"];
-    _actualDuration = json["actual_duration"];
-    _priority = json["priority"];
-    _emailCc = json["email_cc"];
-    _companyId = json["company_id"] != null ? Company_id.fromJson(json["company_id"]) : null;
-    _description = json["description"];
-    if (json["purchase_line"] != null) {
-      _purchaseLine = [];
-      json["purchase_line"].forEach((v) {
-        _purchaseLine.add(Purchase_line.fromJson(v));
-      });
-    }
-    if (json["warehouse_ids"] != null) {
-      _warehouseIds = [];
-      json["warehouse_ids"].forEach((v) {
-        _warehouseIds.add(Warehouse_ids.fromJson(v));
-      });
-    }
-    if (json["maintenance_product_ids"] != null) {
-      _maintenanceProductIds = [];
-      json["maintenance_product_ids"].forEach((v) {
-        _maintenanceProductIds.add(Maintenance_product_ids.fromJson(v));
-      });
-    }
-    _locationId = json["location_id"] != null ? Location_id.fromJson(json["location_id"]) : null;
-    _qty = json["qty"];
-    _duration_days = json["duration_days"];
-    _duration_hours = json["duration_hrs"];
-    if (json["purchase_line"] != null) {
-      _maintenancePurchaseline = [];
-      json["purchase_line"].forEach((v) {
-        _maintenancePurchaseline.add(Maintenance_purchase_line.fromJson(v));
-      });
-    }
-    //_title = json["title"];
+  Maintenance_request_model copyWith({
+    int? id,
+    String? name,
+    String? code,
+    Vehicle_id? vehicleId,
+    Driver_id? driverId,
+    Spare_id? spareId,
+    Spare_id? spare2Id,
+    String? requestDate,
+    String? maintenanceType,
+    String? state,
+    String? image,
+    String? image1,
+    String? image2,
+    String? image3,
+    String? image4,
+    String? image5,
+    Maintenance_team_id? maintenanceTeamId,
+    User_id? userId,
+    String? startDate,
+    String? endDate,
+    double? actualDuration,
+    String? priority,
+    String? emailCc,
+    Company_id? companyId,
+    String? description,
+    List<Purchase_line>? purchaseLine,
+    List<Warehouse_ids>? warehouseIds,
+    List<Maintenance_product_ids>? maintenanceProductIds,
+    List<Maintenance_purchase_line>? maintenancePurchaseline,
+    Location_id? locationId,
+    double? qty,
+    String? title,
+    double? duration_days,
+    double? duration_hours,
+  }) {
+    return Maintenance_request_model(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      code: code ?? this.code,
+      vehicleId: vehicleId ?? this.vehicleId,
+      driverId: driverId ?? this.driverId,
+      spareId: spareId ?? this.spareId,
+      spare2Id: spare2Id ?? this.spare2Id,
+      requestDate: requestDate ?? this.requestDate,
+      maintenanceType: maintenanceType ?? this.maintenanceType,
+      state: state ?? this.state,
+      image: image ?? this.image,
+      image1: image1 ?? this.image1,
+      image2: image2 ?? this.image2,
+      image3: image3 ?? this.image3,
+      image4: image4 ?? this.image4,
+      image5: image5 ?? this.image5,
+      maintenanceTeamId: maintenanceTeamId ?? this.maintenanceTeamId,
+      userId: userId ?? this.userId,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      actualDuration: actualDuration ?? this.actualDuration,
+      priority: priority ?? this.priority,
+      emailCc: emailCc ?? this.emailCc,
+      companyId: companyId ?? this.companyId,
+      description: description ?? this.description,
+      purchaseLine: purchaseLine ?? this.purchaseLine,
+      warehouseIds: warehouseIds ?? this.warehouseIds,
+      maintenanceProductIds:
+          maintenanceProductIds ?? this.maintenanceProductIds,
+      maintenancePurchaseline:
+          maintenancePurchaseline ?? this.maintenancePurchaseline,
+      locationId: locationId ?? this.locationId,
+      qty: qty ?? this.qty,
+      title: title ?? this.title,
+      duration_days: duration_days ?? this.duration_days,
+      duration_hours: duration_hours ?? this.duration_hours,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    map["code"] = _code;
-    if (_vehicleId != null) {
-      map["vehicle_id"] = _vehicleId.toJson();
-    }
-    if (_driverId != null) {
-      map["driver_id"] = _driverId.toJson();
-    }
-    map["request_date"] = _requestDate;
-    map["maintenance_type"] = _maintenanceType;
-    map['state'] = _state;
-    map["image"] = _image;
-    map["image1"] = _image1;
-    map["image2"] = _image2;
-    map["image3"] = _image3;
-    map["image4"] = _image4;
-    map["image5"] = _image5;
-    if (_maintenanceTeamId != null) {
-      map["maintenance_team_id"] = _maintenanceTeamId.toJson();
-    }
-    if (_userId != null) {
-      map["user_id"] = _userId.toJson();
-    }
-    map["start_date"] = _startDate;
-    map["end_date"] = _endDate;
-    map["actual_duration"] = _actualDuration;
-    map["priority"] = _priority;
-    map["email_cc"] = _emailCc;
-    map["company_id"] = _companyId;
-    map["description"] = _description;
-    if (_purchaseLine != null) {
-      map["purchase_line"] = _purchaseLine.map((v) => v.toJson()).toList();
-    }
-    if (_warehouseIds != null) {
-      map["warehouse_ids"] = _warehouseIds.map((v) => v.toJson()).toList();
-    }
-    if (_maintenanceProductIds != null) {
-      map["maintenance_product_ids"] = _maintenanceProductIds.map((v) => v.toJson()).toList();
-    }
-    if (_locationId != null) {
-      map["location_id"] = _locationId.toJson();
-    }
-    map["qty"] = _qty;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'code': code,
+      'vehicle_id': vehicleId?.toMap(),
+      'driver_id': driverId?.toMap(),
+      'spare_id': spareId?.toMap(),
+      'spare2_id': spare2Id?.toMap(),
+      'request_date': requestDate,
+      'maintenance_type': maintenanceType,
+      'state': state,
+      'image': image,
+      'image1': image1,
+      'image2': image2,
+      'image3': image3,
+      'image4': image4,
+      'image5': image5,
+      'maintenance_team_id': maintenanceTeamId?.toMap(),
+      'user_id': userId?.toMap(),
+      'start_date': startDate,
+      'end_date': endDate,
+      'actual_duration': actualDuration,
+      'priority': priority,
+      'email_cc': emailCc,
+      'company_id': companyId?.toMap(),
+      'description': description,
+      'purchase_line': purchaseLine?.map((x) => x?.toMap())?.toList(),
+      'warehouse_ids': warehouseIds?.map((x) => x?.toMap())?.toList(),
+      'maintenance_product_ids':
+          maintenanceProductIds?.map((x) => x?.toMap())?.toList(),
+      'purchase_line':
+          maintenancePurchaseline?.map((x) => x?.toMap())?.toList(),
+      'location_id': locationId?.toMap(),
+      'qty': qty,
+      'title': title,
+      'duration_days': duration_days,
+      'duration_hrs': duration_hours,
+    };
   }
 
+  factory Maintenance_request_model.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Maintenance_request_model(
+      id: map['id'],
+      name: map['name'],
+      code: map['code'],
+      vehicleId: map['vehicle_id'],
+      driverId: map['driver_id'],
+      spareId: map['spare_id'],
+      spare2Id: map['spare2_id'],
+      requestDate: map['request_date'],
+      maintenanceType: map['maintenance_type'],
+      state: map['state'],
+      image: map['image'],
+      image1: map['image1'],
+      image2: map['image2'],
+      image3: map['image3'],
+      image4: map['image4'],
+      image5: map['image5'],
+      maintenanceTeamId: map['maintenance_team_id'],
+      userId: map['user_id'],
+      startDate: map['start_date'],
+      endDate: map['end_date'],
+      actualDuration: map['actual_duration'],
+      priority: map['priority'],
+      emailCc: map['email_cc'],
+      companyId: map['company_id'],
+      description: map['description'],
+      purchaseLine: List<Purchase_line>.from(
+          map['purchase_line']?.map((x) => Purchase_line.fromMap(x))),
+      warehouseIds: List<Warehouse_ids>.from(
+          map['warehouse_ids']?.map((x) => Warehouse_ids.fromMap(x))),
+      maintenanceProductIds: List<Maintenance_product_ids>.from(
+          map['maintenance_product_ids']
+              ?.map((x) => Maintenance_product_ids.fromMap(x))),
+      maintenancePurchaseline: List<Maintenance_purchase_line>.from(
+          map['purchase_line']
+              ?.map((x) => Maintenance_purchase_line.fromMap(x))),
+      locationId: map['location_id'],
+      qty: map['qty'],
+      title: map['title'],
+      duration_days: map['duration_days'],
+      duration_hours: map['duration_hrs'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Maintenance_request_model.fromJson(String source) =>
+      Maintenance_request_model.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Maintenance_request_model(id: $id, name: $name,code: $code, vehicleId: $vehicleId,driverId: $driverId, spareId: $spareId,spare2Id: $spare2Id, requestDate: $requestDate,maintenanceType: $maintenanceType, state: $state,image: $image, image1: $image1,image2: $image2, image3: $image3,image4: $image4, image5: $image5,maintenanceTeamId: $maintenanceTeamId, userId: $userId,startDate: $startDate, endDate: $endDate, actualDuration: $actualDuration,priority: $priority, emailCc: $emailCc,companyId: $companyId, description: $description,purchaseLine: $purchaseLine, warehouseIds: $warehouseIds, maintenanceProductIds: $maintenanceProductIds,maintenancePurchaseline: $maintenancePurchaseline, locationId: $locationId,qty: $qty, title: $title,duration_days: $duration_days, duration_hours: $duration_hours)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Maintenance_request_model &&
+        o.id == id &&
+        o.name == name &&
+        o.code == code &&
+        o.vehicleId == vehicleId &&
+        o.driverId == driverId &&
+        o.spareId == spareId &&
+        o.spare2Id == spare2Id &&
+        o.requestDate == requestDate &&
+        o.maintenanceType == maintenanceType &&
+        o.state == state &&
+        o.image == image &&
+        o.image1 == image1 &&
+        o.image2 == image2 &&
+        o.image3 == image3 &&
+        o.image4 == image4 &&
+        o.image5 == image5 &&
+        o.maintenanceTeamId == maintenanceTeamId &&
+        o.userId == userId &&
+        o.startDate == startDate &&
+        o.endDate == endDate &&
+        o.actualDuration == actualDuration &&
+        o.priority == priority &&
+        o.emailCc == emailCc &&
+        o.companyId == companyId &&
+        o.description == description &&
+        o.purchaseLine == purchaseLine &&
+        o.warehouseIds == warehouseIds &&
+        o.maintenanceProductIds == maintenanceProductIds &&
+        o.maintenancePurchaseline == maintenancePurchaseline &&
+        o.locationId == locationId &&
+        o.qty == qty &&
+        o.title == title &&
+        o.duration_days == duration_days &&
+        o.duration_hours == duration_hours;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      code.hashCode ^
+      vehicleId.hashCode ^
+      driverId.hashCode ^
+      spareId.hashCode ^
+      spare2Id.hashCode ^
+      requestDate.hashCode ^
+      maintenanceType.hashCode ^
+      state.hashCode ^
+      image.hashCode ^
+      image1.hashCode ^
+      image2.hashCode ^
+      image3.hashCode ^
+      image4.hashCode ^
+      image5.hashCode ^
+      maintenanceTeamId.hashCode ^
+      userId.hashCode ^
+      startDate.hashCode ^
+      endDate.hashCode ^
+      actualDuration.hashCode ^
+      priority.hashCode ^
+      emailCc.hashCode ^
+      companyId.hashCode ^
+      description.hashCode ^
+      purchaseLine.hashCode ^
+      warehouseIds.hashCode ^
+      maintenanceProductIds.hashCode ^
+      emailCc.hashCode ^
+      companyId.hashCode ^
+      description.hashCode ^
+      purchaseLine.hashCode ^
+      warehouseIds.hashCode ^
+      maintenanceProductIds.hashCode ^
+      maintenancePurchaseline.hashCode ^
+      locationId.hashCode ^
+      qty.hashCode ^
+      title.hashCode ^
+      duration_days.hashCode ^
+      duration_hours.hashCode;
 }
+
+// class Maintenance_request_model {
+
+//   int _id;
+//   String _name;
+//   String _code;
+//   Vehicle_id _vehicleId;
+//   Driver_id _driverId;
+//   Spare_id _spareId;
+//   Spare_id _spare2Id;
+//   String _requestDate;
+//   String _maintenanceType;
+//   String _state;
+//   String _image;
+//   String _image1;
+//   String _image2;
+//   String _image3;
+//   String _image4;
+//   String _image5;
+//   Maintenance_team_id _maintenanceTeamId;
+//   User_id _userId;
+//   String _startDate;
+//   String _endDate;
+//   double _actualDuration;
+//   String _priority;
+//   String _emailCc;
+//   Company_id _companyId;
+//   String _description;
+//   List<Purchase_line> _purchaseLine;
+//   List<Warehouse_ids> _warehouseIds;
+//   List<Maintenance_product_ids> _maintenanceProductIds;
+//   List<Maintenance_purchase_line> _maintenancePurchaseline;
+//   Location_id _locationId;
+//   double _qty;
+//   String _title;
+//   double _duration_days;
+//   double _duration_hours;
+//   Maintenance_request_model({
+//     this.id = 0,
+//     this.name = ''
+//   });
+
+//   Maintenance_request_model copyWith({
+//     int? id,
+//     String? name
+//   }) {
+//     return Maintenance_request_model(
+//       id: id ?? this.id,
+//       name: name ?? this.name,
+//     );
+//   }
+
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'id': id,
+//       'name': name
+//     };
+//   }
+
+//   factory Maintenance_request_model.fromMap(Map<String, dynamic> map) {
+//     // if (map == null) return null;
+
+//     return Maintenance_request_model(
+//       id: map['id'],
+//       name: map['name'],
+//     );
+//   }
+
+//   String toJson() => json.encode(toMap());
+
+//   factory Maintenance_request_model.fromJson(String source) =>
+//       Maintenance_request_model.fromMap(json.decode(source));
+
+//   @override
+//   String toString() => 'Maintenance_request_model(id: $id, name: $name)';
+
+//   @override
+//   bool operator ==(Object o) {
+//     if (identical(this, o)) return true;
+
+//     return o is Maintenance_request_model && o.id == id && o.name == name;
+//   }
+
+//   @override
+//   int get hashCode => id.hashCode ^ name.hashCode;
+// }
+
+// class Maintenance_request_model {
+//   int _id;
+//   String _name;
+//   String _code;
+//   Vehicle_id _vehicleId;
+//   Driver_id _driverId;
+//   Spare_id _spareId;
+//   Spare_id _spare2Id;
+//   String _requestDate;
+//   String _maintenanceType;
+//   String _state;
+//   String _image;
+//   String _image1;
+//   String _image2;
+//   String _image3;
+//   String _image4;
+//   String _image5;
+//   Maintenance_team_id _maintenanceTeamId;
+//   User_id _userId;
+//   String _startDate;
+//   String _endDate;
+//   double _actualDuration;
+//   String _priority;
+//   String _emailCc;
+//   Company_id _companyId;
+//   String _description;
+//   List<Purchase_line> _purchaseLine;
+//   List<Warehouse_ids> _warehouseIds;
+//   List<Maintenance_product_ids> _maintenanceProductIds;
+//   List<Maintenance_purchase_line> _maintenancePurchaseline;
+//   Location_id _locationId;
+//   double _qty;
+//   String _title;
+//   double _duration_days;
+//   double _duration_hours;
+
+//   String get title => _title;
+//   int get id => _id;
+//   String get name => _name;
+//   String get code => _code;
+//   Vehicle_id get vehicleId => _vehicleId;
+//   Driver_id get driverId => _driverId;
+//   Spare_id get spareId => _spareId;
+//   Spare_id get spare2Id => _spare2Id;
+//   String get requestDate => _requestDate;
+//   String get maintenanceType => _maintenanceType;
+//   String get state => _state;
+//   String get image => _image;
+//   String get image1 => _image1;
+//   String get image2 => _image2;
+//   String get image3 => _image3;
+//   String get image4 => _image4;
+//   String get image5 => _image5;
+//   Maintenance_team_id get maintenanceTeamId => _maintenanceTeamId;
+//   User_id get userId => _userId;
+//   String get startDate => _startDate;
+//   String get endDate => _endDate;
+//   double get actualDuration => _actualDuration;
+//   String get priority => _priority;
+//   String get emailCc => _emailCc;
+//   Company_id get companyId => _companyId;
+//   String get description => _description;
+//   List<Purchase_line> get purchaseLine => _purchaseLine;
+//   List<Warehouse_ids> get warehouseIds => _warehouseIds;
+//   List<Maintenance_product_ids> get maintenanceProductIds => _maintenanceProductIds;
+//   Location_id get locationId => _locationId;
+//   double get qty => _qty;
+//   double get duration_days => _duration_days;
+//   double get duration_hours => _duration_hours;
+//   Maintenance_request_model({
+//       int id,
+//       String name,
+//       String code,
+//       Vehicle_id vehicleId,
+//       Driver_id driverId,
+//       Spare_id spareId,
+//       String requestDate,
+//       String maintenanceType,
+//       String state,
+//       String image,
+//       String image1,
+//       String image2,
+//       String image3,
+//       String image4,
+//       String image5,
+//       Maintenance_team_id maintenanceTeamId,
+//       User_id userId,
+//       String startDate,
+//       String endDate,
+//       double actualDuration,
+//       String priority,
+//       String emailCc,
+//       Company_id companyId,
+//       String description,
+//       List<Purchase_line> purchaseLine,
+//       List<Warehouse_ids> warehouseIds,
+//       List<Maintenance_product_ids> maintenanceProductIds,
+//       Location_id locationId,
+//       double qty}){
+//     _id = id;
+//     _name = name;
+//     _code = code;
+//     _vehicleId = vehicleId;
+//     _driverId = driverId;
+//     _spareId = spareId;
+//     _spare2Id = spare2Id;
+//     _requestDate = requestDate;
+//     _maintenanceType = maintenanceType;
+//     _state = state;
+//     _image = image;
+//     _image1 = image1;
+//     _image2 = image2;
+//     _image3 = image3;
+//     _image4 = image4;
+//     _image5 = image5;
+//     _maintenanceTeamId = maintenanceTeamId;
+//     _userId = userId;
+//     _startDate = startDate;
+//     _endDate = endDate;
+//     _actualDuration = actualDuration;
+//     _priority = priority;
+//     _emailCc = emailCc;
+//     _companyId = companyId;
+//     _description = description;
+//     _purchaseLine = purchaseLine;
+//     _warehouseIds = warehouseIds;
+//     _maintenanceProductIds = maintenanceProductIds;
+//     _locationId = locationId;
+//     _qty = qty;
+// }
+
+//   Maintenance_request_model.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"]??'';
+//     _code = json["code"];
+//     _vehicleId = json["vehicle_id"] != null ? Vehicle_id.fromJson(json["vehicle_id"]) : null;
+//     _driverId = json["driver_id"] != null ? Driver_id.fromJson(json["driver_id"]) : null;
+//     _spareId = json["spare1_id"] != null ? Spare_id.fromJson(json["spare1_id"]) : null;
+//     _spare2Id = json["spare2_id"] != null ? Spare_id.fromJson(json["spare2_id"]) : null;
+//     _requestDate = json["request_date"];
+//     _maintenanceType = json["maintenance_type"];
+//     _state = json['state'];
+//     _image = json["image"];
+//     _image1 = json["image1"];
+//     _image2 = json["image2"];
+//     _image3 = json["image3"];
+//     _image4 = json["image4"];
+//     _image5 = json["image5"];
+//     _maintenanceTeamId = json["maintenance_team_id"] != null ? Maintenance_team_id.fromJson(json["maintenance_team_id"]) : null;
+//     _userId = json["user_id"] != null ? User_id.fromJson(json["user_id"]) : null;
+//     _startDate = json["start_date"];
+//     _endDate = json["end_date"];
+//     _actualDuration = json["actual_duration"];
+//     _priority = json["priority"];
+//     _emailCc = json["email_cc"];
+//     _companyId = json["company_id"] != null ? Company_id.fromJson(json["company_id"]) : null;
+//     _description = json["description"];
+//     if (json["purchase_line"] != null) {
+//       _purchaseLine = [];
+//       json["purchase_line"].forEach((v) {
+//         _purchaseLine.add(Purchase_line.fromJson(v));
+//       });
+//     }
+//     if (json["warehouse_ids"] != null) {
+//       _warehouseIds = [];
+//       json["warehouse_ids"].forEach((v) {
+//         _warehouseIds.add(Warehouse_ids.fromJson(v));
+//       });
+//     }
+//     if (json["maintenance_product_ids"] != null) {
+//       _maintenanceProductIds = [];
+//       json["maintenance_product_ids"].forEach((v) {
+//         _maintenanceProductIds.add(Maintenance_product_ids.fromJson(v));
+//       });
+//     }
+//     _locationId = json["location_id"] != null ? Location_id.fromJson(json["location_id"]) : null;
+//     _qty = json["qty"];
+//     _duration_days = json["duration_days"];
+//     _duration_hours = json["duration_hrs"];
+//     if (json["purchase_line"] != null) {
+//       _maintenancePurchaseline = [];
+//       json["purchase_line"].forEach((v) {
+//         _maintenancePurchaseline.add(Maintenance_purchase_line.fromJson(v));
+//       });
+//     }
+//     //_title = json["title"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     map["code"] = _code;
+//     if (_vehicleId != null) {
+//       map["vehicle_id"] = _vehicleId.toJson();
+//     }
+//     if (_driverId != null) {
+//       map["driver_id"] = _driverId.toJson();
+//     }
+//     map["request_date"] = _requestDate;
+//     map["maintenance_type"] = _maintenanceType;
+//     map['state'] = _state;
+//     map["image"] = _image;
+//     map["image1"] = _image1;
+//     map["image2"] = _image2;
+//     map["image3"] = _image3;
+//     map["image4"] = _image4;
+//     map["image5"] = _image5;
+//     if (_maintenanceTeamId != null) {
+//       map["maintenance_team_id"] = _maintenanceTeamId.toJson();
+//     }
+//     if (_userId != null) {
+//       map["user_id"] = _userId.toJson();
+//     }
+//     map["start_date"] = _startDate;
+//     map["end_date"] = _endDate;
+//     map["actual_duration"] = _actualDuration;
+//     map["priority"] = _priority;
+//     map["email_cc"] = _emailCc;
+//     map["company_id"] = _companyId;
+//     map["description"] = _description;
+//     if (_purchaseLine != null) {
+//       map["purchase_line"] = _purchaseLine.map((v) => v.toJson()).toList();
+//     }
+//     if (_warehouseIds != null) {
+//       map["warehouse_ids"] = _warehouseIds.map((v) => v.toJson()).toList();
+//     }
+//     if (_maintenanceProductIds != null) {
+//       map["maintenance_product_ids"] = _maintenanceProductIds.map((v) => v.toJson()).toList();
+//     }
+//     if (_locationId != null) {
+//       map["location_id"] = _locationId.toJson();
+//     }
+//     map["qty"] = _qty;
+//     return map;
+//   }
+
+// }
 
 /// id : null
 /// name : null
 
 class Location_id {
-  dynamic _id;
-  dynamic _name;
+  int id;
+  String name;
 
-  dynamic get id => _id;
-  dynamic get name => _name;
+  Location_id({this.id = 0, this.name = ''});
 
-  Location_id({
-      dynamic id, 
-      dynamic name}){
-    _id = id;
-    _name = name;
-}
-
-  Location_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Location_id copyWith({int? id, String? name}) {
+    return Location_id(id: id ?? this.id, name: name ?? this.name);
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'name': name};
   }
 
+  factory Location_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Location_id(id: map['id'], name: map['name']);
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Location_id.fromJson(String source) =>
+      Location_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Location_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Location_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Location_id {
+//   dynamic _id;
+//   dynamic _name;
+
+//   dynamic get id => _id;
+//   dynamic get name => _name;
+
+//   Location_id({
+//       dynamic id,
+//       dynamic name}){
+//     _id = id;
+//     _name = name;
+// }
+
+//   Location_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+
+// }
 
 /// product_id : {"id":73,"name":"ABS Sensor ဖြုတ်/တပ် (တစ်ခုစီ)"}
 /// category_id : {"id":15,"name":"Maintenance"}
@@ -304,182 +758,505 @@ class Location_id {
 /// qty : 1.0
 
 class Maintenance_product_ids {
-  int _id;
-  Product_id _productId;
-  Category_id _categoryId;
-  String _type;
-  double _qty;
+  int id;
+  Product_id? productId;
+  Category_id? categoryId;
+  String type;
+  double qty;
 
-  int get id => _id;
-  Product_id get productId => _productId;
-  Category_id get categoryId => _categoryId;
-  String get type => _type;
-  double get qty => _qty;
+  Maintenance_product_ids(
+      {this.id = 0,
+      this.productId,
+      this.categoryId,
+      this.type = '',
+      this.qty = 0.0});
 
-  Maintenance_product_ids({
-      int id,
-      Product_id productId, 
-      Category_id categoryId, 
-      String type, 
-      double qty}){
-    _id = id;
-    _productId = productId;
-    _categoryId = categoryId;
-    _type = type;
-    _qty = qty;
-}
-
-  Maintenance_product_ids.fromJson(dynamic json) {
-
-    _id = json["id"];
-    _productId = json["product_id"] != null ? Product_id.fromJson(json["product_id"]) : null;
-    _categoryId = json["category_id"] != null ? Category_id.fromJson(json["category_id"]) : null;
-    _type = json["type"];
-    _qty = json["qty"];
+  Maintenance_product_ids copyWith({
+    int? id,
+    Product_id? productId,
+    Category_id? categoryId,
+    String? type,
+    double? qty,
+  }) {
+    return Maintenance_product_ids(
+        id: id ?? this.id,
+        productId: productId ?? this.productId,
+        categoryId: categoryId ?? this.categoryId,
+        type: type ?? this.type,
+        qty: qty ?? this.qty);
   }
 
-
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    if(_id !=null)
-      map["id"] = _id;
-    if (_productId != null) {
-      map["product_id"] = _productId.toJson();
-    }
-    if (_categoryId != null) {
-      map["category_id"] = _categoryId.toJson();
-    }
-    map["type"] = _type;
-    map["qty"] = _qty;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'product_id': productId?.toMap(),
+      'category_id': categoryId?.toMap(),
+      'type': type,
+      'qty': qty
+    };
   }
 
+  factory Maintenance_product_ids.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Maintenance_product_ids(
+      id: map['id'],
+      productId: map['product_id'],
+      categoryId: map['category_id'],
+      type: map['type'],
+      qty: map['qty'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Maintenance_product_ids.fromJson(String source) =>
+      Maintenance_product_ids.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Maintenance_product_ids(id: $id, productId: $productId,categoryId: $categoryId, type: $type,qty: $qty)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Maintenance_product_ids &&
+        o.id == id &&
+        o.productId == productId &&
+        o.categoryId == categoryId &&
+        o.type == type &&
+        o.qty == qty;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      productId.hashCode ^
+      categoryId.hashCode ^
+      type.hashCode ^
+      qty.hashCode;
 }
+
+// class Maintenance_product_ids {
+//   int _id;
+//   Product_id _productId;
+//   Category_id _categoryId;
+//   String _type;
+//   double _qty;
+
+//   int get id => _id;
+//   Product_id get productId => _productId;
+//   Category_id get categoryId => _categoryId;
+//   String get type => _type;
+//   double get qty => _qty;
+
+//   Maintenance_product_ids(
+//       {int id,
+//       Product_id productId,
+//       Category_id categoryId,
+//       String type,
+//       double qty}) {
+//     _id = id;
+//     _productId = productId;
+//     _categoryId = categoryId;
+//     _type = type;
+//     _qty = qty;
+//   }
+
+//   Maintenance_product_ids.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _productId = json["product_id"] != null
+//         ? Product_id.fromJson(json["product_id"])
+//         : null;
+//     _categoryId = json["category_id"] != null
+//         ? Category_id.fromJson(json["category_id"])
+//         : null;
+//     _type = json["type"];
+//     _qty = json["qty"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     if (_id != null) map["id"] = _id;
+//     if (_productId != null) {
+//       map["product_id"] = _productId.toJson();
+//     }
+//     if (_categoryId != null) {
+//       map["category_id"] = _categoryId.toJson();
+//     }
+//     map["type"] = _type;
+//     map["qty"] = _qty;
+//     return map;
+//   }
+// }
+
 class Maintenance_purchase_line {
-  String _name;
-  String date_approve;
-  Category_id _partner_id;
-  Category_id _company_id;
-  String date_planned;
-  Category_id user_id;
-  double _amount_total;
+  String? name;
+  String? date_approve;
+  Category_id? partner_id;
+  Category_id? company_id;
+  String? date_planned;
+  Category_id? user_id;
+  double? amount_total;
 
-  String get name => _name;
-  Category_id get partnerId => _partner_id;
-  Category_id get companyID => _company_id;
-  double get type => _amount_total;
+  Maintenance_purchase_line(
+      {this.name,
+      this.date_approve,
+      this.partner_id,
+      this.company_id,
+      this.date_planned,
+      this.user_id,
+      this.amount_total});
 
-
-  Maintenance_purchase_line.fromJson(dynamic json) {
-
-    _name = json["name"];
-    date_approve = json["date_approve"];
-    _partner_id = json["partner_id"] != null ? Category_id.fromJson(json["partner_id"]) : null;
-    _company_id = json["company_id"] != null ? Category_id.fromJson(json["company_id"]) : null;
-    date_planned = json["date_planned"];
-    _amount_total = json["amount_total"];
+  Maintenance_purchase_line copyWith({
+    String? name,
+    String? date_approve,
+    Category_id? partner_id,
+    Category_id? company_id,
+    String? date_planned,
+    Category_id? user_id,
+    double? amount_total,
+  }) {
+    return Maintenance_purchase_line(
+        name: name ?? this.name,
+        date_approve: date_approve ?? this.date_approve,
+        partner_id: partner_id ?? this.partner_id,
+        company_id: company_id ?? this.company_id,
+        date_planned: date_planned ?? this.date_planned,
+        user_id: user_id ?? this.user_id,
+        amount_total: amount_total ?? this.amount_total);
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'date_approve': date_approve,
+      'partner_id': partner_id?.toMap(),
+      'company_id': company_id?.toMap(),
+      'date_planned': date_planned,
+      'user_id': user_id?.toMap(),
+      'amount_total': amount_total
+    };
+  }
 
+  factory Maintenance_purchase_line.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Maintenance_purchase_line(
+      name: map['name'],
+      date_approve: map['date_approve'],
+      partner_id: map['partner_id'],
+      company_id: map['company_id'],
+      date_planned: map['date_planned'],
+      user_id: map['user_id'],
+      amount_total: map['amount_total'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Maintenance_purchase_line.fromJson(String source) =>
+      Maintenance_purchase_line.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Maintenance_purchase_line(name: $name, date_approve: $date_approve,partner_id: $partner_id, company_id: $company_id,date_planned: $date_planned, user_id: $user_id,amount_total: $amount_total)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Maintenance_purchase_line &&
+        o.name == name &&
+        o.date_approve == date_approve &&
+        o.partner_id == partner_id &&
+        o.company_id == company_id &&
+        o.date_planned == date_planned &&
+        o.user_id == user_id &&
+        o.amount_total == amount_total;
+  }
+
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      date_approve.hashCode ^
+      partner_id.hashCode ^
+      company_id.hashCode ^
+      date_planned.hashCode ^
+      user_id.hashCode ^
+      amount_total.hashCode;
 }
+
+// class Maintenance_purchase_line {
+//   String _name;
+//   String date_approve;
+//   Category_id _partner_id;
+//   Category_id _company_id;
+//   String date_planned;
+//   Category_id user_id;
+//   double _amount_total;
+
+//   String get name => _name;
+//   Category_id get partnerId => _partner_id;
+//   Category_id get companyID => _company_id;
+//   double get type => _amount_total;
+
+//   Maintenance_purchase_line.fromJson(dynamic json) {
+//     _name = json["name"];
+//     date_approve = json["date_approve"];
+//     _partner_id = json["partner_id"] != null
+//         ? Category_id.fromJson(json["partner_id"])
+//         : null;
+//     _company_id = json["company_id"] != null
+//         ? Category_id.fromJson(json["company_id"])
+//         : null;
+//     date_planned = json["date_planned"];
+//     _amount_total = json["amount_total"];
+//   }
+// }
+
 class Maintenance_product_id {
-  int _productId;
-  int _categoryId;
-  String _type;
-  double _qty;
+  int? productId;
+  int? categoryId;
+  String? type;
+  double? qty;
+  Maintenance_product_id(
+      {this.productId, this.categoryId, this.type, this.qty});
 
-  int get productId => _productId;
-  int get categoryId => _categoryId;
-  String get type => _type;
-  double get qty => _qty;
-
-  Maintenance_product_id({
-    int productId,
-    int categoryId,
-    String type,
-    double qty}){
-    _productId = productId;
-    _categoryId = categoryId;
-    _type = type;
-    _qty = qty;
+  Maintenance_product_id copyWith({
+    int? productId,
+    int? categoryId,
+    String? type,
+    double? qty,
+  }) {
+    return Maintenance_product_id(
+        productId: productId ?? this.productId,
+        categoryId: categoryId ?? this.categoryId,
+        type: type ?? this.type,
+        qty: qty ?? this.qty);
   }
 
-
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    if (_productId != null) {
-      map["product_id"] = _productId;
-    }
-    if (_categoryId != null) {
-      map["category_id"] = _categoryId;
-    }
-    map["type"] = _type;
-    map["qty"] = _qty;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'product_id': productId,
+      'category_id': categoryId,
+      'type': type,
+      'qty': qty,
+    };
   }
 
+  factory Maintenance_product_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Maintenance_product_id(
+      productId: map['product_id'],
+      categoryId: map['category_id'],
+      type: map['type'],
+      qty: map['qty'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Maintenance_product_id.fromJson(String source) =>
+      Maintenance_product_id.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Maintenance_product_id(productId: $productId, categoryId: $categoryId,type: $type, qty: $qty)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Maintenance_product_id &&
+        o.productId == productId &&
+        o.categoryId == categoryId &&
+        o.type == type &&
+        o.qty == qty;
+  }
+
+  @override
+  int get hashCode =>
+      productId.hashCode ^ categoryId.hashCode ^ type.hashCode ^ qty.hashCode;
 }
+// class Maintenance_product_id {
+//   int _productId;
+//   int _categoryId;
+//   String _type;
+//   double _qty;
+
+//   int get productId => _productId;
+//   int get categoryId => _categoryId;
+//   String get type => _type;
+//   double get qty => _qty;
+
+//   Maintenance_product_id(
+//       {int productId, int categoryId, String type, double qty}) {
+//     _productId = productId;
+//     _categoryId = categoryId;
+//     _type = type;
+//     _qty = qty;
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     if (_productId != null) {
+//       map["product_id"] = _productId;
+//     }
+//     if (_categoryId != null) {
+//       map["category_id"] = _categoryId;
+//     }
+//     map["type"] = _type;
+//     map["qty"] = _qty;
+//     return map;
+//   }
+// }
+
 /// id : 15
 /// name : "Maintenance"
 
 class Category_id {
-  int _id;
-  String _name;
+  int id;
+  String name;
+  Category_id({this.id = 0, this.name = ''});
 
-  int get id => _id;
-  String get name => _name;
-
-  Category_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
-
-  Category_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Category_id copyWith({int? id, String? name}) {
+    return Category_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'name': name};
   }
 
+  factory Category_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Category_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Category_id.fromJson(String source) =>
+      Category_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Category_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Category_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Category_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Category_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Category_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// id : 73
 /// name : "ABS Sensor ဖြုတ်/တပ် (တစ်ခုစီ)"
 
 class Product_id {
-  int _id;
-  String _name;
+  int id;
+  String name;
+  Product_id({this.id = 0, this.name = ''});
 
-  int get id => _id;
-  String get name => _name;
-
-  Product_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
-
-  Product_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Product_id copyWith({int? id, String? name}) {
+    return Product_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'name': name};
   }
 
+  factory Product_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Product_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Product_id.fromJson(String source) =>
+      Product_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Product_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Product_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Product_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Product_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Product_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// product_id : {"id":73,"name":"ABS Sensor ဖြုတ်/တပ် (တစ်ခုစီ)"}
 /// location_id : {"id":102,"name":"Stock"}
@@ -487,49 +1264,115 @@ class Product_id {
 /// qty : 1000.0
 
 class Warehouse_ids {
-  Product_id _productId;
-  Location_id _locationId;
-  double _cost;
-  double _qty;
+  Product_id? productId;
+  Location_id? locationId;
+  double? cost;
+  double? qty;
 
-  Product_id get productId => _productId;
-  Location_id get locationId => _locationId;
-  double get cost => _cost;
-  double get qty => _qty;
+  Warehouse_ids({this.productId, this.locationId, this.cost, this.qty});
 
-  Warehouse_ids({
-      Product_id productId, 
-      Location_id locationId, 
-      double cost, 
-      double qty}){
-    _productId = productId;
-    _locationId = locationId;
-    _cost = cost;
-    _qty = qty;
-}
-
-  Warehouse_ids.fromJson(dynamic json) {
-    _productId = json["product_id"] != null ? Product_id.fromJson(json["product_id"]) : null;
-    _locationId = json["location_id"] != null ? Location_id.fromJson(json["location_id"]) : null;
-    _cost = json["cost"];
-    _qty = json["qty"];
+  Warehouse_ids copyWith({
+    Product_id? productId,
+    Location_id? locationId,
+    double? cost,
+    double? qty,
+  }) {
+    return Warehouse_ids(
+      productId: productId ?? this.productId,
+      locationId: locationId ?? this.locationId,
+      cost: cost ?? this.cost,
+      qty: qty ?? this.qty,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    if (_productId != null) {
-      map["product_id"] = _productId.toJson();
-    }
-    if (_locationId != null) {
-      map["location_id"] = _locationId.toJson();
-    }
-    map["cost"] = _cost;
-    map["qty"] = _qty;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'product_id': productId?.toMap(),
+      'location_id': locationId?.toMap(),
+      'cost': cost,
+      'qty': qty
+    };
   }
 
+  factory Warehouse_ids.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Warehouse_ids(
+      productId: map['product_id'],
+      locationId: map['location_id'],
+      cost: map['cost'],
+      qty: map['qty'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Warehouse_ids.fromJson(String source) =>
+      Warehouse_ids.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Warehouse_ids(productId: $productId, locationId: $locationId,cost: $cost, qty: $qty)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Warehouse_ids &&
+        o.productId == productId &&
+        o.locationId == locationId &&
+        o.cost == cost &&
+        o.qty == qty;
+  }
+
+  @override
+  int get hashCode =>
+      productId.hashCode ^ locationId.hashCode ^ cost.hashCode ^ qty.hashCode;
 }
 
+// class Warehouse_ids {
+//   Product_id _productId;
+//   Location_id _locationId;
+//   double _cost;
+//   double _qty;
+
+//   Product_id get productId => _productId;
+//   Location_id get locationId => _locationId;
+//   double get cost => _cost;
+//   double get qty => _qty;
+
+//   Warehouse_ids(
+//       {Product_id productId, Location_id locationId, double cost, double qty}) {
+//     _productId = productId;
+//     _locationId = locationId;
+//     _cost = cost;
+//     _qty = qty;
+//   }
+
+//   Warehouse_ids.fromJson(dynamic json) {
+//     _productId = json["product_id"] != null
+//         ? Product_id.fromJson(json["product_id"])
+//         : null;
+//     _locationId = json["location_id"] != null
+//         ? Location_id.fromJson(json["location_id"])
+//         : null;
+//     _cost = json["cost"];
+//     _qty = json["qty"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     if (_productId != null) {
+//       map["product_id"] = _productId.toJson();
+//     }
+//     if (_locationId != null) {
+//       map["location_id"] = _locationId.toJson();
+//     }
+//     map["cost"] = _cost;
+//     map["qty"] = _qty;
+//     return map;
+//   }
+// }
 
 /// name : "P00007"
 /// date_approve : null
@@ -542,294 +1385,768 @@ class Warehouse_ids {
 /// state : "draft"
 
 class Purchase_line {
-  String _name;
-  dynamic _dateApprove;
-  Partner_id _partnerId;
-  Company_id _companyId;
-  String _datePlanned;
-  User_id _userId;
-  String _origin;
-  double _amountTotal;
-  String _state;
+  String? name;
+  dynamic? dateApprove;
+  Partner_id? partnerId;
+  Company_id? companyId;
+  String? datePlanned;
+  User_id? userId;
+  String? origin;
+  double? amountTotal;
+  String? state;
 
-  String get name => _name;
-  dynamic get dateApprove => _dateApprove;
-  Partner_id get partnerId => _partnerId;
-  Company_id get companyId => _companyId;
-  String get datePlanned => _datePlanned;
-  User_id get userId => _userId;
-  String get origin => _origin;
-  double get amountTotal => _amountTotal;
-  String get state => _state;
+  Purchase_line(
+      {this.name,
+      this.dateApprove,
+      this.partnerId,
+      this.companyId,
+      this.datePlanned,
+      this.userId,
+      this.origin,
+      this.amountTotal,
+      this.state});
 
-  Purchase_line({
-      String name, 
-      dynamic dateApprove, 
-      Partner_id partnerId, 
-      Company_id companyId, 
-      String datePlanned, 
-      User_id userId, 
-      String origin, 
-      double amountTotal, 
-      String state}){
-    _name = name;
-    _dateApprove = dateApprove;
-    _partnerId = partnerId;
-    _companyId = companyId;
-    _datePlanned = datePlanned;
-    _userId = userId;
-    _origin = origin;
-    _amountTotal = amountTotal;
-    _state = state;
-}
-
-  Purchase_line.fromJson(dynamic json) {
-    _name = json["name"];
-    _dateApprove = json["date_approve"];
-    _partnerId = json["partner_id"] != null ? Partner_id.fromJson(json["partner_id"]) : null;
-    _companyId = json["company_id"] != null ? Company_id.fromJson(json["company_id"]) : null;
-    _datePlanned = json["date_planned"];
-    _userId = json["user_id"] != null ? User_id.fromJson(json["user_id"]) : null;
-    _origin = json["origin"];
-    _amountTotal = json["amount_total"];
-    _state = json["state"];
+  Purchase_line copyWith({
+    String? name,
+  dynamic? dateApprove,
+  Partner_id? partnerId,
+  Company_id? companyId,
+  String? datePlanned,
+  User_id? userId,
+  String? origin,
+  double? amountTotal,
+  String? state
+  }) {
+    return Purchase_line(
+      name: name ?? this.name,
+      dateApprove: dateApprove ?? this.dateApprove,
+      partnerId: partnerId ?? this.partnerId,
+      companyId: companyId ?? this.companyId,
+      datePlanned: datePlanned ?? this.datePlanned,
+      userId: userId ?? this.userId,
+      origin: origin ?? this.origin,
+      amountTotal: amountTotal ?? this.amountTotal,
+      state: state ?? this.state,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["name"] = _name;
-    map["date_approve"] = _dateApprove;
-    if (_partnerId != null) {
-      map["partner_id"] = _partnerId.toJson();
-    }
-    if (_companyId != null) {
-      map["company_id"] = _companyId.toJson();
-    }
-    map["date_planned"] = _datePlanned;
-    if (_userId != null) {
-      map["user_id"] = _userId.toJson();
-    }
-    map["origin"] = _origin;
-    map["amount_total"] = _amountTotal;
-    map["state"] = _state;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'date_approve': dateApprove,
+      'partner_id': partnerId?.toMap(),
+      'company_id': companyId?.toMap(),
+      'date_planned': datePlanned,
+      'user_id': userId?.toMap(),
+      'origin': origin,
+      'amount_total': amountTotal,
+      'state': state
+    };
   }
 
+  factory Purchase_line.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Purchase_line(
+      name: map['name'],
+      dateApprove: map['date_approve'],
+      partnerId: map['partner_id'],
+      companyId: map['company_id'],
+      datePlanned: map['date_planned'],
+      userId: map['user_id'],
+      origin: map['origin'],
+      amountTotal: map['amount_total'],
+      state: map['state'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Purchase_line.fromJson(String source) =>
+      Purchase_line.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'Purchase_line(name: $name, dateApprove: $dateApprove,partnerId: $partnerId, companyId: $companyId,datePlanned: $datePlanned, userId: $userId,origin: $origin, amountTotal: $amountTotal, state: $state)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Purchase_line &&
+        o.name == name &&
+        o.dateApprove == dateApprove &&
+        o.partnerId == partnerId &&
+        o.companyId == companyId &&
+        o.datePlanned == datePlanned &&
+        o.dateApprove == dateApprove &&
+        o.userId == userId &&
+        o.origin == origin &&
+        o.amountTotal == amountTotal &&
+        o.state == state;
+  }
+
+  @override
+  int get hashCode =>
+      name.hashCode ^ dateApprove.hashCode ^ partnerId.hashCode ^ companyId.hashCode ^ partnerId.hashCode ^ companyId.hashCode ^ datePlanned.hashCode ^ dateApprove.hashCode
+       ^ userId.hashCode ^ origin.hashCode ^ amountTotal.hashCode ^ state.hashCode;
 }
+
+// class Purchase_line {
+//   String _name;
+//   dynamic _dateApprove;
+//   Partner_id _partnerId;
+//   Company_id _companyId;
+//   String _datePlanned;
+//   User_id _userId;
+//   String _origin;
+//   double _amountTotal;
+//   String _state;
+
+//   String get name => _name;
+//   dynamic get dateApprove => _dateApprove;
+//   Partner_id get partnerId => _partnerId;
+//   Company_id get companyId => _companyId;
+//   String get datePlanned => _datePlanned;
+//   User_id get userId => _userId;
+//   String get origin => _origin;
+//   double get amountTotal => _amountTotal;
+//   String get state => _state;
+
+//   Purchase_line(
+//       {String name,
+//       dynamic dateApprove,
+//       Partner_id partnerId,
+//       Company_id companyId,
+//       String datePlanned,
+//       User_id userId,
+//       String origin,
+//       double amountTotal,
+//       String state}) {
+//     _name = name;
+//     _dateApprove = dateApprove;
+//     _partnerId = partnerId;
+//     _companyId = companyId;
+//     _datePlanned = datePlanned;
+//     _userId = userId;
+//     _origin = origin;
+//     _amountTotal = amountTotal;
+//     _state = state;
+//   }
+
+//   Purchase_line.fromJson(dynamic json) {
+//     _name = json["name"];
+//     _dateApprove = json["date_approve"];
+//     _partnerId = json["partner_id"] != null
+//         ? Partner_id.fromJson(json["partner_id"])
+//         : null;
+//     _companyId = json["company_id"] != null
+//         ? Company_id.fromJson(json["company_id"])
+//         : null;
+//     _datePlanned = json["date_planned"];
+//     _userId =
+//         json["user_id"] != null ? User_id.fromJson(json["user_id"]) : null;
+//     _origin = json["origin"];
+//     _amountTotal = json["amount_total"];
+//     _state = json["state"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["name"] = _name;
+//     map["date_approve"] = _dateApprove;
+//     if (_partnerId != null) {
+//       map["partner_id"] = _partnerId.toJson();
+//     }
+//     if (_companyId != null) {
+//       map["company_id"] = _companyId.toJson();
+//     }
+//     map["date_planned"] = _datePlanned;
+//     if (_userId != null) {
+//       map["user_id"] = _userId.toJson();
+//     }
+//     map["origin"] = _origin;
+//     map["amount_total"] = _amountTotal;
+//     map["state"] = _state;
+//     return map;
+//   }
+// }
 
 /// id : 2
 /// name : "Htun Win"
 
 class User_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   User_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = ''
+  });
 
-  User_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  User_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return User_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
+  factory User_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return User_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory User_id.fromJson(String source) =>
+      User_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'User_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is User_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class User_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   User_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   User_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// id : 1
 /// name : "WIN BROTHERS GROUP OF COMPANIES LIMITED"
 
 class Company_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   Company_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = ''
+  });
 
-  Company_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Company_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return Company_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
+  factory Company_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Company_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Company_id.fromJson(String source) =>
+      Company_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Company_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Company_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Company_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Company_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Company_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// id : 955
 /// name : "Kyaw Zay Ya"
 
 class Partner_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   Partner_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = ''
+  });
 
-  Partner_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Partner_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return Partner_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
-}
+  factory Partner_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
 
+    return Partner_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Partner_id.fromJson(String source) =>
+      Partner_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Partner_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Partner_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
+}
+// class Partner_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Partner_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Partner_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// id : 2
 /// name : "Outsource Team"
 
 class Maintenance_team_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   Maintenance_team_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = ''
+  });
 
-  Maintenance_team_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Maintenance_team_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return Maintenance_team_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
+  factory Maintenance_team_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Maintenance_team_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Maintenance_team_id.fromJson(String source) =>
+      Maintenance_team_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Maintenance_team_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Maintenance_team_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Maintenance_team_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Maintenance_team_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Maintenance_team_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
+
 class Spare_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   Spare_id({
-    int id,
-    String name}){
-    _id = id;
-    _name = name;
+    this.id = 0,
+    this.name = ''
+  });
+
+  Spare_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return Spare_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Spare_id.fromJson(dynamic json) {
-    _id = json["id"]==null?0:json["id"];
-    _name = json["name"]==null?'':json["name"];
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  factory Spare_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Spare_id(
+      id: map['id'],
+      name: map['name'],
+    );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory Spare_id.fromJson(String source) =>
+      Spare_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Spare_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Spare_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Spare_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Spare_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Spare_id.fromJson(dynamic json) {
+//     _id = json["id"] == null ? 0 : json["id"];
+//     _name = json["name"] == null ? '' : json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
+
 /// id : 1046
 /// name : " Aung Thant Zin"
 
 class Driver_id {
-  int _id;
-  String _name;
 
-  int get id => _id;
-  String get name => _name;
-
+  int id;
+  String name;
   Driver_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = ''
+  });
 
-  Driver_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
+  Driver_id copyWith({
+    int? id,
+    String? name
+  }) {
+    return Driver_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name
+    };
   }
 
+  factory Driver_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Driver_id(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Driver_id.fromJson(String source) =>
+      Driver_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Driver_id(id: $id, name: $name)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Driver_id && o.id == id && o.name == name;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }
+
+// class Driver_id {
+//   int _id;
+//   String _name;
+
+//   int get id => _id;
+//   String get name => _name;
+
+//   Driver_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Driver_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
 
 /// id : 7
 /// name : "Mitsubishi /Canter/3H/2417"
 
 class Vehicle_id {
-  int _id;
-  String _name;
-  int _incharge_id;
 
-  int get id => _id;
-  String get name => _name;
-  int get incharge_id => _incharge_id;
-
+  int id;
+  String name;
+  int incharge_id;
   Vehicle_id({
-      int id, 
-      String name}){
-    _id = id;
-    _name = name;
-}
+    this.id = 0,
+    this.name = '',
+    this.incharge_id = 0
+  });
 
-  Vehicle_id.fromJson(dynamic json) {
-    _id = json["id"];
-    _name = json["name"];
-    _incharge_id = json["incharge_id"];
-
+  Vehicle_id copyWith({
+    int? id,
+  String? name,
+  int? incharge_id,
+  }) {
+    return Vehicle_id(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      incharge_id: incharge_id ?? this.incharge_id
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    var map = <String, dynamic>{};
-    map["id"] = _id;
-    map["name"] = _name;
-    return map;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'incharge_id': incharge_id
+    };
   }
 
+  factory Vehicle_id.fromMap(Map<String, dynamic> map) {
+    // if (map == null) return null;
+
+    return Vehicle_id(
+      id: map['id'],
+      name: map['name'],
+      incharge_id: map['incharge_id'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Vehicle_id.fromJson(String source) =>
+      Vehicle_id.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Vehicle_id(id: $id, name: $name, incharge_id: $incharge_id)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Vehicle_id && o.id == id && o.name == name && o.incharge_id == incharge_id;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode ^ incharge_id;
 }
+
+// class Vehicle_id {
+//   int _id;
+//   String _name;
+//   int _incharge_id;
+
+//   int get id => _id;
+//   String get name => _name;
+//   int get incharge_id => _incharge_id;
+
+//   Vehicle_id({int id, String name}) {
+//     _id = id;
+//     _name = name;
+//   }
+
+//   Vehicle_id.fromJson(dynamic json) {
+//     _id = json["id"];
+//     _name = json["name"];
+//     _incharge_id = json["incharge_id"];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     var map = <String, dynamic>{};
+//     map["id"] = _id;
+//     map["name"] = _name;
+//     return map;
+//   }
+// }
