@@ -50,7 +50,7 @@ class LoanDetailsPage extends StatelessWidget {
               children: [
                 Container(
                   child: Text(
-                    controller.loanList[dindex].name,
+                    controller.loanList[dindex].name!,
                     style: subtitleStyle(),
                   ),
                 ),
@@ -69,7 +69,7 @@ class LoanDetailsPage extends StatelessWidget {
                       Obx(
                             () => Container(
                           child: Text(
-                            controller.loanList[dindex].state,
+                            controller.loanList[dindex].state!,
                             style: subtitleStyle(),
                           ),
                         ),
@@ -92,7 +92,7 @@ class LoanDetailsPage extends StatelessWidget {
                       Obx(
                         () => Container(
                           child: Text(
-                            controller.loanList[dindex].employee_id.name,
+                            controller.loanList[dindex].employee_id!.name,
                             style: subtitleStyle(),
                           ),
                         ),
@@ -114,10 +114,10 @@ class LoanDetailsPage extends StatelessWidget {
                       ),
                       Obx(
                         () => Container(
-                          child: controller.loanList[dindex].job_position.name !=
+                          child: controller.loanList[dindex].job_position!.name !=
                                   null
                               ? Text(
-                                  controller.loanList[dindex].job_position.name,
+                                  controller.loanList[dindex].job_position!.name,
                                   style: subtitleStyle(),
                                 )
                               : Text('-'),
@@ -163,13 +163,13 @@ class LoanDetailsPage extends StatelessWidget {
                       children: [
                         Container(
                           child: Text(
-                            AppUtils.changeDateFormat(controller.loanList[dindex].date),
+                            AppUtils.changeDateFormat(controller.loanList[dindex].date!),
                             style: subtitleStyle(),
                           ),
                         ),
                         Container(
                           child: Text(
-                            AppUtils.changeDateFormat(controller.loanList[dindex].payment_date),
+                            AppUtils.changeDateFormat(controller.loanList[dindex].payment_date!),
                             style: subtitleStyle(),
                           ),
                         ),
@@ -254,7 +254,7 @@ class LoanDetailsPage extends StatelessWidget {
                 controller.loanList.value[dindex].attachment!=null ?
                 InkWell(
                   onTap: () async{
-                    controller.loanList.value[dindex].attachment_filename.contains('pdf')?
+                    controller.loanList.value[dindex].attachment_filename!.contains('pdf')?
                     _createFileFromString(controller.loanList.value[dindex].attachment.toString()).then((path) async{
                       await OpenFile.open(path);
                     //  Get.to(PdfView(path,'Name.pdf'));
@@ -263,7 +263,7 @@ class LoanDetailsPage extends StatelessWidget {
                         context: context,
                         builder: (_) {
                           return ImageDialog(
-                            bytes: base64Decode(controller.loanList.value[dindex].attachment),
+                            bytes: base64Decode(controller.loanList.value[dindex].attachment!),
                           );
                         }
                     );
@@ -278,7 +278,7 @@ class LoanDetailsPage extends StatelessWidget {
                             Icon(Icons.attach_file),
                             Expanded(
                               child: AutoSizeText(
-                                controller.loanList.value[dindex].attachment_filename!=null?controller.loanList.value[dindex].attachment_filename:'',
+                                controller.loanList.value[dindex].attachment_filename!=null?controller.loanList.value[dindex].attachment_filename!:'',
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     color: Colors.blueAccent,
@@ -360,7 +360,7 @@ class LoanDetailsPage extends StatelessWidget {
           child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: controller.loanList[dindex].loan_lines.length,
+            itemCount: controller.loanList[dindex].loan_lines!.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
@@ -370,16 +370,16 @@ class LoanDetailsPage extends StatelessWidget {
                       children: [
                         Container(
                           child: Text(
-                              AppUtils.changeDateFormat(controller.loanList[dindex].loan_lines[index].date)
+                              AppUtils.changeDateFormat(controller.loanList[dindex].loan_lines![index].date)
                             ),
                         ),
                         Container(
                           child: Text(controller
-                              .loanList[dindex].loan_lines[index].state),
+                              .loanList[dindex].loan_lines![index].state),
                         ),
                         Container(
                           child: Text(NumberFormat('#,###').format(double.tryParse(controller
-                  .loanList[dindex].loan_lines[index].amount
+                  .loanList[dindex].loan_lines![index].amount
                   .toString()))
                           ),
                         ),

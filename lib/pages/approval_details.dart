@@ -154,12 +154,12 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
       // child:O bx(() => ListView.builder(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: controller.leaveApprovalList[index].leave_line.length,
+        itemCount: controller.leaveApprovalList[index].leave_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           var start_date =
-              controller.leaveApprovalList[index].leave_line[ind].start_date;
+              controller.leaveApprovalList[index].leave_line![ind].start_date;
           var startDate = AppUtils.changeDateFormat(start_date.split(' ')[0]);
-          var end_date = controller.leaveApprovalList[index].leave_line[ind].end_date;
+          var end_date = controller.leaveApprovalList[index].leave_line![ind].end_date;
           var endDate = AppUtils.changeDateFormat(end_date.split(' ')[0]);
           return Column(
             children: [
@@ -191,13 +191,13 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
                           padding: EdgeInsets.only(left: 20, right: 10),
                           // color: Colors.green,
                           child: controller
-                                  .leaveApprovalList[index].leave_line[ind].full
+                                  .leaveApprovalList[index].leave_line![ind].full
                               ? Text('Full')
                               : controller.leaveApprovalList[index]
-                                      .leave_line[ind].first
+                                      .leave_line![ind].first
                                   ? Text('First Half')
                                   : controller.leaveApprovalList[index]
-                                          .leave_line[ind].second
+                                          .leave_line![ind].second
                                       ? Text('Second Half')
                                       : Text('None')),
                     ),
@@ -249,11 +249,11 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
               ),
               Container(
                 child: controller.leaveApprovalList.value[index]
-                            .holiday_status_id.name !=
+                            .holiday_status_id!.name !=
                         null
                     ? Text(
                         controller.leaveApprovalList.value[index]
-                            .holiday_status_id.name,
+                            .holiday_status_id!.name,
                         style: subtitleStyle())
                     : Text('-'),
               ),

@@ -131,37 +131,37 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
           ],
           rows: [
             for (var i = 0;
-                i < controller.leaveApprovedList[index].leave_line.length;
+                i < controller.leaveApprovedList[index].leave_line!.length;
                 i++)
               DataRow(cells: [
                 DataCell(Text(controller
-                    .leaveApprovedList[index].leave_line[i].dayofweek
+                    .leaveApprovedList[index].leave_line![i].dayofweek
                     .toString(),style: maintitleStyle(),)),
-                DataCell(controller.leaveApprovedList[index].leave_line[i].date
+                DataCell(controller.leaveApprovedList[index].leave_line![i].date
                             .toString() ==
                         "null"
                     ? Text("-")
                     : Text(
                         AppUtils.changeDateFormat(controller
-                            .leaveApprovedList[index].leave_line[i].date
+                            .leaveApprovedList[index].leave_line![i].date
                             .toString()),
                         style: maintitleStyle(),
                 )),
                 DataCell(
-                  controller.leaveApprovedList[index].leave_line[i].end_date
+                  controller.leaveApprovedList[index].leave_line![i].end_date
                               .toString() !=
                           null
                       ? Text(AppUtils.changeDateFormat(controller
-                          .leaveApprovedList[index].leave_line[i].end_date
+                          .leaveApprovedList[index].leave_line![i].end_date
                           .toString()),style: maintitleStyle(),)
                       : SizedBox(),
                 ),
-                DataCell(controller.leaveApprovedList[index].leave_line[i].full
+                DataCell(controller.leaveApprovedList[index].leave_line![i].full
                     ? Text('Full',style: maintitleStyle(),)
-                    : controller.leaveApprovedList[index].leave_line[i].first
+                    : controller.leaveApprovedList[index].leave_line![i].first
                         ? Text('First Half')
                         : controller
-                                .leaveApprovedList[index].leave_line[i].second
+                                .leaveApprovedList[index].leave_line![i].second
                             ? Text('Second Half')
                             : Text('None')),
               ])
@@ -211,10 +211,10 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
       // child:O bx(() => ListView.builder(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: controller.leaveApprovedList[index].leave_line.length,
+        itemCount: controller.leaveApprovedList[index].leave_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           var start_date =
-              controller.leaveApprovedList[index].leave_line[ind].start_date;
+              controller.leaveApprovedList[index].leave_line![ind].start_date;
           var startDate = AppUtils.changeDateFormat(start_date.split(' ')[0]);
           var end_date = controller.leaveApprovedList[index].end_date;
           var endDate = AppUtils.changeDateFormat(end_date.split(' ')[0]);
@@ -257,13 +257,13 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
                           padding: EdgeInsets.only(left: 20, right: 10),
                           // color: Colors.green,
                           child: controller
-                                  .leaveApprovedList[index].leave_line[ind].full
+                                  .leaveApprovedList[index].leave_line![ind].full
                               ? Text('Full')
                               : controller.leaveApprovedList[index]
-                                      .leave_line[ind].first
+                                      .leave_line![ind].first
                                   ? Text('First Half')
                                   : controller.leaveApprovedList[index]
-                                          .leave_line[ind].second
+                                          .leave_line![ind].second
                                       ? Text('Second Half')
                                       : Text('None')),
                     ),
@@ -314,11 +314,11 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
               ),
               Container(
                 child: controller.leaveApprovedList.value[index]
-                            .holiday_status_id.name !=
+                            .holiday_status_id!.name !=
                         null
                     ? Text(
                         controller.leaveApprovedList.value[index]
-                            .holiday_status_id.name,
+                            .holiday_status_id!.name,
                         style: subtitleStyle())
                     : Text('-'),
               ),

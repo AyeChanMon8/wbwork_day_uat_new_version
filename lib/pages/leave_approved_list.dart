@@ -92,13 +92,13 @@ class _LeaveApprovedListState extends State<LeaveApprovedList> {
                                   .toString())),
                           SizedBox(height: 5),
                           Text(controller.leaveApprovedList.value[index]
-                              .holiday_status_id.name),
+                              .holiday_status_id!.name),
                         ],
                       ),
                       subtitle: Container(
                         margin: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(controller
-                            .leaveApprovedList.value[index].employee_id.name),
+                            .leaveApprovedList.value[index].employee_id!.name),
                       ),
                       trailing: arrowforwardIcon),
                 ),

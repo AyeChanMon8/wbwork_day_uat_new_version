@@ -203,7 +203,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
               width: 200,
               height: 200,
               child: Image.memory(Base64Decoder()
-                  .convert(controllerList.leaveList.value[index].attachment)));
+                  .convert(controllerList.leaveList.value[index].attachment!)));
     }
   }
 
@@ -432,7 +432,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
           controllerList.leaveList.value[index].duration.toString();
       controller.descriptionController.text =
           controllerList.leaveList.value[index].description.toString();
-      idData = controllerList.leaveList.value[index].holiday_status_id.name
+      idData = controllerList.leaveList.value[index].holiday_status_id!.name
           .toString();
       //
       /*Future.delayed(Duration(seconds: 3), () {
@@ -442,13 +442,13 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
       });*/
       controller.is_add_leavelist.value = true;
       controller.leavelLineList.value =
-          controllerList.leaveList.value[index].leave_line;
+          controllerList.leaveList.value[index].leave_line!;
 
       selectedFromDate = DateTime.parse(
           controllerList.leaveList.value[index].start_date.toString());
       selectedToDate = DateTime.parse(
           controllerList.leaveList.value[index].end_date.toString());
-      if (controllerList.leaveList.value[index].attachment.isNotEmpty)
+      if (controllerList.leaveList.value[index].attachment!.isNotEmpty)
         controller.isShowImage.value = true;
     }
     user_image = box.read('emp_image');

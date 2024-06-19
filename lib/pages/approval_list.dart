@@ -77,13 +77,13 @@ class _ApprovalListState extends State<ApprovalList> {
                               height: 5,
                             ),
                             Text(controller.leaveApprovalList.value[index]
-                                .holiday_status_id.name),
+                                .holiday_status_id!.name),
                           ],
                         ),
                         subtitle: Container(
                           margin: EdgeInsets.only(top: 5, bottom: 5),
                           child: Text(controller
-                              .leaveApprovalList.value[index].employee_id.name),
+                              .leaveApprovalList.value[index].employee_id!.name),
                         ),
                         trailing: arrowforwardIcon),
                   ),

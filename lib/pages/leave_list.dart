@@ -76,7 +76,7 @@ class _LeaveListPage extends State<LeaveListPage>{
                                 EdgeInsets.only(left: 20, bottom: 10, top: 20),
                                 child: Text(
                                   controller.leaveList.value[index]
-                                      .holiday_status_id.name.toUpperCase(),
+                                      .holiday_status_id!.name.toUpperCase(),
                                   style: subtitleStyle(),
                                 ),
                               ),

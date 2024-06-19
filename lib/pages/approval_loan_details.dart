@@ -55,7 +55,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
               children: [
                 Container(
                   child: Text(
-                    controller.loanApprovalList.value[index].name,
+                    controller.loanApprovalList.value[index].name!,
                     style: subtitleStyle(),
                   ),
                 ),
@@ -74,7 +74,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                       Obx(
                             () => controller.loanApprovalList.length > 0 ?Container(
                           child: Text(
-                            controller.loanApprovalList[index].state,
+                            controller.loanApprovalList[index].state!,
                             style: subtitleStyle(),
                           ),
                         ):SizedBox(),
@@ -97,7 +97,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                       Obx(
                             () => controller.loanApprovalList.value.length > 0 ?Container(
                           child: Text(
-                            controller.loanApprovalList.value[index].employee_id.name,
+                            controller.loanApprovalList.value[index].employee_id!.name,
                             style: subtitleStyle(),
                           ),
                         ):SizedBox(),
@@ -119,10 +119,10 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                       ),
                       Obx(
                             () => controller.loanApprovalList.value.length > 0 ?Container(
-                          child: controller.loanApprovalList.value[index].job_position.name !=
+                          child: controller.loanApprovalList.value[index].job_position!.name !=
                               null
                               ? Text(
-                            controller.loanApprovalList.value[index].job_position.name,
+                            controller.loanApprovalList.value[index].job_position!.name,
                             style: subtitleStyle(),
                           )
                               : Text('-'),
@@ -168,13 +168,13 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                       children: [
                         Container(
                           child: Text(
-                            AppUtils.changeDateFormat(controller.loanApprovalList.value[index].date),
+                            AppUtils.changeDateFormat(controller.loanApprovalList.value[index].date!),
                             style: subtitleStyle(),
                           ),
                         ),
                         Container(
                           child: Text(
-                            AppUtils.changeDateFormat(controller.loanApprovalList.value[index].payment_date),
+                            AppUtils.changeDateFormat(controller.loanApprovalList.value[index].payment_date!),
                             style: subtitleStyle(),
                           ),
                         ),
@@ -221,7 +221,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                           flex:1,
                           child: Container(
                             child: Text(
-                              AppUtils.removeNullString(controller.loanApprovalList.value[index].company_id.name),
+                              AppUtils.removeNullString(controller.loanApprovalList.value[index].company_id!.name),
                               style: subtitleStyle(),
                             ),
                           ),
@@ -232,7 +232,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                             child: Padding(
                               padding: const EdgeInsets.only(left:28.0),
                               child: Text(
-                                AppUtils.removeNullString(controller.loanApprovalList.value[index].branch_id.name),
+                                AppUtils.removeNullString(controller.loanApprovalList.value[index].branch_id!.name),
                                 style: subtitleStyle(),
                               ),
                             ),
@@ -319,7 +319,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                 controller.loanApprovalList.value[index].attachment!=null ?
                 InkWell(
                   onTap: () async{
-                    controller.loanApprovalList.value[index].attachment_filename.contains('pdf')?
+                    controller.loanApprovalList.value[index].attachment_filename!.contains('pdf')?
                     _createFileFromString(controller.loanApprovalList.value[index].attachment.toString()).then((path) async{
                       await OpenFile.open(path);
                       //  Get.to(PdfView(path,'Name.pdf'));
@@ -328,7 +328,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                         context: context,
                         builder: (_) {
                           return ImageDialog(
-                            bytes: base64Decode(controller.loanApprovalList.value[index].attachment),
+                            bytes: base64Decode(controller.loanApprovalList.value[index].attachment!),
                           );
                         }
                     );
@@ -344,7 +344,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                             Icon(Icons.attach_file),
                             Expanded(
                               child: AutoSizeText(
-                                controller.loanApprovalList.value[index].attachment_filename!=null?controller.loanApprovalList.value[index].attachment_filename:'',
+                                controller.loanApprovalList.value[index].attachment_filename!=null?controller.loanApprovalList.value[index].attachment_filename!:'',
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     color: Colors.blueAccent,
@@ -430,7 +430,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: controller.loanApprovalList.value[index].loan_lines.length,
+        itemCount: controller.loanApprovalList.value[index].loan_lines!.length,
         itemBuilder: (BuildContext context, int pos) {
           return Column(
             children: [
@@ -440,14 +440,14 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                   children: [
                     Container(
                       child: Text(
-                          AppUtils.changeDateFormat(controller.loanApprovalList.value[index].loan_lines[pos].date)
+                          AppUtils.changeDateFormat(controller.loanApprovalList.value[index].loan_lines![pos].date)
                       ),
                     ),
                     Container(
-                      child: Text(controller.loanApprovalList.value[index].loan_lines[pos].state),
+                      child: Text(controller.loanApprovalList.value[index].loan_lines![pos].state),
                     ),
                     Container(
-                      child: Text(NumberFormat('#,###').format(double.tryParse(controller.loanApprovalList.value[index].loan_lines[pos].amount
+                      child: Text(NumberFormat('#,###').format(double.tryParse(controller.loanApprovalList.value[index].loan_lines![pos].amount
                           .toString()))
                       ),
                     ),
@@ -489,7 +489,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
             child: GFButton(
               onPressed: () {
                 controller
-                    .approveLoan(controller.loanApprovalList.value[index].id);
+                    .approveLoan(controller.loanApprovalList.value[index].id!);
                 print("Loan approved");
               },
               text: labels?.approve,
@@ -505,7 +505,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
             child: GFButton(
               onPressed: () {
                 controller.declinedLoan(
-                    controller.loanApprovalList.value[index].id);
+                    controller.loanApprovalList.value[index].id!);
               },
               type: GFButtonType.outline,
               text: labels?.decline,

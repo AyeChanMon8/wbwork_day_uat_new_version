@@ -228,7 +228,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
       return leavelistreponse.attachment == null ? Container() : Container(
           width: 200,
           height: 200,
-          child: Image.memory(Base64Decoder().convert(leavelistreponse.attachment)));
+          child: Image.memory(Base64Decoder().convert(leavelistreponse.attachment!)));
     }
   }
 
@@ -486,7 +486,7 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
       controller.descriptionController.text =
           leavelistreponse.description.toString();
       idData =
-          leavelistreponse.holiday_status_id.name.toString();
+          leavelistreponse.holiday_status_id!.name.toString();
       //
       /*Future.delayed(Duration(seconds: 3), () {
         controller.fetchLeaveLine(starttimeDate, endtimeDate);
@@ -495,16 +495,16 @@ class _LeaveRequestUpdateState extends State<LeaveRequestUpdate> {
       });*/
       controller.is_add_leavelist.value = true;
       // controllerList.leaveList.value[index].leave_line;
-      controller.leavelLineList.value = leavelistreponse.leave_line;
+      controller.leavelLineList.value = leavelistreponse.leave_line!;
 
       selectedFromDate = DateTime.parse(
           leavelistreponse.start_date.toString());
       selectedToDate = DateTime.parse(leavelistreponse.end_date.toString());
-      if(leavelistreponse.attachment.isNotEmpty)
+      if(leavelistreponse.attachment!.isNotEmpty)
         controller.isShowImage.value = true;
       print('image : ${leavelistreponse}');
-      controller.image_base64 = leavelistreponse.attachment;
-      controller.selectedLeaveType = LeaveType(id: leavelistreponse.holiday_status_id.id,name: leavelistreponse.holiday_status_id.name,show_in_mobile_app: false);
+      controller.image_base64 = leavelistreponse.attachment!;
+      controller.selectedLeaveType = LeaveType(id: leavelistreponse.holiday_status_id!.id,name: leavelistreponse.holiday_status_id!.name,show_in_mobile_app: false);
 
 
     }

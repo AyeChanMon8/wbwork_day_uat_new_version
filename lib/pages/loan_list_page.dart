@@ -82,7 +82,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 20, right: 20),
                                 child: Text(
-                                  controller.loanList[dindex].name,
+                                  controller.loanList[dindex].name!,
                                   style: maintitleStyle(),
                                 ),
                               ),
@@ -90,7 +90,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 10, top: 20, right: 20),
                                 child: Text(
-                                  controller.loanList[dindex].employee_id.name,
+                                  controller.loanList[dindex].employee_id!.name,
                                   style: maintitleStyle(),
                                 ),
                               ),
@@ -188,7 +188,7 @@ class _LoanListPageState extends State<LoanListPage> {
                                     left: 20, bottom: 20, top: 5, right: 20),
                                 child: Text(
                                   AppUtils.changeDateFormat(
-                                      controller.loanList[dindex].date),
+                                      controller.loanList[dindex].date!),
                                   style: subtitleStyle(),
                                 ),
                               ),

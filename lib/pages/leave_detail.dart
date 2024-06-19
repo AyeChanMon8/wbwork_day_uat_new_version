@@ -138,12 +138,12 @@ class LeaveDetails extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.leaveList[index].leave_line.length,
+        itemCount: controller.leaveList[index].leave_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           var start_date =
-              controller.leaveList[index].leave_line[ind].date;
+              controller.leaveList[index].leave_line![ind].date;
           var startDate = start_date.split(' ')[0];
-          var end_date = controller.leaveList[index].leave_line[ind].end_date;
+          var end_date = controller.leaveList[index].leave_line![ind].end_date;
           var endDate = end_date.split(' ')[0];
           return Column(
             children: [
@@ -179,9 +179,9 @@ class LeaveDetails extends StatelessWidget {
                           padding: EdgeInsets.only(left: 20, right: 10),
                           // color: Colors.green,
                           child:
-                              controller.leaveList[index].leave_line[ind].full
+                              controller.leaveList[index].leave_line![ind].full
                                   ? Text('Full')
-                                  : controller.leaveList[index].leave_line[ind]
+                                  : controller.leaveList[index].leave_line![ind]
                                           .first
                                       ? Text('First Half')
                                       : Text('Second Half')),
@@ -232,11 +232,11 @@ class LeaveDetails extends StatelessWidget {
               ),
               Container(
                 child:
-                    controller.leaveList.value[index].holiday_status_id.name !=
+                    controller.leaveList.value[index].holiday_status_id!.name !=
                             null
                         ? Text(
                             controller
-                                .leaveList.value[index].holiday_status_id.name,
+                                .leaveList.value[index].holiday_status_id!.name,
                             style: subtitleStyle())
                         : Text('-'),
               ),

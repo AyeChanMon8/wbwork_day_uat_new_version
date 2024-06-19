@@ -132,7 +132,7 @@ class LeaveTripReport extends StatelessWidget{
           child: ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: controller.leave_report_list.value[index].balance_list.length,
+            itemCount: controller.leave_report_list.value[index].balance_list!.length,
             itemBuilder: (BuildContext context, int position) {
               return Container(
                 padding: EdgeInsets.only(top:10.0),
@@ -141,7 +141,7 @@ class LeaveTripReport extends StatelessWidget{
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Text(controller.leave_report_list.value[index].balance_list[position].name.toString(),style: textfieldStyle(),),),
+                        child: Text(controller.leave_report_list.value[index].balance_list![position].name.toString(),style: textfieldStyle(),),),
                       SizedBox(
                         width: 20,
                       ),
@@ -149,7 +149,7 @@ class LeaveTripReport extends StatelessWidget{
                         flex: 1,
                         child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text('${controller.leave_report_list.value[index].balance_list[position].entitle.toStringAsFixed(1)}')),),
+                            child: Text('${controller.leave_report_list.value[index].balance_list![position].entitle.toStringAsFixed(1)}')),),
                       SizedBox(
                         width: 20,
                       ),
@@ -157,7 +157,7 @@ class LeaveTripReport extends StatelessWidget{
                         flex: 1,
                         child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text(controller.leave_report_list.value[index].balance_list[position].taken.toString())),),
+                            child: Text(controller.leave_report_list.value[index].balance_list![position].taken.toString())),),
                       SizedBox(
                         width: 20,
                       ),
@@ -165,7 +165,7 @@ class LeaveTripReport extends StatelessWidget{
                           flex: 1,
                           child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text(controller.leave_report_list.value[index].balance_list[position].balance.toStringAsFixed(1)))),
+                              child: Text(controller.leave_report_list.value[index].balance_list![position].balance.toStringAsFixed(1)))),
 
                     ]),
               );

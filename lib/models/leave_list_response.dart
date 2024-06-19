@@ -17,7 +17,7 @@ class LeaveListResponse {
   String end_date;
   double duration;
   String description;
-  String attachment;
+  String? attachment;
   String file_name;
   String state;
   List<LeaveLine>? leave_line;
