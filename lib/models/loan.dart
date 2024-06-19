@@ -1,32 +1,32 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/company.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/job.dart';
-import 'package:winbrother_hr_app/models/loan_line.dart';
+import '../models/company.dart';
+import '../models/department.dart';
+import '../models/employee_id.dart';
+import '../models/job.dart';
+import '../models/loan_line.dart';
 
 class Loan {
-  int id;
-  String name;
-  EmployeeID employee_id;
-  Department department_id;
-  Job job_position;
-  String date;
-  String payment_date;
-  double loan_amount;
-  int installment;
-  String type;
-  Company company_id;
-  List<LoanLine> loan_lines;
-  String state;
-  String attachment;
-  String attachment_filename;
-  Company branch_id;
+  int? id;
+  String? name;
+  EmployeeID? employee_id;
+  Department? department_id;
+  Job? job_position;
+  String? date;
+  String? payment_date;
+  double? loan_amount;
+  int? installment;
+  String? type;
+  Company? company_id;
+  List<LoanLine>? loan_lines;
+  String? state;
+  String? attachment;
+  String? attachment_filename;
+  Company? branch_id;
 
   Loan({
     this.id,
@@ -48,21 +48,21 @@ class Loan {
   
 
   Loan copyWith({
-    int id,
-    String name,
-    EmployeeID employee_id,
-    Department department_id,
-    Job job_position,
-    String date,
-    String payment_date,
-    double loan_amount,
-    int installment,
-    String type,
-    Company company_id,
-    List<LoanLine> loan_lines,
-    String state,
-    String attch,
-    String attch_name,
+    int? id,
+    String? name,
+    EmployeeID? employee_id,
+    Department? department_id,
+    Job? job_position,
+    String? date,
+    String? payment_date,
+    double? loan_amount,
+    int? installment,
+    String? type,
+    Company? company_id,
+    List<LoanLine>? loan_lines,
+    String? state,
+    String? attch,
+    String? attch_name,
 
   }) {
     return Loan(
@@ -103,7 +103,7 @@ class Loan {
   }
 
   factory Loan.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return Loan(
       id: map['id'],

@@ -1,23 +1,3 @@
-// @dart=2.9
-
-/// id : 15
-/// name : "Maintenance"
-/// display_name : "Maintenance"
-/// parent_id : {"id":null,"name":null}
-/// delivery : null
-/// fuel : null
-/// day_trip : null
-/// plan_trip : null
-/// out_of_pocket_expense : null
-/// travel_expense : null
-/// trip_expense : null
-/// vehicle_cost : null
-/// maintenance : true
-/// hr : null
-/// admin : null
-/// purchase : null
-/// property_cost_method : "standard"
-/// property_valuation : "manual_periodic"
 
 class Maintenance_product_category_model {
   int _id;
