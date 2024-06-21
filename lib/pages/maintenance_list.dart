@@ -62,37 +62,37 @@ class _MaintenanceListPageState extends State<MaintenanceListPage> {
               if(controller.maintenanceList[index].state=="reject"){
                 state = "Rejected";
               }else{
-                state = controller.maintenanceList[index].state;
+                state = controller.maintenanceList[index].state!;
               }
               Maintenance_request_model maintenanceModel = controller.maintenanceList[index];
-              var start_date = AppUtils.changeDateTimeFormat(maintenanceModel.startDate);
-              var end_date = AppUtils.changeDateTimeFormat(maintenanceModel.endDate);
+              var start_date = AppUtils.changeDateTimeFormat(maintenanceModel.startDate!);
+              var end_date = AppUtils.changeDateTimeFormat(maintenanceModel.endDate!);
           return InkWell(
             onTap: (){
               controller.current_page.value = widget.pageType;
              // if(maintenanceModel.state == 'approved' || maintenanceModel.state == 'approve' ) {
                 controller.imageList.clear();
-                if (maintenanceModel.image !=null && maintenanceModel.image.isNotEmpty)
+                if (maintenanceModel.image !=null && maintenanceModel.image!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image));
-                if (maintenanceModel.image1 !=null &&maintenanceModel.image1.isNotEmpty)
+                      base64Decode(maintenanceModel.image!));
+                if (maintenanceModel.image1 !=null &&maintenanceModel.image1!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image1));
-                if (maintenanceModel.image2 !=null &&maintenanceModel.image2.isNotEmpty)
+                      base64Decode(maintenanceModel.image1!));
+                if (maintenanceModel.image2 !=null &&maintenanceModel.image2!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image2));
-                if (maintenanceModel.image3 !=null &&maintenanceModel.image3.isNotEmpty)
+                      base64Decode(maintenanceModel.image2!));
+                if (maintenanceModel.image3 !=null &&maintenanceModel.image3!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image3));
-                if (maintenanceModel.image4 !=null &&maintenanceModel.image4.isNotEmpty)
+                      base64Decode(maintenanceModel.image3!));
+                if (maintenanceModel.image4 !=null &&maintenanceModel.image4!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image4));
-                if (maintenanceModel.image5 !=null &&maintenanceModel.image5.isNotEmpty)
+                      base64Decode(maintenanceModel.image4!));
+                if (maintenanceModel.image5 !=null &&maintenanceModel.image5!.isNotEmpty)
                   controller.imageList.add(
-                      base64Decode(maintenanceModel.image5));
+                      base64Decode(maintenanceModel.image5!));
 
                 controller.maintenanceProductIdList.value =
-                    maintenanceModel.maintenanceProductIds;
+                    maintenanceModel.maintenanceProductIds!;
 
                 Get.toNamed(
                     Routes.MAINTENANCEDETAILPAGE, arguments: maintenanceModel);
@@ -118,12 +118,12 @@ class _MaintenanceListPageState extends State<MaintenanceListPage> {
                     SizedBox(height: 10,),
                     Row(children: [
                       AutoSizeText(labels.vehicle+' : ',style: maintitleStyle(),),
-                      AutoSizeText(maintenanceModel.vehicleId.name??'',style: maintitleStyle(),),
+                      AutoSizeText(maintenanceModel.vehicleId!.name??'',style: maintitleStyle(),),
                     ],),
                     SizedBox(height: 10,),
                     Row(children: [
                       AutoSizeText(labels.requestDate+' : ',style: maintitleStyle(),),
-                      AutoSizeText(AppUtils.changeDateFormat(maintenanceModel.requestDate)??'',style: maintitleStyle(),),
+                      AutoSizeText(AppUtils.changeDateFormat(maintenanceModel.requestDate!)??'',style: maintitleStyle(),),
                     ],),
                     SizedBox(height: 10,),
                     Row(children: [

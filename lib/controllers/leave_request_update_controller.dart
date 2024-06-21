@@ -379,7 +379,7 @@ class LeaveRequestUpdateController extends GetxController {
                   )),
               barrierDismissible: false));
                var employee_id = int.tryParse(box.read('emp_id'));
-      leavelLineList.value[index].employee_id = employee_id;
+      leavelLineList.value[index].employee_id = employee_id!;
       await leaveService?.updateLeaveLine(leavelLineList.value[index])
           .then((value) {
         if(value!=null){
@@ -402,10 +402,10 @@ class LeaveRequestUpdateController extends GetxController {
           var employee_id = int.tryParse(box.read('emp_id'));
           if(i==index){
             leavelLineList[i].update_status = true;
-            leavelLineList[i].employee_id = employee_id;
+            leavelLineList[i].employee_id = employee_id!;
           }else{
             leavelLineList[i].update_status = false;
-            leavelLineList[i].employee_id = employee_id;
+            leavelLineList[i].employee_id = employee_id!;
           }
         }
         durationController.text = '$days';

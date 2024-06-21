@@ -289,9 +289,9 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
   Widget leaveData(BuildContext context) {
     late Uint8List bytes;
     if (controller.leaveApprovedList.value[index].attachment != null) {
-      if (controller.leaveApprovedList.value[index].attachment.isNotEmpty) {
+      if (controller.leaveApprovedList.value[index].attachment!.isNotEmpty) {
         bytes =
-            base64Decode(controller.leaveApprovedList.value[index].attachment);
+            base64Decode(controller.leaveApprovedList.value[index].attachment!);
       }
     }
 

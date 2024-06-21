@@ -54,15 +54,15 @@ class LeaveTripReportController extends GetxController {
     bool found = false;
     for (int i = 0; i < list.length; i++) {
       var leave_balance = LeaveBalance(
-          name: list[i].x_leave_type,
-          entitle: list[i].x_entitle,
-          taken: list[i].x_taken,
-          balance: list[i].x_balance);
+          name: list[i].x_leave_type!,
+          entitle: list[i].x_entitle!,
+          taken: list[i].x_taken!,
+          balance: list[i].x_balance!);
 
       if (leaveReportList.length != 0) {
         for (int j = 0; j < leaveReportList.length; j++) {
           if (list[i].x_employee_id == leaveReportList[j].employee_id) {
-            leaveReportList[j].balance_list.add(leave_balance);
+            leaveReportList[j].balance_list!.add(leave_balance);
             found = true;
             break;
           } else {
@@ -74,8 +74,8 @@ class LeaveTripReportController extends GetxController {
           List<LeaveBalance> leave_balance_list = <LeaveBalance>[];
           leave_balance_list.add(leave_balance);
           var leaveReport = LeaveReportList(
-              employee_id: list[i].x_employee_id,
-              employee_name: list[i].x_name,
+              employee_id: list[i].x_employee_id!,
+              employee_name: list[i].x_name!,
               balance_list: leave_balance_list);
           leaveReportList.add(leaveReport);
         }
@@ -83,8 +83,8 @@ class LeaveTripReportController extends GetxController {
         List<LeaveBalance> leave_balance_list = <LeaveBalance>[];
         leave_balance_list.add(leave_balance);
         var leaveReport = LeaveReportList(
-            employee_id: list[i].x_employee_id,
-            employee_name: list[i].x_name,
+            employee_id: list[i].x_employee_id!,
+            employee_name: list[i].x_name!,
             balance_list: leave_balance_list);
         leaveReportList.add(leaveReport);
       }

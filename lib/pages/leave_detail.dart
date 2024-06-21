@@ -208,8 +208,8 @@ class LeaveDetails extends StatelessWidget {
   Widget leaveData(BuildContext context) {
     late Uint8List bytes;
     if (controller.leaveList.value[index].attachment != null) {
-      if (controller.leaveList.value[index].attachment.isNotEmpty) {
-        bytes = base64Decode(controller.leaveList.value[index].attachment);
+      if (controller.leaveList.value[index].attachment!.isNotEmpty) {
+        bytes = base64Decode(controller.leaveList.value[index].attachment!);
       }
     }
 

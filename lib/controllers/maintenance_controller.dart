@@ -439,14 +439,14 @@ void onChangeProductTypeDropdown(
 
 void updateMaintenanceProductId(int id,Maintenance_product_ids maintenance_product_id){
   this.maintenanceProductIds.add(maintenance_product_id);
-  this.maintenanceProductIdLists.add(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
+  this.maintenanceProductIdLists.add(Maintenance_product_id(productId:maintenance_product_id.productId!.id ,categoryId: maintenance_product_id.categoryId!.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
   maintenanceProductIdList.value = maintenanceProductIds;
-  createProductLine(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty), id);
+  createProductLine(Maintenance_product_id(productId:maintenance_product_id.productId!.id ,categoryId: maintenance_product_id.categoryId!.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty), id);
 }
 
 void deleteMaintenanceProductId(Maintenance_product_ids maintenance_product_id){
   this.maintenanceProductIdList.value.remove(maintenance_product_id);
-  this.maintenanceProductIdLists.remove(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
+  this.maintenanceProductIdLists.remove(Maintenance_product_id(productId:maintenance_product_id.productId!.id ,categoryId: maintenance_product_id.categoryId!.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
   update();
   maintenanceService?.deleteProductLine(maintenance_product_id.id,box.read('emp_id')).then((data){
     maintenanceList.value = data;
@@ -459,14 +459,14 @@ void addMaintenanceProductId(Maintenance_product_ids maintenance_product_id){
   this.maintenanceProductIds.add(maintenance_product_id);
     print("afterData");
     print(this.maintenanceProductIds.length);
-  this.maintenanceProductIdLists.add(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
+  this.maintenanceProductIdLists.add(Maintenance_product_id(productId:maintenance_product_id.productId!.id ,categoryId: maintenance_product_id.categoryId!.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
   maintenanceProductIdList.value =  this.maintenanceProductIds;
   update();
 
 }
 void removeMaintenanceProductId(Maintenance_product_ids maintenance_product_id){
   this.maintenanceProductIdList.value.remove(maintenance_product_id);
-  this.maintenanceProductIdLists.remove(Maintenance_product_id(productId:maintenance_product_id.productId.id ,categoryId: maintenance_product_id.categoryId.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
+  this.maintenanceProductIdLists.remove(Maintenance_product_id(productId:maintenance_product_id.productId!.id ,categoryId: maintenance_product_id.categoryId!.id,type:maintenance_product_id.type,qty:maintenance_product_id.qty));
   update();
 }
 

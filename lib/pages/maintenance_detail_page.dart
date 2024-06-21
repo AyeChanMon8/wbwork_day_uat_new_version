@@ -60,7 +60,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
     print(maintenanceRequestModel.state);
     isDriver = box.read("is_driver");
     var employee_id = box.read('emp_id');
-    if((maintenanceRequestModel.driverId.id != int.parse(employee_id) && box.read('real_role_category').toString().contains('branch manager')) || maintenanceRequestModel.driverId.id != int.parse(employee_id) && box.read('real_role_category').toString().contains('manager')){
+    if((maintenanceRequestModel.driverId!.id != int.parse(employee_id) && box.read('real_role_category').toString().contains('branch manager')) || maintenanceRequestModel.driverId!.id != int.parse(employee_id) && box.read('real_role_category').toString().contains('manager')){
       is_branch_manager = true;
     }
     // else if(maintenanceRequestModel.driverId.id == int.parse(employee_id) && box.read('real_role_category').toString().contains('branch manager')){
@@ -77,48 +77,48 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
     print(isDriver);
     if(maintenanceRequestModel.image!=null){
       controller.isShowBeforeOne.value = true;
-      bytes1 = base64Decode(maintenanceRequestModel.image);
+      bytes1 = base64Decode(maintenanceRequestModel.image!);
 
     }else{
       controller.isShowBeforeOne.value = false;
     }
     if(maintenanceRequestModel.image1!=null){
       controller.isShowBeforeTwo.value = true;
-      bytes2 = base64Decode(maintenanceRequestModel.image1);
+      bytes2 = base64Decode(maintenanceRequestModel.image1!);
 
     }else{
       controller.isShowBeforeTwo.value = false;
     }
     if(maintenanceRequestModel.image2!=null){
       controller.isShowBeforeThree.value = true;
-      bytes3 = base64Decode(maintenanceRequestModel.image2);
+      bytes3 = base64Decode(maintenanceRequestModel.image2!);
 
     }else{
       controller.isShowBeforeThree.value = false;
     }
     if(maintenanceRequestModel.image3!=null){
       controller.isShowAfterOne.value = true;
-      bytes4 = base64Decode(maintenanceRequestModel.image3);
+      bytes4 = base64Decode(maintenanceRequestModel.image3!);
 
     }else{
       controller.isShowAfterOne.value = false;
     }
     if(maintenanceRequestModel.image4!=null){
       controller.isShowAfterTwo.value = true;
-      bytes5 = base64Decode(maintenanceRequestModel.image4);
+      bytes5 = base64Decode(maintenanceRequestModel.image4!);
 
     }else{
       controller.isShowAfterTwo.value = false;
     }
     if(maintenanceRequestModel.image5!=null){
       controller.isShowAfterThree.value = true;
-      bytes6 = base64Decode(maintenanceRequestModel.image5);
+      bytes6 = base64Decode(maintenanceRequestModel.image5!);
     }else{
       controller.isShowAfterThree.value = false;
     }
-    requestDate = AppUtils.changeDateFormat(maintenanceRequestModel.requestDate);
-    controller.selectedFromDate.value = AppUtils.changeDateTimeFormat(maintenanceRequestModel.startDate);
-    controller.selectedToDate.value = AppUtils.changeDateTimeFormat(maintenanceRequestModel.endDate);
+    requestDate = AppUtils.changeDateFormat(maintenanceRequestModel.requestDate!);
+    controller.selectedFromDate.value = AppUtils.changeDateTimeFormat(maintenanceRequestModel.startDate!);
+    controller.selectedToDate.value = AppUtils.changeDateTimeFormat(maintenanceRequestModel.endDate!);
     //controller.selectedFromDate.value = DateFormat('yyyy-MM-dd HH:mm').parse(maintenanceRequestModel.startDate.toString()).add(Duration(hours: 6,minutes: 30)).toString().split('.')[0];
     //controller.selectedToDate.value = DateFormat('yyyy-MM-dd HH:mm').parse(maintenanceRequestModel.endDate.toString()).add(Duration(hours: 6,minutes: 30)).toString().split('.')[0];
     super.initState();
@@ -174,7 +174,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    maintenanceRequestModel.maintenanceType,
+                    maintenanceRequestModel.maintenanceType!,
                     style: maintitleStyle(),
                   ),
                 ],
@@ -189,7 +189,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    maintenanceRequestModel.maintenanceTeamId.name??'',
+                    maintenanceRequestModel.maintenanceTeamId!.name??'',
                     style: maintitleStyle(),
                   ),
                 ],
@@ -244,7 +244,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                       ),
                   ),
 
-                  maintenanceRequestModel.vehicleId.incharge_id==emp_id&&maintenanceRequestModel.state=='start'||maintenanceRequestModel.state == 'approve'||maintenanceRequestModel.state != 'done' ?
+                  maintenanceRequestModel.vehicleId!.incharge_id==emp_id&&maintenanceRequestModel.state=='start'||maintenanceRequestModel.state == 'approve'||maintenanceRequestModel.state != 'done' ?
                   Padding(
                     padding: const EdgeInsets.only(left:8.0),
                     child: InkWell(
@@ -273,7 +273,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    maintenanceRequestModel.duration_days.toStringAsFixed(2)+" Days "+maintenanceRequestModel.duration_hours.toStringAsFixed(2)+" Hrs",
+                    maintenanceRequestModel.duration_days!.toStringAsFixed(2)+" Days "+maintenanceRequestModel.duration_hours!.toStringAsFixed(2)+" Hrs",
                     style: maintitleStyle(),
                   ),
                 ],
@@ -288,7 +288,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    AppUtils.removeNullString(maintenanceRequestModel.driverId.name),
+                    AppUtils.removeNullString(maintenanceRequestModel.driverId!.name),
                     style: maintitleStyle(),
                   ),
                 ],
@@ -303,7 +303,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    AppUtils.removeNullString(maintenanceRequestModel.spareId.name),
+                    AppUtils.removeNullString(maintenanceRequestModel.spareId!.name),
                     style: maintitleStyle(),
                   ),
                 ],
@@ -318,7 +318,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     style: datalistStyle(),
                   ),
                   AutoSizeText(
-                    AppUtils.removeNullString(maintenanceRequestModel.spare2Id.name),
+                    AppUtils.removeNullString(maintenanceRequestModel.spare2Id!.name),
                     style: maintitleStyle(),
                   ),
                 ],
@@ -362,7 +362,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      AppUtils.removeNullString(maintenanceRequestModel.description),
+                      AppUtils.removeNullString(maintenanceRequestModel.description!),
                       style: maintitleStyle(),
                     ),
                   ),
@@ -444,7 +444,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                                                   type: controller.selectedProductType.value,
                                                   qty: double.parse(controller.qtyTextController.text));
                                               controller.maintenanceProductIds = controller.maintenanceProductIdList.value;
-                                              controller.updateMaintenanceProductId(maintenanceRequestModel.id,product_ids);
+                                              controller.updateMaintenanceProductId(maintenanceRequestModel.id!,product_ids);
                                               setState(() {
 
                                               });
@@ -524,13 +524,13 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                                         .maintenanceProductIdList[index]
                                         .productId==null?Text(''):AutoSizeText(AppUtils.removeNullString(controller
                                         .maintenanceProductIdList[index]
-                                        .productId
+                                        .productId!
                                         .name))),
                                 Expanded(
                                     flex: 2,
                                     child: AutoSizeText(AppUtils.removeNullString(controller
                                         .maintenanceProductIdList[index]
-                                        .categoryId
+                                        .categoryId!
                                         .name))),
                                 Expanded(
                                   child: AutoSizeText(AppUtils.removeNullString(controller
@@ -596,7 +596,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
               ),
               ListView.builder(
                   shrinkWrap: true,
-                  itemCount: maintenanceRequestModel.purchaseLine.length,
+                  itemCount: maintenanceRequestModel.purchaseLine!.length,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     // var utc_date = maintenanceRequestModel.purchaseLine[index].dateApprove.toString();
@@ -608,27 +608,27 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     // var split_date = dateLocal.split(" ")[0];
                     // print('dateLocal');
                     // print(dateLocal);
-                    var conf_date = AppUtils.changeDateFormat(maintenanceRequestModel.purchaseLine[index].dateApprove);
+                    var conf_date = AppUtils.changeDateFormat(maintenanceRequestModel.purchaseLine![index].dateApprove);
                     return Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                               flex: 1,
-                              child: AutoSizeText(maintenanceRequestModel.purchaseLine[index].name)),
+                              child: AutoSizeText(maintenanceRequestModel.purchaseLine![index].name!)),
                           Expanded(
                               flex: 2,
                               child: AutoSizeText(conf_date)),
                           Expanded(
                               flex: 2,
-                              child: AutoSizeText(maintenanceRequestModel.purchaseLine[index].partnerId.name)),
+                              child: AutoSizeText(maintenanceRequestModel.purchaseLine![index].partnerId!.name)),
                           Expanded(
                               flex: 1,
                               child: AutoSizeText(
-                                  '${NumberFormat('#,###').format(double.tryParse(maintenanceRequestModel.purchaseLine[index].amountTotal.toString()))}')),
+                                  '${NumberFormat('#,###').format(double.tryParse(maintenanceRequestModel.purchaseLine![index].amountTotal.toString()))}')),
                           Expanded(
                               flex: 1,
-                              child: AutoSizeText(maintenanceRequestModel.purchaseLine[index].state)),
+                              child: AutoSizeText(maintenanceRequestModel.purchaseLine![index].state!)),
                           // Expanded(
                           //   flex: 1,
                           //     child: IconButton(
@@ -645,7 +645,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                 height: 20,
               ),
 
-              maintenanceRequestModel.warehouseIds.length!=0?
+              maintenanceRequestModel.warehouseIds!.length!=0?
               Column(
                 children: [
                   Row(
@@ -684,7 +684,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                   ),
                   ListView.builder(
                       shrinkWrap: true,
-                      itemCount: maintenanceRequestModel.warehouseIds.length,
+                      itemCount: maintenanceRequestModel.warehouseIds!.length,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Container(
@@ -693,25 +693,25 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                             children: [
                               Expanded(
                                   flex: 3,
-                                  child: AutoSizeText(AppUtils.removeNullString(maintenanceRequestModel.warehouseIds[index]
-                                      .productId
+                                  child: AutoSizeText(AppUtils.removeNullString(maintenanceRequestModel.warehouseIds![index]
+                                      .productId!
                                       .name))),
                               Expanded(
                                   flex: 2,
-                                  child: AutoSizeText(AppUtils.removeNullString(maintenanceRequestModel.warehouseIds[index].locationId.name))),
+                                  child: AutoSizeText(AppUtils.removeNullString(maintenanceRequestModel.warehouseIds![index].locationId!.name))),
                               Expanded(
                                   flex: 1,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left:8.0),
-                                    child: AutoSizeText(AppUtils.addThousnadSperator(maintenanceRequestModel.warehouseIds[index]
-                                        .cost)),
+                                    child: AutoSizeText(AppUtils.addThousnadSperator(maintenanceRequestModel.warehouseIds![index]
+                                        .cost!)),
                                   )),
                               Expanded(
                                   flex: 1,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left:8.0),
                                     child: AutoSizeText(
-                                        '${AppUtils.removeNullString(maintenanceRequestModel.warehouseIds[index].qty.toString())}'),
+                                        '${AppUtils.removeNullString(maintenanceRequestModel.warehouseIds![index].qty.toString())}'),
                                   )),
 
                             ],
@@ -1009,11 +1009,11 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
               maintenanceRequestModel.state == 'start'||maintenanceRequestModel.state == 'approve'
                   ? Row(
                 children: [
-                  maintenanceRequestModel.vehicleId.incharge_id==emp_id&&is_branch_manager==false?Expanded(
+                  maintenanceRequestModel.vehicleId!.incharge_id==emp_id&&is_branch_manager==false?Expanded(
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.clickQCButton(maintenanceRequestModel.id);
+                        controller.clickQCButton(maintenanceRequestModel.id!);
                       },
                       child: Text('QC'),
                     ),
@@ -1028,7 +1028,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.clickReproposeButton(maintenanceRequestModel.id);
+                        controller.clickReproposeButton(maintenanceRequestModel.id!);
                       },
                       child: Text('Re-Propose'),
                     ),
@@ -1055,7 +1055,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.clickStartButton(maintenanceRequestModel.id);
+                        controller.clickStartButton(maintenanceRequestModel.id!);
                       },
                       child: Text('Start'),
                     ),
@@ -1073,7 +1073,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.approveMaintenance(maintenanceRequestModel.id);
+                        controller.approveMaintenance(maintenanceRequestModel.id!);
                       },
                       child: Text(labels.approve),
                     ),
@@ -1086,7 +1086,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                         type: GFButtonType.outline,
                         color: Globals.primaryColor,
                         onPressed: () {
-                          controller.rejectMaintenance(maintenanceRequestModel.id);
+                          controller.rejectMaintenance(maintenanceRequestModel.id!);
                         },
                         child: Text(labels.rejected),
                       ),
@@ -1104,7 +1104,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.secondApprove(maintenanceRequestModel.id);
+                        controller.secondApprove(maintenanceRequestModel.id!);
                       },
                       child: Text(labels.approvedAgain),
                     ),
@@ -1117,7 +1117,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                         type: GFButtonType.outline,
                         color: Globals.primaryColor,
                         onPressed: () {
-                          controller.rejectMaintenance(maintenanceRequestModel.id);
+                          controller.rejectMaintenance(maintenanceRequestModel.id!);
                         },
                         child: Text(labels.rejectAgain),
                       ),
@@ -1127,13 +1127,13 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                 ],
               ) : SizedBox(),
 
-              maintenanceRequestModel.state == 'reproposed'&& maintenanceRequestModel.vehicleId.incharge_id==emp_id&&is_branch_manager==false? Row(
+              maintenanceRequestModel.state == 'reproposed'&& maintenanceRequestModel.vehicleId!.incharge_id==emp_id&&is_branch_manager==false? Row(
                 children: [
                   Expanded(
                     child: GFButton(
                       color: Globals.primaryColor,
                       onPressed: () {
-                        controller.resubmitClick(maintenanceRequestModel.id);
+                        controller.resubmitClick(maintenanceRequestModel.id!);
                       },
                       child: Text('Resubmitted'),
                     ),
@@ -1526,9 +1526,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                         onPressed: () {
                           //controller.selectedToD
                           if(state=='start'){
-                            controller.updateStartDate(maintenanceRequestModel.id);
+                            controller.updateStartDate(maintenanceRequestModel.id!);
                           }else{
-                            controller.updateEndDate(maintenanceRequestModel.id);
+                            controller.updateEndDate(maintenanceRequestModel.id!);
                           }
 
                         }),
@@ -1567,9 +1567,9 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
                 //firstDate: DateTime(1988),
                 firstDate: DateTime(1988),
                 //initialDate: currentValue ?? DateTime.now(),
-                initialDate:state == 'start'?DateTime.parse(maintenanceRequestModel.endDate):DateTime.now(),
+                initialDate:state == 'start'?DateTime.parse(maintenanceRequestModel.endDate!):DateTime.now(),
                 // lastDate: DateTime(2200));
-                lastDate: state == 'start'?DateTime.parse(maintenanceRequestModel.endDate):DateTime(2200));
+                lastDate: state == 'start'?DateTime.parse(maintenanceRequestModel.endDate!):DateTime(2200));
             if (date != null) {
               final time = await showTimePicker(
                 context: context,

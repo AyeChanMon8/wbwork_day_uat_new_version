@@ -62,25 +62,25 @@ class _ApprovalLoanListState extends State<ApprovalLoanList> {
                               arguments: index);
                         },
                         child: ListTile(
-                            leading: Text(AppUtils.removeNullString(controller.loanApprovalList[index].name
+                            leading: Text(AppUtils.removeNullString(controller.loanApprovalList[index].name!
                                 )),
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppUtils.removeNullString(controller.loanApprovalList.value[index].employee_id.name),
+                                  AppUtils.removeNullString(controller.loanApprovalList.value[index].employee_id!.name),
                                     style: TextStyle(color: backgroundIconColor)
 
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                  AppUtils.removeNullString(controller.loanApprovalList.value[index].type),
+                                  AppUtils.removeNullString(controller.loanApprovalList.value[index].type!),
                                     style: TextStyle(color: backgroundIconColor)
 
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                  AppUtils.addThousnadSperator(controller.loanApprovalList.value[index].loan_amount),
+                                  AppUtils.addThousnadSperator(controller.loanApprovalList.value[index].loan_amount!),
                                     style: TextStyle(color: backgroundIconColor)
 
                                 ),
@@ -93,7 +93,7 @@ class _ApprovalLoanListState extends State<ApprovalLoanList> {
                                 child: Column(
                                   children: [
                                     SizedBox(height: 5),
-                                    Text(AppUtils.changeDateFormat(controller.loanApprovalList.value[index].payment_date)),
+                                    Text(AppUtils.changeDateFormat(controller.loanApprovalList.value[index].payment_date!)),
                                   ],
                                 ),
                               ),

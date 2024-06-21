@@ -81,9 +81,9 @@ class LeaveService extends OdooService {
   Future<String> createLeave(Leave leavedata, int status) async {
     var employee_id = int.tryParse(box.read('emp_id'));
     if(status == 0){
-      for(var i=0;i<leavedata.leave_line.length;i++){
-          leavedata.leave_line[i].update_status = true;
-          leavedata.leave_line[i].employee_id = employee_id;
+      for(var i=0;i<leavedata.leave_line!.length;i++){
+          leavedata.leave_line![i].update_status = true;
+          leavedata.leave_line![i].employee_id = employee_id!;
         }
     }
     var created = "0";
@@ -156,7 +156,7 @@ class LeaveService extends OdooService {
       var list = response.data['results'];
       list.forEach((v) {
         var leave = LeaveListResponse.fromMap(v);
-        if (leave.employee_id.id == empID) {
+        if (leave.employee_id!.id == empID) {
           leave_list.add(LeaveListResponse.fromMap(v));
         } else {
           if (leave.state != 'draft') {

@@ -441,8 +441,8 @@ class _FleetPageState extends State<FleetPage> {
                       children: [
                         AutoSizeText(labels.name+' : ${maintenance_request_model.name}',style: datalistStyle(),),
                         AutoSizeText(labels.maintenanceType+' : ${maintenance_request_model.maintenanceType??''}',style: datalistStyle(),),
-                        AutoSizeText(labels.maintenanceTeam+' : ${maintenance_request_model.maintenanceTeamId.name??''}',style: datalistStyle(),),
-                       maintenance_request_model.startDate != null && maintenance_request_model.endDate != null ? AutoSizeText('${AppUtils.changeDateFormat(maintenance_request_model.startDate)} - ${AppUtils.changeDateFormat(maintenance_request_model.endDate)}',style: datalistStyle(),) : AutoSizeText('${AppUtils.formatter.format(DateTime.parse(maintenance_request_model.requestDate))}',style: datalistStyle(),),
+                        AutoSizeText(labels.maintenanceTeam+' : ${maintenance_request_model.maintenanceTeamId!.name??''}',style: datalistStyle(),),
+                       maintenance_request_model.startDate != null && maintenance_request_model.endDate != null ? AutoSizeText('${AppUtils.changeDateFormat(maintenance_request_model.startDate!)} - ${AppUtils.changeDateFormat(maintenance_request_model.endDate!)}',style: datalistStyle(),) : AutoSizeText('${AppUtils.formatter.format(DateTime.parse(maintenance_request_model.requestDate!))}',style: datalistStyle(),),
                         RatingBar.builder(
                           onRatingUpdate: (rating) {
                             print(rating);

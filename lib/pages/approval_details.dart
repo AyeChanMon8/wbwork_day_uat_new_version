@@ -223,9 +223,9 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
   Widget leaveData(BuildContext context) {
     late Uint8List bytes;
     if (controller.leaveApprovalList.value[index].attachment != null) {
-      if (controller.leaveApprovalList.value[index].attachment.isNotEmpty) {
+      if (controller.leaveApprovalList.value[index].attachment!.isNotEmpty) {
         bytes =
-            base64Decode(controller.leaveApprovalList.value[index].attachment);
+            base64Decode(controller.leaveApprovalList.value[index].attachment!);
       }
     }
      var start_date = AppUtils.changeDateFormat(controller.leaveApprovalList.value[index].start_date);
