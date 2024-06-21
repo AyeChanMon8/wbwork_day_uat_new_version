@@ -1,16 +1,16 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_holo_date_picker/date_time_formatter.dart';
 
-import 'package:winbrother_hr_app/models/category_id.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/ot_category.dart';
-import 'package:winbrother_hr_app/models/overtime_request_line.dart';
-import 'package:winbrother_hr_app/models/request_line.dart';
-import 'package:winbrother_hr_app/models/requested_employee.dart';
+import '../models/category_id.dart';
+import '../models/department.dart';
+import '../models/ot_category.dart';
+import '../models/overtime_request_line.dart';
+import '../models/request_line.dart';
+import '../models/requested_employee.dart';
 
 class OvertimeRequestResponse {
   int id;
@@ -21,19 +21,19 @@ class OvertimeRequestResponse {
   String reason;
   String state;
   String create_date;
-  RequestedEmployee requested_employee_id;
-  List<Department> department_ids;
-  List<RequestLine> request_line;
-  OTCategory categ_id;
+  RequestedEmployee? requested_employee_id;
+  List<Department>? department_ids;
+  List<RequestLine>? request_line;
+  OTCategory? categ_id;
   OvertimeRequestResponse({
-    this.id,
-    this.name,
-    this.start_date,
-    this.end_date,
-    this.duration,
-    this.reason,
-    this.state,
-    this.create_date,
+    this.id = 0,
+    this.name = '',
+    this.start_date = '',
+    this.end_date = '',
+    this.duration = 0.0,
+    this.reason = '',
+    this.state = '',
+    this.create_date = '',
     this.requested_employee_id,
     this.department_ids,
     this.request_line,
@@ -43,18 +43,18 @@ class OvertimeRequestResponse {
 
 
   OvertimeRequestResponse copyWith({
-    int id,
-    String name,
-    String start_date,
-    String end_date,
-    double duration,
-    String reason,
-    String state,
-    String create_date,
-    RequestedEmployee requested_employee_id,
-    List<Department> department_ids,
-    List<RequestLine> request_line,
-    OTCategory categ_id,
+    int? id,
+    String? name,
+    String? start_date,
+    String? end_date,
+    double? duration,
+    String? reason,
+    String? state,
+    String? create_date,
+    RequestedEmployee? requested_employee_id,
+    List<Department>? department_ids,
+    List<RequestLine>? request_line,
+    OTCategory? categ_id,
   }) {
     return OvertimeRequestResponse(
       id: id ?? this.id,
@@ -90,7 +90,7 @@ class OvertimeRequestResponse {
   }
 
   factory OvertimeRequestResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return OvertimeRequestResponse(
       id: map['id'],

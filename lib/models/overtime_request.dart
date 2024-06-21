@@ -1,13 +1,13 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:winbrother_hr_app/models/category_id.dart';
-import 'package:winbrother_hr_app/models/department.dart';
-import 'package:winbrother_hr_app/models/employee_promotion.dart';
-import 'package:winbrother_hr_app/models/overtime_request_line.dart';
+import '../models/category_id.dart';
+import '../models/department.dart';
+import '../models/employee_promotion.dart';
+import '../models/overtime_request_line.dart';
 
 import 'ot_department.dart';
 
@@ -18,34 +18,34 @@ class OvertimeRequest {
   double duration;
   String reason;
   int requested_employee_id;
-  List<OTDepartment> department_ids;
-  List<OvertimeRequestLine> request_line;
-  List<Branch_id> branch_ids;
+  List<OTDepartment>? department_ids;
+  List<OvertimeRequestLine>? request_line;
+  List<Branch_id>? branch_ids;
   int categ_id;
   OvertimeRequest({
-    this.name,
-    this.start_date,
-    this.end_date,
-    this.duration,
-    this.reason,
-    this.requested_employee_id,
+    this.name = '',
+    this.start_date = '',
+    this.end_date = '',
+    this.duration = 0.0,
+    this.reason = '',
+    this.requested_employee_id = 0,
     this.department_ids,
     this.request_line,
-    this.categ_id,
+    this.categ_id = 0,
     this.branch_ids
   });
 
   OvertimeRequest copyWith({
-    String name,
-    String start_date,
-    String end_date,
-    double duration,
-    String reason,
-    int requested_employee_id,
-    List<OTDepartment> department_ids,
-    List<OvertimeRequestLine> request_line,
-    int categ_id,
-    List<Branch_id> branch_ids
+    String? name,
+    String? start_date,
+    String? end_date,
+    double? duration,
+    String? reason,
+    int? requested_employee_id,
+    List<OTDepartment>? department_ids,
+    List<OvertimeRequestLine>? request_line,
+    int? categ_id,
+    List<Branch_id>? branch_ids
   }) {
     return OvertimeRequest(
       name: name ?? this.name,
@@ -78,7 +78,7 @@ class OvertimeRequest {
   }
 
   factory OvertimeRequest.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OvertimeRequest(
       name: map['name'],
@@ -143,14 +143,14 @@ class Branch_id {
   int id;
   String name;
   Branch_id({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
 
   Branch_id copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return Branch_id(
       id: id ?? this.id,
@@ -165,7 +165,7 @@ class Branch_id {
   }
 
   factory Branch_id.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return Branch_id(
       id: map['id'],

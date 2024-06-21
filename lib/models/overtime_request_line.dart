@@ -1,9 +1,9 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:winbrother_hr_app/models/employee.dart';
+import '../models/employee.dart';
 
 import 'overtime_request.dart';
 
@@ -18,28 +18,28 @@ class OvertimeRequestLine {
   double duration;
   int branch_id;
   OvertimeRequestLine({
-    this.start_date,
-    this.end_date,
-    this.employee_id,
-    this.emp_name,
-    this.email,
-    this.state,
-    this.dept_id,
-    this.duration,
-    this.branch_id
+    this.start_date = '',
+    this.end_date = '',
+    this.employee_id = 0,
+    this.emp_name = '',
+    this.email = '',
+    this.state = '',
+    this.dept_id = 0,
+    this.duration = 0.0,
+    this.branch_id = 0
   });
 
 
   OvertimeRequestLine copyWith({
-    String start_date,
-    String end_date,
-    int employee_id,
-    String emp_name,
-    String email,
-    String state,
-    int dept_id,
-    double duration,
-    int branch_id
+    String? start_date,
+    String? end_date,
+    int? employee_id,
+    String? emp_name,
+    String? email,
+    String ?state,
+    int? dept_id,
+    double? duration,
+    int? branch_id
   }) {
     return OvertimeRequestLine(
       start_date: start_date ?? this.start_date,
@@ -67,7 +67,7 @@ class OvertimeRequestLine {
   }
 
   factory OvertimeRequestLine.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OvertimeRequestLine(
       start_date: map['start_date'],

@@ -1,47 +1,47 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
-import 'package:winbrother_hr_app/models/employee_id.dart';
-import 'package:winbrother_hr_app/models/overtime_category.dart';
+import '../models/employee_id.dart';
+import '../models/overtime_category.dart';
 
 import 'ot_category.dart';
 
 class OvertimeResponse {
   int id;
   String name;
-  EmployeeID employee_id;
-  EmployeeID requested_employee_id;
+  EmployeeID? employee_id;
+  EmployeeID? requested_employee_id;
   String start_date;
   String end_date;
   double duration;
   String remark;
   String state;
-  OTCategory categ_id;
+  OTCategory? categ_id;
   OvertimeResponse({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
     this.employee_id,
     this.requested_employee_id,
-    this.start_date,
-    this.end_date,
-    this.duration,
-    this.remark,
-    this.state,
+    this.start_date = '',
+    this.end_date = '',
+    this.duration = 0.0,
+    this.remark = '',
+    this.state = '',
     this.categ_id,
   });
 
   OvertimeResponse copyWith({
-    int id,
-    String name,
-    EmployeeID employee_id,
-    EmployeeID requested_employee_id,
-    String start_date,
-    String end_date,
-    double duration,
-    String remark,
-    String state,
-    OTCategory categ_id, 
+    int? id,
+    String? name,
+    EmployeeID? employee_id,
+    EmployeeID? requested_employee_id,
+    String? start_date,
+    String? end_date,
+    double? duration,
+    String? remark,
+    String? state,
+    OTCategory? categ_id, 
   }) {
     return OvertimeResponse(
       id: id ?? this.id,
@@ -73,7 +73,7 @@ class OvertimeResponse {
   }
 
   factory OvertimeResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return OvertimeResponse(
       id: map['id'],

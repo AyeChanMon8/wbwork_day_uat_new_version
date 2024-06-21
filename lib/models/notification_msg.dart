@@ -1,7 +1,7 @@
-// @dart=2.9
+
 
 import 'dart:convert';
-import 'package:flutter_icons/flutter_icons.dart';
+
 
 class NotificationMsg {
   int id;
@@ -13,26 +13,26 @@ class NotificationMsg {
   String create_date;
   String message_type;
   NotificationMsg({
-     this.id,
-     this.contents,
-     this.headings,
-     this.subTitle,
-     this.message_type,
-     this.has_read,
-     this.create_date,
+     this.id = 0,
+     this.contents = '',
+     this.headings = '',
+     this.subTitle = '',
+     this.message_type = '',
+     this.has_read =  false,
+     this.create_date = '',
     this.selected = false,
   });
 
   NotificationMsg copyWith({
-    int id,
-    String contents,
-    String headings,
-    String subTitle,
-    String message_type,
-    bool read,
-    String reason,
-    String create_date,
-    bool selected
+    int? id,
+    String? contents,
+    String? headings,
+    String? subTitle,
+    String? message_type,
+    bool? read,
+    String? reason,
+    String? create_date,
+    bool? selected
   }) {
     return NotificationMsg(
       id: id ?? this.id,
@@ -59,7 +59,7 @@ class NotificationMsg {
   }
 
   factory NotificationMsg.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return NotificationMsg(
       id: map['id'] ?? 0,

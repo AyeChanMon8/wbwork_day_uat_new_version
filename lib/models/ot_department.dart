@@ -1,8 +1,8 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
-import 'package:winbrother_hr_app/models/employee_id.dart';
+import '../models/employee_id.dart';
 
 import 'overtime_request.dart';
 
@@ -13,20 +13,20 @@ class OTDepartment {
   // final String branch_name;
   Branch_id branch_id;
   String complete_name;
-  List<EmployeeID> employee_ids;
+  List<EmployeeID>? employee_ids;
   OTDepartment({
-    this.id,
-    this.name,this.complete_name,
+    this.id = 0,
+    this.name = '',this.complete_name = '',
     // this.branch_id,this.branch_name
-    this.branch_id
+    required this.branch_id
   });
 
 
   OTDepartment copyWith({
-    int id,
-    String name,
-    int branch_id,
-    String branch_name
+    int? id,
+    String? name,
+    Branch_id? branch_id,
+    String? branch_name
   }) {
     return OTDepartment(
       id: id ?? this.id,
@@ -44,7 +44,7 @@ class OTDepartment {
   }
 
   factory OTDepartment.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OTDepartment(
       id: map['id'],

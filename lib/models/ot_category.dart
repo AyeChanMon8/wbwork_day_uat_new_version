@@ -1,4 +1,3 @@
-// @dart=2.9
 
 import 'dart:convert';
 
@@ -7,14 +6,14 @@ class OTCategory {
   final int id;
   final String category;
   OTCategory({
-    this.id,
-    this.category,
+    this.id = 0,
+    this.category = '',
   });
 
 
   OTCategory copyWith({
-    int id,
-    String category,
+    int? id,
+    String? category,
   }) {
     return OTCategory(
       id: id ?? this.id,
@@ -30,7 +29,7 @@ class OTCategory {
   }
 
   factory OTCategory.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OTCategory(
       id: map['id'],

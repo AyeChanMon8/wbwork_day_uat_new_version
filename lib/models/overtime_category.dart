@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -7,14 +7,14 @@ class OvertimeCategory {
   final int id;
   final String name;
   OvertimeCategory({
-    this.id,
-    this.name,
+    this.id = 0,
+    this.name = '',
   });
 
 
   OvertimeCategory copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     return OvertimeCategory(
       id: id ?? this.id,
@@ -30,7 +30,7 @@ class OvertimeCategory {
   }
 
   factory OvertimeCategory.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
 
     return OvertimeCategory(
       id: map['id'],

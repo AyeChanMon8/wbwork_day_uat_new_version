@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -7,17 +7,17 @@ import 'package:flutter/foundation.dart';
 class OrganizationChart {
   String id;
   String email;
-  List<String> next;
+  List<String>? next;
   OrganizationChart({
-    this.id,
-    this.email,
+    this.id = '',
+    this.email = '',
     this.next,
   });
 
   OrganizationChart copyWith({
-    String id,
-    String email,
-    List<String> next,
+    String? id,
+    String? email,
+    List<String>? next,
   }) {
     return OrganizationChart(
       id: id ?? this.id,
@@ -35,7 +35,7 @@ class OrganizationChart {
   }
 
   factory OrganizationChart.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+    // if (map == null) return null;
   
     return OrganizationChart(
       id: map['id'],

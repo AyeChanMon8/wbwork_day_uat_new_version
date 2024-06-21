@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'package:flutter/material.dart';
 
@@ -9,13 +9,13 @@ class Partner{
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const Partner({
-     this.id,
-     this.name,
+     this.id= 0,
+     this.name = '',
   });
 
   Partner copyWith({
-    int id,
-    String name,
+    int? id,
+    String? name,
   }) {
     if ((id == null || identical(id, this.id)) &&
         (name == null || identical(name, this.name))) {
