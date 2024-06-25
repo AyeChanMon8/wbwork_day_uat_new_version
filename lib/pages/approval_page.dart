@@ -124,7 +124,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                       flex: 2,
                                       child: Text(
                                         controller.otcList.value[index]
-                                            .requested_employee_id.name,
+                                            .requested_employee_id!.name,
                                         style: labelStyle(),
                                       ),
                                     ),

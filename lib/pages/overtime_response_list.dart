@@ -126,7 +126,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                       //   ),
                       // ),
                       title: Text(
-                        controller.otAcceptedList.value[index].employee_id.name
+                        controller.otAcceptedList.value[index].employee_id!.name
                             .toString(),
                         // "Attendance Regualarization",
                         style: maintitleStyle(),
@@ -154,7 +154,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.otAcceptedList.value[index]
-                                      .requested_employee_id.name
+                                      .requested_employee_id!.name
                                       .toString(),
                                   style: subtitleStyle(),
                                 ),
@@ -209,7 +209,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                       //   ),
                       // ),
                       title: Text(
-                        controller.otDeclinedList.value[index].employee_id.name
+                        controller.otDeclinedList.value[index].employee_id!.name
                             .toString(),
                         // "Attendance Regualarization",
                         style: maintitleStyle(),
@@ -238,7 +238,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.otDeclinedList.value[index]
-                                      .requested_employee_id.name
+                                      .requested_employee_id!.name
                                       .toString(),
                                   style: subtitleStyle(),
                                 ),
@@ -281,7 +281,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                       contentPadding: EdgeInsets.only(
                           left: 10.0, top: 20.0, bottom: 20.0, right: 10.0),
                       title: Text(
-                        controller.otDraftList.value[index].employee_id.name
+                        controller.otDraftList.value[index].employee_id!.name
                             .toString(),
                         // "Attendance Regualarization",
                         style: maintitleStyle(),
@@ -309,7 +309,7 @@ class OverTimeResponseListPage extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.otDraftList.value[index]
-                                      .requested_employee_id.name
+                                      .requested_employee_id!.name
                                       .toString(),
                                   style: subtitleStyle(),
                                 ),

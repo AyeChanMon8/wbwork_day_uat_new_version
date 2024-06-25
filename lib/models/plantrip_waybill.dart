@@ -546,14 +546,14 @@ class Route_id {
 class Consumption_ids {
   dynamic _isRequired;
   Route_id _routeId;
-  int _standardLiter;
+  dynamic _standardLiter;
   double _consumedLiter;
   dynamic _description;
   int _id;
 
   dynamic get isRequired => _isRequired;
   Route_id get routeId => _routeId;
-  int get standardLiter => _standardLiter;
+  dynamic get standardLiter => _standardLiter;
   double get consumedLiter => _consumedLiter;
   dynamic get description => _description;
   int get id => _id;

@@ -62,7 +62,7 @@ class _OvertimeApprovalListState extends State<OvertimeApprovalList> {
                         controller.otcList.value[index]
                             .name),
                     subtitle: Text(controller
-                        .otcList.value[index].requested_employee_id.name),
+                        .otcList.value[index].requested_employee_id!.name),
                     trailing: arrowforwardIcon),
               ),
             ),

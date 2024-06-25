@@ -8,7 +8,7 @@ import '../models/employee.dart';
 import '../models/employee_payslip.dart';
 import '../models/line_ids.dart';
 
-class Product_id {
+class PaySlips {
   int id;
   String month;
   String year;
@@ -19,15 +19,15 @@ class Product_id {
   double total;
   String pin;
   String slip_number;
-  dynamic? bank_account_number;
-  Product_id({this.id = 0, this.month = '',
+  dynamic bank_account_number;
+  PaySlips({this.id = 0, this.month = '',
   this.year = '', this.dateFrom = '', this.dateTo = '',
   this.employeeId,this.categoryList, this.total = 0.0,
   this.pin = '', this.slip_number = '',
   this.bank_account_number});
 
-  Product_id copyWith({int? id, String? name}) {
-    return Product_id(
+  PaySlips copyWith({int? id, String? name}) {
+    return PaySlips(
       id: id ?? this.id,
       month: month ?? this.month,
       year: year ?? this.year,
@@ -57,10 +57,10 @@ class Product_id {
     };
   }
 
-  factory Product_id.fromMap(Map<String, dynamic> map) {
+  factory PaySlips.fromMap(Map<String, dynamic> map) {
     // if (map == null) return null;
 
-    return Product_id(
+    return PaySlips(
       id: map['id'],
       month: map['month'],
       year: map['year'],
@@ -78,17 +78,17 @@ class Product_id {
 
   String toJson() => json.encode(toMap());
 
-  factory Product_id.fromJson(String source) =>
-      Product_id.fromMap(json.decode(source));
+  factory PaySlips.fromJson(String source) =>
+      PaySlips.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Product_id(id: $id, month: $month,year: $year, dateFrom: $dateFrom,dateTo: $dateTo, employeeId: $employeeId,categoryList: $categoryList, total: $total,pin: $pin, slip_number: $slip_number, bank_account_number: $bank_account_number)';
+  String toString() => 'PaySlips(id: $id, month: $month,year: $year, dateFrom: $dateFrom,dateTo: $dateTo, employeeId: $employeeId,categoryList: $categoryList, total: $total,pin: $pin, slip_number: $slip_number, bank_account_number: $bank_account_number)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Product_id && o.id == id && o.month == month && o.year == year && o.dateFrom == dateFrom
+    return o is PaySlips && o.id == id && o.month == month && o.year == year && o.dateFrom == dateFrom
     && o.dateTo == dateTo && o.employeeId == employeeId && o.categoryList == categoryList && o.total == total && o.pin == pin && o.slip_number == slip_number
     && o.bank_account_number == bank_account_number;
   }

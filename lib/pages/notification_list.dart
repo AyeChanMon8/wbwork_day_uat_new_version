@@ -306,7 +306,7 @@ class _NotificationMessageListState extends State<NotificationMessageList> {
                                                      flex: 1,
                                                      child: Checkbox(value:  controller.notificationList[index].selected, onChanged: (value){
                                                        setState(() {
-                                                         controller.notificationList[index].selected = value;
+                                                         controller.notificationList[index].selected = value!;
                                                        });
                                                      })),
                                                  controller

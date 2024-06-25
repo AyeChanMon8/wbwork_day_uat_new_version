@@ -105,7 +105,7 @@ class OvertimeDetails extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         // itemCount: controller.travelLineList.length,
-        itemCount: controller.otList[index].request_line.length,
+        itemCount: controller.otList[index].request_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           // var start_date =
           //     controller.otList[index].request_line[ind].start_date;
@@ -126,19 +126,19 @@ class OvertimeDetails extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              controller.otList[index].request_line[ind]
+                              controller.otList[index].request_line![ind]
                                   .employee_id.name,
                               style: labelPrimaryHightlightTextStyle(),
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            Text(controller.otList[index].request_line[ind]
+                            Text(controller.otList[index].request_line![ind]
                                         .email ==
                                     null
                                 ? "-"
                                 : controller
-                                    .otList[index].request_line[ind].email)
+                                    .otList[index].request_line![ind].email)
                           ],
                         ),
                       ),
@@ -151,7 +151,7 @@ class OvertimeDetails extends StatelessWidget {
                         // color: Colors.red,
                         // width: 80,
                         child: Text(
-                            controller.otList[index].request_line[ind].state == 'draft' ? 'Waiting':controller.otList[index].request_line[ind].state == 'cancel' ? 'declined' : controller.otList[index].request_line[ind].state),
+                            controller.otList[index].request_line![ind].state == 'draft' ? 'Waiting':controller.otList[index].request_line![ind].state == 'cancel' ? 'declined' : controller.otList[index].request_line![ind].state),
                       ),
                     ),
                     Expanded(
@@ -294,9 +294,9 @@ class OvertimeDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otList.value[index].categ_id.category != null
+                child: controller.otList.value[index].categ_id!.category != null
                     ? Text(
-                        (controller.otList.value[index].categ_id.category).toString(),
+                        (controller.otList.value[index].categ_id!.category).toString(),
                         style: subtitleStyle(),
                       )
                     : Text('-'),

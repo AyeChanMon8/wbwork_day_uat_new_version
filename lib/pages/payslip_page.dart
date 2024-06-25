@@ -67,7 +67,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
 
   getCategoryList() {
     List<Category_list> categoryList = [];
-    categoryList = controller.paySlips[pindex].categoryList;
+    categoryList = controller.paySlips[pindex].categoryList!;
     Category_list deduction = Category_list();
     Category_list net = Category_list();
     for (var i = 0; i < categoryList.length; i++) {
@@ -164,7 +164,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: category[index]
-                              .lineList
+                              .lineList!
                               .length, // controller.paySlips[pindex].categoryList[index].lineList.length,
                           itemBuilder: (BuildContext context, int ind) {
                             return Column(
@@ -179,7 +179,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                                     children: [
                                       Container(
                                         child: Text(
-                                          category[index].lineList[ind].name,
+                                          category[index].lineList![ind].name,
                                           //controller.paySlips[pindex].categoryList[index].lineList[ind].name,
                                           style: TextStyle(
                                               color: Color.fromRGBO(
@@ -189,7 +189,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                                       Container(
                                         child: Text(
                                           AppUtils.addThousnadSperator(
-                                            category[index].lineList[ind].total,
+                                            category[index].lineList![ind].total,
                                             //controller.paySlips[pindex].categoryList[index].lineList[ind].total
                                           ),
                                           style: TextStyle(
@@ -206,7 +206,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                                 // ),
                                 (index == category.length - 1 &&
                                         ind ==
-                                            category[index].lineList.length - 1)
+                                            category[index].lineList!.length - 1)
                                     ? SizedBox()
                                     : Divider(
                                         thickness: 1,
@@ -279,7 +279,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Salary Slip- ' +
-                        controller.paySlips[pindex].employeeId.name +
+                        controller.paySlips[pindex].employeeId!.name +
                         ' - ' +
                         date,
                     style: TextStyle(
@@ -308,7 +308,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                           '[' +
                               controller.paySlips[pindex].pin.toString() +
                               '] ' +
-                              controller.paySlips[pindex].employeeId.name,
+                              controller.paySlips[pindex].employeeId!.name,
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -321,7 +321,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Text(
-                          controller.paySlips[pindex].employeeId.jobId.name,
+                          controller.paySlips[pindex].employeeId!.jobId!.name,
                           style:
                               TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                     ),
@@ -620,9 +620,9 @@ class _PaySlipPageState extends State<PaySlipPage> {
         .parse(controller.paySlips[pindex].dateFrom);
     String paySlipDate = DateFormat("MMMM yyyy").format(tempDate1);
     List<Category_list> categoryList = [];
-    categoryList = controller.paySlips[pindex].categoryList;
+    categoryList = controller.paySlips[pindex].categoryList!;
     String file_name =
-        controller.paySlips[pindex].employeeId.name + paySlipDate;
+        controller.paySlips[pindex].employeeId!.name + paySlipDate;
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyyMMdd');
     var timeFormatter = new DateFormat('HHmmss');
@@ -644,7 +644,7 @@ class _PaySlipPageState extends State<PaySlipPage> {
 
     page.graphics.drawString(
         'Salary Slip- ' +
-            controller.paySlips[pindex].employeeId.name +
+            controller.paySlips[pindex].employeeId!.name +
             ' - ' +
             paySlipDate,
         PdfStandardFont(PdfFontFamily.timesRoman, 20),
@@ -662,9 +662,9 @@ class _PaySlipPageState extends State<PaySlipPage> {
     row11.cells[1].value = '[' +
         controller.paySlips[pindex].pin.toString() +
         '] ' +
-        controller.paySlips[pindex].employeeId.name;
+        controller.paySlips[pindex].employeeId!.name;
     row11.cells[2].value = 'Designation';
-    row11.cells[3].value = controller.paySlips[pindex].employeeId.jobId.name;
+    row11.cells[3].value = controller.paySlips[pindex].employeeId!.jobId!.name;
     PdfGridRow row12 = grid2.rows.add();
     row12.cells[0].value = 'Reference';
     row12.cells[1].value = controller.paySlips[pindex].slip_number.toString();
@@ -699,11 +699,11 @@ class _PaySlipPageState extends State<PaySlipPage> {
         PdfStringFormat(alignment: PdfTextAlignment.right);
 
     for (int i = 0; i < category.length; i++) {
-      for (int j = 0; j < category[i].lineList.length; j++) {
+      for (int j = 0; j < category[i].lineList!.length; j++) {
         row = grid.rows.add();
-        row.cells[0].value = category[i].lineList[j].name;
+        row.cells[0].value = category[i].lineList![j].name;
         row.cells[1].value =
-            AppUtils.addThousnadSperator(category[i].lineList[j].total)
+            AppUtils.addThousnadSperator(category[i].lineList![j].total)
                 .toString();
         row.cells[1].style.stringFormat =
             PdfStringFormat(alignment: PdfTextAlignment.right);

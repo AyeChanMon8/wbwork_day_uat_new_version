@@ -26,7 +26,7 @@ class OdooService extends GetxService {
     token = box.read(Globals.token);
     if (token == null) {
       this.odooInstance.value = await getOdooInstance();
-      token = this.odooInstance.value.user.access_token;
+      token = this.odooInstance.value.user!.access_token;
       box.write(Globals.tokenDate, DateTime.now().toString());
       box.write(Globals.token, token);
     }
@@ -46,9 +46,9 @@ class OdooService extends GetxService {
       print(response.data);
       if (response.statusCode == 200) {
         newOdooInstance.user = User.fromMap(response.data);
-        print(newOdooInstance.user.access_token);
+        print(newOdooInstance.user!.access_token);
         newOdooInstance.connected = true;
-        box.write(Globals.token, newOdooInstance.user.access_token);
+        box.write(Globals.token, newOdooInstance.user!.access_token);
       } else {
         throw Exception('Failed to create album.');
       }
@@ -72,7 +72,7 @@ class OdooService extends GetxService {
         print('used $token');
       } else {
         OdooInstance newInst = await getOdooInstance();
-        token = newInst.user.access_token;
+        token = newInst.user!.access_token;
         box.write(Globals.tokenDate, DateTime.now().toString());
         box.save();
       }
@@ -101,7 +101,7 @@ class OdooService extends GetxService {
             dio.interceptors.responseLock.lock();
             RequestOptions options = e.requestOptions;
             OdooInstance newInst = await getOdooInstance();
-            token = newInst.user.access_token;
+            token = newInst.user!.access_token;
             options.headers["Access-Token"] = token;
             options.connectTimeout = 5000000;
             options.receiveTimeout = 3000000;
@@ -114,7 +114,7 @@ class OdooService extends GetxService {
           // return error;
          // Get.snackbar("Try Again Login", "Token is expired or invalid!",snackPosition: SnackPosition.BOTTOM,backgroundColor:Colors.red,colorText: Colors.white);
           this.odooInstance.value = await getOdooInstance();
-          token = this.odooInstance.value.user.access_token;
+          token = this.odooInstance.value.user!.access_token;
           box.write(Globals.token, token);
           box.write(Globals.tokenDate, DateTime.now().toString());
           box.save();

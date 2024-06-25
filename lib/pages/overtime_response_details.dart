@@ -83,11 +83,11 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otAcceptedList.value[index].employee_id.name
+                child: controller.otAcceptedList.value[index].employee_id!.name
                     .toString() !=
                     null
                     ? Text(
-                    controller.otAcceptedList.value[index].employee_id.name
+                    controller.otAcceptedList.value[index].employee_id!.name
                         .toString(),
                     style: subtitleStyle())
                     : Text('-'),
@@ -131,8 +131,8 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otAcceptedList.value[index].categ_id.category != null
-                    ? Text(controller.otAcceptedList.value[index].categ_id.category.toString(),
+                child: controller.otAcceptedList.value[index].categ_id!.category != null
+                    ? Text(controller.otAcceptedList.value[index].categ_id!.category.toString(),
                     style: subtitleStyle())
                     : Text('-'),
               ),
@@ -239,11 +239,11 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otDraftList.value[index].employee_id.name
+                child: controller.otDraftList.value[index].employee_id!.name
                     .toString() !=
                     null
                     ? Text(
-                    controller.otDraftList.value[index].employee_id.name
+                    controller.otDraftList.value[index].employee_id!.name
                         .toString(),
                     style: subtitleStyle())
                     : Text('-'),
@@ -288,8 +288,8 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otDraftList.value[index].categ_id.category != null
-                    ? Text(controller.otDraftList.value[index].categ_id.category.toString(),
+                child: controller.otDraftList.value[index].categ_id!.category != null
+                    ? Text(controller.otDraftList.value[index].categ_id!.category.toString(),
                     style: subtitleStyle())
                     : Text('-'),
               ),
@@ -395,11 +395,11 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otDeclinedList.value[index].employee_id.name
+                child: controller.otDeclinedList.value[index].employee_id!.name
                     .toString() !=
                     null
                     ? Text(
-                    controller.otDeclinedList.value[index].employee_id.name
+                    controller.otDeclinedList.value[index].employee_id!.name
                         .toString(),
                     style: subtitleStyle())
                     : Text('-'),
@@ -444,8 +444,8 @@ class OvertimeResponseDetails extends StatelessWidget {
                 ),
               ),
               Container(
-                child: controller.otDeclinedList.value[index].categ_id.category.toString() != null
-                    ? Text(controller.otDeclinedList.value[index].categ_id.category.toString(),
+                child: controller.otDeclinedList.value[index].categ_id!.category.toString() != null
+                    ? Text(controller.otDeclinedList.value[index].categ_id!.category.toString(),
                     style: subtitleStyle())
                     : Text('-'),
               ),

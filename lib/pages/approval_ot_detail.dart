@@ -75,11 +75,11 @@ class OvertimeApprovalDetail extends StatelessWidget {
               ),
               Obx(
                 () => Container(
-                  child: controller.otcList.value[index].employee_id.name
+                  child: controller.otcList.value[index].employee_id!.name
                               .toString() !=
                           null
                       ? Text(
-                          controller.otcList.value[index].employee_id.name
+                          controller.otcList.value[index].employee_id!.name
                               .toString(),
                           style: subtitleStyle())
                       : Text('-'),
