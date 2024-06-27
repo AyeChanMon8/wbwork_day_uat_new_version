@@ -1568,8 +1568,8 @@ class PlanTrip_Consumption_ids {
 /// actual_amount : 0.0
 
 class Expense_ids {
-  Route_expense_id routeExpenseId;
-  ERoute_id eRouteId;
+  Route_expense_id? routeExpenseId;
+  ERoute_id? eRouteId;
   double standardAmount;
   double actualAmount;
   double overAmount;
@@ -1577,8 +1577,8 @@ class Expense_ids {
   String attachement_image;
   String description;
   Expense_ids({
-    required this.routeExpenseId,
-    required this.eRouteId,
+    this.routeExpenseId,
+    this.eRouteId,
     this.standardAmount =0.0,
     this.actualAmount = 0.0,
     this.overAmount = 0.0,

@@ -462,9 +462,9 @@ class PlanTripController extends GetxController {
         Plantrip_product_expense_line plantrip_product_expense_line =
             Plantrip_product_expense_line(
                 // tripProductId: planTripModel.id,
-                routeExpenseId: selectedExpenseRouteCategory.routeExpenseId.id,
+                routeExpenseId: selectedExpenseRouteCategory.routeExpenseId!.id,
                 actualAmount: double.tryParse(
-                    expenseActualTextController.text.toString()),
+                    expenseActualTextController.text.toString())!,
                 description: expenseDescriptionTextController.text.toString(),
                 image: selectedExpensePlanTripProductImage);
         planTripServie?.addPlanTripProductExpense(plantrip_product_expense_line, lineID,
@@ -843,7 +843,7 @@ class PlanTripController extends GetxController {
     Plantrip_product_expense_line plantrip_product_expense_line =
         Plantrip_product_expense_line(
             // tripProductId: planTripModel.id,
-            routeExpenseId: expenseId.routeExpenseId.id,
+            routeExpenseId: expenseId.routeExpenseId!.id,
             actualAmount: 0.0,
             description: expenseId.description,
             image: expenseId.attachement_image);

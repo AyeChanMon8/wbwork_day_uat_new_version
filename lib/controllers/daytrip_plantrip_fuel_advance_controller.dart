@@ -456,7 +456,7 @@ class DayTripPlanTripGeneralController extends GetxController{
           });
         }else if(arg=="PlanTripProduct"){
 
-          var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
+          var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text)!,amount: int.tryParse(amountTextController.text)!,total_amount: int.tryParse(totalAmountController.text)!,remark: remarkTextController.text);
           await planTripServie?.addPlanTripProductAdvance(advance).then((data) {
             isAdvanceButton.value = false;
             if (data != 0) {
@@ -510,7 +510,7 @@ class DayTripPlanTripGeneralController extends GetxController{
       });
     }
     else if(arg=="PlanTripProduct"){
-      var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text),amount: int.tryParse(amountTextController.text),totalAmount: int.tryParse(totalAmountController.text),remark: remarkTextController.text);
+      var advance  = Plantrip_product_adavance_line(tripProductId: tripID,expenseCategId: this.selectedExpenseCategory.id,quantity: int.tryParse(quantityTextController.text)!,amount: int.tryParse(amountTextController.text)!,total_amount: int.tryParse(totalAmountController.text)!,remark: remarkTextController.text);
       await planTripServie?.addPlanTripProductAdvance(advance).then((data) {
         if (data != 0) {
           Get.defaultDialog(title:'Information',content: Text('Successfully Saved!'),confirmTextColor: Colors.white,onConfirm: (){

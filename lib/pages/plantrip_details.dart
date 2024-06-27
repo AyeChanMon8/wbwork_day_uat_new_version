@@ -1508,7 +1508,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 child: Text(controller
                                     .plantrip_with_product_list[arg_index]
                                     .expenseIds![index]
-                                    .eRouteId
+                                    .eRouteId!
                                     .name
                                     .toString(),style: TextStyle(fontSize: 11)),
                                 ),
@@ -1520,7 +1520,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 child: Text(controller
                                     .plantrip_with_product_list[arg_index]
                                     .expenseIds![index]
-                                    .routeExpenseId
+                                    .routeExpenseId!
                                     .name
                                     .toString(),style: TextStyle(fontSize: 11)),
                               ),
@@ -2954,7 +2954,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
-                                category.routeExpenseId.name,
+                                category.routeExpenseId!.name,
                                 style: TextStyle(),
                               ),
                             ),
@@ -2987,8 +2987,8 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
       controller.isShowImage.value = false;
       controller.selectedExpensePlanTripProductImage = "";
     }
-    controller.routeName = arguments.eRouteId.name.toString();
-    findDropDownValue(arguments.routeExpenseId.id);
+    controller.routeName = arguments.eRouteId!.name.toString();
+    findDropDownValue(arguments.routeExpenseId!.id);
     super.initState();
   }
 
@@ -3170,7 +3170,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
   void findDropDownValue(int expenseID) {
     bool found = false;
     for (int i = 0; i < controller.expense_list.value.length; i++) {
-      if (controller.expense_list.value[i].routeExpenseId.id == expenseID) {
+      if (controller.expense_list.value[i].routeExpenseId!.id == expenseID) {
         found = true;
         controller.selectedExpenseRouteCategory =
             controller.expense_list.value[i];
