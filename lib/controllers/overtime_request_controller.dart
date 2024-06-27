@@ -132,7 +132,7 @@ class OvertimeRequestController extends GetxController {
             requestLineList.add(
               OvertimeRequestLine(
                 employee_id: data[i].id,
-                duration: double.tryParse(durationController.text),
+                duration: double.tryParse(durationController.text)!,
                 start_date: from_date,
                 end_date: to_date,
                 email: data[i].work_email,
@@ -225,8 +225,8 @@ class OvertimeRequestController extends GetxController {
       List<Branch_id> branch_ids = [];
       for(var i=0;i<dept_ids.length;i++){
         Branch_id branch = new Branch_id();
-        branch.id = dept_ids[i].branch_id.id;
-        branch.name = dept_ids[i].branch_id.name;
+        branch.id = dept_ids[i].branch_id!.id;
+        branch.name = dept_ids[i].branch_id!.name;
         branch_ids.add(branch);
       }
       var overtime_request = OvertimeRequest(
@@ -238,7 +238,7 @@ class OvertimeRequestController extends GetxController {
         duration: double.parse(durationController.text),
         reason: reasonTextController.text,
         request_line: requestLineList,
-        requested_employee_id: employee_id,
+        requested_employee_id: employee_id!,
         categ_id: categ_id,
       );
       print(overtime_request.toJson());

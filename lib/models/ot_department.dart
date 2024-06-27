@@ -11,14 +11,14 @@ class OTDepartment {
   final String name;
   // final int branch_id;
   // final String branch_name;
-  Branch_id branch_id;
+  Branch_id? branch_id;
   String complete_name;
   List<EmployeeID>? employee_ids;
   OTDepartment({
     this.id = 0,
     this.name = '',this.complete_name = '',
     // this.branch_id,this.branch_name
-    required this.branch_id
+    this.branch_id
   });
 
 

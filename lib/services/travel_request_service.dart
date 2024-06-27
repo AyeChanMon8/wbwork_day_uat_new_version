@@ -538,7 +538,7 @@ class TravelRequestService extends OdooService {
     var created = 0;
     String url = Globals.baseURL + "/hr.employee/2/add_pocket_expense_lines";
     print('pocketlinesize');
-    print(outofPocket.pocket_line.length);
+    print(outofPocket.pocket_line!.length);
     print(outofPocket.pocket_line.toString());
     Response response = await dioClient.put(url, data: outofPocket.toJson());
 

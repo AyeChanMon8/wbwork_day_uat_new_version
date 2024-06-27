@@ -66,8 +66,8 @@ class _PlantripWithProductToApproveListPage extends State<PlantripWithProductToA
                                 EdgeInsets.only(left: 20, bottom: 10, top: 20),
                                 child: Text(
                                   controller.plantrip_with_product_toapprove_list.value[index]
-                                      .routePlanIds.length==0?"":controller.plantrip_with_product_toapprove_list.value[index]
-                                      .routePlanIds.first.routeId.name,
+                                      .routePlanIds!.length==0?"":controller.plantrip_with_product_toapprove_list.value[index]
+                                      .routePlanIds!.first.routeId!.name,
                                   style: subtitleStyle(),
                                 ),
                               ),
@@ -110,7 +110,7 @@ class _PlantripWithProductToApproveListPage extends State<PlantripWithProductToA
                                     text: TextSpan(
                                       style: datalistStyle(),
                                       text: controller
-                                          .plantrip_with_product_toapprove_list.value[index].spare1Id.name,
+                                          .plantrip_with_product_toapprove_list.value[index].spare1Id!.name,
                                     ),
                                   ),
                                 ),

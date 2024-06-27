@@ -70,10 +70,10 @@ class _PlantripWithProductListPage extends State<PlantripWithProductListPage>{
               var routes = "";
               var route_names = [];
               if(controller.plantrip_with_product_list.value[index]
-                  .routePlanIds.length!=0){
+                  .routePlanIds!.length!=0){
                 controller.plantrip_with_product_list.value[index]
-                    .routePlanIds.forEach((element) {
-                  route_names.add(element.routeId.name);
+                    .routePlanIds!.forEach((element) {
+                  route_names.add(element.routeId!.name);
                 });
               }
 
@@ -180,8 +180,8 @@ class _PlantripWithProductListPage extends State<PlantripWithProductListPage>{
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AutoSizeText(labels.driver+'  ',style: datalistStylenotBold(),),
-                              controller.plantrip_with_product_list[index].driverId.name==null?Text("-"):
-                              AutoSizeText('${controller.plantrip_with_product_list[index].driverId.name}',style: datalistStyle(),)
+                              controller.plantrip_with_product_list[index].driverId!.name==null?Text("-"):
+                              AutoSizeText('${controller.plantrip_with_product_list[index].driverId!.name}',style: datalistStyle(),)
                             ],),
                         ),
                         SizedBox(height:10),
@@ -195,15 +195,15 @@ class _PlantripWithProductListPage extends State<PlantripWithProductListPage>{
                               //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   AutoSizeText(labels.spare+' ',style: datalistStylenotBold(),),
-                                  controller.plantrip_with_product_list[index].spare1Id.name==null?Text("-"):
-                                  AutoSizeText('(${controller.plantrip_with_product_list[index].spare1Id.name})',style: datalistStyle(),)
+                                  controller.plantrip_with_product_list[index].spare1Id!.name==null?Text("-"):
+                                  AutoSizeText('(${controller.plantrip_with_product_list[index].spare1Id!.name})',style: datalistStyle(),)
                                 ],),
                             ),
                             Container(
                               margin: EdgeInsets.only(
                                   left: 20, bottom: 20, top: 5, right: 5),
                               child: controller.plantrip_with_product_list.value[index].state=='open'?
-                              controller.plantrip_with_product_list.value[index].driverId.id==emp_id?
+                              controller.plantrip_with_product_list.value[index].driverId!.id==emp_id?
                               Text(controller.plantrip_with_product_list.value[index].state.toUpperCase(),
                                 style: subtitleStyle(),):Text(
                                 'approved'.toUpperCase(),

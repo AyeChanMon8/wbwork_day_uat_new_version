@@ -65,23 +65,23 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
     }
     if (Get.arguments != null) {
       arg_index = Get.arguments;
-      if (controller.plantrip_with_product_list[arg_index].expenseIds.length >
+      if (controller.plantrip_with_product_list[arg_index].expenseIds!.length >
           0) {
         controller.selectedExpenseRouteCategory =
-            controller.plantrip_with_product_list[arg_index].expenseIds[0];
+            controller.plantrip_with_product_list[arg_index].expenseIds![0];
         controller.expense_list.value =
-            controller.plantrip_with_product_list[arg_index].expenseIds;
+            controller.plantrip_with_product_list[arg_index].expenseIds!;
       }
 
       if (controller
-              .plantrip_with_product_list[arg_index].consumptionIds.length !=
+              .plantrip_with_product_list[arg_index].consumptionIds!.length !=
           0) {
         controller.selectedRoute =
-            controller.plantrip_with_product_list[arg_index].consumptionIds[0];
+            controller.plantrip_with_product_list[arg_index].consumptionIds![0];
       }
       if(controller
-              .plantrip_with_product_list[arg_index].vehicleId.inchargeId !=null && controller
-              .plantrip_with_product_list[arg_index].vehicleId.inchargeId.id == int.parse(employee_id)){
+              .plantrip_with_product_list[arg_index].vehicleId!.inchargeId !=null && controller
+              .plantrip_with_product_list[arg_index].vehicleId!.inchargeId.id == int.parse(employee_id)){
                 isIncharge = true;
       }
     }
@@ -97,7 +97,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         controller.plantrip_with_product_list[arg_index].id.toString(),
         'plantrip_product');
     controller.calculatePlantripTotalExpense(controller
-        .plantrip_with_product_list[arg_index].expenseIds);
+        .plantrip_with_product_list[arg_index].expenseIds!);
     super.initState();
   }
 
@@ -133,7 +133,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         //   padding: const EdgeInsets.only(top: 20),
         //   child: routeListWidget(context),
         // ),
-        controller.plantrip_with_product_list.value[controller.arg_index.value].state == 'running' && (controller.plantrip_with_product_list[arg_index].driverId.id == int.parse(employee_id)) ? Padding(
+        controller.plantrip_with_product_list.value[controller.arg_index.value].state == 'running' && (controller.plantrip_with_product_list[arg_index].driverId!.id == int.parse(employee_id)) ? Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: routeListWidget(context),
         ): SizedBox(),
@@ -154,7 +154,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds.length,
+        itemCount: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds!.length,
         itemBuilder: (BuildContext context, int index1) {
 
           return Column(
@@ -168,7 +168,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                       flex: 3,
                       child: Container(
                         width: 80,
-                        child: Text(controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].routeId.name
+                        child: Text(controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].routeId!.name
                             .toString()
                         ),
                       ),
@@ -181,8 +181,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           data: new ThemeData(
                             primaryColor: textFieldTapColor,
                           ),
-                          child: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].startActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
-                controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].startActualDate)): SizedBox(),
+                          child: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].startActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
+                controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].startActualDate)): SizedBox(),
                         )),
                   ),
                    Expanded(
@@ -193,15 +193,15 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           data: new ThemeData(
                             primaryColor: textFieldTapColor,
                           ),
-                          child: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].endActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
-                controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].endActualDate)): SizedBox()
+                          child: controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].endActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
+                controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].endActualDate)): SizedBox()
                         )),
                   ),
-                  controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].status!=null ?Expanded(
+                  controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].status!=null ?Expanded(
                     flex: 3,
                     child: Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
-                      child:  Text(controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds[index1].status),
+                      child:  Text(controller.plantrip_with_product_list[controller.arg_index.value].routePlanIds![index1].status),
                     ),
                   ):SizedBox()
                   ],
@@ -264,7 +264,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         color: backgroundIconColor,
       ),
     ),
-    controller.plantrip_with_product_list[arg_index].productIds.length > 0
+    controller.plantrip_with_product_list[arg_index].productIds!.length > 0
         ? Expanded(
           child: Padding(
               padding: const EdgeInsets.only(top: 10),
@@ -349,7 +349,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             onPressed: () {
               var itemAdvanceTotal = 0.0;
               controller.plantrip_with_product_list[arg_index]
-                  .requestAllowanceLines
+                  .requestAllowanceLines!
                   .forEach((element) {
                 itemAdvanceTotal += element.totalAmount;
               });
@@ -364,7 +364,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                   DayTripPlanTripGeneralController day_trip_controller =
                       Get.find();
                   controller.plantrip_with_product_list[arg_index]
-                      .requestAllowanceLines
+                      .requestAllowanceLines!
                       .add(Request_allowance_lines(
                           id: value,
                           expenseCategId: Expense_categ_id(
@@ -373,11 +373,11 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               name: day_trip_controller
                                   .selectedExpenseCategory.displayName),
                           quantity: double.tryParse(day_trip_controller
-                              .quantityTextController.text),
+                              .quantityTextController.text)!,
                           amount: double.tryParse(day_trip_controller
-                              .amountTextController.text),
+                              .amountTextController.text)!,
                           totalAmount: double.tryParse(day_trip_controller
-                              .totalAmountController.text),
+                              .totalAmountController.text)!,
                           remark: day_trip_controller.remarkTextController.text));
                 }
               });
@@ -653,7 +653,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                   DayTripPlanTripGeneralController general_controller =
                       Get.find();
                   controller
-                      .plantrip_with_product_list[arg_index].fuelinIds
+                      .plantrip_with_product_list[arg_index].fuelinIds!
                       .add(
                     Fuelin_ids(
                         id: value,
@@ -671,11 +671,11 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                         slipNo:
                             general_controller.slipNoTextController.text,
                         liter: double.tryParse(
-                            general_controller.qtyController.text),
+                            general_controller.qtyController.text)!,
                         priceUnit: double.tryParse(
-                            general_controller.priceController.text),
+                            general_controller.priceController.text)!,
                         amount: double.tryParse(general_controller
-                            .totalFuelInAmtController.text)),
+                            .totalFuelInAmtController.text)!),
                   );
                 }
               });
@@ -814,9 +814,9 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     var spare_one = AppUtils.removeNullString(
-        controller.plantrip_with_product_list[arg_index].spare1Id.name);
+        controller.plantrip_with_product_list[arg_index].spare1Id!.name);
     var spare_two = AppUtils.removeNullString(
-        controller.plantrip_with_product_list[arg_index].spare2Id.name);
+        controller.plantrip_with_product_list[arg_index].spare2Id!.name);
 
     image = box.read('emp_image');
     controller.plantrip_id =
@@ -974,7 +974,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                     height: 5,
                                   ),
                                   controller.plantrip_with_product_list.length > 0 ? AutoSizeText(
-                                    '${controller.plantrip_with_product_list[arg_index].vehicleId.name}',
+                                    '${controller.plantrip_with_product_list[arg_index].vehicleId!.name}',
                                     style: maintitleStyle(),
                                   ):SizedBox()
                                 ],
@@ -994,7 +994,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                     height: 5,
                                   ),
                                   controller.plantrip_with_product_list.length > 0 ?AutoSizeText(
-                                    '${controller.plantrip_with_product_list[arg_index].driverId.name}',
+                                    '${controller.plantrip_with_product_list[arg_index].driverId!.name}',
                                     style: maintitleStyle(),
                                   ):SizedBox()
                                 ],
@@ -1271,7 +1271,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             shrinkWrap: true,
             //physics: NeverScrollableScrollPhysics(),
             itemCount: controller
-                .plantrip_with_product_list[arg_index].consumptionIds.length,
+                .plantrip_with_product_list[arg_index].consumptionIds!.length,
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1286,8 +1286,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                             // width: 80,
                             child: Text(controller
                                 .plantrip_with_product_list[arg_index]
-                                .consumptionIds[index]
-                                .routeId
+                                .consumptionIds![index]
+                                .routeId!
                                 .name
                                 .toString(),style: TextStyle(fontSize: 11)),
                           ),
@@ -1301,7 +1301,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 child: Text(NumberFormat('#,###')
                                     .format(double.tryParse(controller
                                         .plantrip_with_product_list[arg_index]
-                                        .consumptionIds[index]
+                                        .consumptionIds![index]
                                         .standardLiter
                                         .toString()))
                                     .toString(),style: TextStyle(fontSize: 11)),
@@ -1314,7 +1314,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(NumberFormat('#,###.##')
                                   .format(double.tryParse(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .consumptionIds[index]
+                                      .consumptionIds![index]
                                       .consumedLiter
                                       .toString()))
                                   .toString(),style: TextStyle(fontSize: 11))),
@@ -1325,7 +1325,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                             // width: 80,
                             child: Text(AppUtils.removeNullString(controller
                                 .plantrip_with_product_list[arg_index]
-                                .consumptionIds[index]
+                                .consumptionIds![index]
                                 .description),style: TextStyle(fontSize: 11)),
                           ),
                         ),
@@ -1340,7 +1340,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                           controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .consumptionIds[index] 
+                                              .consumptionIds![index] 
                                               .id,controller
                                               .plantrip_with_product_list[
                                                   arg_index].id);
@@ -1361,12 +1361,12 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                           controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .consumptionIds[index]
+                                              .consumptionIds![index]
                                               .id,
                                           controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .consumptionIds[index]);
+                                              .consumptionIds![index]);
                                     },
                                     child: Container(
                                       child: Icon(
@@ -1403,10 +1403,10 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         controller.plantrip_with_product_list[arg_index].consumptionIds;
 
     if (controller
-            .plantrip_with_product_list[arg_index].consumptionIds.length !=
+            .plantrip_with_product_list[arg_index].consumptionIds!.length !=
         0) {
       controller.selectedRoute =
-          controller.plantrip_with_product_list[arg_index].consumptionIds[0];
+          controller.plantrip_with_product_list[arg_index].consumptionIds![0];
     }
     return Container(
       child: Row(
@@ -1480,7 +1480,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             controller: scrollController,
             shrinkWrap: true,
             itemCount: controller
-                .plantrip_with_product_list[arg_index].expenseIds.length,
+                .plantrip_with_product_list[arg_index].expenseIds!.length,
             itemBuilder: (BuildContext context, int index) {
               //fields = controller.travelLineModel.length;
               //create dynamic destination textfield controller
@@ -1507,7 +1507,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 // width: 80,
                                 child: Text(controller
                                     .plantrip_with_product_list[arg_index]
-                                    .expenseIds[index]
+                                    .expenseIds![index]
                                     .eRouteId
                                     .name
                                     .toString(),style: TextStyle(fontSize: 11)),
@@ -1519,7 +1519,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 // width: 80,
                                 child: Text(controller
                                     .plantrip_with_product_list[arg_index]
-                                    .expenseIds[index]
+                                    .expenseIds![index]
                                     .routeExpenseId
                                     .name
                                     .toString(),style: TextStyle(fontSize: 11)),
@@ -1536,7 +1536,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                     child: Text(NumberFormat('#,###')
                                         .format(double.tryParse(controller
                                             .plantrip_with_product_list[arg_index]
-                                            .expenseIds[index]
+                                            .expenseIds![index]
                                             .standardAmount
                                             .toString()))
                                         .toString(),style: TextStyle(fontSize: 11)),
@@ -1555,7 +1555,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                     child: Text(NumberFormat('#,###')
                                         .format(double.tryParse(controller
                                             .plantrip_with_product_list[arg_index]
-                                            .expenseIds[index]
+                                            .expenseIds![index]
                                             .actualAmount
                                             .toString()))
                                         .toString(),style: TextStyle(fontSize: 11)),
@@ -1570,7 +1570,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                 child: controller
                                             .plantrip_with_product_list[
                                                 arg_index]
-                                            .expenseIds[index]
+                                            .expenseIds![index]
                                             .overAmount !=
                                         null
                                     ? Align(
@@ -1579,7 +1579,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                           .format(double.tryParse(controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .expenseIds[index]
+                                              .expenseIds![index]
                                               .overAmount
                                               .toString()))
                                           .toString(),style: TextStyle(fontSize: 11)),
@@ -1597,7 +1597,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                         controller.deleteExpenseLine(controller
                                             .plantrip_with_product_list[
                                                 arg_index]
-                                            .expenseIds[index]);
+                                            .expenseIds![index]);
                                       },
                                     )):SizedBox(),
                             controller.plantrip_with_product_list[arg_index]
@@ -1616,7 +1616,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                   arguments: controller
                                                       .plantrip_with_product_list[
                                                           arg_index]
-                                                      .expenseIds[index])?.then((value) {
+                                                      .expenseIds![index])?.then((value) {
                                             if (value != null) {
                                               controller.getPlantripList(
                                                   controller
@@ -1715,16 +1715,16 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         plantrip_product_list_lines = [];
         next_route_id = 0;
         previous_route_id = 0;
-          for(var i=0; i< controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds.length; i++){
-            if(i == 0 && (controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == '' || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == null)){
+          for(var i=0; i< controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds!.length; i++){
+            if(i == 0 && (controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == '' || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == null)){
               first_route = true;
             }else{
               first_route = false;
             }
-            if((controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == '' || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == null || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == 'running') || (((controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds.length-1) == i) && controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].status == 'end')){
-              plantrip_product_list_lines.add(controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i]);
-              if(i != controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds.length-1){
-                  next_route_id = controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i+1].id;
+            if((controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == '' || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == null || controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == 'running') || (((controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds!.length-1) == i) && controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].status == 'end')){
+              plantrip_product_list_lines.add(controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i]);
+              if(i != controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds!.length-1){
+                  next_route_id = controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i+1].id;
               }
               break;
             }
@@ -1761,11 +1761,11 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                     width: 50,
                     child: GFButton(
                       onPressed: () {
-                        if(controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds.length > 1){
-                          for(var i=0; i< controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds.length; i++){
+                        if(controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds!.length > 1){
+                          for(var i=0; i< controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds!.length; i++){
                             if(i!=0){
-                                if(plantrip_product_list_lines[index].id == controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i].id){
-                                  previous_route_id = controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds[i-1].id;break;
+                                if(plantrip_product_list_lines[index].id == controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i].id){
+                                  previous_route_id = controller.plantrip_with_product_list.value[controller.arg_index.value].routePlanIds![i-1].id;break;
                                 }
                             }
                           }
@@ -1866,7 +1866,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(labels.product, style: pmstitleStyle())),
                           Expanded(
                               child: Text(AppUtils.removeNullString(
-                                  fuelIn_ids.productId.name)))
+                                  fuelIn_ids.productId!.name)))
                         ],
                       ),
                       SizedBox(
@@ -1882,7 +1882,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           Expanded(
                               child: Text(fuelIn_ids.location_id != null
                                   ? AppUtils.removeNullString(
-                                      fuelIn_ids.location_id.name)
+                                      fuelIn_ids.location_id!.name)
                                   : ''))
                         ],
                       ),
@@ -1970,16 +1970,16 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             shrinkWrap: true,
             //physics: NeverScrollableScrollPhysics(),
             itemCount: controller
-                .plantrip_with_product_list[arg_index].fuelinIds.length,
+                .plantrip_with_product_list[arg_index].fuelinIds!.length,
             itemBuilder: (BuildContext context, int index) {
               var date = AppUtils.changeDateFormat(controller
-                  .plantrip_with_product_list[arg_index].fuelinIds[index].date);
+                  .plantrip_with_product_list[arg_index].fuelinIds![index].date);
               return InkWell(
                 onTap: () {
                   fuelInBottomSheet(
                       context,
                       controller.plantrip_with_product_list[arg_index]
-                          .fuelinIds[index]);
+                          .fuelinIds![index]);
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -2009,12 +2009,12 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               // width: 80,
                               child: Text(controller
                                   .plantrip_with_product_list[arg_index]
-                                  .fuelinIds[index]
-                                  .productId
+                                  .fuelinIds![index]
+                                  .productId!
                                   .name !=null ? controller
                                   .plantrip_with_product_list[arg_index]
-                                  .fuelinIds[index]
-                                  .productId
+                                  .fuelinIds![index]
+                                  .productId!
                                   .name
                                   .toString() : '',style: TextStyle(fontSize: 11)),
                             ),
@@ -2026,7 +2026,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(NumberFormat('#,###').format(
                                   double.tryParse(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .fuelinIds[index]
+                                      .fuelinIds![index]
                                       .liter
                                       .toString())),style: TextStyle(fontSize: 11)),
                             ),
@@ -2038,7 +2038,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(NumberFormat('#,###').format(
                                   double.tryParse(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .fuelinIds[index]
+                                      .fuelinIds![index]
                                       .priceUnit
                                       .toString())),style: TextStyle(fontSize: 11)),
                             ),
@@ -2050,14 +2050,14 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(NumberFormat('#,###').format(
                                   double.tryParse(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .fuelinIds[index]
+                                      .fuelinIds![index]
                                       .amount
                                       .toString())),style: TextStyle(fontSize: 11)),
                             ),
                           ),
                           controller.plantrip_with_product_list[arg_index].state == "close"
                               ? SizedBox()
-                              : (controller.plantrip_with_product_list[arg_index].state=='running'&&(controller.plantrip_with_product_list[arg_index].fuelinIds[index].add_from_office == null) && (isDriver==true||is_spare==true)&&is_branch_manager==false)
+                              : (controller.plantrip_with_product_list[arg_index].state=='running'&&(controller.plantrip_with_product_list[arg_index].fuelinIds![index].add_from_office == null) && (isDriver==true||is_spare==true)&&is_branch_manager==false)
                                   ? Expanded(
                                       flex: 1,
                                       child: IconButton(
@@ -2070,7 +2070,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                     .fromDatetime,
                                                 controller.plantrip_with_product_list[arg_index]
                                                     .toDatetime,
-                                                controller.plantrip_with_product_list[arg_index].fuelinIds[index]
+                                                controller.plantrip_with_product_list[arg_index].fuelinIds![index]
                                                 ))?.then((value) {
                                                   if (value != null) {
                                                     controller.getPlantripList(controller.current_page.value);
@@ -2081,7 +2081,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                   : Expanded(flex: 1, child: SizedBox()),
                           controller.plantrip_with_product_list[arg_index].state == "close"
                               ? SizedBox()
-                              : (controller.plantrip_with_product_list[arg_index].state=='running'&& (controller.plantrip_with_product_list[arg_index].fuelinIds[index].add_from_office == null)&&(isDriver==true||is_spare==true)&&is_branch_manager==false)
+                              : (controller.plantrip_with_product_list[arg_index].state=='running'&& (controller.plantrip_with_product_list[arg_index].fuelinIds![index].add_from_office == null)&&(isDriver==true||is_spare==true)&&is_branch_manager==false)
                                   ? Expanded(
                                       flex: 1,
                                       child: IconButton(
@@ -2092,7 +2092,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                   controller
                                                       .plantrip_with_product_list[
                                                           arg_index]
-                                                      .fuelinIds[index]
+                                                      .fuelinIds![index]
                                                       .id);
                                         },
                                       ))
@@ -2139,33 +2139,33 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
         return ListView.builder(
           shrinkWrap: true,
           itemCount: controller
-              .plantrip_with_product_list[arg_index].productIds.length,
+              .plantrip_with_product_list[arg_index].productIds!.length,
           itemBuilder: (BuildContext context, int index) {
             fields = controller
-                .plantrip_with_product_list[arg_index].productIds.length;
+                .plantrip_with_product_list[arg_index].productIds!.length;
             //create dynamic destination textfield controller
             qty_controllers = List.generate(
                 fields,
                 (index) => TextEditingController(
                     text: controller.plantrip_with_product_list[arg_index]
-                        .productIds[index].quantity
+                        .productIds![index].quantity
                         .toString()));
             var formatter = NumberFormat(',000.0');
             var quantity = "0";
             if (controller.plantrip_with_product_list[arg_index]
-                    .productIds[index].quantity
+                    .productIds![index].quantity
                     .round()
                     .toString()
                     .length >=
                 4) {
               quantity = formatter.format(double.tryParse(controller
                   .plantrip_with_product_list[arg_index]
-                  .productIds[index]
+                  .productIds![index]
                   .quantity
                   .toString()));
             } else {
               quantity = controller.plantrip_with_product_list[arg_index]
-                  .productIds[index].quantity
+                  .productIds![index].quantity
                   .toInt()
                   .toString();
             }
@@ -2182,8 +2182,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           // width: 80,
                           child: Text(controller
                               .plantrip_with_product_list[arg_index]
-                              .productIds[index]
-                              .productId
+                              .productIds![index]
+                              .productId!
                               .name
                               .toString(),style: TextStyle(fontSize: 11)),
                         ),
@@ -2196,14 +2196,14 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                             // width: 80,
                             child: controller
                                         .plantrip_with_product_list[arg_index]
-                                        .productIds[index]
-                                        .productUom
+                                        .productIds![index]
+                                        .productUom!
                                         .name !=
                                     null
                                 ? Text(controller
                                     .plantrip_with_product_list[arg_index]
-                                    .productIds[index]
-                                    .productUom
+                                    .productIds![index]
+                                    .productUom!
                                     .name,style: TextStyle(fontSize: 11))
                                 : Text(''),
                           ),
@@ -2299,7 +2299,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                                               controller
                                                                   .plantrip_with_product_list[
                                                                       arg_index]
-                                                                  .productIds[
+                                                                  .productIds![
                                                                       index]
                                                                   .id);
                                                         }),
@@ -2524,7 +2524,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                           )),
                           Expanded(
                             child: Text(
-                                advance_ids.expenseCategId.name.toString(),
+                                advance_ids.expenseCategId!.name.toString(),
                                 style: pmstitleStyle()),
                           )
                         ],
@@ -2616,7 +2616,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             shrinkWrap: true,
             //physics: NeverScrollableScrollPhysics(),
             itemCount: controller.plantrip_with_product_list[arg_index]
-                .requestAllowanceLines.length,
+                .requestAllowanceLines!.length,
             itemBuilder: (BuildContext context, int index) {
               //fields = controller.travelLineModel.length;
               //create dynamic destination textfield controller
@@ -2634,7 +2634,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                       advanceBottomSheet(
                           context,
                           controller.plantrip_with_product_list[arg_index]
-                              .requestAllowanceLines[index]);
+                              .requestAllowanceLines![index]);
                     },
                     child: Container(
                       child: Row(
@@ -2646,8 +2646,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               // width: 80,
                               child: Text(controller
                                   .plantrip_with_product_list[arg_index]
-                                  .requestAllowanceLines[index]
-                                  .expenseCategId
+                                  .requestAllowanceLines![index]
+                                  .expenseCategId!
                                   .name
                                   .toString(),style: TextStyle(fontSize: 11)),
                             ),
@@ -2658,7 +2658,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               padding: EdgeInsets.only(left: 5),
                               child: Text(controller
                                   .plantrip_with_product_list[arg_index]
-                                  .requestAllowanceLines[index]
+                                  .requestAllowanceLines![index]
                                   .quantity
                                   .toString(),style: TextStyle(fontSize: 11)),
                             ),
@@ -2670,7 +2670,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: Text(NumberFormat('#,###')
                                   .format(double.tryParse(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .requestAllowanceLines[index]
+                                      .requestAllowanceLines![index]
                                       .amount
                                       .obs
                                       .toString()))
@@ -2693,21 +2693,21 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                               child: controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .requestAllowanceLines[index]
+                                              .requestAllowanceLines![index]
                                               .remark
                                               .toString() ==
                                           null ||
                                       controller
                                               .plantrip_with_product_list[
                                                   arg_index]
-                                              .requestAllowanceLines[index]
+                                              .requestAllowanceLines![index]
                                               .remark
                                               .toString() ==
                                           "null"
                                   ? Text("-")
                                   : Text(controller
                                       .plantrip_with_product_list[arg_index]
-                                      .requestAllowanceLines[index]
+                                      .requestAllowanceLines![index]
                                       .remark
                                       .toString(),style: TextStyle(fontSize: 11)),
                             ),
@@ -2722,7 +2722,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                                   onPressed: () {
                                     controller.deleteAdvanceLine(controller
                                         .plantrip_with_product_list[arg_index]
-                                        .requestAllowanceLines[index]
+                                        .requestAllowanceLines![index]
                                         .id);
                                   },
                                 )):SizedBox(),
@@ -2762,8 +2762,8 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
   void fuelAddDialog(int lineID, PlanTrip_Consumption_ids consumption) {
     if (consumption != null) {
       controller.selectedBaseRoute = BaseRoute(
-          id: consumption.routeId.id,
-          name: consumption.routeId.name,
+          id: consumption.routeId!.id,
+          name: consumption.routeId!.name,
           fuel_liter: consumption.standardLiter);
       controller.actualAmountTextController.text = consumption.consumedLiter.toString();
       controller.descriptionTextController.text = consumption.description;

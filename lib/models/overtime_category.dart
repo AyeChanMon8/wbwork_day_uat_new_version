@@ -43,7 +43,7 @@ class OvertimeCategory {
   factory OvertimeCategory.fromJson(String source) => OvertimeCategory.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Department(id: $id, name: $name)';
+  String toString() => 'OvertimeCategory(id: $id, name: $name)';
 
   @override
   bool operator ==(Object o) {
