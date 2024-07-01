@@ -64,7 +64,7 @@ class _PlantripWithWayBillToApproveListPage extends State<PlantripWithWayBillToA
                                 child: Text(
                                   controller.plantrip_with_waybill_topprove_list.value[index]
                                       .routePlanIds!=null?'':controller.plantrip_with_waybill_topprove_list.value[index]
-                                      .routePlanIds.first.routeId.name,
+                                      .routePlanIds!.first.routeId!.name,
                                   style: subtitleStyle(),
                                 ),
                               ),
@@ -105,7 +105,7 @@ class _PlantripWithWayBillToApproveListPage extends State<PlantripWithWayBillToA
                                     text: TextSpan(
                                       style: datalistStyle(),
                                       text: controller
-                                          .plantrip_with_waybill_topprove_list.value[index].spareId.name,
+                                          .plantrip_with_waybill_topprove_list.value[index].spareId!.name,
                                     ),
                                   ),
                                 ),

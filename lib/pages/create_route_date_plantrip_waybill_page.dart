@@ -28,7 +28,7 @@ class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTrip
   @override
   void initState() {
     arguments = Get.arguments;
-    controller.routeName = arguments.routeId.name.toString();
+    controller.routeName = arguments.routeId!.name.toString();
     if(arguments.startActualDate!=null && arguments.startActualDate!=""){
       controller.fromDateTextController.text = arguments.startActualDate;
     }else{

@@ -573,10 +573,10 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                             children: [
                               Expanded(
                                   flex:3,
-                                  child: AutoSizeText(controller.maintenanceProductIdList[index].productId.name)),
+                                  child: AutoSizeText(controller.maintenanceProductIdList[index].productId!.name)),
                               Expanded(
                                   flex: 2,
-                                  child: AutoSizeText(controller.maintenanceProductIdList[index].categoryId.name)),
+                                  child: AutoSizeText(controller.maintenanceProductIdList[index].categoryId!.name)),
                               Expanded(child: AutoSizeText(controller.maintenanceProductIdList[index].type)),
                               Expanded(child: AutoSizeText('${controller.maintenanceProductIdList[index].qty}')),
                               Expanded(child:IconButton(icon: Icon(Icons.delete),onPressed: (){

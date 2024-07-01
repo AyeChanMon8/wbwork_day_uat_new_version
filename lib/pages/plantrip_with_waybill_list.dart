@@ -68,7 +68,7 @@ class _PlantripWithWayBillListPage extends State<PlantripWithWayBillListPage> {
             //controller.plantrip_with_waybill_list.length,
             itemBuilder: (BuildContext context, int index) {
               print(
-                  "Name: ${controller.plantrip_with_waybill_list[index].spareId.name}");
+                  "Name: ${controller.plantrip_with_waybill_list[index].spareId!.name}");
               print(
                   "WayLegth : ${controller.plantrip_with_waybill_list.length}");
               var from_date = AppUtils.changeDefaultDateTimeFormat(controller
@@ -79,11 +79,11 @@ class _PlantripWithWayBillListPage extends State<PlantripWithWayBillListPage> {
               var routes = "";
               var route_names = [];
               if (controller.plantrip_with_waybill_list.value[index]
-                      .routePlanIds.length !=
+                      .routePlanIds!.length !=
                   0) {
-                controller.plantrip_with_waybill_list.value[index].routePlanIds
+                controller.plantrip_with_waybill_list.value[index].routePlanIds!
                     .forEach((element) {
-                  route_names.add(element.routeId.name);
+                  route_names.add(element.routeId!.name);
                 });
               }
 
@@ -193,7 +193,7 @@ class _PlantripWithWayBillListPage extends State<PlantripWithWayBillListPage> {
                                 style: datalistStyle(),
                               ),
                               AutoSizeText(
-                                '${controller.plantrip_with_waybill_list[index].driverId.name}',
+                                '${controller.plantrip_with_waybill_list[index].driverId!.name}',
                                 style: maintitleStyle(),
                               )
                             ],
@@ -219,18 +219,18 @@ class _PlantripWithWayBillListPage extends State<PlantripWithWayBillListPage> {
                                         child: controller
                                                         .plantrip_with_waybill_list[
                                                             index]
-                                                        .spareId
+                                                        .spareId!
                                                         .name ==
                                                     "null" ||
                                                 controller
                                                         .plantrip_with_waybill_list[
                                                             index]
-                                                        .spareId
+                                                        .spareId!
                                                         .name ==
                                                     null
                                             ? Text("-")
                                             : AutoSizeText(
-                                                '(${controller.plantrip_with_waybill_list[index].spareId.name})',
+                                                '(${controller.plantrip_with_waybill_list[index].spareId!.name})',
                                                 style: datalistStyle(),
                                               ))
                                   ],
@@ -242,7 +242,7 @@ class _PlantripWithWayBillListPage extends State<PlantripWithWayBillListPage> {
                                             .value[index].state ==
                                         'open'
                                     ? controller.plantrip_with_waybill_list
-                                                .value[index].driverId.id ==
+                                                .value[index].driverId!.id ==
                                             emp_id
                                         ? Text(
                                             controller
