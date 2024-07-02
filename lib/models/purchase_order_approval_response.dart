@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -7,44 +7,33 @@ import 'package:flutter/foundation.dart';
 import 'company.dart';
 
 class PurchaseOrderApprovalResponse {
-  int id;
+ int id;
   String name;
   String partner_name;
   double amount_total;
-  Currency currency_id;
-  Company company_id;
-  Branch_id branch_id;
-  Department_id department_id;
+  Currency? currency_id;
+  Company? company_id;
+  Branch_id? branch_id;
+  Department_id? department_id;
   bool state;
-  List<OrderLine> order_line;
-  List<String> reject_reasons_list;
-  PurchaseOrderApprovalResponse({
-    this.id,
-    this.name,
-    this.partner_name,
-    this.amount_total,
-    this.currency_id,
-    this.company_id,
-    this.branch_id,
-    this.department_id,
-    this.state,
-    this.order_line,
-    this.reject_reasons_list
-  });
+  List<OrderLine>? order_line;
+  List<String>? reject_reasons_list;
 
-  PurchaseOrderApprovalResponse copyWith({
-    int id,
-    String name,
-    String partner_name,
-    double amount_total,
-    Currency currency_id,
-    Company company_id,
-    Branch_id branch_id,
-    Department_id department_id,
-    bool state,
-    List<OrderLine> order_line,
-    List<String> reject_reasons_list,
-  }) {
+  PurchaseOrderApprovalResponse({
+    this.id = 0,
+  this.name = '',
+  this.partner_name = '',
+  this.amount_total = 0.0,
+  this.currency_id,
+  this.company_id,
+  this.branch_id,
+  this.department_id,
+  this.state = false,
+  this.order_line,
+  this.reject_reasons_list
+    });
+
+  PurchaseOrderApprovalResponse copyWith({int? id, String? name}) {
     return PurchaseOrderApprovalResponse(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -56,29 +45,28 @@ class PurchaseOrderApprovalResponse {
       department_id: department_id ?? this.department_id,
       state: state ?? this.state,
       order_line: order_line ?? this.order_line,
-      reject_reasons_list: reject_reasons_list ?? this.reject_reasons_list,
+      reject_reasons_list: reject_reasons_list ?? this.reject_reasons_list
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'partner_name':partner_name,
-      'amount_total': amount_total,
-      'currency_id': currency_id?.toMap(),
-      'company_id':company_id?.toMap(),
-      'branch_id': branch_id?.toMap(),
-      'department_id': department_id?.toMap(),
-      'state': state,
-      'order_line': order_line?.map((x) => x?.toMap())?.toList(),
-      'reject_reasons_list': reject_reasons_list
+    return {'id': id, 
+    'name': name,
+    'partner_name': partner_name, 
+    'amount_total': amount_total,
+    'currency_id': currency_id?.toMap(),
+    'company_id': company_id?.toMap(),
+    'branch_id': branch_id?.toMap(),
+    'department_id': department_id?.toMap(),
+    'state': state,
+    'order_line': order_line?.map((x) => x?.toMap())?.toList(),
+    'reject_reasons_list': reject_reasons_list?.map((x) => x?.toMap())?.toList(),
     };
   }
 
   factory PurchaseOrderApprovalResponse.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
+    // if (map == null) return null;
+
     return PurchaseOrderApprovalResponse(
       id: map['id'],
       name: map['name'],
@@ -90,52 +78,164 @@ class PurchaseOrderApprovalResponse {
       department_id: Department_id.fromMap(map['department_id']),
       state: map['state'],
       order_line: List<OrderLine>.from(map['order_line']?.map((x) => OrderLine.fromMap(x))),
-      reject_reasons_list: List<String>.from(map['reject_reasons_list']),
+      reject_reasons_list: List<String>.from(map['reject_reasons_list']?.map(String)),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PurchaseOrderApprovalResponse.fromJson(String source) => PurchaseOrderApprovalResponse.fromMap(json.decode(source));
+  factory PurchaseOrderApprovalResponse.fromJson(String source) =>
+      PurchaseOrderApprovalResponse.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'PurchaseOrderApprovalResponse(id: $id, name: $name, partner_name: $partner_name, amount_total: $amount_total, currency_id: $currency_id, company_id: $company_id, branch_id: $branch_id, department_id: $department_id, state: $state, order_line: $order_line, reject_reasons_list: $reject_reasons_list)';
-  }
+  String toString() => 'PurchaseOrderApprovalResponse(id: $id, name: $name,partner_name: $partner_name, amount_total: $amount_total, currency_id: $currency_id,company_id: $company_id, branch_id: $branch_id, department_id: $department_id,state: $state, order_line: $order_line, reject_reasons_list: $reject_reasons_list)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
-    return o is PurchaseOrderApprovalResponse &&
-      o.id == id &&
-      o.name == name &&
-      o.partner_name == partner_name &&
-      o.amount_total == amount_total &&
-      o.currency_id == currency_id &&
-      o.company_id == company_id &&
-      o.branch_id == branch_id &&
-      o.department_id == department_id &&
-      o.state == state &&
-      listEquals(o.order_line, order_line) &&
-      o.reject_reasons_list == reject_reasons_list;
+
+    return o is PurchaseOrderApprovalResponse && o.id == id && o.name == name && o.partner_name == partner_name && o.amount_total == amount_total
+    && o.currency_id == currency_id && o.company_id == company_id && o.branch_id == branch_id
+    && o.department_id == department_id && o.state == state && o.order_line == order_line && o.reject_reasons_list == reject_reasons_list;
   }
 
   @override
-  int get hashCode {
-    return id.hashCode ^
-      name.hashCode ^
-      partner_name.hashCode ^
-      amount_total.hashCode ^
-      currency_id.hashCode ^
-      company_id.hashCode ^
-      branch_id.hashCode ^
-      department_id.hashCode ^
-      state.hashCode ^
-      order_line.hashCode ^
-      reject_reasons_list.hashCode;
-  }
+  int get hashCode => id.hashCode ^ name.hashCode ^ partner_name.hashCode ^ amount_total.hashCode ^ currency_id.hashCode
+   ^ company_id.hashCode ^ branch_id.hashCode ^ department_id.hashCode ^ state.hashCode
+    ^ order_line.hashCode ^ reject_reasons_list.hashCode;
 }
+
+
+// class PurchaseOrderApprovalResponse {
+//   int id;
+//   String name;
+//   String partner_name;
+//   double amount_total;
+//   Currency currency_id;
+//   Company company_id;
+//   Branch_id branch_id;
+//   Department_id department_id;
+//   bool state;
+//   List<OrderLine> order_line;
+//   List<String> reject_reasons_list;
+//   PurchaseOrderApprovalResponse({
+//     this.id,
+//     this.name,
+//     this.partner_name,
+//     this.amount_total,
+//     this.currency_id,
+//     this.company_id,
+//     this.branch_id,
+//     this.department_id,
+//     this.state,
+//     this.order_line,
+//     this.reject_reasons_list
+//   });
+
+//   PurchaseOrderApprovalResponse copyWith({
+//     int id,
+//     String name,
+//     String partner_name,
+//     double amount_total,
+//     Currency currency_id,
+//     Company company_id,
+//     Branch_id branch_id,
+//     Department_id department_id,
+//     bool state,
+//     List<OrderLine> order_line,
+//     List<String> reject_reasons_list,
+//   }) {
+//     return PurchaseOrderApprovalResponse(
+//       id: id ?? this.id,
+//       name: name ?? this.name,
+//       partner_name: partner_name ?? this.partner_name,
+//       amount_total: amount_total ?? this.amount_total,
+//       currency_id: currency_id ?? this.currency_id,
+//       company_id: company_id ?? this.company_id,
+//       branch_id: branch_id ?? this.branch_id,
+//       department_id: department_id ?? this.department_id,
+//       state: state ?? this.state,
+//       order_line: order_line ?? this.order_line,
+//       reject_reasons_list: reject_reasons_list ?? this.reject_reasons_list,
+//     );
+//   }
+
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'id': id,
+//       'name': name,
+//       'partner_name':partner_name,
+//       'amount_total': amount_total,
+//       'currency_id': currency_id?.toMap(),
+//       'company_id':company_id?.toMap(),
+//       'branch_id': branch_id?.toMap(),
+//       'department_id': department_id?.toMap(),
+//       'state': state,
+//       'order_line': order_line?.map((x) => x?.toMap())?.toList(),
+//       'reject_reasons_list': reject_reasons_list
+//     };
+//   }
+
+//   factory PurchaseOrderApprovalResponse.fromMap(Map<String, dynamic> map) {
+//     if (map == null) return null;
+  
+//     return PurchaseOrderApprovalResponse(
+//       id: map['id'],
+//       name: map['name'],
+//       partner_name: map['partner_name'],
+//       amount_total: map['amount_total'],
+//       currency_id: Currency.fromMap(map['currency_id']),
+//       company_id: Company.fromMap(map['company_id']),
+//       branch_id: Branch_id.fromMap(map['branch_id']),
+//       department_id: Department_id.fromMap(map['department_id']),
+//       state: map['state'],
+//       order_line: List<OrderLine>.from(map['order_line']?.map((x) => OrderLine.fromMap(x))),
+//       reject_reasons_list: List<String>.from(map['reject_reasons_list']),
+//     );
+//   }
+
+//   String toJson() => json.encode(toMap());
+
+//   factory PurchaseOrderApprovalResponse.fromJson(String source) => PurchaseOrderApprovalResponse.fromMap(json.decode(source));
+
+//   @override
+//   String toString() {
+//     return 'PurchaseOrderApprovalResponse(id: $id, name: $name, partner_name: $partner_name, amount_total: $amount_total, currency_id: $currency_id, company_id: $company_id, branch_id: $branch_id, department_id: $department_id, state: $state, order_line: $order_line, reject_reasons_list: $reject_reasons_list)';
+//   }
+
+//   @override
+//   bool operator ==(Object o) {
+//     if (identical(this, o)) return true;
+  
+//     return o is PurchaseOrderApprovalResponse &&
+//       o.id == id &&
+//       o.name == name &&
+//       o.partner_name == partner_name &&
+//       o.amount_total == amount_total &&
+//       o.currency_id == currency_id &&
+//       o.company_id == company_id &&
+//       o.branch_id == branch_id &&
+//       o.department_id == department_id &&
+//       o.state == state &&
+//       listEquals(o.order_line, order_line) &&
+//       o.reject_reasons_list == reject_reasons_list;
+//   }
+
+//   @override
+//   int get hashCode {
+//     return id.hashCode ^
+//       name.hashCode ^
+//       partner_name.hashCode ^
+//       amount_total.hashCode ^
+//       currency_id.hashCode ^
+//       company_id.hashCode ^
+//       branch_id.hashCode ^
+//       department_id.hashCode ^
+//       state.hashCode ^
+//       order_line.hashCode ^
+//       reject_reasons_list.hashCode;
+//   }
+// }
 
 class Product_id {
   final dynamic id;
