@@ -287,8 +287,8 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                       .toString();
                                   return InkWell(
                                     onTap: () {
-                                      if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds.length > 0){
-                                        controller.getAttachment(keyPerformance.attachmentIds);
+                                      if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds!.length > 0){
+                                        controller.getAttachment(keyPerformance.attachmentIds!);
                                       }
                                       showModalBottomSheet(
                                           context: context,
@@ -388,12 +388,12 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                               .employeeRating !=
                                                           null &&
                                                       keyPerformance
-                                                              .employeeRating
+                                                              .employeeRating!
                                                               .name !=
                                                           null ? Expanded(
                                                                 child: Text(
                                                                     keyPerformance
-                                                                        .employeeRating.name
+                                                                        .employeeRating!.name
                                                                         .toString())
                                                             ):Expanded(child: Text(''),)
                                                           ],
@@ -413,12 +413,12 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                               .managerRating !=
                                                           null &&
                                                       keyPerformance
-                                                              .managerRating
+                                                              .managerRating!
                                                               .name !=
                                                           null ?Expanded(
                                                                 child: Text(
                                                                     keyPerformance
-                                                                        .managerRating.name
+                                                                        .managerRating!.name
                                                                         .toString())
                                                             ):Expanded(child: Text(''))
                                                           ],
@@ -525,8 +525,8 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                               )),
                                           Expanded(
                                               flex: 1,
-                                              child: keyPerformance.employeeRating!= null && keyPerformance.employeeRating.id!= 0 && keyPerformance.employeeRating.id!=null ?Text(
-                                                keyPerformance.employeeRating.name
+                                              child: keyPerformance.employeeRating!= null && keyPerformance.employeeRating!.id!= 0 && keyPerformance.employeeRating!.id!=null ?Text(
+                                                keyPerformance.employeeRating!.name
                                                     .toString(),
                                                 style: TextStyle(
                                                     color: backgroundIconColor),
@@ -539,8 +539,8 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                                 children: [
-                                                  keyPerformance.managerRating!=null && keyPerformance.managerRating.id!=0 && keyPerformance.managerRating.id!=null ? Text(
-                                                    keyPerformance.managerRating.name
+                                                  keyPerformance.managerRating!=null && keyPerformance.managerRating!.id!=0 && keyPerformance.managerRating!.id!=null ? Text(
+                                                    keyPerformance.managerRating!.name
                                                         .toString(),
                                                     style: TextStyle(
                                                         color: backgroundIconColor),
@@ -725,9 +725,9 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                       child: Text('Employee Self-Assessment',
                                                           style:
                                                           pmstitleStyle())),
-                                                  competencies.employee_rating!=null && competencies.employee_rating.id != 0 && competencies.employee_rating.id != null ? Expanded(
+                                                  competencies.employee_rating!=null && competencies.employee_rating!.id != 0 && competencies.employee_rating!.id != null ? Expanded(
                                                       child: Text(competencies
-                                                          .employee_rating.name
+                                                          .employee_rating!.name
                                                           .toString())):Expanded(child: Text(''),)
                                                 ],
                                               ),
@@ -740,9 +740,9 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                       child: Text('Manager Rating',
                                                           style:
                                                           pmstitleStyle())),
-                                                  competencies.rating!=null && competencies.rating.id != 0 && competencies.rating.id != null ? Expanded(
+                                                  competencies.rating!=null && competencies.rating!.id != 0 && competencies.rating!.id != null ? Expanded(
                                                       child: Text(competencies
-                                                          .rating.name
+                                                          .rating!.name
                                                           .toString())):Expanded(child: Text(''),)
                                                 ],
                                               ),
@@ -796,8 +796,8 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                                 children: [
-                                                  competencies.employee_rating!=null && competencies.employee_rating.id!=0 && competencies.employee_rating.id!=null ? Text(
-                                                    competencies.employee_rating.name.toString(),
+                                                  competencies.employee_rating!=null && competencies.employee_rating!.id!=0 && competencies.employee_rating!.id!=null ? Text(
+                                                    competencies.employee_rating!.name.toString(),
                                                     style: TextStyle(
                                                         color: backgroundIconColor),
                                                     textAlign: TextAlign.center,
@@ -812,7 +812,7 @@ class _PmsDetailsState extends State<PmsDoneDetails>
                                                 MainAxisAlignment.end,
                                                 children: [
                                                   competencies.rating!=null && competencies.id!=0 && competencies.id!=null ? Text(
-                                                    competencies.rating.name.toString(),
+                                                    competencies.rating!.name.toString(),
                                                     style: TextStyle(
                                                         color: backgroundIconColor),
                                                     textAlign: TextAlign.center,

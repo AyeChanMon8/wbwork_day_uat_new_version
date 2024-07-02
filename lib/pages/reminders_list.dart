@@ -249,7 +249,7 @@ class _RemindersListState extends State<RemindersList> {
                                                                 controller
                                                                     .reminderList[
                                                                         index]
-                                                                    .selected = value;
+                                                                    .selected = value!;
                                                               });
                                                             })),
                                                     controller
@@ -354,7 +354,7 @@ class _RemindersListState extends State<RemindersList> {
                                                                       .reminderList
                                                                       .value[
                                                                           index]
-                                                                      .attachment_ids
+                                                                      .attachment_ids!
                                                                       .length,
                                                                   shrinkWrap:
                                                                       true,
@@ -377,31 +377,31 @@ class _RemindersListState extends State<RemindersList> {
                                                                     return InkWell(
                                                                       onTap:
                                                                           () async {
-                                                                        !controller.reminderList.value[index].attachment_ids[fileIndex].name.toString().contains('pdf')
+                                                                        !controller.reminderList.value[index].attachment_ids![fileIndex].name.toString().contains('pdf')
                                                                             ? await showDialog(
                                                                                 context: context,
                                                                                 builder: (_) {
                                                                                   return ImageDialog(
-                                                                                    bytes: base64Decode(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file),
+                                                                                    bytes: base64Decode(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file),
                                                                                   );
                                                                                 })
-                                                                            : _createFileFromString(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file.toString()).then((path) async {
+                                                                            : _createFileFromString(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file.toString()).then((path) async {
                                                                                 print("FilePath");
                                                                                 await OpenFile.open(path);
                                                                                 print(path.toString());
                                                                               });
                                                                       },
                                                                       child:
-                                                                          !controller.reminderList.value[index].attachment_ids[fileIndex].name.toString().contains('pdf')
+                                                                          !controller.reminderList.value[index].attachment_ids![fileIndex].name.toString().contains('pdf')
                                                                             ? Container(
                                                                               height: 30,
                                                                               width: 30,
                                                                               padding: EdgeInsets.all(10),
-                                                                              child: Image.memory(base64Decode(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file),
+                                                                              child: Image.memory(base64Decode(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file),
                                                                               fit: BoxFit.cover,),
                                                                             )
                                                                             : AutoSizeText(
-                                                                                controller.reminderList.value[index].attachment_ids[fileIndex].name.toString(),
+                                                                                controller.reminderList.value[index].attachment_ids![fileIndex].name.toString(),
                                                                                 style: TextStyle(fontWeight: FontWeight.normal, color: Colors.blueGrey, fontSize: 16),
                                                                               ),
                                                                     );

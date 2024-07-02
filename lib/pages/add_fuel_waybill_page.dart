@@ -40,12 +40,12 @@ class AddFuelWayBillPage extends StatelessWidget {
       day_trip_controller.selectedProduct = null;
       day_trip_controller.selectedLocation = null;
       if(fuelInId.productId!=null){
-        day_trip_controller.selectedProductId = fuelInId.productId.id;
-        day_trip_controller.getProductForFuelTabId(fuelInId.productId.id);
+        day_trip_controller.selectedProductId = fuelInId.productId!.id;
+        day_trip_controller.getProductForFuelTabId(fuelInId.productId!.id);
       }
       if(fuelInId.location_id!=null){
-        day_trip_controller.selectedLocationId = fuelInId.location_id.id;
-        day_trip_controller.getAddFuelLocationID(fuelInId.location_id.id);
+        day_trip_controller.selectedLocationId = fuelInId.location_id!.id;
+        day_trip_controller.getAddFuelLocationID(fuelInId.location_id!.id);
       }
       line_id = fuelInId.id;
     }else{

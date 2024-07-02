@@ -32,9 +32,9 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
     } else {
       controller.button_approve_show.value = true;
     }
-    list = controller.purchaseOrderApprovalList.value[index].reject_reasons_list;
-    if(controller.purchaseOrderApprovalList.value[index].reject_reasons_list.length > 0){
-      reject_controller.text = controller.purchaseOrderApprovalList.value[index].reject_reasons_list[0];
+    list = controller.purchaseOrderApprovalList.value[index].reject_reasons_list!;
+    if(controller.purchaseOrderApprovalList.value[index].reject_reasons_list!.length > 0){
+      reject_controller.text = controller.purchaseOrderApprovalList.value[index].reject_reasons_list![0];
     }else{
       reject_controller.text = "";
     }
@@ -248,11 +248,11 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
               ),
               Container(
                 child: controller.purchaseOrderApprovalList.value[index]
-                            .currency_id.name !=
+                            .currency_id!.name !=
                         null
                     ? Text(
                         controller.purchaseOrderApprovalList.value[index]
-                            .currency_id.name,
+                            .currency_id!.name,
                         style: subtitleStyle())
                     : Text('-'),
               ),
@@ -271,7 +271,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount:
-              controller.purchaseOrderApprovalList[index].order_line.length,
+              controller.purchaseOrderApprovalList[index].order_line!.length,
           itemBuilder: (BuildContext context, int ind) {
             return Container(
               child: Column(
@@ -284,14 +284,14 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
-                                        .categ_id
+                                        .order_line![ind]
+                                        .categ_id!
                                         .name !=
                                     null && controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
-                                        .categ_id
+                                        .order_line![ind]
+                                        .categ_id!
                                         .name !=
                                     false
                                 ? Align(
@@ -300,8 +300,8 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
-                                          .categ_id
+                                          .order_line![ind]
+                                          .categ_id!
                                           .name,
                                       style: labelPrimaryHightlightTextStyle()),
                                 )
@@ -314,8 +314,8 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
-                                        .product_id
+                                        .order_line![ind]
+                                        .product_id!
                                         .name !=
                                     null
                                 ? Align(
@@ -324,8 +324,8 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
-                                          .product_id
+                                          .order_line![ind]
+                                          .product_id!
                                           .name,
                                       style: labelPrimaryHightlightTextStyle()),
                                 )
@@ -338,7 +338,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
+                                        .order_line![ind]
                                         .product_qty !=
                                     null
                                 ? Align(
@@ -347,7 +347,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
+                                          .order_line![ind]
                                           .product_qty.toString(),
                                       style: labelPrimaryHightlightTextStyle()),
                                 )
@@ -360,7 +360,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
+                                        .order_line![ind]
                                         .qty_received !=
                                     null
                                 ? Align(
@@ -369,7 +369,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
+                                          .order_line![ind]
                                           .qty_received.toString(),
                                       style: labelPrimaryHightlightTextStyle()),
                                 )
@@ -382,7 +382,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
+                                        .order_line![ind]
                                         .price_unit !=
                                     null
                                 ? Align(
@@ -391,7 +391,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
+                                          .order_line![ind]
                                           .price_unit.toString(),
                                       style: labelPrimaryHightlightTextStyle()),
                                 )
@@ -404,7 +404,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                             child: controller
                                         .purchaseOrderApprovalList
                                         .value[index]
-                                        .order_line[ind]
+                                        .order_line![ind]
                                         .price_subtotal !=
                                     null
                                 ? Align(
@@ -413,7 +413,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                                       controller
                                           .purchaseOrderApprovalList
                                           .value[index]
-                                          .order_line[ind]
+                                          .order_line![ind]
                                           .price_subtotal.toString(),
                                       style: labelPrimaryHightlightTextStyle()),
                                 )

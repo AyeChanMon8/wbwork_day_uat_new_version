@@ -66,16 +66,16 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
       }
       //controller.planTripWayBillModel = Get.arguments;
       controller.arg_index.value = Get.arguments;
-      if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds.length>0){
+      if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds!.length>0){
         controller.selectedWayBillExpenseRouteCategory = controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds[0];
       }
-      if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds.length>0){
-        controller.selectedWayBillRoute = controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds[0];
+      if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds!.length>0){
+        controller.selectedWayBillRoute = controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds![0];
       }
-      controller.waybill_expense_list.value = controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds;
+      controller.waybill_expense_list.value = controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds!;
       if(controller
-              .plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId.inchargeId!=null && controller
-              .plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId.inchargeId.id == int.parse(employee_id)){
+              .plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId!.inchargeId!=null && controller
+              .plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId!.inchargeId!.id == int.parse(employee_id)){
                 isIncharge = true;
       }
      
@@ -86,7 +86,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
     _tabController = TabController(length: 6, vsync: this);
     controller.fetchExpenseStatusData(controller.plantrip_with_waybill_list[controller.arg_index.value].id,'plantrip_waybill');
     controller.getRouteList(controller.plantrip_with_waybill_list[controller.arg_index.value].id.toString(),'plantrip_waybill');
-    controller.calculateTotalExpense(controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds);
+    controller.calculateTotalExpense(controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds!);
     
     super.initState();
   }
@@ -112,7 +112,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
           padding: const EdgeInsets.only(top: 2,right: 0,left: 0),
           child: Divider(height: 1,thickness: 1,color: backgroundIconColor,),
         ),
-        controller.plantrip_with_waybill_list.value[controller.arg_index.value].state == 'running' && (controller.plantrip_with_waybill_list[controller.arg_index.value].driverId.id == int.parse(employee_id)) ? Padding(
+        controller.plantrip_with_waybill_list.value[controller.arg_index.value].state == 'running' && (controller.plantrip_with_waybill_list[controller.arg_index.value].driverId!.id == int.parse(employee_id)) ? Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: routeListWidget(context),
         ): SizedBox(),
@@ -134,7 +134,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
         return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds.length,
+        itemCount: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds!.length,
         itemBuilder: (BuildContext context, int index1) {
 
           return Column(
@@ -148,7 +148,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                       flex: 3,
                       child: Container(
                         width: 80,
-                        child: Text(controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].routeId.name
+                        child: Text(controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].routeId!.name
                             .toString()
                         ),
                       ),
@@ -161,8 +161,8 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                           data: new ThemeData(
                             primaryColor: textFieldTapColor,
                           ),
-                          child: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].startActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
-                controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].startActualDate)): SizedBox(),
+                          child: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].startActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
+                controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].startActualDate)): SizedBox(),
                         )),
                   ),
                    Expanded(
@@ -173,15 +173,15 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                           data: new ThemeData(
                             primaryColor: textFieldTapColor,
                           ),
-                          child: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].endActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
-                controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].endActualDate)): SizedBox()
+                          child: controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].endActualDate!=null ? Text(AppUtils.changeDateAndTimeFormat(
+                controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].endActualDate)): SizedBox()
                         )),
                   ),
-                  controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].status!=null ?Expanded(
+                  controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].status!=null ?Expanded(
                     flex: 3,
                     child: Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
-                      child:  Text(controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds[index1].status),
+                      child:  Text(controller.plantrip_with_waybill_list[controller.arg_index.value].routePlanIds![index1].status),
                     ),
                   ): SizedBox()
                   ],
@@ -1298,7 +1298,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
       child: Obx(()=>ListView.builder(
         shrinkWrap: true,
         //physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds.length,
+        itemCount: controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds!.length,
         itemBuilder: (BuildContext context, int index) {
           //fields = controller.travelLineModel.length;
           //create dynamic destination textfield controller
@@ -2009,7 +2009,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                         flex: 2,
                         child: Container(
                           // width: 80,
-                          child: Text(controller.plantrip_with_waybill_list.value[controller.arg_index.value].requestAllowanceLines[index].remark
+                          child: Text(controller.plantrip_with_waybill_list.value[controller.arg_index.value].requestAllowanceLines![index].remark
                               .toString(),style: TextStyle(fontSize: 11)),
                         ),
                       ),
@@ -2017,7 +2017,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                           child: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              controller.deleteWayBillAdvanceLine(controller.plantrip_with_waybill_list[controller.arg_index.value].requestAllowanceLines[index].id);
+                              controller.deleteWayBillAdvanceLine(controller.plantrip_with_waybill_list[controller.arg_index.value].requestAllowanceLines![index].id);
                             },
                           )):SizedBox(),
                       Expanded(

@@ -92,7 +92,7 @@ class _PmsDonePageState extends State<PmsDonePage> {
                                 children: [
                                   Text(pmsDetailModel.name,style: TextStyle(color: backgroundIconColor,fontWeight: FontWeight.bold),),
                                   SizedBox(height: 20,),
-                                  Text(pmsDetailModel.employeeId.name,style: TextStyle(color: Colors.deepPurple[700]),),
+                                  Text(pmsDetailModel.employeeId!.name,style: TextStyle(color: Colors.deepPurple[700]),),
                                   // SizedBox(height: 10,),
                                   // Text(pmsDetailModel.compTemplateId.name,style: TextStyle(color: Colors.deepPurple[700]),),
                                 ],
@@ -107,7 +107,7 @@ class _PmsDonePageState extends State<PmsDonePage> {
                                   //
                                   // }',style: TextStyle(color: Colors.deepPurple[700]),),
                                   SizedBox(height: 10,),
-                                  Text('Period : ${pmsDetailModel.dateRangeId.name}',style: TextStyle(color: Colors.deepPurple[700]),),
+                                  Text('Period : ${pmsDetailModel.dateRangeId!.name}',style: TextStyle(color: Colors.deepPurple[700]),),
                                   SizedBox(height: 20,),
                                   Container(
                                       padding: EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 10),

@@ -91,7 +91,7 @@ class RemindersDetails extends StatelessWidget {
               
               showAttachment ? SizedBox(
                 child: GridView.builder(
-                    itemCount: controller.reminderList.value[index].attachment_ids.length,
+                    itemCount: controller.reminderList.value[index].attachment_ids!.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -104,16 +104,16 @@ class RemindersDetails extends StatelessWidget {
 
                       return InkWell(
                         onTap: () async{
-                          !controller.reminderList.value[index].attachment_ids[fileIndex].name.toString().contains('pdf')?
+                          !controller.reminderList.value[index].attachment_ids![fileIndex].name.toString().contains('pdf')?
                           await showDialog(
                               context: context,
                               builder: (_) {
                                 return ImageDialog(
-                                  bytes: base64Decode(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file),
+                                  bytes: base64Decode(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file),
                                 );
                               }
                           ):
-                          _createFileFromString(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file.toString()).then((path) async{
+                          _createFileFromString(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file.toString()).then((path) async{
                             print("FilePath");
                             await OpenFile.open(path);
                              print(path.toString());
@@ -124,10 +124,10 @@ class RemindersDetails extends StatelessWidget {
                             height: 120,
                             width: MediaQuery.of(context).size.width*0.8,
                             padding: EdgeInsets.all(10),
-                            child: !controller.reminderList.value[index].attachment_ids[fileIndex].name.toString().contains('pdf')? 
+                            child: !controller.reminderList.value[index].attachment_ids![fileIndex].name.toString().contains('pdf')? 
                             
-                            Image.memory(base64Decode(controller.reminderList.value[index].attachment_ids[fileIndex].attach_file)):AutoSizeText(
-                              controller.reminderList.value[index].attachment_ids[fileIndex].name.toString(),
+                            Image.memory(base64Decode(controller.reminderList.value[index].attachment_ids![fileIndex].attach_file)):AutoSizeText(
+                              controller.reminderList.value[index].attachment_ids![fileIndex].name.toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   color: Colors.blueGrey,

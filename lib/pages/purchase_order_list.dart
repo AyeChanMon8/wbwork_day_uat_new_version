@@ -100,7 +100,7 @@ class _PurchaseOrderListPageState extends State<PurchaseOrderListPage> {
                                 margin: EdgeInsets.only(
                                     left: 20, bottom: 20, right: 20),
                                 child: Text(
-                                  controller.purchaseOrderApprovalList.value[dindex].company_id.name,
+                                  controller.purchaseOrderApprovalList.value[dindex].company_id!.name,
                                   style: subtitleStyle()
                                 ),
                               ),

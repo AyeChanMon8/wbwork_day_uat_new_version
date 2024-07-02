@@ -304,8 +304,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                       keyPerformance.managerRate.toString();
                                   return InkWell(
                                     onTap: () {
-                                      if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds.length > 0){
-                                        controller.getAttachment(keyPerformance.attachmentIds);
+                                      if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds!.length > 0){
+                                        controller.getAttachment(keyPerformance.attachmentIds!);
                                       }
                                       showModalBottomSheet(
                                           context: context,
@@ -411,11 +411,11 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                               .employeeRating !=
                                                           null &&
                                                       keyPerformance
-                                                              .employeeRating
+                                                              .employeeRating!
                                                               .name !=
                                                           null ? Expanded(
                                                                     child: Text(keyPerformance
-                                                                        .employeeRating.name
+                                                                        .employeeRating!.name
                                                                         .toString())):Expanded(child: Text(''))
                                                               ],
                                                             ),
@@ -433,11 +433,11 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                               .managerRating !=
                                                           null &&
                                                       keyPerformance
-                                                              .managerRating
+                                                              .managerRating!
                                                               .name !=
                                                           null ? Expanded(
                                                                     child: Text(keyPerformance
-                                                                        .managerRating.name
+                                                                        .managerRating!.name
                                                                         .toString())):Expanded(child: Text(''),)
                                                               ],
                                                             ),
@@ -550,14 +550,14 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                           .employeeRating !=
                                                       null &&
                                                   keyPerformance
-                                                          .employeeRating
+                                                          .employeeRating!
                                                           .name !=
                                                       null
                                               ? Expanded(
                                                 flex: 1,
                                                   child: Text(
                                                     keyPerformance
-                                                        .employeeRating.name
+                                                        .employeeRating!.name
                                                         .toString(),
                                                     style: TextStyle(
                                                         color:
@@ -586,14 +586,14 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                   keyPerformance.managerRating !=
                                                               null &&
                                                           keyPerformance
-                                                                  .managerRating
+                                                                  .managerRating!
                                                                   .name !=
                                                               null
                                                       ? Expanded(
                                                         flex: 1,
                                                           child: Text(
                                                             keyPerformance
-                                                                .managerRating
+                                                                .managerRating!
                                                                 .name
                                                                 .toString(),
                                                             style: TextStyle(
@@ -626,30 +626,30 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                                         .managerRating !=
                                                                     null &&
                                                                 keyPerformance
-                                                                        .managerRating
+                                                                        .managerRating!
                                                                         .id !=
-                                                                    0 && keyPerformance.managerRating.id!=null) {
+                                                                    0 && keyPerformance.managerRating!.id!=null) {
                                                               RatingConfig
                                                                   data =
                                                                   new RatingConfig();
                                                               data.id =
                                                                   keyPerformance
-                                                                      .managerRating
+                                                                      .managerRating!
                                                                       .id;
                                                               data.name =
                                                                   keyPerformance
-                                                                      .managerRating
+                                                                      .managerRating!
                                                                       .name;
                                                               data.rating_description =
                                                                   keyPerformance
-                                                                      .managerRating
+                                                                      .managerRating!
                                                                       .rating_description;
                                                               controller
                                                                       .selectedRatingConfig =
                                                                   data;
                                                             }
-                                                            if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds.length > 0){
-                                                              controller.getAttachment(keyPerformance.attachmentIds);
+                                                            if(keyPerformance.attachmentIds!=null && keyPerformance.attachmentIds!.length > 0){
+                                                              controller.getAttachment(keyPerformance.attachmentIds!);
                                                             }
                                                             controller
                                                                 .attachment_list
@@ -1266,8 +1266,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                             style:
                                                                 pmstitleStyle())),
                                                     Expanded(
-                                                        child: competencies.employee_rating!=null && competencies.employee_rating.id != 0 && competencies.employee_rating.id != null ?Text(competencies
-                                                            .employee_rating.name
+                                                        child: competencies.employee_rating!=null && competencies.employee_rating!.id != 0 && competencies.employee_rating!.id != null ?Text(competencies
+                                                            .employee_rating!.name
                                                             .toString()):SizedBox())
                                                   ],
                                                 ),
@@ -1281,8 +1281,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                             style:
                                                                 pmstitleStyle())),
                                                     Expanded(
-                                                        child: competencies.rating!=null && competencies.rating.id != 0 && competencies.rating.id != null ?Text(competencies
-                                                            .rating.name
+                                                        child: competencies.rating!=null && competencies.rating!.id != 0 && competencies.rating!.id != null ?Text(competencies
+                                                            .rating!.name
                                                             .toString()):SizedBox())
                                                   ],
                                                 ),
@@ -1338,14 +1338,14 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                         competencies.employee_rating !=
                                                       null &&
                                                   competencies
-                                                          .employee_rating
+                                                          .employee_rating!
                                                           .name !=
                                                       null
                                               ? Expanded(
                                                 flex: 1,
                                                   child: Text(
                                                     competencies
-                                                        .employee_rating.name
+                                                        .employee_rating!.name
                                                         .toString(),
                                                     style: TextStyle(
                                                         color:
@@ -1371,8 +1371,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                competencies.rating!=null && competencies.rating.id != 0 && competencies.rating.id != null ?Text(
-                                                  competencies.rating.name.toString(),
+                                                competencies.rating!=null && competencies.rating!.id != 0 && competencies.rating!.id != null ?Text(
+                                                  competencies.rating!.name.toString(),
                                                   style: TextStyle(
                                                       color:
                                                           backgroundIconColor),
@@ -1388,22 +1388,22 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                           size: 16,
                                                         ),
                                                         onPressed: () {
-                                                          if (competencies.rating != null && competencies.rating.id !=
-                                                                    0 && competencies.rating.id!=null) {
+                                                          if (competencies.rating != null && competencies.rating!.id !=
+                                                                    0 && competencies.rating!.id!=null) {
                                                               RatingConfig
                                                                   data =
                                                                   new RatingConfig();
                                                               data.id =
                                                                   competencies
-                                                                      .rating
+                                                                      .rating!
                                                                       .id;
                                                               data.name =
                                                                   competencies
-                                                                      .rating
+                                                                      .rating!
                                                                       .name;
                                                               data.rating_description =
                                                                   competencies
-                                                                      .rating
+                                                                      .rating!
                                                                       .rating_description;
                                                               controller
                                                                       .selectedCompetenciesRatingConfig =

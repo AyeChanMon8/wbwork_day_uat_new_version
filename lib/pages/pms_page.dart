@@ -95,7 +95,7 @@ class _PmsPageState extends State<PmsPage> {
                               children: [
                                 Text(pmsDetailModel.name,style: TextStyle(color: backgroundIconColor,fontWeight: FontWeight.bold),),
                                 SizedBox(height: 5,),
-                                Text(pmsDetailModel.templateId.name,style: TextStyle(color: Colors.deepPurple[700]),),
+                                Text(pmsDetailModel.templateId!.name,style: TextStyle(color: Colors.deepPurple[700]),),
                                 // SizedBox(height: 5,),
                                 // Text(pmsDetailModel.compTemplateId.name,style: TextStyle(color: Colors.deepPurple[700]),),
                               ],
@@ -111,7 +111,7 @@ class _PmsPageState extends State<PmsPage> {
                                 //   }',style: TextStyle(color: Colors.deepPurple[700]),),
                                 //Text('Deadline : ${deadLine}',style: TextStyle(color: Colors.deepPurple[700]),),
                                 SizedBox(height: 5,),
-                                Text('Period : ${pmsDetailModel.dateRangeId.name}',style: TextStyle(color: Colors.deepPurple[700]),),
+                                Text('Period : ${pmsDetailModel.dateRangeId!.name}',style: TextStyle(color: Colors.deepPurple[700]),),
                                 SizedBox(height: 5,),
                                 Container(
                                   padding: EdgeInsets.only(left: 10,right: 10,bottom: 3,top: 3),
