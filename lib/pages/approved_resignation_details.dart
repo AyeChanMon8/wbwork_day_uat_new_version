@@ -70,7 +70,7 @@ class _ApprovedResignationDetailsState extends State<ApprovedResignationDetails>
                       Obx(
                             () => Container(
                           child: Text(
-                            controller.resignationApprovedList.value[index].employeeId.name,
+                            controller.resignationApprovedList.value[index].employeeId!.name,
                             style: subtitleStyle(),
                           ),
                         ),
@@ -127,7 +127,7 @@ class _ApprovedResignationDetailsState extends State<ApprovedResignationDetails>
                           child: controller.resignationApprovedList.value[index].departmentId !=
                               null
                               ? Text(
-                            controller.resignationApprovedList.value[index].departmentId.name,
+                            controller.resignationApprovedList.value[index].departmentId!.name,
                             style: subtitleStyle(),
                           )
                               : Text('-'),
@@ -175,7 +175,7 @@ class _ApprovedResignationDetailsState extends State<ApprovedResignationDetails>
                           flex:1,
                           child: Container(
                             child: Text(
-                              AppUtils.removeNullString(controller.resignationApprovedList.value[index].company_id.name),
+                              AppUtils.removeNullString(controller.resignationApprovedList.value[index].company_id!.name),
                               style: subtitleStyle(),
                             ),
                           ),
@@ -188,7 +188,7 @@ class _ApprovedResignationDetailsState extends State<ApprovedResignationDetails>
                               child: Padding(
                                 padding: const EdgeInsets.only(left:50.0),
                                 child: Text(
-                                  AppUtils.removeNullString(controller.resignationApprovedList.value[index].branch_id.name),
+                                  AppUtils.removeNullString(controller.resignationApprovedList.value[index].branch_id!.name),
                                   style: subtitleStyle(),
                                 ),
                               ),

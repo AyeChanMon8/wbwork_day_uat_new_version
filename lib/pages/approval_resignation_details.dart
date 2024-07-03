@@ -71,7 +71,7 @@ class _ApprovalResignationDetailsState extends State<ApprovalResignationDetails>
                       ),
                       Obx(
                             () => controller.resignationApprovalList.value.length > 0 ?Container(
-                          child: Text(AppUtils.removeNullString(controller.resignationApprovalList.value[index].employeeId.name),
+                          child: Text(AppUtils.removeNullString(controller.resignationApprovalList.value[index].employeeId!.name),
                             style: subtitleStyle(),
                           ),
                         ):SizedBox(),
@@ -127,7 +127,7 @@ class _ApprovalResignationDetailsState extends State<ApprovalResignationDetails>
                             () => controller.resignationApprovalList.value.length > 0 ?Container(
                           child: controller.resignationApprovalList.value[index].departmentId !=
                               null
-                              ? Text(AppUtils.removeNullString(controller.resignationApprovalList.value[index].departmentId.name)
+                              ? Text(AppUtils.removeNullString(controller.resignationApprovalList.value[index].departmentId!.name)
                             ,
                             style: subtitleStyle(),
                           )
@@ -176,7 +176,7 @@ class _ApprovalResignationDetailsState extends State<ApprovalResignationDetails>
                           flex:1,
                           child: Container(
                             child: Text(
-                              AppUtils.removeNullString(controller.resignationApprovalList.value[index].company_id.name),
+                              AppUtils.removeNullString(controller.resignationApprovalList.value[index].company_id!.name),
                               style: subtitleStyle(),
                             ),
                           ),
@@ -189,7 +189,7 @@ class _ApprovalResignationDetailsState extends State<ApprovalResignationDetails>
                               child: Padding(
                                 padding: const EdgeInsets.only(left:50.0),
                                 child: Text(
-                                  AppUtils.removeNullString(controller.resignationApprovalList.value[index].branch_id.name),
+                                  AppUtils.removeNullString(controller.resignationApprovalList.value[index].branch_id!.name),
                                   style: subtitleStyle(),
                                 ),
                               ),

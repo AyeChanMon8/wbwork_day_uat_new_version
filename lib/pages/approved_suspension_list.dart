@@ -69,7 +69,7 @@ class _ApprovedSuspensionListState extends State<ApprovedSuspensionList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    AppUtils.removeNullString(controller.suspensionApprovedList.value[index].employeeId.name),
+                                    AppUtils.removeNullString(controller.suspensionApprovedList.value[index].employeeId!.name),
                                     style: TextStyle(color: backgroundIconColor)
 
                                 ),

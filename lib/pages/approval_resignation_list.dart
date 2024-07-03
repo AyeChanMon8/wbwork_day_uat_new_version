@@ -67,7 +67,7 @@ class _ApprovalResignationListState extends State<ApprovalResignationList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    AppUtils.removeNullString(controller.resignationApprovalList.value[index].employeeId.name),
+                                    AppUtils.removeNullString(controller.resignationApprovalList.value[index].employeeId!.name),
                                     style: TextStyle(color: backgroundIconColor)
 
                                 ),

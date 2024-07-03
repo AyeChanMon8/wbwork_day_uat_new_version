@@ -76,7 +76,7 @@ class RewardsDetailsPage extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      controller.rewards[index].employeeId[0].name,
+                      controller.rewards[index].employeeId![0].name,
                       style: subtitleStyle(),
                     ),
                   )
@@ -149,9 +149,9 @@ class RewardsDetailsPage extends StatelessWidget {
                   Container(
                     child: Text(
                       AppUtils.removeNullString(
-                          controller.rewards[index].rewardTypeId.isEmpty
+                          controller.rewards[index].rewardTypeId!.isEmpty
                               ? ""
-                              : controller.rewards[index].rewardTypeId[0].name
+                              : controller.rewards[index].rewardTypeId![0].name
                                   .toString()),
                       style: subtitleStyle(),
                     ),
@@ -177,9 +177,9 @@ class RewardsDetailsPage extends StatelessWidget {
                   Container(
                     child: Text(
                       AppUtils.removeNullString(controller
-                              .rewards[index].rewardTitleId.isEmpty
+                              .rewards[index].rewardTitleId!.isEmpty
                           ? ''
-                          : controller.rewards[index].rewardTitleId[0].name),
+                          : controller.rewards[index].rewardTitleId![0].name),
                       style: subtitleStyle(),
                     ),
                   )
@@ -204,7 +204,7 @@ class RewardsDetailsPage extends StatelessWidget {
                   Container(
                     child: Text(
                       controller
-                          .rewards[index].employeeId[0].rewardCarriedForward
+                          .rewards[index].employeeId![0].rewardCarriedForward
                           .toString(),
                       style: subtitleStyle(),
                     ),
@@ -229,7 +229,7 @@ class RewardsDetailsPage extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      controller.rewards[index].employeeId[0].rewardThisYear
+                      controller.rewards[index].employeeId![0].rewardThisYear
                           .toString(),
                       style: subtitleStyle(),
                     ),
@@ -254,7 +254,7 @@ class RewardsDetailsPage extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      controller.rewards[index].employeeId[0].rewardTotal
+                      controller.rewards[index].employeeId![0].rewardTotal
                           .toString(),
                       style: subtitleStyle(),
                     ),
@@ -319,11 +319,11 @@ class RewardsDetailsPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            controller.rewards[index].warningAttachId.length > 0
+            controller.rewards[index].warningAttachId!.length > 0
                 ? Column(
                     children: [
                       for (var data
-                          in controller.rewards[index].warningAttachId)
+                          in controller.rewards[index].warningAttachId!)
                         Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Row(
@@ -477,13 +477,13 @@ class RewardsDetailsPage extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.rewards[index].rewardActionId.length,
+        itemCount: controller.rewards[index].rewardActionId!.length,
         itemBuilder: (BuildContext context, int pos) {
           var name = AppUtils.removeNullString(controller
-              .rewards[index].rewardActionId[pos].employee.name
+              .rewards[index].rewardActionId![pos].employee!.name
               .toString());
           var mark = AppUtils.removeNullString(
-              controller.rewards[index].rewardActionId[pos].mark.toString());
+              controller.rewards[index].rewardActionId![pos].mark.toString());
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

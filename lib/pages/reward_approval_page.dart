@@ -69,7 +69,7 @@ class _RewardApprovalPageState extends State<RewardApprovalPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.rewards[index].employeeId[0].name,
+                                controller.rewards[index].employeeId![0].name,
                                 style: subtitleStyle(),
                               ),
                               Text(
@@ -85,7 +85,7 @@ class _RewardApprovalPageState extends State<RewardApprovalPage> {
                                   controller.rewards[index].date.toString())),
                               Text(
                                 controller
-                                    .rewards[index].employeeId[0].rewardTotal
+                                    .rewards[index].employeeId![0].rewardTotal
                                     .toString(),
                                 style: subtitleStyle(),
                               )

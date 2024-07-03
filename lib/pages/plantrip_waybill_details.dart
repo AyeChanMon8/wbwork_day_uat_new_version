@@ -1010,7 +1010,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       AutoSizeText(labels.vehicle,style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].vehicleId!.name}',style: maintitleStyle(),)
                     ],)),
                   SizedBox(width: 10,),
                   Expanded(child: Column(
@@ -1018,7 +1018,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       AutoSizeText(labels.driver,style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].driverId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].driverId!.name}',style: maintitleStyle(),)
                     ],)),
                 ],),
                 SizedBox(height: 10,),
@@ -1028,7 +1028,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       AutoSizeText(labels.spare,style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].spareId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].spareId!.name}',style: maintitleStyle(),)
                     ],)),
                   SizedBox(width: 10,),
                   Expanded(child: Column(
@@ -1036,7 +1036,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       AutoSizeText(labels.trailer,style: maintitlenoBoldStyle(),),
                       SizedBox(height:5),
-                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].trailerId.name}',style: maintitleStyle(),)
+                      AutoSizeText('${controller.plantrip_with_waybill_list.value[controller.arg_index.value].trailerId!.name}',style: maintitleStyle(),)
                     ],)),
                 ],),
                 SizedBox(height: 10,),

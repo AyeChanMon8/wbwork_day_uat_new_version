@@ -64,7 +64,7 @@ class _ReminderApprovalPageState extends State<ReminderApprovalPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.reminders[index].employeeId[0].name,
+                                controller.reminders[index].employeeId![0].name,
                                 style: subtitleStyle(),
                               ),
                               Text(
@@ -79,7 +79,7 @@ class _ReminderApprovalPageState extends State<ReminderApprovalPage> {
                             children: [
                               Text(controller.reminders[index].date),
                               Text(
-                                controller.reminders[index].employeeId[0].rewardTotal.toString(),
+                                controller.reminders[index].employeeId![0].rewardTotal.toString(),
                                 style: subtitleStyle(),
                               )
                             ],

@@ -71,7 +71,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                       Obx(
                             () => Container(
                           child: controller.suspensionApprovedList.length > 0 && controller.suspensionApprovedList.value[index].employeeId !=null ? Text(
-                            controller.suspensionApprovedList.value[index].employeeId.name,
+                            controller.suspensionApprovedList.value[index].employeeId!.name,
                             style: subtitleStyle(),
                           ):SizedBox(),
                         ),
@@ -145,7 +145,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                           flex:1,
                           child: Container(
                             child: controller.suspensionApprovedList.length > 0 && controller.suspensionApprovedList.value[index].company_id!=null ? Text(
-                              AppUtils.removeNullString(controller.suspensionApprovedList.value[index].company_id.name),
+                              AppUtils.removeNullString(controller.suspensionApprovedList.value[index].company_id!.name),
                               style: subtitleStyle(),
                             ):SizedBox(),
                           ),
@@ -158,7 +158,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left:50.0),
                                 child: controller.suspensionApprovedList.length > 0 && controller.suspensionApprovedList.value[index].branch_id !=null ? Text(
-                                  AppUtils.removeNullString(controller.suspensionApprovedList.value[index].branch_id.name),
+                                  AppUtils.removeNullString(controller.suspensionApprovedList.value[index].branch_id!.name),
                                   style: subtitleStyle(),
                                 ):SizedBox(),
                               ),
@@ -195,7 +195,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                           child: controller.suspensionApprovedList.length > 0 && controller.suspensionApprovedList.value[index].departmentId !=
                               null
                               ? Text(
-                            controller.suspensionApprovedList.value[index].departmentId.name,
+                            controller.suspensionApprovedList.value[index].departmentId!.name,
                             style: subtitleStyle(),
                           )
                               : Text('-'),
@@ -243,7 +243,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                           flex:1,
                           child: Container(
                             child: controller.suspensionApprovedList.length > 0 && controller.suspensionApprovedList.value[index].job_id != null? Text(
-                              AppUtils.removeNullString(controller.suspensionApprovedList.value[index].job_id.name),
+                              AppUtils.removeNullString(controller.suspensionApprovedList.value[index].job_id!.name),
                               style: subtitleStyle(),
                             ):SizedBox(),
                           ),
@@ -256,7 +256,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left:50.0),
                                 child: Text(
-                                  AppUtils.removeNullString(controller.suspensionApprovedList.value[index].job_grade_id.name),
+                                  AppUtils.removeNullString(controller.suspensionApprovedList.value[index].job_grade_id!.name),
                                   style: subtitleStyle(),
                                 ),
                               ),

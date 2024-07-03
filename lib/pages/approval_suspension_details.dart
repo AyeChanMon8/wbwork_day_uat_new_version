@@ -69,7 +69,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                           style: datalistStyle(),
                         ),
                       ),Container(
-                          child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].employeeId!=null ?Text(AppUtils.removeNullString(controller.suspensionApprovalList.value[index].employeeId.name),
+                          child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].employeeId!=null ?Text(AppUtils.removeNullString(controller.suspensionApprovalList.value[index].employeeId!.name),
                             style: subtitleStyle(),
                           ):SizedBox(),
                         ),
@@ -141,7 +141,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                           flex:1,
                           child: Container(
                             child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].company_id != null?Text(
-                              AppUtils.removeNullString(controller.suspensionApprovalList.value[index].company_id.name),
+                              AppUtils.removeNullString(controller.suspensionApprovalList.value[index].company_id!.name),
                               style: subtitleStyle(),
                             ):SizedBox(),
                           ),
@@ -154,7 +154,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left:50.0),
                                 child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].branch_id != null? Text(
-                                  AppUtils.removeNullString(controller.suspensionApprovalList.value[index].branch_id.name),
+                                  AppUtils.removeNullString(controller.suspensionApprovalList.value[index].branch_id!.name),
                                   style: subtitleStyle(),
                                 ): SizedBox(),
                               ),
@@ -188,7 +188,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                       ),Container(
                           child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].departmentId !=
                               null
-                              ? Text(AppUtils.removeNullString(controller.suspensionApprovalList.value[index].departmentId.name)
+                              ? Text(AppUtils.removeNullString(controller.suspensionApprovalList.value[index].departmentId!.name)
                             ,
                             style: subtitleStyle(),
                           )
@@ -307,7 +307,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                             child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].job_id !=
                               null
                               ? Text(
-                              AppUtils.removeNullString(controller.suspensionApprovalList.value[index].job_id.name),
+                              AppUtils.removeNullString(controller.suspensionApprovalList.value[index].job_id!.name),
                               style: subtitleStyle(),
                             ): Text('-'),
                           ),
@@ -322,7 +322,7 @@ class _ApprovalSuspensionDetailsState extends State<ApprovalSuspensionDetails> {
                                 child: controller.suspensionApprovalList.length > 0 && controller.suspensionApprovalList.value[index].job_grade_id !=
                               null
                               ? Text(
-                                  AppUtils.removeNullString(controller.suspensionApprovalList.value[index].job_grade_id.name),
+                                  AppUtils.removeNullString(controller.suspensionApprovalList.value[index].job_grade_id!.name),
                                   style: subtitleStyle(),
                                 ): Text('-'),
                               ),

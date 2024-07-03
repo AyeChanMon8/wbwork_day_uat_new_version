@@ -111,7 +111,7 @@ class _RewardPageState extends State<RewardPage> {
                                 children: [
                                   Text(date),
                                   Text(
-                                    controller.rewards[index].employeeId[0].rewardTotal.toString(),
+                                    controller.rewards[index].employeeId![0].rewardTotal.toString(),
                                     style: subtitleStyle(),
                                   )
                                 ],
