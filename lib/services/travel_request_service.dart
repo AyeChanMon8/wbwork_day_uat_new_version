@@ -721,7 +721,7 @@ class TravelRequestService extends OdooService {
     var created = 0;
     String url = Globals.baseURL + "/hr.employee/2/add_travel_expense_lines";
     print('pocketlinesize');
-    print(traveldata.travel_line.length);
+    print(traveldata.travel_line!.length);
     //Globals.ph_hardware_back.value = false;
     Response response = await dioClient.put(url, data: traveldata.toJson());
     
@@ -777,7 +777,7 @@ class TravelRequestService extends OdooService {
       if (response.data['count'] != 0) {
         list.forEach((v) {
           var travel_data = TravelRequestListResponse.fromMap(v);
-          if (travel_data.employee_id.id == empID) {
+          if (travel_data.employee_id!.id == empID) {
             travel_list.add(TravelRequestListResponse.fromMap(v));
           } else {
             if (travel_data.state != 'draft') {

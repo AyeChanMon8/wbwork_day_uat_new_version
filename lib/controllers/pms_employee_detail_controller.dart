@@ -60,7 +60,7 @@ void onReady() async {
 
   Future<int?> checkApproveOrNote(PMSDetailModel value) async{
     this.pmsService = await PMSService().init();
-    await pmsService?.pmsApproveorNot(value.employeeId.id.toString(),value.state).then((value){
+    await pmsService?.pmsApproveorNot(value.employeeId!.id.toString(),value.state).then((value){
       print("Status#");
       print(value);
       approve_or_not.value = value!;

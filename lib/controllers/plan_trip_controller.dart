@@ -257,7 +257,7 @@ class PlanTripController extends GetxController {
       //   log('arg_index => $arg_index');
       //   // recalculate
         if(plantrip_with_waybill_list!=null && plantrip_with_waybill_list.length>0){
-          calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds);
+          calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds!);
         }
         //calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds);
        }
@@ -511,7 +511,7 @@ class PlanTripController extends GetxController {
             Plantrip_waybill_expense_line(
                 // tripWaybillId: planTripWayBillModel.id,
                 routeExpenseId:
-                    selectedWayBillExpenseRouteCategory.routeExpenseId.id,
+                    selectedWayBillExpenseRouteCategory.routeExpenseId!.id,
                 actualAmount: double.parse(
                     wayBillexpenseActualTextController.text.toString()),
                 description:
@@ -877,7 +877,7 @@ class PlanTripController extends GetxController {
     Plantrip_waybill_expense_line plantrip_waybill_expense_line =
         Plantrip_waybill_expense_line(
             // tripWaybillId: planTripWayBillModel.id,
-            routeExpenseId: expenseId.routeExpenseId.id,
+            routeExpenseId: expenseId.routeExpenseId!.id,
             actualAmount: 0.0,
             description: expenseId.description,
             image: expenseId.attachement);
@@ -1181,7 +1181,7 @@ class PlanTripController extends GetxController {
       //   log('arg_index => $arg_index');
       //   // recalculate
         if(plantrip_with_waybill_list!=null && plantrip_with_waybill_list.length>0){
-          calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds);
+          calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds!);
         }
         //calculateTotalExpense(plantrip_with_waybill_list[arg_index.value].expenseIds);
        }

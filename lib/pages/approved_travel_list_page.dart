@@ -64,7 +64,7 @@ class _ApprovedTravelListState extends State<ApprovedTravelList> {
                       leading: Text(controller.travelApprovedList[index].name),
                       title: Text(
                           controller
-                              .travelApprovedList.value[index].employee_id.name,style: TextStyle(color: backgroundIconColor),),
+                              .travelApprovedList.value[index].employee_id!.name,style: TextStyle(color: backgroundIconColor),),
                       subtitle: Text(
                           controller.travelApprovedList.value[index].city_from +
                               " - " +

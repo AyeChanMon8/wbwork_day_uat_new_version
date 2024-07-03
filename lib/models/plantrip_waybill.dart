@@ -1429,6 +1429,7 @@ class WayBill_Expense_ids {
   double overAmount;
   int id;
   String description;
+  String attachement;
   WayBill_Expense_ids({
     this.routeExpenseId,
     this.eRouteId,
@@ -1436,7 +1437,8 @@ class WayBill_Expense_ids {
     this.actualAmount = 0.0,
     this.overAmount = 0.0,
     this.id = 0,
-    this.description = ''
+    this.description = '',
+    this.attachement = ''
   });
 
   WayBill_Expense_ids copyWith({
@@ -1447,6 +1449,7 @@ class WayBill_Expense_ids {
   double? overAmount,
   int? id,
   String? description,
+  String? attachement
   }) {
     return WayBill_Expense_ids(
       routeExpenseId: routeExpenseId ?? this.routeExpenseId,
@@ -1456,6 +1459,7 @@ class WayBill_Expense_ids {
       overAmount: overAmount ?? this.overAmount,
       id: id ?? this.id,
       description: description ?? this.description,
+      attachement: attachement ?? this.attachement,
     );
   }
 
@@ -1468,6 +1472,7 @@ class WayBill_Expense_ids {
       'over_amount': overAmount,
       'description': description,
       'id': id,
+      'attachement': attachement,
     };
   }
 
@@ -1482,6 +1487,7 @@ class WayBill_Expense_ids {
       overAmount: map['over_amount'],
       description: map['description'],
       id: map['id'],
+      attachement: map['attachement'],
     );
   }
 
@@ -1491,17 +1497,17 @@ class WayBill_Expense_ids {
       WayBill_Expense_ids.fromMap(json.decode(source));
 
   @override
-  String toString() => 'WayBill_Expense_ids(routeExpenseId: $routeExpenseId, eRouteId: $eRouteId,standardAmount: $standardAmount, actualAmount: $actualAmount,overAmount: $overAmount, description: $description, id: $id)';
+  String toString() => 'WayBill_Expense_ids(routeExpenseId: $routeExpenseId, eRouteId: $eRouteId,standardAmount: $standardAmount, actualAmount: $actualAmount,overAmount: $overAmount, description: $description, id: $id, attachement: $attachement)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is WayBill_Expense_ids && o.routeExpenseId == routeExpenseId && o.eRouteId == eRouteId && o.standardAmount == standardAmount && o.actualAmount == actualAmount && o.overAmount == overAmount && o.description == description && o.id == id;
+    return o is WayBill_Expense_ids && o.routeExpenseId == routeExpenseId && o.eRouteId == eRouteId && o.standardAmount == standardAmount && o.actualAmount == actualAmount && o.overAmount == overAmount && o.description == description && o.id == id && o.attachement == attachement;
   }
 
   @override
-  int get hashCode => routeExpenseId.hashCode ^ eRouteId.hashCode ^ standardAmount.hashCode ^ actualAmount.hashCode  ^ overAmount.hashCode ^ description.hashCode ^ id.hashCode;
+  int get hashCode => routeExpenseId.hashCode ^ eRouteId.hashCode ^ standardAmount.hashCode ^ actualAmount.hashCode  ^ overAmount.hashCode ^ description.hashCode ^ id.hashCode ^ attachement.hashCode;
 }
 // class WayBill_Expense_ids {
 //   Route_expense_id _routeExpenseId;

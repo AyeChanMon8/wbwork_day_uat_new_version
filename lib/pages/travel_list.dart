@@ -148,20 +148,20 @@ class _TravelListPage extends State<TravelListPage> {
                                     child: controller
                                                 .travelLineList
                                                 .value[index]
-                                                .travel_line
+                                                .travel_line!
                                                 .length >
                                             0
                                         ? Text(
                                             controller
                                                         .travelLineList
                                                         .value[index]
-                                                        .travel_line[0]
+                                                        .travel_line![0]
                                                         .purpose !=
                                                     null
                                                 ? controller
                                                     .travelLineList
                                                     .value[index]
-                                                    .travel_line[0]
+                                                    .travel_line![0]
                                                     .purpose
                                                 : '',
                                             style: datalistStyle(),

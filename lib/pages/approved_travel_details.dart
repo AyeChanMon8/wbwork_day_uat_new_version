@@ -113,7 +113,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.travelApprovedList[index].travel_line.length,
+        itemCount: controller.travelApprovedList[index].travel_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           return Column(
             children: [
@@ -124,12 +124,12 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                     Expanded(
                       child: Container(
                         child: controller.travelApprovedList.value[index]
-                                    .travel_line[ind].date !=
+                                    .travel_line![ind].date !=
                                 null
                             ? Text(AppUtils.changeDateFormat(controller
                                 .travelApprovedList
                                 .value[index]
-                                .travel_line[ind]
+                                .travel_line![ind]
                                 .date
                                 .toString()))
                             : Text('  -'),
@@ -138,10 +138,10 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                     Expanded(
                       child: Container(
                         child: controller.travelApprovedList.value[index]
-                                    .travel_line[ind].destination !=
+                                    .travel_line![ind].destination !=
                                 null
                             ? Text(controller.travelApprovedList.value[index]
-                                .travel_line[ind].destination)
+                                .travel_line![ind].destination)
                             : Text('  -'),
                       ),
                     ),
@@ -153,10 +153,10 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                           left: 60,
                         ),
                         child: controller.travelApprovedList.value[index]
-                                    .travel_line[ind].purpose !=
+                                    .travel_line![ind].purpose !=
                                 null
                             ? Text(controller.travelApprovedList.value[index]
-                                .travel_line[ind].purpose)
+                                .travel_line![ind].purpose)
                             : Text('  -'),
                       ),
                     ),
@@ -356,7 +356,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount:
-            controller.travelApprovedList[index].request_allowance_lines.length,
+            controller.travelApprovedList[index].request_allowance_lines!.length,
         itemBuilder: (BuildContext context, int pos) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,7 +370,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                       child: Container(
                         // width: 80,
                         child: Text(controller.travelApprovedList[index]
-                            .request_allowance_lines[pos].expense_categ_id.name
+                            .request_allowance_lines![pos].expense_categ_id!.name
                             .toString()),
                       ),
                     ),
@@ -394,7 +394,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                       child: Container(
                         // width: 80,
                         child: Text(controller.travelApprovedList[index]
-                            .request_allowance_lines[pos].total_amount
+                            .request_allowance_lines![pos].total_amount
                             .toString()),
                       ),
                     ),
@@ -420,7 +420,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
                       child: Container(
                         // width: 80,
                         child: Text(controller.travelApprovedList[index]
-                            .request_allowance_lines[pos].remark
+                            .request_allowance_lines![pos].remark
                             .toString()),
                       ),
                     ),

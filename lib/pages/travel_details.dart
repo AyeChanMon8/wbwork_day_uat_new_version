@@ -304,7 +304,7 @@ class TravelDetails extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: controller
-            .travelLineList.value[index].request_allowance_lines.length,
+            .travelLineList.value[index].request_allowance_lines!.length,
         itemBuilder: (BuildContext context, int ind) {
           var list =
               controller.travelLineList.value[index].request_allowance_lines;
@@ -316,8 +316,8 @@ class TravelDetails extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        child: list[ind].expense_categ_id != null
-                            ? Text(list[ind].expense_categ_id.name)
+                        child: list![ind].expense_categ_id != null
+                            ? Text(list[ind].expense_categ_id!.name)
                             : Text('  -'),
                       ),
                     ),
@@ -372,7 +372,7 @@ class TravelDetails extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.travelLineList.value[index].travel_line.length,
+        itemCount: controller.travelLineList.value[index].travel_line!.length,
         itemBuilder: (BuildContext context, int ind) {
           return Column(
             children: [
@@ -383,11 +383,11 @@ class TravelDetails extends StatelessWidget {
                     Expanded(
                       child: Container(
                         child: controller.travelLineList.value[index]
-                                    .travel_line[ind].date !=
+                                    .travel_line![ind].date !=
                                 null
                             ? Text(
                             AppUtils.changeDateFormat(controller.travelLineList.value[index]
-                            .travel_line[ind].date)
+                            .travel_line![ind].date)
                               )
                             : Text('  -'),
                       ),
@@ -395,10 +395,10 @@ class TravelDetails extends StatelessWidget {
                     Expanded(
                       child: Container(
                         child: controller.travelLineList.value[index]
-                                    .travel_line[ind].destination !=
+                                    .travel_line![ind].destination !=
                                 null
                             ? Text(controller.travelLineList.value[index]
-                                .travel_line[ind].destination)
+                                .travel_line![ind].destination)
                             : Text('  -'),
                       ),
                     ),
@@ -410,10 +410,10 @@ class TravelDetails extends StatelessWidget {
                          // left: 60,
                         ),
                         child: controller.travelLineList.value[index]
-                                    .travel_line[ind].purpose !=
+                                    .travel_line![ind].purpose !=
                                 null
                             ? Text(controller.travelLineList.value[index]
-                                .travel_line[ind].purpose)
+                                .travel_line![ind].purpose)
                             : Text('  -'),
                       ),
                     ),
