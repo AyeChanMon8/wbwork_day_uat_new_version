@@ -2019,10 +2019,10 @@ class ApprovalController extends GetxController {
   double getTotalAmount(int index) {
     double totalAmount = 0.0;
     for (var i = 0;
-        i < travelApprovalList[index].request_allowance_lines.length;
+        i < travelApprovalList[index].request_allowance_lines!.length;
         i++) {
       totalAmount += travelApprovalList[index]
-          .request_allowance_lines[i]
+          .request_allowance_lines![i]
           .total_amount; // prints each element of the array
     }
     // travelApprovalList[index].request_allowance_lines.forEach((element) {

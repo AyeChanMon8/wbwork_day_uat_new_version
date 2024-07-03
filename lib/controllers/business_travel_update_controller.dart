@@ -177,8 +177,8 @@ class BusinessTravelUpdateController extends GetxController {
     from_travel_date.value = travelExpenseApproveModel.start_date;
     to_travel_date.value = travelExpenseApproveModel.end_date;
     this.selectedApproveList = travelExpenseApproveModel;
-    for(var i=0;i<travelExpenseApproveModel.request_allowance_lines.length;i++){
-      totalamount+= travelExpenseApproveModel.request_allowance_lines[i].total_amount;
+    for(var i=0;i<travelExpenseApproveModel.request_allowance_lines!.length;i++){
+      totalamount+= travelExpenseApproveModel.request_allowance_lines![i].total_amount;
     }
     // travelExpenseApproveModel.request_allowance_lines.forEach((element) {
     //   totalamount += element.total_amount;

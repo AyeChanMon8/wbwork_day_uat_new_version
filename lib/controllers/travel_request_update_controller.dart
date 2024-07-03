@@ -124,8 +124,8 @@ class TravelRequestUpdateController extends GetxController {
       toPlaceController.text = travelRequestListResponse.city_to;
       toDateTextController.text = travelRequestListResponse.end_date;
       durationController.text = travelRequestListResponse.duration.toString();
-      travelLineList.value = travelRequestListResponse.travel_line;
-      travelRequestListResponse.request_allowance_lines.forEach((element) {
+      travelLineList.value = travelRequestListResponse.travel_line!;
+      travelRequestListResponse.request_allowance_lines!.forEach((element) {
         TravelExpense trExpense = element as TravelExpense;
         newexpenseList.add(TravelExpense(
             expense_categ_id: trExpense.expense_categ_id,
@@ -168,9 +168,9 @@ class TravelRequestUpdateController extends GetxController {
     var expense = TravelExpense(
         expense_name: selectedExpenseType.display_name,
         expense_categ_id: selectedExpenseType.id,
-        total_amount: double.tryParse(amount.toString()),
-        quantity: int.tryParse(quantityTextController.text),
-        amount: int.tryParse(unitPriceController.text),
+        total_amount: double.tryParse(amount.toString())!,
+        quantity: int.tryParse(quantityTextController.text)!,
+        amount: int.tryParse(unitPriceController.text)!,
         remark: remarkTextController.text);
     expenseList.add(expense);
   }
@@ -388,7 +388,7 @@ travelLineList.value = value;
             )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    travelLineList.value[index].employee_id = employee_id;
+    travelLineList.value[index].employee_id = employee_id!;
     await _travelRequestService?.updateTravelLine(travelLineList.value[index])
         .then((value) {
           if(value!=null){

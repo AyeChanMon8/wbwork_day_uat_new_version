@@ -170,10 +170,10 @@ class BusinessTravelController extends GetxController {
     this.selectedApproveList = travelExpenseApproveModel;
     if (travelExpenseApproveModel.request_allowance_lines != null) {
       for (var i = 0;
-          i < travelExpenseApproveModel.request_allowance_lines.length;
+          i < travelExpenseApproveModel.request_allowance_lines!.length;
           i++) {
         totalamount +=
-            travelExpenseApproveModel.request_allowance_lines[i].total_amount;
+            travelExpenseApproveModel.request_allowance_lines![i].total_amount;
       }
       // travelExpenseApproveModel.request_allowance_lines.forEach((element) {
       //   totalamount += element.total_amount;
@@ -614,12 +614,12 @@ class BusinessTravelController extends GetxController {
                 i <
                     travel_expense_approve_list
                         .value[travel_expense_approve_list.value.length - 1]
-                        .request_allowance_lines
+                        .request_allowance_lines!
                         .length;
                 i++) {
               totalamount += travel_expense_approve_list
                   .value[travel_expense_approve_list.value.length - 1]
-                  .request_allowance_lines[i]
+                  .request_allowance_lines![i]
                   .total_amount;
             }
             // travel_expense_approve_list

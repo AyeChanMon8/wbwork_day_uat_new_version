@@ -177,8 +177,8 @@ class TravelListController extends GetxController {
     // travelLineList.value[index].request_allowance_lines.forEach((element) {
     //   totalAmount += element.total_amount;
     // });
-    for(var i=0;i<travelLineList.value[index].request_allowance_lines.length;i++){
-      totalAmount += travelLineList.value[index].request_allowance_lines[i].total_amount;
+    for(var i=0;i<travelLineList.value[index].request_allowance_lines!.length;i++){
+      totalAmount += travelLineList.value[index].request_allowance_lines![i].total_amount;
     }
     return totalAmount;
   }

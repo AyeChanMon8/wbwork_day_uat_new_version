@@ -146,9 +146,9 @@ clearTravelLine();
     var expense = TravelExpense(
         expense_name: selectedExpenseType.display_name,
         expense_categ_id: selectedExpenseType.id,
-        total_amount: double.tryParse(amount.toString()),
-        quantity: int.tryParse(quantityTextController.text),
-        amount: int.tryParse(unitPriceController.text),
+        total_amount: double.tryParse(amount.toString())!,
+        quantity: int.tryParse(quantityTextController.text)!,
+        amount: int.tryParse(unitPriceController.text)!,
         remark: remarkTextController.text);
     expenseList.add(expense);
     getTotalAmount();
@@ -415,7 +415,7 @@ clearTravelLine();
             )),
             barrierDismissible: false));
     var employee_id = int.tryParse(box.read('emp_id'));
-    travelLineList.value[index].employee_id = employee_id;
+    travelLineList.value[index].employee_id = employee_id!;
     await _travelRequestService?.updateTravelLine(travelLineList.value[index])
         .then((value) {
       travelLineList.removeAt(index);
