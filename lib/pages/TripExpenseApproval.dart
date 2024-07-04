@@ -552,7 +552,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: controller
-            .tripExpenseToApproveList[index].trip_expense_lines.length,
+            .tripExpenseToApproveList[index].trip_expense_lines!.length,
         itemBuilder: (BuildContext context, int ind) {
           return Column(
             children: [
@@ -562,33 +562,33 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
                     Expanded(
                       flex: 2,
                       child: Text(controller.tripExpenseToApproveList[index]
-                          .trip_expense_lines[ind].date
+                          .trip_expense_lines![ind].date
                           .toString(),style: TextStyle(color: controller.tripExpenseToApproveList[index]
-                                  .trip_expense_lines[ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
-                                  .trip_expense_lines[ind].over_amount>0?Colors.red:Colors.black),),
+                                  .trip_expense_lines![ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
+                                  .trip_expense_lines![ind].over_amount>0?Colors.red:Colors.black),),
                     ),
                     Expanded(
                       flex: 1,
                       child: Text(
                         controller.tripExpenseToApproveList[index]
-                            .trip_expense_lines[ind].product_id.name
+                            .trip_expense_lines![ind].product_id!.name
                             .toString(),style: TextStyle(color: controller.tripExpenseToApproveList[index]
-                          .trip_expense_lines[ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
-                          .trip_expense_lines[ind].over_amount>0?Colors.red:Colors.black),
+                          .trip_expense_lines![ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
+                          .trip_expense_lines![ind].over_amount>0?Colors.red:Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Expanded(
                       flex: 1,
                       child: controller.tripExpenseToApproveList[index]
-                                  .trip_expense_lines[ind].description !=
+                                  .trip_expense_lines![ind].description !=
                               null
                           ? Text(
                               controller.tripExpenseToApproveList[index]
-                                  .trip_expense_lines[ind].description
+                                  .trip_expense_lines![ind].description
                                   .toString(),style: TextStyle(color: controller.tripExpenseToApproveList[index]
-                          .trip_expense_lines[ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
-                          .trip_expense_lines[ind].over_amount>0?Colors.red:Colors.black),
+                          .trip_expense_lines![ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
+                          .trip_expense_lines![ind].over_amount>0?Colors.red:Colors.black),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -600,10 +600,10 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
                         alignment:Alignment.centerRight,
                         child: Text(NumberFormat("#,###").format(controller
                             .tripExpenseToApproveList[index]
-                            .trip_expense_lines[ind]
+                            .trip_expense_lines![ind]
                             .price_subtotal),style: TextStyle(color: controller.tripExpenseToApproveList[index]
-                            .trip_expense_lines[ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
-                            .trip_expense_lines[ind].over_amount>0?Colors.red:Colors.black),),
+                            .trip_expense_lines![ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
+                            .trip_expense_lines![ind].over_amount>0?Colors.red:Colors.black),),
                       ),
                     ),
                     Expanded(
@@ -614,10 +614,10 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
                           padding: const EdgeInsets.only(left:8.0),
                           child: Text(NumberFormat("#,###").format(controller
                               .tripExpenseToApproveList[index]
-                              .trip_expense_lines[ind]
+                              .trip_expense_lines![ind]
                               .over_amount),style: TextStyle(color: controller.tripExpenseToApproveList[index]
-                              .trip_expense_lines[ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
-                              .trip_expense_lines[ind].over_amount>0?Colors.red:Colors.black),),
+                              .trip_expense_lines![ind].over_amount!=null&&controller.tripExpenseToApproveList[index]
+                              .trip_expense_lines![ind].over_amount>0?Colors.red:Colors.black),),
                         ),
                       ),
                     ),
@@ -628,9 +628,9 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
                           icon: Icon(Icons.attach_file),
                           onPressed: () async {
                             print(controller.tripExpenseToApproveList.value[index]
-                                .trip_expense_lines[ind].id);
+                                .trip_expense_lines![ind].id);
                             controller.findExpenseImage(controller.tripExpenseToApproveList.value[index]
-                                .trip_expense_lines[ind].id).then((value) async{
+                                .trip_expense_lines![ind].id).then((value) async{
 
                                   if(value.length>0){
                                     await showDialog(
@@ -686,11 +686,11 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
               ),
               Container(
                 child: controller.tripExpenseToApproveList.value[index]
-                            .employee_id.name !=
+                            .employee_id!.name !=
                         null
                     ? Text(
                         controller.tripExpenseToApproveList.value[index]
-                            .employee_id.name,
+                            .employee_id!.name,
                         style: subtitleStyle())
                     : Text('-'),
               ),

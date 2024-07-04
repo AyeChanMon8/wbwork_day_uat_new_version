@@ -155,9 +155,9 @@ class TravelRequestService extends OdooService {
     String url = Globals.baseURL + "/travel.request/1/create_travle_request";
     var employee_id = int.tryParse(box.read('emp_id'));
     if(status==0){
-      for(var i=0;i<travelRequest.travel_line.length;i++){
-        travelRequest.travel_line[i].update_status = true;
-        travelRequest.travel_line[i].employee_id = employee_id;
+      for(var i=0;i<travelRequest.travel_line!.length;i++){
+        travelRequest.travel_line![i].update_status = true;
+        travelRequest.travel_line![i].employee_id = employee_id!;
       }
     }
     

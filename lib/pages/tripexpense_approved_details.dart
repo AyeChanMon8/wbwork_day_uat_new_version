@@ -177,7 +177,7 @@ class _ApprovalDetailsState extends State<TripExpenseApprovedDetails> {
       child: ListView.builder(
         shrinkWrap: true,
         itemCount:
-        controller.tripExpenseApprovedList[index].trip_expense_lines.length,
+        controller.tripExpenseApprovedList[index].trip_expense_lines!.length,
         itemBuilder: (BuildContext context, int ind) {
           return Column(
             children: [
@@ -188,33 +188,33 @@ class _ApprovalDetailsState extends State<TripExpenseApprovedDetails> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                        child: Text(AppUtils.changeDateFormat(controller.tripExpenseApprovedList[index].trip_expense_lines[ind].date)
+                        child: Text(AppUtils.changeDateFormat(controller.tripExpenseApprovedList[index].trip_expense_lines![ind].date)
                             .toString()),
                       ),
                     ),
                     Expanded(
                       flex: 2,
-                      child: Text(controller.tripExpenseApprovedList[index].trip_expense_lines[ind].product_id.name
+                      child: Text(controller.tripExpenseApprovedList[index].trip_expense_lines![ind].product_id!.name
                           .toString(),textAlign: TextAlign.center,),
                     ),
                     Expanded(
                       flex: 2,
-                      child:controller.tripExpenseApprovedList[index].trip_expense_lines[ind].description!=null?
-                      Text(controller.tripExpenseApprovedList[index].trip_expense_lines[ind].description
+                      child:controller.tripExpenseApprovedList[index].trip_expense_lines![ind].description!=null?
+                      Text(controller.tripExpenseApprovedList[index].trip_expense_lines![ind].description
                           .toString()):SizedBox(),
                     ),
                     Expanded(
                       flex: 2,
-                      child: Text(controller.tripExpenseApprovedList[index].trip_expense_lines[ind].price_subtotal
+                      child: Text(controller.tripExpenseApprovedList[index].trip_expense_lines![ind].price_subtotal
                           .toString()),
                     ),
                     Expanded(
                       flex: 1,
-                      child: controller.tripExpenseApprovedList[index].trip_expense_lines[ind].attached_file != null ? IconButton(icon: Icon(Icons.attach_file), onPressed: ()async{
+                      child: controller.tripExpenseApprovedList[index].trip_expense_lines![ind].attached_file != null ? IconButton(icon: Icon(Icons.attach_file), onPressed: ()async{
                         await showDialog(
                             context: context,
                             builder: (_) => ImageDialog(
-                              bytes: base64Decode(controller.tripExpenseApprovedList[index].trip_expense_lines[ind].attached_file),
+                              bytes: base64Decode(controller.tripExpenseApprovedList[index].trip_expense_lines![ind].attached_file),
                             ));
                       }):SizedBox(),
                     ),
@@ -257,11 +257,11 @@ class _ApprovalDetailsState extends State<TripExpenseApprovedDetails> {
               ),
               Container(
                 child: controller.tripExpenseApprovedList.value[index]
-                    .employee_id.name !=
+                    .employee_id!.name !=
                     null
                     ? Text(
                     controller.tripExpenseApprovedList.value[index]
-                        .employee_id.name,
+                        .employee_id!.name,
                     style: subtitleStyle())
                     : Text('-'),
               ),

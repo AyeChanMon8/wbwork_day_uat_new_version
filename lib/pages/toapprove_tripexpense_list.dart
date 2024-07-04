@@ -70,10 +70,10 @@ class _ToApproveTripExpenseListState extends State<ToApproveTripExpenseList> {
                         title: Text(
                           // "Approval 1",
                             controller.tripExpenseToApproveList
-                                .value[index].company_id.name),
+                                .value[index].company_id!.name),
                         subtitle: Text(
                             controller.tripExpenseToApproveList
-                                .value[index].employee_id.name),
+                                .value[index].employee_id!.name),
                         trailing: arrowforwardIcon),
                   ),
                 ),
