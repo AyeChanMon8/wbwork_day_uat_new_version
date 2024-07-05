@@ -105,7 +105,7 @@ class _WarningApprovalPageState extends State<WarningApprovalPage> {
                                         .isNull)
                                     ? '-'
                                     : controller.warnings[index]
-                                        .employeeId[0].name,
+                                        .employeeId![0].name,
                                 style: subtitleStyle(),
                               ),
                               Text(

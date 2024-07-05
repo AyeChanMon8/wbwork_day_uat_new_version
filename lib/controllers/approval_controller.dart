@@ -2049,10 +2049,10 @@ class ApprovalController extends GetxController {
   double getTotalTripExpenseAmount(int index) {
     double totalAmount = 0.0;
     for (var i = 0;
-        i < tripExpenseToApproveList[index].trip_expense_lines.length;
+        i < tripExpenseToApproveList[index].trip_expense_lines!.length;
         i++) {
       totalAmount += tripExpenseToApproveList[index]
-          .trip_expense_lines[i]
+          .trip_expense_lines![i]
           .price_subtotal; // prints each element of the array
     }
     // tripExpenseToApproveList[index].trip_expense_lines.forEach((element) {
@@ -2079,10 +2079,10 @@ class ApprovalController extends GetxController {
   double getTotaltripExpenseApprovedAmount(int index) {
     double totalAmount = 0.0;
     for (var i = 0;
-        i < tripExpenseApprovedList[index].trip_expense_lines.length;
+        i < tripExpenseApprovedList[index].trip_expense_lines!.length;
         i++) {
       totalAmount += tripExpenseApprovedList[index]
-          .trip_expense_lines[i]
+          .trip_expense_lines![i]
           .price_subtotal; // prints each element of the array
     }
     // tripExpenseApprovedList[index].trip_expense_lines.forEach((element) {

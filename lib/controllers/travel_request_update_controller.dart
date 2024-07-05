@@ -209,7 +209,7 @@ class TravelRequestUpdateController extends GetxController {
               )),
               barrierDismissible: false));
       TravelRequest travelRequest = TravelRequest(
-          employee_id: employee_id,
+          employee_id: employee_id!,
           start_date: from_date,
           end_date: to_date,
           city_from: from_des,
@@ -319,7 +319,7 @@ class TravelRequestUpdateController extends GetxController {
     String formattedFromDate = formatter.format(formdate);
     String formattedToDate = formatter.format(endDate);
     TravelRequest travel = TravelRequest(
-      employee_id: employee_id,
+      employee_id: employee_id!,
       start_date: formattedFromDate,
       end_date: formattedToDate,
     );

@@ -127,7 +127,7 @@ class OvertimeDetails extends StatelessWidget {
                           children: [
                             Text(
                               controller.otList[index].request_line![ind]
-                                  .employee_id.name,
+                                  .employee_id!.name,
                               style: labelPrimaryHightlightTextStyle(),
                             ),
                             SizedBox(

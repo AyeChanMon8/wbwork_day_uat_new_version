@@ -78,7 +78,7 @@ class WarningDetailsPage extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        controller.warnings[index].employeeId[0].name,
+                        controller.warnings[index].employeeId![0].name,
                         style: subtitleStyle(),
                       ),
                     )
@@ -160,7 +160,7 @@ class WarningDetailsPage extends StatelessWidget {
                           (controller.warnings[index].warningTypeId.isNull)
                               ? '-'
                               : controller
-                                  .warnings[index].warningTypeId[0].name,
+                                  .warnings[index].warningTypeId![0].name,
                           style: subtitleStyle(),
                         ),
                       ),
@@ -190,7 +190,7 @@ class WarningDetailsPage extends StatelessWidget {
                           (controller.warnings[index].description.isNull)
                               ? '-'
                               : controller
-                                  .warnings[index].warningTitleId[0].name,
+                                  .warnings[index].warningTitleId![0].name,
                           style: subtitleStyle(),
                         ),
                       ),
@@ -216,7 +216,7 @@ class WarningDetailsPage extends StatelessWidget {
                     Container(
                       child: Text(
                         controller
-                            .warnings[index].employeeId[0].warningCarriedForward
+                            .warnings[index].employeeId![0].warningCarriedForward
                             .toString(),
                         style: subtitleStyle(),
                       ),
@@ -241,7 +241,7 @@ class WarningDetailsPage extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        controller.warnings[index].employeeId[0].warningThisYear
+                        controller.warnings[index].employeeId![0].warningThisYear
                             .toString(),
                         style: subtitleStyle(),
                       ),
@@ -266,7 +266,7 @@ class WarningDetailsPage extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        controller.warnings[index].employeeId[0].warningTotal
+                        controller.warnings[index].employeeId![0].warningTotal
                             .toString(),
                         style: subtitleStyle(),
                       ),
@@ -331,11 +331,11 @@ class WarningDetailsPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              controller.warnings[index].warningAttachId.length > 0
+              controller.warnings[index].warningAttachId!.length > 0
                   ? Column(
                       children: [
                         for (var data
-                            in controller.warnings[index].warningAttachId)
+                            in controller.warnings[index].warningAttachId!)
                           Container(
                             margin: EdgeInsets.only(left: 20),
                             child: Row(
@@ -490,13 +490,13 @@ class WarningDetailsPage extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.warnings[index].managerWarningIds.length,
+        itemCount: controller.warnings[index].managerWarningIds!.length,
         itemBuilder: (BuildContext context, int pos) {
           var name = AppUtils.removeNullString(controller
-              .warnings[index].managerWarningIds[pos].employee.name
+              .warnings[index].managerWarningIds![pos].employee!.name
               .toString());
           var mark = AppUtils.removeNullString(controller
-              .warnings[index].managerWarningIds[pos].mark
+              .warnings[index].managerWarningIds![pos].mark
               .toString());
 
           return Column(
