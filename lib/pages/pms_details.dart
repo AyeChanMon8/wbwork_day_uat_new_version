@@ -124,7 +124,7 @@ class _PmsDetailsState extends State<PmsDetails>
                       style: pmstitleStyle(),
                     ),
                     Text(
-                      (controller.detailModel.value.dateRangeId.name),
+                      (controller.detailModel.value.dateRangeId!.name),
                       style: pmstitleStyle(),
                     ),
                   ],
@@ -141,7 +141,7 @@ class _PmsDetailsState extends State<PmsDetails>
                     ),
                     Text(
                       (AppUtils.removeNullString(
-                          controller.detailModel.value.job_id.name)),
+                          controller.detailModel.value.job_id!.name)),
                       style: pmstitleStyle(),
                     ),
                   ],
@@ -284,10 +284,10 @@ class _PmsDetailsState extends State<PmsDetails>
                       () => ListView.builder(
                           shrinkWrap: true,
                           itemCount: controller
-                              .detailModel.value.keyPerformanceIds.length,
+                              .detailModel.value.keyPerformanceIds!.length,
                           itemBuilder: (context, index) {
                             Key_performance_ids keyPerformance = controller
-                                .detailModel.value.keyPerformanceIds[index];
+                                .detailModel.value.keyPerformanceIds![index];
                             return InkWell(
                               onTap: () {
                                 if (keyPerformance.attachmentIds != null &&
@@ -1028,8 +1028,8 @@ class _PmsDetailsState extends State<PmsDetails>
                                                                                 child: GFButton(
                                                                                   color: textFieldTapColor,
                                                                                   onPressed: () {
-                                                                                    controller.detailModel.value.keyPerformanceIds[index].setemployeeRate(ratingValue);
-                                                                                    controller.detailModel.value.keyPerformanceIds[index].setemployeeRemark(remarkTextController.text);
+                                                                                    controller.detailModel.value.keyPerformanceIds![index].setemployeeRate(ratingValue);
+                                                                                    controller.detailModel.value.keyPerformanceIds![index].setemployeeRemark(remarkTextController.text);
                                                                                     controller.editEmployeeRateAndRate(index);
                                                                                   },
                                                                                   text: "SAVE",
@@ -1190,10 +1190,10 @@ class _PmsDetailsState extends State<PmsDetails>
                       child: Obx(() => ListView.builder(
                           shrinkWrap: true,
                           itemCount: controller
-                              .detailModel.value.competenciesIds.length,
+                              .detailModel.value.competenciesIds!.length,
                           itemBuilder: (context, index) {
                             Competencies_ids competencies = controller
-                                .detailModel.value.competenciesIds[index];
+                                .detailModel.value.competenciesIds![index];
                             return InkWell(
                               onTap: () {
                                 showModalBottomSheet(
@@ -1543,8 +1543,8 @@ class _PmsDetailsState extends State<PmsDetails>
                                                                                       child: GFButton(
                                                                                         color: textFieldTapColor,
                                                                                         onPressed: () {
-                                                                                          controller.detailModel.value.competenciesIds[index].setScore(ratingValue);
-                                                                                          controller.detailModel.value.competenciesIds[index].setComment(remarkTextController.text);
+                                                                                          controller.detailModel.value.competenciesIds![index].setScore(ratingValue);
+                                                                                          controller.detailModel.value.competenciesIds![index].setComment(remarkTextController.text);
                                                                                           controller.editEmployeeCompetenciesScore(index);
                                                                                         },
                                                                                         text: "SAVE",
@@ -1678,20 +1678,20 @@ class _PmsDetailsState extends State<PmsDetails>
                                                 controller
                                                         .detailModel
                                                         .value
-                                                        .final_evaluation_rating
+                                                        .final_evaluation_rating!
                                                         .id !=
                                                     0 &&
                                                 controller
                                                         .detailModel
                                                         .value
-                                                        .final_evaluation_rating
+                                                        .final_evaluation_rating!
                                                         .id !=
                                                     null
                                             ? Text(
                                                 controller
                                                     .detailModel
                                                     .value
-                                                    .final_evaluation_rating
+                                                    .final_evaluation_rating!
                                                     .name
                                                     .toString(),
                                                 style: TextStyle(

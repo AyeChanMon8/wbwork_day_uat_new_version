@@ -21,7 +21,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
 
   bool _serviceEnabled = false;
   late PermissionStatus _permissionGranted;
-  late LocationData _locationData;
+  late LocationData? _locationData;
   @override
   Widget build(BuildContext context) {
     final attendance = box.read("mobile_app_attendance");
@@ -377,7 +377,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
   }
 
   Future<void> _getLocation() async{
-     _locationData = await location.getLocation().then((value) {
+     _locationData = await location.getLocation().then((value){
       print('locationReceived');
       print(value.latitude);
       print(value.longitude);

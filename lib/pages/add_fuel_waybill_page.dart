@@ -23,7 +23,7 @@ class AddFuelWayBillPage extends StatelessWidget {
   var from_date = "";
   var to_date = "";
   var line_id = 0;
-  AddFuelWayBillPage(String from,int daytrip_id, String fromDatetime,String toDateTime,WayBill_Fuelin_ids fuelInId){
+  AddFuelWayBillPage(String from,int daytrip_id, String fromDatetime,String toDateTime,WayBill_Fuelin_ids? fuelInId){
     day_trip_controller.getProductForFuelTab();
     day_trip_controller.getAddFuelLocation();
     arg_id = daytrip_id;

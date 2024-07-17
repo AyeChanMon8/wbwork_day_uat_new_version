@@ -67,7 +67,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
       //controller.planTripWayBillModel = Get.arguments;
       controller.arg_index.value = Get.arguments;
       if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds!.length>0){
-        controller.selectedWayBillExpenseRouteCategory = controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds[0];
+        controller.selectedWayBillExpenseRouteCategory = controller.plantrip_with_waybill_list.value[controller.arg_index.value].expenseIds![0];
       }
       if(controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds!.length>0){
         controller.selectedWayBillRoute = controller.plantrip_with_waybill_list.value[controller.arg_index.value].consumptionIds![0];

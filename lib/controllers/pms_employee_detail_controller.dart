@@ -136,9 +136,9 @@ void selectImage(List<PlatformFile> files){
 
 clickDone(String pmsId,String status) async{
   String state = detailModel.value.state;
-  if(detailModel.value.keyPerformanceIds.any((element) => (element.managerRating.id==0 || element.managerRating.id==null)))
+  if(detailModel.value.keyPerformanceIds!.any((element) => (element.managerRating!.id==0 || element.managerRating!.id==null)))
     AppUtils.showDialog("Information", 'Please all fill Manager Rating in WHAT');
-  else if(detailModel.value.competenciesIds.any((element) => (element.rating.id==0 || element.rating.id==null)))
+  else if(detailModel.value.competenciesIds!.any((element) => (element.rating!.id==0 || element.rating!.id==null)))
     AppUtils.showDialog("Information", 'Please all fill Manager Rating in HOW');
   else{
     String message = '';
@@ -168,9 +168,9 @@ clickDone(String pmsId,String status) async{
 }
 
 clickSubmit(String pmsId) async{
-  if(detailModel.value.keyPerformanceIds.any((element) => (element.employeeRating.id==0 || element.employeeRating.id==null))){
+  if(detailModel.value.keyPerformanceIds!.any((element) => (element.employeeRating!.id==0 || element.employeeRating!.id==null))){
     AppUtils.showDialog("Information", 'Please all fill Employee Rating in WHAT');
-  }else if(detailModel.value.competenciesIds.any((element) => (element.employee_rating.id==0 || element.employee_rating.id==null))){
+  }else if(detailModel.value.competenciesIds!.any((element) => (element.employee_rating!.id==0 || element.employee_rating!.id==null))){
     AppUtils.showDialog("Information", 'Please all fill Employee Rating in HOW');
   }
   else {
@@ -238,7 +238,7 @@ editEmployeeRateAndRate(int index) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-  String message= await pmsService!.editEmployeeRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].employeeRemark,pmsAttach);
+  String message= await pmsService!.editEmployeeRate(detailModel.value.keyPerformanceIds![index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds![index].employeeRemark,pmsAttach);
   if(message == 'Success'){
     Get.back();
     AppUtils.showConfirmDialog('Information', message, () async{
@@ -270,7 +270,7 @@ editManagerRateAndRate(int index) async{
     AppUtils.showDialog("Information", 'Please fill Manager Rating');
   }else{
     print('editManagerRateAndRate');
-  print(detailModel.value.keyPerformanceIds[index].managerRate.toString());
+  print(detailModel.value.keyPerformanceIds![index].managerRate.toString());
   var pmsAttach = <PMSAttach>[];
   if(attachment_list.value.length > 0){
     for(var i=0;i<attachment_list.value.length;i++){
@@ -291,7 +291,7 @@ editManagerRateAndRate(int index) async{
               size: 30.0,
             )),
             barrierDismissible: false));
-  String message= await pmsService!.editManagerRate(detailModel.value.keyPerformanceIds[index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds[index].managerRemark,pmsAttach);
+  String message= await pmsService!.editManagerRate(detailModel.value.keyPerformanceIds![index].id.toString(), selectedRatingConfig.id, detailModel.value.keyPerformanceIds![index].managerRemark,pmsAttach);
   if(message == 'Success'){
     Get.back();
     AppUtils.showConfirmDialog('Information', message, () async{
@@ -320,8 +320,8 @@ editCompetenciesScore(int index) async{
     AppUtils.showDialog("Information", 'Please fill Manager Rating');
   }else{
     print("editCompetenciesScore");
-  print(detailModel.value.competenciesIds[index].score);
-  String message= await pmsService!.editCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment);
+  print(detailModel.value.competenciesIds![index].score);
+  String message= await pmsService!.editCompetencyScore(detailModel.value.competenciesIds![index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds![index].comment);
   if(message == 'Success'){
     AppUtils.showConfirmDialog('Information', message, () async{
       var pmsList =await pmsListController!.getPmsApprovalList();
@@ -344,8 +344,8 @@ editEmployeeCompetenciesScore(int index) async{
     AppUtils.showDialog("Information", 'Please fill Employee Rating');
   }else{
     print("editCompetenciesScore");
-  print(detailModel.value.competenciesIds[index].score);
-  String message= await pmsService!.editEmployeeCompetencyScore(detailModel.value.competenciesIds[index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds[index].comment).toString();
+  print(detailModel.value.competenciesIds![index].score);
+  String message= await pmsService!.editEmployeeCompetencyScore(detailModel.value.competenciesIds![index].id.toString(), selectedCompetenciesRatingConfig.id, detailModel.value.competenciesIds![index].comment).toString();
   if(message == 'Success'){
     AppUtils.showConfirmDialog('Information', message, () async{
       var pmsList =await pmsListController!.getPmsList();
@@ -366,7 +366,7 @@ editEmployeeCompetenciesScore(int index) async{
   calculateTotalEmployeeRate(){
   var total = 0.0;
     if(detailModel.value!=null){
-      detailModel.value.keyPerformanceIds.forEach((value) {
+      detailModel.value.keyPerformanceIds!.forEach((value) {
         total += (value.weightage * value.employeeRate)/100;
       });
       totalEmployeeRate.value = total;
@@ -375,15 +375,15 @@ editEmployeeCompetenciesScore(int index) async{
 calculateTotalScoreAverage(){
   var total = 0.0;
   if(detailModel.value!=null){
-  detailModel.value.competenciesIds.forEach((value) {
+  detailModel.value.competenciesIds!.forEach((value) {
     total += value.score;
   });
-  totalScoreAverage.value = total/ detailModel.value.competenciesIds.length;}
+  totalScoreAverage.value = total/ detailModel.value.competenciesIds!.length;}
 }
 calculateTotalFinalRate(){
   var total = 0.0;
   if(detailModel.value!=null){
-  detailModel.value.keyPerformanceIds.forEach((value) {
+  detailModel.value.keyPerformanceIds!.forEach((value) {
     total += (value.weightage * value.managerRate)/100;
   });
   totalFinalRate.value = total;}

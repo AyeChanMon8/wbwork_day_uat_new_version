@@ -119,7 +119,7 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                       style: pmstitleStyle(),
                     ),
                     Text(
-                      (controller.detailModel.value.dateRangeId.name),
+                      (controller.detailModel.value.dateRangeId!.name),
                       style: pmstitleStyle(),
                     ),
                   ],
@@ -136,7 +136,7 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                     ),
                     Text(
                       (AppUtils.removeNullString(
-                          controller.detailModel.value.job_id.name)),
+                          controller.detailModel.value.job_id!.name)),
                       style: pmstitleStyle(),
                     ),
                   ],
@@ -295,11 +295,11 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                 shrinkWrap: true,
                                 //physics: NeverScrollableScrollPhysics(),
                                 itemCount: controller
-                                    .detailModel.value.keyPerformanceIds.length,
+                                    .detailModel.value.keyPerformanceIds!.length,
                                 itemBuilder: (context, index) {
                                   Key_performance_ids keyPerformance =
                                       controller.detailModel.value
-                                          .keyPerformanceIds[index];
+                                          .keyPerformanceIds![index];
                                   controller.managerRateTextController.text =
                                       keyPerformance.managerRate.toString();
                                   return InkWell(
@@ -1057,8 +1057,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                                                       child: GFButton(
                                                                                         color: textFieldTapColor,
                                                                                         onPressed: () {
-                                                                                          controller.detailModel.value.keyPerformanceIds[index].setManagerRate(ratingValue);
-                                                                                          controller.detailModel.value.keyPerformanceIds[index].setManagerRemark(remarkTextController.text);
+                                                                                          controller.detailModel.value.keyPerformanceIds![index].setManagerRate(ratingValue);
+                                                                                          controller.detailModel.value.keyPerformanceIds![index].setManagerRemark(remarkTextController.text);
                                                                                           controller.editManagerRateAndRate(index);
                                                                                         },
                                                                                         text: "SAVE",
@@ -1193,10 +1193,10 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: controller
-                              .detailModel.value.competenciesIds.length,
+                              .detailModel.value.competenciesIds!.length,
                           itemBuilder: (context, index) {
                             Competencies_ids competencies = controller
-                                .detailModel.value.competenciesIds[index];
+                                .detailModel.value.competenciesIds![index];
 
                             return InkWell(
                               onTap: () {
@@ -1416,7 +1416,7 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                           ratingValue = controller
                                                               .detailModel
                                                               .value
-                                                              .competenciesIds[
+                                                              .competenciesIds![
                                                                   index]
                                                               .score;
                                                           showBarModalBottomSheet(
@@ -1566,8 +1566,8 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                                                                     child: GFButton(
                                                                                       color: textFieldTapColor,
                                                                                       onPressed: () {
-                                                                                        controller.detailModel.value.competenciesIds[index].setScore(ratingValue);
-                                                                                        controller.detailModel.value.competenciesIds[index].setComment(remarkTextController.text);
+                                                                                        controller.detailModel.value.competenciesIds![index].setScore(ratingValue);
+                                                                                        controller.detailModel.value.competenciesIds![index].setComment(remarkTextController.text);
                                                                                         controller.editCompetenciesScore(index);
                                                                                       },
                                                                                       text: "SAVE",
@@ -1707,9 +1707,9 @@ class _PmsDetailsState extends State<PmsManagerApprovalDetails>
                                 // )),
                                 child: controller
                                           .detailModel.value.final_evaluation_rating!=null && controller
-                                          .detailModel.value.final_evaluation_rating.id != 0 && controller
-                                          .detailModel.value.final_evaluation_rating.id != null ?Text(controller
-                                          .detailModel.value.final_evaluation_rating.name.toString(),
+                                          .detailModel.value.final_evaluation_rating!.id != 0 && controller
+                                          .detailModel.value.final_evaluation_rating!.id != null ?Text(controller
+                                          .detailModel.value.final_evaluation_rating!.name.toString(),
                                           style: TextStyle(color: backgroundIconColor)):Text('',style: TextStyle(color: backgroundIconColor),)
                           )),
                           Obx(() => Expanded(

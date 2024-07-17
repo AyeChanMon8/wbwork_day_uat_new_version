@@ -146,7 +146,7 @@ class OvertimeService extends OdooService {
   Future<bool> overtimeDecline(int empID, Remark remark) async {
     String url = Globals.baseURL + "/ot.request.line/" + empID.toString();
     bool result = false;
-    Response response = await dioClient.put(url, data: remark.toJson());
+    Response response = await dioClient.put(url, data: jsonEncode(remark.toJson()));
     if (response.statusCode == 200) {
       result = true;
     } else {

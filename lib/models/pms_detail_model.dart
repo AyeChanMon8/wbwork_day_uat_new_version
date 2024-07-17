@@ -22,33 +22,33 @@ import '../models/rating_config.dart';
 /// competencies_ids : [{"id":46,"name":"Teamwork","description":"Interacts effectively and builds respectful relationships within and between units and among individuals.","score":0,"comment":null},{"id":47,"name":"Adherence to Policy","description":"Follows rules of conduct, safety rules, other regulations, and adheres to company policies and procedures.","score":0,"comment":null},{"id":48,"name":"Execuation (PDCA)","description":"Carrying out of a plan, order, or course of action.","score":0,"comment":null},{"id":49,"name":"Management","description":"The process of dealing with or controlling things or people.","score":0,"comment":null},{"id":50,"name":"Collaboration","description":"The action of working with someone to produce something","score":0,"comment":null},{"id":51,"name":"360-degree feedback","description":"feedback from an employee's subordinates, colleagues, and supervisor(s)","score":0,"comment":null}]
 
 class PMSDetailModel {
-  int id;
-  String name;
-  String state;
-  Employee_id? employeeId;
-  Template_id? templateId;
-  Comp_template_id? compTemplateId;
-  String midFromDate;
-  String midToDate;
-  String endFromDate;
-  String endToDate;
-  Date_range_id? dateRangeId;
-  String dateStart;
-  String dateEnd;
+  late int id;
+  late String name;
+  late String state;
+  late Employee_id? employeeId;
+  late Template_id? templateId;
+  late Comp_template_id? compTemplateId;
+  late String midFromDate;
+  late String midToDate;
+  late String endFromDate;
+  late String endToDate;
+  late Date_range_id? dateRangeId;
+  late String dateStart;
+  late String dateEnd;
   // String _deadline;
-  List<Key_performance_ids>? keyPerformanceIds;
+  late List<Key_performance_ids>? keyPerformanceIds;
   // List<KeyPerformanceAttachmentIds> _keyPerformanceAttachmentIds;
-  List<Competencies_ids>? competenciesIds;
-  Employee_id? job_id;
-  double competency_score;
-  double mid_competency_score;
+  late List<Competencies_ids>? competenciesIds;
+  late Employee_id? job_id;
+  late double competency_score;
+  late double mid_competency_score;
   // double _kpi;
   // double _mid_kpi;
-  int what_final_rating;
-  int how_final_rating;
+  late int what_final_rating;
+  late int how_final_rating;
   // bool _is_submitted;
-  FinalRating? final_evaluation_rating;
-  String final_evaluation_description;
+  late FinalRating? final_evaluation_rating;
+  late String final_evaluation_description;
 
   PMSDetailModel(
       {this.id = 0,
@@ -163,6 +163,8 @@ class PMSDetailModel {
       'final_evaluation_description': final_evaluation_description,
     };
   }
+
+  PMSDetailModel.name();
 
   factory PMSDetailModel.fromMap(Map<String, dynamic> map) {
     // if (map == null) return null;
@@ -585,6 +587,14 @@ class Competencies_ids {
     );
   }
 
+  void setScore(double score) {
+    score = score;
+  }
+
+  void setComment(String comment) {
+    comment = comment;
+  }
+
   String toJson() => json.encode(toMap());
 
   factory Competencies_ids.fromJson(String source) =>
@@ -780,7 +790,8 @@ class Key_performance_ids {
       managerRemark: map['manager_remark'],
       employeeRating: Rating.fromMap(map['employee_rating']),
       managerRating: Rating.fromMap(map['manager_rating']),
-      attachmentIds: List<PMSattachments>.from(map['attachment_ids']?.map((x) => PMSattachments.fromMap(x))),
+      attachmentIds: List<PMSattachments>.from(
+          map['attachment_ids']?.map((x) => PMSattachments.fromMap(x))),
     );
   }
 
@@ -808,6 +819,22 @@ class Key_performance_ids {
         o.employeeRating == employeeRating &&
         o.managerRating == managerRating &&
         o.attachmentIds == attachmentIds;
+  }
+
+    void setemployeeRate(double rate) {
+    employeeRate = rate;
+  }
+
+  void setemployeeRemark(String remark) {
+    employeeRemark = remark;
+  }
+
+  void setManagerRate(double rate) {
+    managerRate = rate;
+  }
+
+  void setManagerRemark(String remark) {
+    managerRemark = remark;
   }
 
   @override
@@ -1301,19 +1328,12 @@ class Rating {
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
-  Rating({
-    this.id = 0,
-    this.rating_description = '',
-    this.name = ''
-  });
+  Rating({this.id = 0, this.rating_description = '', this.name = ''});
 
-  Rating copyWith({
-    int? id,
-  String? rating_description,
-  String? name
-  }) {
+  Rating copyWith({int? id, String? rating_description, String? name}) {
     if ((id == null || identical(id, this.id)) &&
-        (rating_description == null || identical(rating_description, this.rating_description)) &&
+        (rating_description == null ||
+            identical(rating_description, this.rating_description)) &&
         (name == null || identical(name, this.name))) {
       return this;
     }
@@ -1411,7 +1431,8 @@ class FinalRating {
     String? name,
   }) {
     if ((id == null || identical(id, this.id)) &&
-    (final_description == null || identical(final_description, this.final_description)) &&
+        (final_description == null ||
+            identical(final_description, this.final_description)) &&
         (name == null || identical(name, this.name))) {
       return this;
     }
