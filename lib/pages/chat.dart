@@ -1,8 +1,10 @@
 
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ChatPage extends StatefulWidget {
   @override
@@ -33,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundIconColor,
-        title: Text(labels.message),
+        title: Text(labels!.message),
       ),
       body: Container(
         color: Colors.yellow.withAlpha(64),

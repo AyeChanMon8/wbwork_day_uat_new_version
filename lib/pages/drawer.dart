@@ -9,9 +9,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../constants/globals.dart';
 import '../controllers/user_profile_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../routes/app_pages.dart';
 import 'login_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DrawerPage extends StatelessWidget {
   final UserProfileController _userProfileController =
@@ -27,7 +29,7 @@ class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
-    changePassswrod = labels.changePassword;
+    changePassswrod = labels!.changePassword;
     logout = labels.logout;
     language = labels.language;
     setting = labels.setting;
@@ -191,7 +193,7 @@ class DrawerPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              title: Text(labels.logout, style: TextStyle(color: Colors.redAccent)),
+              title: Text(labels!.logout, style: TextStyle(color: Colors.redAccent)),
               content:  Text(labels.areYousurewanttoLogout),
               actions: <Widget>[
                 TextButton(

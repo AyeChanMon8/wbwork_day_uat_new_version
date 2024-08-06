@@ -9,6 +9,7 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/announcements_details.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AnnouncementsList extends StatelessWidget {
   final AnnouncementsController controller = Get.put(AnnouncementsController());
@@ -23,7 +24,7 @@ class AnnouncementsList extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.announcements, image)),
+        child: appbar(context, labels!.announcements, image)),
       body: Obx(
         () => NotificationListener<ScrollNotification>(
                 // ignore: missing_return

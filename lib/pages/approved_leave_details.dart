@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import '../controllers/approval_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'leave_detail.dart';
 
@@ -32,7 +33,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels.approvedleaveDetails,
+            labels!.approvedleaveDetails,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -113,7 +114,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
           minWidth: 300,
           columns: [
             DataColumn2(
-              label: Text(labels.day,style: maintitleStyle(),),
+              label: Text(labels!.day,style: maintitleStyle(),),
               size: ColumnSize.L,
             ),
             DataColumn2(
@@ -307,7 +308,7 @@ class _ApprovedLeaveDetailsState extends State<ApprovedLeaveDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.leaveType + " :",
+                  labels!.leaveType + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),

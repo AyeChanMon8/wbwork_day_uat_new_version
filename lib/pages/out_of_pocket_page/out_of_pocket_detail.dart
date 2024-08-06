@@ -17,6 +17,7 @@ import '../../my_class/my_style.dart';
 import 'package:get/get.dart';
 
 import '../leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OutOfPocketDetails extends StatelessWidget {
   OutofPocketList controller = Get.put(OutofPocketList());
@@ -54,7 +55,7 @@ class OutOfPocketDetails extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context,labels.outofpocketDetails, image)),
+        child: appbar(context,labels!.outofpocketDetails, image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +123,7 @@ class OutOfPocketDetails extends StatelessWidget {
             child: Container(
               // width: 35,
               child: Text(
-                (labels.date),
+                (labels!.date),
                 style: subtitleStyle(),
               ),
             ),
@@ -329,7 +330,7 @@ class OutOfPocketDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name + " :",
+                  labels!.name + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),
@@ -426,7 +427,7 @@ class OutOfPocketDetails extends StatelessWidget {
                 // controller.approveLeave(
                 //     controller.outofpocketExpenseList.value[index].id);
               },
-              text: labels.approve,
+              text: labels!.approve,
               blockButton: true,
               size: GFSize.LARGE,
             ),
@@ -468,7 +469,7 @@ class OutOfPocketDetails extends StatelessWidget {
                     // );
                   },
                   child: Text(
-                    labels.approve,
+                    labels!.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -614,7 +615,7 @@ class OutOfPocketDetails extends StatelessWidget {
                           context);
                     },
                     child: Text(
-                      labels.submit,
+                      labels!.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

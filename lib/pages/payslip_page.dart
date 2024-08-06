@@ -16,12 +16,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../controllers/payslip_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/payslip.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PaySlipPage extends StatefulWidget {
   @override

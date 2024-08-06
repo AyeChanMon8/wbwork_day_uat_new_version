@@ -13,7 +13,7 @@ import '../controllers/notification_controller.dart';
 import '../controllers/reminder_controller.dart';
 import '../controllers/reminder_noti_controller.dart';
 import '../controllers/user_profile_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/home_function.dart';
 import '../routes/app_pages.dart';
 import '../tools/internet_provider.dart';
@@ -22,6 +22,8 @@ import '../my_class/my_style.dart';
 import '../pages/drawer.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomePage extends StatefulWidget {
@@ -275,7 +277,7 @@ class _MainState extends State<HomePage> {
       appBar:AppBar(
         backgroundColor: backgroundIconColor,
         title: Text(
-          labels.home,
+          labels!.home,
           style: appbarTextStyle(),
         ),
         iconTheme: drawerIconColor,
@@ -384,13 +386,13 @@ class _MainState extends State<HomePage> {
                               top: 30, left: 10, bottom: 20, right: 80),
                           child: controller.empData.value.name != null
                               ? AutoSizeText(
-                                  labels.welcome + " ${controller.empData.value.name}",
+                                  labels!.welcome + " ${controller.empData.value.name}",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25))
-                              : AutoSizeText(labels.welcome,
+                              : AutoSizeText(labels!.welcome,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20))),
@@ -564,7 +566,7 @@ class _MainState extends State<HomePage> {
             children: [
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
-                child: Text((labels.reminders), style: maintitleStyle()),
+                child: Text((labels!.reminders), style: maintitleStyle()),
               ),
               Divider(
                 thickness: 1,
@@ -629,7 +631,7 @@ class _MainState extends State<HomePage> {
             children: [
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
-                child: Text((labels.announcements), style: maintitleStyle()),
+                child: Text((labels!.announcements), style: maintitleStyle()),
               ),
               Divider(
                 thickness: 1,
@@ -745,7 +747,7 @@ class _MainState extends State<HomePage> {
               Container(
                 padding: EdgeInsets.only(left: 10, top: 10),
                 child: Text(
-                  labels.notifications,
+                  labels!.notifications,
                   style: maintitleStyle(),
                 ),
               ),
@@ -763,7 +765,7 @@ class _MainState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(labels.allNotifications, style: subtitleStyle()),
+                      Text(labels!.allNotifications, style: subtitleStyle()),
                       Row(
                         children: [
                           Obx(()=>

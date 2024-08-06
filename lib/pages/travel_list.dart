@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../constants/globals.dart';
 import '../controllers/travel_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TravelListPage extends StatefulWidget {
   @override
@@ -194,7 +196,7 @@ class _TravelListPage extends State<TravelListPage> {
                                                         .toUpperCase() ==
                                                     "IN_PROGRESS"
                                                 ? Text(
-                                                    labels.inProgress,
+                                                    labels!.inProgress,
                                                     style: subtitleStyle(),
                                                     textAlign: TextAlign.right,
                                                   )

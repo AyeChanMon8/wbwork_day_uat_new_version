@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/approval_travel_list_page.dart';
 import '../pages/approved_travel_list_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TravelApprovalTabBar extends StatefulWidget {
   @override
@@ -31,7 +33,7 @@ class _StateTravelApprovalTabBar extends State<TravelApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.travelRequest, style: appbarTextStyle()),
+              title: Text(labels!.travelRequest, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

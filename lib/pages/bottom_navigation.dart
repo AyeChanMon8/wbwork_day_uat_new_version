@@ -3,7 +3,7 @@
 // import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../localization.dart';
+// import '../localization.dart';
 
 import '../tools/internet_provider.dart';
 import '../my_class/my_style.dart';
@@ -15,6 +15,8 @@ import '../pages/hr_page.dart';
 import '../pages/setting_page.dart';
 
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BottomNavigationWidget extends StatefulWidget {
   @override
@@ -125,7 +127,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: (labels.home),
+            label: (labels!.home),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

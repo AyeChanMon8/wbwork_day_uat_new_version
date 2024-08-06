@@ -4,12 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/warning_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/approval_list.dart';
 import '../pages/leave_approved_list.dart';
 import '../pages/warning_approval_page.dart';
 import '../pages/warning_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class WarningApprovalTabBar extends StatefulWidget {
   @override
@@ -32,7 +36,7 @@ class _StateWarningApprovalTabBar extends State<WarningApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.warning, style: appbarTextStyle()),
+              title: Text(labels!.warning, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

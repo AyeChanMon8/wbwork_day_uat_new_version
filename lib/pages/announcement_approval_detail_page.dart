@@ -21,6 +21,7 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AnnouncementApprovalDetails extends StatelessWidget {
   final ApprovalController controller = Get.put(ApprovalController());
@@ -36,7 +37,7 @@ class AnnouncementApprovalDetails extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.announcements, image)),
+        child: appbar(context, labels!.announcements, image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(left: 20, top: 20, right: 20),

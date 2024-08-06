@@ -9,6 +9,7 @@ import '../../localization.dart';
 import '../../my_class/my_style.dart';
 import '../../routes/app_pages.dart';
 import '../../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmployeeBenefitListPage extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class _EmployeeBenefitListPageState extends State<EmployeeBenefitListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.employee_benefit_list,
+          labels!.employee_benefit_list,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

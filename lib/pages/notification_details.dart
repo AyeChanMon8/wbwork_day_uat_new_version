@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class NotificationDetails extends StatefulWidget {
   @override
@@ -22,7 +24,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.notifications,user_image)),
+        child: appbar(context, labels!.notifications,user_image)),
       body: Container(
         margin: EdgeInsets.only(left: 20, top: 20, right: 20),
         child: Column(

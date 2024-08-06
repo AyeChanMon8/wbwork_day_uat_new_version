@@ -12,6 +12,7 @@ import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class ApprovalDetails extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
     index = Get.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text(labels.leaveDetails,style: appbarTextStyle(),),
+          title: Text(labels!.leaveDetails,style: appbarTextStyle(),),
           backgroundColor: backgroundIconColor,
         ),
         body: SingleChildScrollView(
@@ -124,7 +125,7 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
             margin: EdgeInsets.only(left: 20),
             // width: 80,
             child: Text(
-              labels.startDate,
+              labels!.startDate,
               style: subtitleStyle(),
             ),
           ),
@@ -242,7 +243,7 @@ class _ApprovalDetailsState extends State<ApprovalDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.leaveType + " :",
+                  labels!.leaveType + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../controllers/calendar_controller.dart';
 import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CalendarPage extends StatefulWidget {
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -103,7 +105,7 @@ class _CalendarPageState extends State<CalendarPage> {
     var labels = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text(labels.calendar),
+          title: Text(labels!.calendar),
         ),
         body: Obx(
             ()=> SfCalendar(

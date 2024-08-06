@@ -6,12 +6,14 @@ import 'package:getwidget/components/toast/gf_toast.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
 import '../pages/bottom_navigation.dart';
 import '../pages/home_page.dart';
 import '../routes/app_pages.dart';
 import '../services/employee_service.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LoginController extends GetxController {
   TextEditingController emailTextController = TextEditingController();

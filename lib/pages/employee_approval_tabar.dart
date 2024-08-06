@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/approval_employee_change_list.dart';
 import '../pages/approval_loan_list.dart';
@@ -10,6 +10,7 @@ import '../pages/approved_employee_change_list.dart';
 import '../pages/approved_loan_list.dart';
 import '../pages/approved_route_list.dart';
 import '../pages/first_approval_employee_change_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmployeeChangeApprovalTabBar extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _StateEmployeeChangeApprovalTabBar extends State<EmployeeChangeApprovalTab
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.employeeChanges, style: appbarTextStyle()),
+              title: Text(labels!.employeeChanges, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

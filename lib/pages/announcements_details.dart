@@ -22,6 +22,7 @@ import '../my_class/my_style.dart';
 import '../pages/pdf_view.dart';
 
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AnnouncementsDetails extends StatelessWidget {
   final AnnouncementsController controller = Get.put(AnnouncementsController());

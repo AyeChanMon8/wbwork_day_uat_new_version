@@ -11,7 +11,9 @@ import '../routes/app_pages.dart';
 import '../services/employee_service.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SplashController extends GetxController{
   EmployeeService? employeeService;

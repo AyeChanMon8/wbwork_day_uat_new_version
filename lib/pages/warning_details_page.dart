@@ -14,12 +14,14 @@ import 'package:getwidget/types/gf_button_type.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import '../controllers/warning_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class WarningDetailsPage extends StatelessWidget {
   int index = 0;
@@ -71,7 +73,7 @@ class WarningDetailsPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        labels.employeeName,
+                        labels!.employeeName,
                         // (("employee_name")),
                         style: datalistStyle(),
                       ),
@@ -459,7 +461,7 @@ class WarningDetailsPage extends StatelessWidget {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.employeeName),
+                (labels!.employeeName),
                 style: subtitleStyle(),
               ),
             ),
@@ -470,7 +472,7 @@ class WarningDetailsPage extends StatelessWidget {
               // margin: EdgeInsets.only(left: 30),
               // width: 70,
               child: Text(
-                (labels.marks),
+                (labels!.marks),
                 style: subtitleStyle(),
               ),
             ),

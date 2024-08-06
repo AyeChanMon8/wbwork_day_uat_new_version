@@ -11,6 +11,8 @@ import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'approval_details.dart';
 
@@ -30,7 +32,7 @@ class _ApprovalAttendanceListState extends State<ApprovalAttendanceList> {
     final labels = AppLocalizations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.attendanceApprovalList, image)),
+        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels!.attendanceApprovalList, image)),
       body: ListView.builder(
         itemCount: controller.attendanceApprovalList.value.length,
         itemBuilder: (BuildContext context, int index) {

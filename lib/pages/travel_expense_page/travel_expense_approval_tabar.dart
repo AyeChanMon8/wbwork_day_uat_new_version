@@ -5,6 +5,7 @@ import '../../my_class/my_style.dart';
 import '../../pages/out_of_pocket_page/toapprove_outofpocket_list.dart';
 import '../../pages/travel_expense_page/approved_travel_expense_list.dart';
 import '../../pages/travel_expense_page/toapprove_travelexpense_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TravelExpenseApprovalTabar extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _TravelExpenseApprovalTabarState
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.travelExpense, style: appbarTextStyle()),
+              title: Text(labels!.travelExpense, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

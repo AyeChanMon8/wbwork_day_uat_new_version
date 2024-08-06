@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../controllers/insurance.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/insurancemodel.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class EmployeeInsuranceListPage extends StatelessWidget {
   InsuranceController controller = Get.put(InsuranceController());
   @override
@@ -45,7 +47,7 @@ class EmployeeInsuranceListPage extends StatelessWidget {
                               ],),
                               SizedBox(height: 10,),
                               Row(children: [
-                                AutoSizeText(labels.insuranceType,style: detailsStyle()),
+                                AutoSizeText(labels!.insuranceType,style: detailsStyle()),
                                 AutoSizeText(' : ${insurance.insuranceTypeId!.policy_type}',style: maintitleStyle()),
                               ],),
                               SizedBox(height: 10,),

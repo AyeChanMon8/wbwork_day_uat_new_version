@@ -22,6 +22,8 @@ import '../../my_class/my_style.dart';
 import 'package:get/get.dart';
 
 import '../leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ExpenseTravelDetails extends StatelessWidget {
   final ExpensetravelListController controller =
@@ -71,14 +73,14 @@ class ExpenseTravelDetails extends StatelessWidget {
                   Expanded(
                     flex:2,
                     child: AutoSizeText(
-                      labels.viewDetailsClose,
+                      labels!.viewDetailsClose,
                       style: maintitlenoBoldStyle(),
                     ),
                   ):
                   Expanded(
                     flex:2,
                     child: AutoSizeText(
-                      labels.viewDetails,
+                      labels!.viewDetails,
                       style: maintitlenoBoldStyle(),
                     ),
                   ),
@@ -199,7 +201,7 @@ class ExpenseTravelDetails extends StatelessWidget {
             child: Container(
               // width: 35,
               child: Text(
-                (labels.expenseDate),
+                (labels!.expenseDate),
                 style: subtitleStyle(),
               ),
             ),
@@ -381,7 +383,7 @@ class ExpenseTravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name + " :",
+                  labels!.name + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),
@@ -534,7 +536,7 @@ class ExpenseTravelDetails extends StatelessWidget {
                     // );
                   },
                   child: Text(
-                    labels.approve,
+                    labels!.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -611,7 +613,7 @@ class ExpenseTravelDetails extends StatelessWidget {
                           controller.travelExpenseList.value[index].number);
                     },
                     child: Text(
-                      labels.submit,
+                      labels!.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

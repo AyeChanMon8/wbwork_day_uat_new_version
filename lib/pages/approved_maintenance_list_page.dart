@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import '../controllers/maintenance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../main.dart';
 import '../models/maintenance_request_model.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovedMaintenanceListPage extends StatefulWidget {
   final String pageType;
@@ -100,7 +102,7 @@ class _ApprovedMaintenanceListPageState extends State<ApprovedMaintenanceListPag
                   children: [
                     SizedBox(height: 10,),
                     Row(children: [
-                      AutoSizeText(labels.fromDate+' : ',style: maintitleStyle(),),
+                      AutoSizeText(labels!.fromDate+' : ',style: maintitleStyle(),),
                       AutoSizeText(start_date??'',style: maintitleStyle(),),
                     ],),
                     SizedBox(height: 10,),

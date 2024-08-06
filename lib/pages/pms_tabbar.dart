@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/bottom_navigation.dart';
 import '../pages/leave_list.dart';
@@ -14,6 +14,7 @@ import '../pages/travel_list.dart';
 import '../routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PmsTabBar extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _StatePmsTabBar extends State<PmsTabBar> {
       length: tabbar,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.pms, style: appbarTextStyle()),
+              title: Text(labels!.pms, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,
@@ -83,7 +84,7 @@ class _StatePmsTabBar extends State<PmsTabBar> {
                       indicatorWeight: 5,
                       tabs: [
                         Tab(
-                          text: labels.self,
+                          text: labels!.self,
                         ),
                         Tab(text: labels.toApprove),
                         Tab(text: labels.approved),
@@ -95,7 +96,7 @@ class _StatePmsTabBar extends State<PmsTabBar> {
                       indicatorWeight: 5,
                       tabs: [
                         Tab(
-                          text: labels.self,
+                          text: labels!.self,
                         ),
                       ],
                     )),

@@ -18,7 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:open_file/open_file.dart';
 import '../controllers/pms_employee_detail_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/pms_detail_model.dart';
 import '../models/rating_config.dart';
 import '../my_class/my_app_bar.dart';
@@ -28,6 +28,8 @@ import '../routes/app_pages.dart';
 import '../ui/components/textbox.dart';
 import '../utils/app_utils.dart';
 import '../utils/pdf_file_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PmsDetails extends StatefulWidget {
   @override

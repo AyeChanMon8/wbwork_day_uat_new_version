@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../my_class/my_style.dart';
 
 class ExpenseOpenReport extends StatefulWidget {
@@ -25,7 +27,7 @@ class _ExpenseOpenReportState extends State<ExpenseOpenReport> {
                   children: [
                     Container(
                       child: Text(
-                        labels.reports,
+                        labels!.reports,
                         // "Reports",
                         style: maintitleStyle(),
                       ),

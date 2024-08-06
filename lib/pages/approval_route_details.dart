@@ -11,7 +11,9 @@ import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovalRouteDetails extends StatefulWidget {
   @override
@@ -136,7 +138,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels.date,
+              labels!.date,
               style: subtitleStyle(),
             ),
           ),
@@ -279,7 +281,7 @@ class _ApprovalRouteDetailsState extends State<ApprovalRouteDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.duration,
+                  labels!.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),

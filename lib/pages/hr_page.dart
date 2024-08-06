@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/user_profile_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/attendance_page.dart';
@@ -21,6 +21,7 @@ import '../pages/over_time.dart';
 import '../pages/payslip_page.dart';
 import '../pages/pms_page.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HRPage extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _HRPageState extends State<HRPage> {
     final overtime = box.read("allow_overtime");
     final employee_change = box.read("allow_employee_change");
     if (leave_report != null) {
-      hr.add([Icons.calendar_today, labels.leaveReport, Routes.LEAVE_TRIP_REPORT]);
+      hr.add([Icons.calendar_today, labels!.leaveReport, Routes.LEAVE_TRIP_REPORT]);
     }
 
     if (travel_request != null || leave_request != null) {
@@ -86,12 +87,12 @@ class _HRPageState extends State<HRPage> {
       ]);
     }
    if (employee_change != null&&employee_change==true) {
-      hr.add([Icons.person, labels.employeeChanges, Routes.EMPLOYEE_CHANGE]);
+      hr.add([Icons.person, labels!.employeeChanges, Routes.EMPLOYEE_CHANGE]);
     }
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, (labels.hr), image)),
+        child: appbar(context, (labels!.hr), image)),
       drawer: DrawerPage(),
       body: Container(
           margin: EdgeInsets.only(top: 10),

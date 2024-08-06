@@ -14,6 +14,7 @@ import '../../controllers/employee_benefit_controller.dart';
 import '../../localization.dart';
 import '../../my_class/my_app_bar.dart';
 import '../../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmployeeBenefitDetailsPage extends StatelessWidget {
   int dindex = 0;
@@ -38,7 +39,7 @@ class EmployeeBenefitDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.employee_benefit_details,image)),
+        child: appbar(context, labels!.employee_benefit_details,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,

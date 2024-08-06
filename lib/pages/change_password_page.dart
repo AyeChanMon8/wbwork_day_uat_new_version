@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/change_password_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
@@ -60,7 +62,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(labels.changePassword),
+        title: Text(labels!.changePassword),
         backgroundColor: backgroundIconColor,
       ),
       body: SingleChildScrollView(

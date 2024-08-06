@@ -10,6 +10,7 @@ import '../../my_class/my_style.dart';
 import '../../utils/app_utils.dart';
 
 import '../../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InsuranceApproval extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _InsuranceApprovalState extends State<InsuranceApproval> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.insuranceApproval,
+          labels!.insuranceApproval,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

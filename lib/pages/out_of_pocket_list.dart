@@ -8,10 +8,12 @@ import '../constants/globals.dart';
 import '../controllers/expense_travel_list/out_of_pocket_list.dart';
 import '../controllers/out_of_pocket_controller.dart';
 import '../controllers/travel_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'out_of_pocket_create.dart';
 

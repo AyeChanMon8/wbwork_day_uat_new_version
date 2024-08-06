@@ -17,7 +17,9 @@ import '../services/travel_request_service.dart';
 import '../utils/app_utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class EmployeeDocumentList extends StatefulWidget {
   @override
@@ -46,7 +48,7 @@ class _EmployeeDocumentListState extends State<EmployeeDocumentList> {
 
     return Scaffold(
       appBar: AppBar(
-        title:  Text(labels.employeeDocument),
+        title:  Text(labels!.employeeDocument),
       ),
       body: Obx(
             () => NotificationListener<ScrollNotification>(

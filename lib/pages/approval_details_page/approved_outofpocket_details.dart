@@ -14,6 +14,8 @@ import '../../localization.dart';
 import '../../my_class/my_app_bar.dart';
 import '../../my_class/my_style.dart';
 import '../../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import '../leave_detail.dart';
 
@@ -36,7 +38,7 @@ class _ApprovalDetailsState extends State<OutOfPocketApprovedDetails> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels.outofpocketApproval,
+            AppLocalizations.of(context)!.outofpocketApproval,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -145,7 +147,7 @@ class _ApprovalDetailsState extends State<OutOfPocketApprovedDetails> {
           Container(
             // width: 35,
             child: Text(
-             labels.date,
+             labels!.date,
               style: subtitleStyle(),
             ),
           ),
@@ -186,19 +188,19 @@ class _ApprovalDetailsState extends State<OutOfPocketApprovedDetails> {
           minWidth: 300,
           columns: [
             DataColumn2(
-              label: Text(labels.date,style:maintitleStyle() ,),
+              label: Text(labels!.date,style:maintitleStyle() ,),
               size: ColumnSize.L,
             ),
             DataColumn2(
-              label: Text(labels.title,style:maintitleStyle() ,),
+              label: Text(labels!.title,style:maintitleStyle() ,),
               size: ColumnSize.L,
             ),
             DataColumn2(
-              label: Text(labels.description,style:maintitleStyle() ,),
+              label: Text(labels!.description,style:maintitleStyle() ,),
               size: ColumnSize.L,
             ),
             DataColumn2(
-              label: Text(labels.amount,style:maintitleStyle() ,),
+              label: Text(labels!.amount,style:maintitleStyle() ,),
               size: ColumnSize.L,
             ),
             DataColumn2(
@@ -390,7 +392,7 @@ class _ApprovalDetailsState extends State<OutOfPocketApprovedDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.name + " :",
+                  labels!.name + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),

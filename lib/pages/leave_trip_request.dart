@@ -13,12 +13,14 @@ import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/leave_list_controller.dart';
 import '../controllers/leave_request_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/leave_type.dart';
 import '../my_class/my_style.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LeaveTripRequest extends StatefulWidget {
   @override
@@ -84,7 +86,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
     var dateLbl = "";
 
     if (date == 'Start Date') {
-      dateLbl = labels.fromDate;
+      dateLbl = labels!.fromDate;
       if (date_string == null) {
         date_controller = controller.fromDateTextController;
       } else {
@@ -94,7 +96,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
         date_controller = controller.fromDateTextController;
       }
     } else if (date == 'End Date') {
-      dateLbl = labels.toDate;
+      dateLbl = labels!.toDate;
       if (date_string == null) {
         date_controller = controller.toDateTextController;
       } else {
@@ -195,7 +197,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
   Widget _decideImageView() {
     final labels = AppLocalizations.of(context);
     if (!controller.isShowImage.value) {
-      return Expanded(flex: 1, child: Text(labels.noImageSelected));
+      return Expanded(flex: 1, child: Text(labels!.noImageSelected));
     } else {
       return index == null
           ? Image.file(imageFile, width: 50, height: 50)
@@ -456,7 +458,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.leaveRequest,
+          labels!.leaveRequest,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -556,7 +558,7 @@ class _StateLeaveTripRequest extends State<LeaveTripRequest> {
                       controller: controller.descriptionController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(20.0),
-                        hintText: labels.description,
+                        hintText: labels!.description,
                         border: OutlineInputBorder(
                             borderSide: new BorderSide(color: const Color.fromRGBO(250, 250, 250, 1))),
                       ),

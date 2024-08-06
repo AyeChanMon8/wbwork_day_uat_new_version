@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LanguagePage extends StatefulWidget {
   @override

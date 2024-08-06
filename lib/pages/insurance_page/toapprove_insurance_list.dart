@@ -12,6 +12,8 @@ import '../../routes/app_pages.dart';
 import '../../utils/app_utils.dart';
 
 import '../../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ToApproveInsuranceList extends StatefulWidget {
   @override
   _ToApproveInsuranceListState createState() => _ToApproveInsuranceListState();

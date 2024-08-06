@@ -6,6 +6,7 @@ import '../../my_class/my_style.dart';
 import '../../localization.dart';
 import 'approved_insurance_list.dart';
 import 'toapprove_insurance_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InsuranceApprovalTabar extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _InsuranceApprovalTabarState
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.insurance, style: appbarTextStyle()),
+              title: Text(labels!.insurance, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

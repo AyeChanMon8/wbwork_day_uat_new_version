@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 
 import 'approval_suspension_list.dart';
 import 'approved_suspension_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class SuspensionApprovalTabBar extends StatefulWidget {
@@ -29,7 +31,7 @@ class _StateSuspensionApprovalTabBar extends State<SuspensionApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.suspension, style: appbarTextStyle()),
+              title: Text(labels!.suspension, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

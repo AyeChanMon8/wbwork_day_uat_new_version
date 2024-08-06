@@ -20,6 +20,8 @@ import '../utils/app_utils.dart';
 import '../localization.dart';
 import 'leave_detail.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ApprovalEmployeeChangeDetails extends StatefulWidget {
   @override
   _ApprovalEmployeeChangeDetailsState createState() => _ApprovalEmployeeChangeDetailsState();
@@ -39,7 +41,7 @@ class _ApprovalEmployeeChangeDetailsState extends State<ApprovalEmployeeChangeDe
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.employeeChangeDetails,image)),
+        child: appbar(context, labels!.employeeChangeDetails,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,

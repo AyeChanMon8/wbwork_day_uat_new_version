@@ -15,7 +15,7 @@ import 'package:intl/intl.dart';
 import '../controllers/day_trip_expense_controller.dart';
 import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
 import '../controllers/plan_trip_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/base_route.dart';
 import '../models/daytrip_expense.dart';
 import '../models/plan_trip_product.dart';
@@ -27,6 +27,7 @@ import '../pages/add_advance_page.dart';
 import '../pages/add_fuel_page.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlanTripDetails extends StatefulWidget {
   @override
@@ -116,7 +117,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
             Expanded(
                 flex: 1,
                 child: Text(
-                  labels.route,
+                  labels!.route,
                   style: maintitleStyle(),
                 )),
           ],
@@ -234,7 +235,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
           Expanded(
               flex: 1,
               child: Text(
-                labels.name,
+                labels!.name,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
@@ -287,7 +288,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
           Expanded(
               flex: 2,
               child: Text(
-                labels.expenseCategory,
+                labels!.expenseCategory,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
@@ -403,13 +404,13 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
           Expanded(
               flex: 2,
               child: Text(
-                labels.route,
+                labels!.route,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
               flex: 2,
               child: Text(
-                labels.routeExpense,
+                labels!.routeExpense,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
@@ -586,7 +587,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
           Expanded(
               flex: 1,
               child: Text(
-                labels.date,
+                labels!.date,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
@@ -702,7 +703,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
           Expanded(
               flex: 1,
               child: Text(
-                labels.route,
+                labels!.route,
                 style: TextStyle(color: backgroundIconColor,fontSize: 11),
               )),
           Expanded(
@@ -833,7 +834,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels.planTrip),
+        title: Text(labels!.planTrip),
         actions: [],
       ),
       body: SingleChildScrollView(
@@ -1838,7 +1839,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                         children: [
                           Expanded(
                               child: Text(
-                                labels.date,
+                                labels!.date,
                             style: pmstitleStyle(),
                           )),
                           Expanded(
@@ -1925,7 +1926,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                         children: [
                           Expanded(
                               child: Text(
-                                labels.unitPrice,
+                                labels!.unitPrice,
                             style: pmstitleStyle(),
                           )),
                           Expanded(
@@ -2520,7 +2521,7 @@ class _PlanTripDetailsState extends State<PlanTripDetails>
                         children: [
                           Expanded(
                               child: Text(
-                                labels.expenseCategory,
+                                labels!.expenseCategory,
                           )),
                           Expanded(
                             child: Text(
@@ -3076,7 +3077,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           controller: controller.expenseActualTextController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: labels.actual + " " + labels.amount,
+                            hintText: labels!.actual + " " + labels!.amount,
                           ),
                           onChanged: (text) {},
                         ),

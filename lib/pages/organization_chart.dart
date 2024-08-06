@@ -8,12 +8,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../models/partner.dart';
 import '../my_class/my_style.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import 'package:graphite/core/matrix.dart';
 import 'package:graphite/core/typings.dart';
 import 'package:graphite/graphite.dart';
 import 'package:getwidget/getwidget.dart';
 import '../controllers/organization_chart_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // const employeeList =
 //     '['
@@ -62,7 +63,7 @@ class OrganizationChart extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.organizationChart,
+          labels!.organizationChart,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

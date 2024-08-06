@@ -5,13 +5,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import '../controllers/approval_controller.dart';
 import '../controllers/leave_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../pages/maintenance_request.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovedTravelDetails extends StatefulWidget {
   @override
@@ -34,7 +36,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(8.0),
-          child: appbar(context, labels.travelApproved, image)),
+          child: appbar(context, labels!.travelApproved, image)),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +85,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels.date,
+              labels!.date,
               style: subtitleStyle(),
             ),
           ),
@@ -193,7 +195,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.fromDate,
+                  labels!.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -313,7 +315,7 @@ class _ApprovedTravelDetailsState extends State<ApprovedTravelDetails> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.expenseCategory),
+                (labels!.expenseCategory),
                 style: subtitleStyle(),
               ),
             ),

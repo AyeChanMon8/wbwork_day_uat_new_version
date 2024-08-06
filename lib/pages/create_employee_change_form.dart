@@ -19,7 +19,9 @@ import '../my_class/my_style.dart';
 import 'package:image_picker/image_picker.dart';
 import '../utils/app_utils.dart';
 import '../models/employee_promotion.dart';
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class EmployeeChangeCreateForm extends StatefulWidget {
@@ -91,7 +93,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                   hint: Container(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
-                        labels.employeeName,
+                        labels!.employeeName,
                       )),
                   value: controller.selectedEmployee,
                   icon: Icon(Icons.keyboard_arrow_down),
@@ -145,7 +147,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                   hint: Container(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
-                        labels.employeeName,
+                        labels!.employeeName,
                       )),
                   value: controller.selectedManagerEmployee,
                   icon: Icon(Icons.keyboard_arrow_down),
@@ -205,7 +207,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.company,
+                                labels!.company,
                               )),
                           value: controller.selectedCompany,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -268,7 +270,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.company,
+                                labels!.company,
                               )),
                           value: controller.selectedOldCompany,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -331,7 +333,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                               labels.department,
+                               labels!.department,
                               )),
                           value: controller.selectedDepartment,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -394,7 +396,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.department,
+                                labels!.department,
                               )),
                           value: controller.selectedOldDepartment,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -457,7 +459,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.branch,
+                                labels!.branch,
                               )),
                           value: controller.selectedBranch,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -520,7 +522,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                               labels.branch,
+                               labels!.branch,
                               )),
                           value: controller.selectedOldBranch,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -583,7 +585,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.jobPosition,
+                                labels!.jobPosition,
                               )),
                           value: controller.selectedJobPosition,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -647,7 +649,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.jobGrade,
+                                labels!.jobGrade,
                               )),
                           value: controller.selectedJobGrade,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -710,7 +712,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.salaryLevel,
+                                labels!.salaryLevel,
                               )),
                           value: controller.selectedSalaryLevel,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -750,7 +752,7 @@ class _StateEmployeeChangeCreateForm extends State<EmployeeChangeCreateForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.employeeChangeRequest,
+          labels!.employeeChangeRequest,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

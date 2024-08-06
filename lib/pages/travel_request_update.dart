@@ -8,7 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import '../controllers/travel_list_controller.dart';
 import '../controllers/travel_request_controller.dart';
 import '../controllers/travel_request_update_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/travel_expense.dart';
 import '../models/travel_expense_category.dart';
 import '../models/travel_expense_response.dart';
@@ -20,6 +20,8 @@ import 'package:getwidget/getwidget.dart';
 import '../pages/pre_page.dart';
 import 'package:intl/intl.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TravelRequestUpdate extends StatelessWidget {
   final TravelRequestUpdateController controller = Get.find();
@@ -48,7 +50,7 @@ class TravelRequestUpdate extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.travelRequest,
+          labels!.travelRequest,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

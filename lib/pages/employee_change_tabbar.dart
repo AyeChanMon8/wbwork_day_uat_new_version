@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/employee_change_controller.dart';
 import '../controllers/leave_report_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'employee_changes_list.dart';
 

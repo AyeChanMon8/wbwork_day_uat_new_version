@@ -17,7 +17,9 @@ import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'leave_detail.dart';
 
 class ApprovalResignationDetails extends StatefulWidget {
@@ -38,7 +40,7 @@ class _ApprovalResignationDetailsState extends State<ApprovalResignationDetails>
     index = Get.arguments;
     return Scaffold(
       appBar: PreferredSize(preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.resignationDetails,image)),
+        child: appbar(context, labels!.resignationDetails,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,

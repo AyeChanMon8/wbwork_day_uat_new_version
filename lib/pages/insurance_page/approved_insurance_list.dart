@@ -7,6 +7,7 @@ import '../../constants/globals.dart';
 import '../../controllers/approval_controller.dart';
 import '../../my_class/my_style.dart';
 import '../../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../localization.dart';
 class ApprovedInsuranceList extends StatefulWidget {

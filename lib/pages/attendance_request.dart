@@ -7,9 +7,11 @@ import 'package:location/location.dart';
 import '../constants/globals.dart';
 import '../controllers/attendance_request_controller.dart';
 import '../controllers/user_profile_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AttendanceRequest extends GetWidget<AttendanceRequestController> {
   AttendanceRequestController _attendanceController =
@@ -65,7 +67,7 @@ class AttendanceRequest extends GetWidget<AttendanceRequestController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.attendanceRequest,
+          labels!.attendanceRequest,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

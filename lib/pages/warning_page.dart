@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../constants/globals.dart';
 import '../controllers/warning_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class WarningPage extends StatefulWidget {
   @override
@@ -34,7 +36,7 @@ class _WarningPageState extends State<WarningPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.warning, user_image)),
+        child: appbar(context, labels!.warning, user_image)),
       body: SingleChildScrollView(
         child: Container(
           child: Column(

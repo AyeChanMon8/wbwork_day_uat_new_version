@@ -10,7 +10,9 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreateRouteDatePlanTripWaybill extends StatefulWidget {
   @override
@@ -125,10 +127,10 @@ class _CreateRouteDatePlanTripWaybillState extends State<CreateRouteDatePlanTrip
     var dateLbl = "";
 
     if (date == 'Start Date') {
-      dateLbl = labels.fromDate;
+      dateLbl = labels!.fromDate;
       date_controller = controller.fromDateTextController;
     } else if (date == 'End Date') {
-      dateLbl = labels.toDate;
+      dateLbl = labels!.toDate;
       date_controller = controller.toDateTextController;
 
       // date_controller = controller.toDateTextController;

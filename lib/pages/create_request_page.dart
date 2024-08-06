@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreateRequestPage extends StatefulWidget {
   CreateRequestPage({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class _CreateRequestPageState extends State<CreateRequestPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.expense,image)),
+        child: appbar(context, labels!.expense,image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

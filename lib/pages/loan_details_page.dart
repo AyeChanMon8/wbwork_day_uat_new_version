@@ -12,12 +12,14 @@ import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import '../controllers/loan_page_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../pages/pdf_view.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'leave_detail.dart';
 
@@ -35,7 +37,7 @@ class LoanDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.loanDetails,image)),
+        child: appbar(context, labels!.loanDetails,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,
@@ -330,7 +332,7 @@ class LoanDetailsPage extends StatelessWidget {
         children: [
           Container(
             child: Text(
-              labels.paymentDate,
+              labels!.paymentDate,
               // ("payment_date"),
               style: subtitleStyle(),
             ),

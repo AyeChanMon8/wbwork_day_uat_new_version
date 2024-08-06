@@ -14,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
 import '../controllers/plan_trip_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/base_route.dart';
 import '../models/plantrip_waybill.dart';
 import '../models/travel_expense/list/travel_line_list_model.dart';
@@ -22,6 +22,8 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/add_advance_page.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'add_fuel_waybill_page.dart';
 
@@ -105,7 +107,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
           children: [
             Expanded(
                 flex : 1,
-                child: Text(labels.route,style: maintitleStyle(),)),
+                child: Text(labels!.route,style: maintitleStyle(),)),
           ],
         ),
         Padding(
@@ -214,7 +216,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 2,
                       child: Text(labels.commissionDriver,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
@@ -256,7 +258,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.invoice,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.invoice,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 1,
                       child: Text(labels.customer,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
@@ -299,7 +301,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 2,
-                      child: Text(labels.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex : 2,
                       child: Text(labels.routeExpense,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
@@ -432,7 +434,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       Expanded(
                           child: Text(
-                            labels.date,
+                            labels!.date,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -568,7 +570,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.date,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.date,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 2,
                       child: Padding(
@@ -676,7 +678,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                     children: [
                       Expanded(
                           child: Text(
-                            labels.expenseCategory,
+                            labels!.expenseCategory,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -766,7 +768,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 2,
-                      child: Text(labels.expenseCategory,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.expenseCategory,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 1,
                       child: Padding(
@@ -848,7 +850,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.route,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex : 1,
                       child: Text(labels.stdLit,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
@@ -918,7 +920,7 @@ class _PlanTripWayBillDetailsState extends State<PlanTripWayBillDetails> with Si
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels.pantripWaybill),
+        title: Text(labels!.pantripWaybill),
         actions: [
         ],
       ),
@@ -2392,7 +2394,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           controller: controller.wayBillexpenseActualTextController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: labels.actual+ " "+ labels.amount,
+                            hintText: labels!.actual+ " "+ labels!.amount,
                           ),
                           onChanged: (text) {
                             // setState(() {});

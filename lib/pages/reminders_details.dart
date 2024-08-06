@@ -17,9 +17,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
 import '../controllers/reminder_noti_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'leave_detail.dart';
 

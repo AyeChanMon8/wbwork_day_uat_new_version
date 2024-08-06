@@ -10,11 +10,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/approval_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/leave_detail.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TripExpenseApproval extends StatefulWidget {
   @override
@@ -118,7 +120,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
                     controller.tripExpenseToApproveList.value[index].id);
               },
               type: GFButtonType.outline,
-              text: labels.reject,//'Send Back'
+              text: labels!.reject,//'Send Back'
               textColor: textFieldTapColor,
               blockButton: true,
               size: GFSize.LARGE,
@@ -319,7 +321,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels.description + " :"),
+                  (labels!.description + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -731,7 +733,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels.date + " :"),
+                  (labels!.date + " :"),
                   style: datalistStyle(),
                 ),
               ),
@@ -755,7 +757,7 @@ class _ApprovalDetailsState extends State<TripExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  (labels.status + " :"),
+                  (labels!.status + " :"),
                   style: datalistStyle(),
                 ),
               ),

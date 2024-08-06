@@ -14,12 +14,14 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/size/gf_size.dart';
 import 'package:intl/intl.dart';
 import '../controllers/maintenance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/fleet_model.dart';
 import '../models/maintenance_product_category_model.dart';
 import '../models/maintenance_request_model.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -83,10 +85,10 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
     var date_controller;
     var hintText = "";
     if (from == 'from') {
-      hintText = labels.startdatetime;
+      hintText = labels!.startdatetime;
       date_controller = controller.fromDateTimeTextController;
     } else {
-      hintText = labels.enddatetime;
+      hintText = labels!.enddatetime;
       date_controller = controller.toDateTimeTextController;
     }
     return Container(
@@ -261,7 +263,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.selectProductCategory,style: middleHintLabelStyle(),
+                                labels!.selectProductCategory,style: middleHintLabelStyle(),
                               )),
                           value: controller.selectedProductCategory.value,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -325,7 +327,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.selectProduct,style: middleHintLabelStyle(),
+                                labels!.selectProduct,style: middleHintLabelStyle(),
                               )),
                           value: controller.selectedProduct.value,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -389,7 +391,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.vehicle,style: middleLabelStyle(),
+                                labels!.vehicle,style: middleLabelStyle(),
                               )),
                           value: controller.selectedProductType.value,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -462,7 +464,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.maintenance, user_image)),
+        child: appbar(context, labels!.maintenance, user_image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -1148,7 +1150,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
         children: [
           Expanded(
             flex: 1,
-            child: AutoSizeText(labels.vehicle+' : ',style: middleLabelStyle(),),
+            child: AutoSizeText(labels!.vehicle+' : ',style: middleLabelStyle(),),
           ),
           Expanded(
             flex: 3,
@@ -1171,7 +1173,7 @@ class _MaintenanceRequestState extends State<MaintenanceRequest> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.vehicle,style: middleHintLabelStyle(),
+                                labels!.vehicle,style: middleHintLabelStyle(),
                               )),
                           value: controller.selectedVehicle,
                           icon: Icon(Icons.keyboard_arrow_down),

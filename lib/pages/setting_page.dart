@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../pages/drawer.dart';
@@ -12,6 +12,8 @@ import '../pages/change_password_page.dart';
 import '../routes/app_pages.dart';
 import '../shared_pref.dart';
 import '../tools/theme_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SettingPage extends StatefulWidget {
   @override
@@ -93,7 +95,7 @@ class _SettingPageState extends State<SettingPage> {
           backgroundColor: backgroundIconColor,
           elevation: 1,
           title: Text(
-            labels.more,
+            labels!.more,
             // style: TextStyle(color: Colors.black),
           ),
           bottom: PreferredSize(

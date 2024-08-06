@@ -18,12 +18,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../constants/globals.dart';
 import '../controllers/maintenance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/maintenance_product_category_model.dart';
 import '../models/maintenance_request_model.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'leave_detail.dart';
 
@@ -128,7 +130,7 @@ class _ApprovedMaintenanceDetailState extends State<ApprovedMaintenanceDetailPag
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.maintenance, '')),
+        child: appbar(context, labels!.maintenance, '')),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),

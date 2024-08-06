@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../controllers/overtime_request_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/depart_empids.dart';
 import '../models/department.dart';
 import '../models/employee_category.dart';
@@ -16,6 +16,7 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OverTimePage extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _StateOverTimePage extends State<OverTimePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.overtimeRequest,
+          labels!.overtimeRequest,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -197,10 +198,10 @@ class _StateOverTimePage extends State<OverTimePage> {
     var date_controller;
     var hintText = "";
     if (state == 'from') {
-      hintText = labels.startdatetime;
+      hintText = labels!.startdatetime;
       date_controller = controller.fromDateTimeTextController;
     } else {
-      hintText = labels.enddatetime;
+      hintText = labels!.enddatetime;
       date_controller = controller.toDateTimeTextController;
     }
     return Container(
@@ -327,7 +328,7 @@ class _StateOverTimePage extends State<OverTimePage> {
       margin: EdgeInsets.only(left: 15, right: 20, top: 50),
       child: Container(
         child: Text(
-          (labels.name),
+          (labels!.name),
           style: maintitleStyle(),
         ),
       ),
@@ -361,7 +362,7 @@ class _StateOverTimePage extends State<OverTimePage> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.category,
+                                labels!.category,
                               )),
 
                           value: controller.selectedOvertimeCategory,
@@ -423,7 +424,7 @@ class _StateOverTimePage extends State<OverTimePage> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.department,
+                                labels!.department,
                               )),
 
                           value: controller.selectedDepartment,
@@ -602,7 +603,7 @@ class _StateOverTimePage extends State<OverTimePage> {
           controller.createOverTime();
         },
         child: Text(
-          (labels.save),
+          (labels!.save),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),

@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/business_travel_list.dart';
 import '../pages/out_of_pocket_list.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ExpenseTabBar extends StatefulWidget {
   @override
@@ -42,7 +44,7 @@ class _StateExpenseTabbar extends State<ExpenseTabBar> {
       child: Scaffold(
         appBar: AppBar(
             shadowColor: Colors.white,
-            title: Text(labels.expenseReports, style: appbarTextStyle()),
+            title: Text(labels!.expenseReports, style: appbarTextStyle()),
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

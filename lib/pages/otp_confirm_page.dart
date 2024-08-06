@@ -9,9 +9,11 @@ import '../controllers/auth_controller.dart';
 import '../controllers/forget_password_controller.dart';
 import '../controllers/login_controller.dart';
 import '../controllers/otp_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class OtpConfirmPage extends StatelessWidget {
   OtpController controller = Get.put(OtpController());
@@ -74,7 +76,7 @@ class OtpConfirmPage extends StatelessWidget {
                     controller.compareOtpCode(otp_code,emp_id);
                   },
                   child: Text(
-                    (labels.submit),
+                    (labels!.submit),
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),

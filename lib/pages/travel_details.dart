@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/travel_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../pages/pre_page.dart';
 import '../pages/travel_request_update.dart';
@@ -14,6 +14,8 @@ import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TravelDetails extends StatelessWidget {
   final TravelListController controller = Get.put(TravelListController());
@@ -237,7 +239,7 @@ class TravelDetails extends StatelessWidget {
             child: Container(
               // width: 80,
               child: Text(
-                labels.date,
+                labels!.date,
                 style: subtitleStyle(),
               ),
             ),
@@ -273,7 +275,7 @@ class TravelDetails extends StatelessWidget {
           Container(
             // width: 80,
             child: Text(
-              labels.expense,
+              labels!.expense,
               style: subtitleStyle(),
             ),
           ),
@@ -451,7 +453,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.fromDate,
+                  labels!.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -472,7 +474,7 @@ class TravelDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.toDate,
+                  labels!.toDate,
                   // ("To Date : "),
                   style: datalistStyle(),
                 ),
@@ -659,7 +661,7 @@ class TravelDetails extends StatelessWidget {
                         controller.travelLineList.value[index].id);
                   },
                   child: Text(
-                    labels.approve,
+                    labels!.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),

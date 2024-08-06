@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../ui/components/textbox.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreatePlanTrip extends StatefulWidget {
   @override
@@ -40,7 +42,7 @@ class _CreatePlanTripState extends State<CreatePlanTrip>
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels.planTrip),
+        title: Text(labels!.planTrip),
         actions: [
           IconButton(
               icon: Icon(Icons.check),

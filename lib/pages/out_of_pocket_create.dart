@@ -15,7 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../controllers/expense_travel_list/out_of_pocket_list.dart';
 import '../controllers/out_of_pocket_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/fleet_model.dart';
 import '../models/travel_expense/pocket_line.dart';
 import '../models/travel_expense/travel_expense_category.dart';
@@ -24,6 +24,7 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class OutOfPocketCreate extends StatefulWidget {
   static void showToast(String msg) {
     Get.snackbar('Warning', msg, snackPosition: SnackPosition.BOTTOM);
@@ -128,7 +129,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
                   textInputAction: TextInputAction.none,
                   controller: date_controller,
                   decoration: InputDecoration(
-                    hintText: labels.expenseDate,
+                    hintText: labels!.expenseDate,
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -173,7 +174,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
   Widget _decideImageView(BuildContext context) {
     var labels = AppLocalizations.of(context);
     if (!controller.isShowImage.value) {
-      return Obx(()=>!controller.isShowImage.value?Expanded(flex: 1, child: Text(labels.noImageSelected)):SizedBox());
+      return Obx(()=>!controller.isShowImage.value?Expanded(flex: 1, child: Text(labels!.noImageSelected)):SizedBox());
     } else {
      // return Image.file(imageFile, width: 50, height: 50);
     }
@@ -469,7 +470,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.outOfPocket, user_image)),
+        child: appbar(context, labels!.outOfPocket, user_image)),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -761,7 +762,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.expenseDate),
+                (labels!.expenseDate),
                 style: subtitleStyle(),
               ),
             ),
@@ -771,7 +772,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.expenseTitle),
+                (labels!.expenseTitle),
                 style: subtitleStyle(),
               ),
             ),
@@ -782,7 +783,7 @@ class _OutOfPocketCreateState extends State<OutOfPocketCreate> {
               // margin: EdgeInsets.only(left: 30),
               // width: 70,
               child: Text(
-                (labels.amount),
+                (labels!.amount),
                 style: subtitleStyle(),
               ),
             ),

@@ -18,8 +18,10 @@ import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovalLoanDetails extends StatefulWidget {
   @override
@@ -66,7 +68,7 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
                     children: [
                       Container(
                         child: Text(
-                          labels.status,
+                          labels!.status,
                           // ("employee_name"),
                           style: datalistStyle(),
                         ),
@@ -400,14 +402,14 @@ class _ApprovalLoanDetailsState extends State<ApprovalLoanDetails> {
         children: [
           Container(
             child: Text(
-              labels.paymentDate,
+              labels!.paymentDate,
               // ("payment_date"),
               style: subtitleStyle(),
             ),
           ),
           Container(
             child: Text(
-              labels.status,
+              labels!.status,
               // ("status"),
               style: subtitleStyle(),
             ),

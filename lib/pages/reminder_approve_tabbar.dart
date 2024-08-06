@@ -4,7 +4,9 @@ import '../my_class/my_style.dart';
 import '../pages/reminder_approval_page.dart';
 import '../pages/reward_approval_page.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ReminderApproveTabbar extends StatefulWidget {
   @override
   _ReminderApproveTabbarState createState() => _ReminderApproveTabbarState();
@@ -19,7 +21,7 @@ class _ReminderApproveTabbarState extends State<ReminderApproveTabbar> {
       child: Scaffold(
         appBar: AppBar(
            shadowColor: Colors.white,
-            title: Text(labels.reminder, style: appbarTextStyle()),
+            title: Text(labels!.reminder, style: appbarTextStyle()),
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/maintenance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/maintenance_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'approved_maintenance_list_page.dart';
 
@@ -43,7 +45,7 @@ class _StatePlanTripTabBar extends State<MaintenanceTabBar> {
       length: tabbar,
       child: Scaffold(
         appBar: AppBar(
-            title: Text(labels.maintenanceList, style: appbarTextStyle()),
+            title: Text(labels!.maintenanceList, style: appbarTextStyle()),
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,

@@ -11,6 +11,8 @@ import '../pages/leave_approved_list.dart';
 import '../pages/warning_approval_page.dart';
 import '../pages/warning_page.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AnnouncementApprovalTabBar extends StatefulWidget {
   @override
   _StateAnnouncementApprovalTabBar createState() => _StateAnnouncementApprovalTabBar();
@@ -30,7 +32,7 @@ class _StateAnnouncementApprovalTabBar extends State<AnnouncementApprovalTabBar>
       child: Scaffold(
           appBar: AppBar(
               shadowColor: Colors.white,
-              title: Text(labels.announcements, style: appbarTextStyle()),
+              title: Text(labels!.announcements, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/plan_trip_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../my_class/my_style.dart';
 import '../pages/plan_trip_with_product_list.dart';
 
@@ -81,7 +83,7 @@ class _StatePlanTripTabBar extends State<PlanTripTabBar> {
         //
         // ),
         appBar: AppBar(
-          title: Text(labels.planTrip, style: appbarTextStyle()),
+          title: Text(labels!.planTrip, style: appbarTextStyle()),
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,

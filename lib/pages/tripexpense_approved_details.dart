@@ -9,10 +9,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/approval_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/leave_detail.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class TripExpenseApprovedDetails extends StatefulWidget {
@@ -297,7 +299,7 @@ class _ApprovalDetailsState extends State<TripExpenseApprovedDetails> {
             children: [
               Container(
                 child: Text(
-                  (labels.date + " :"),
+                  (labels!.date + " :"),
                   style: datalistStyle(),
                 ),
               ),

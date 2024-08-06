@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/day_trip_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/day_trip_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class DayTripTabBar extends StatefulWidget {
   @override
   _StateDayTripTabBar createState() => _StateDayTripTabBar();
@@ -39,7 +41,7 @@ class _StateDayTripTabBar extends State<DayTripTabBar> {
       length: tabbar,
         child: Scaffold(
             appBar: AppBar(
-                title: Text(labels.dayTrip, style: appbarTextStyle()),
+                title: Text(labels!.dayTrip, style: appbarTextStyle()),
                 leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,

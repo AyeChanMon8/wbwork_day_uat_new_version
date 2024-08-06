@@ -12,11 +12,13 @@ import 'package:getwidget/getwidget.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import '../controllers/reward_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'leave_detail.dart';
 
@@ -69,7 +71,7 @@ class RewardsDetailsPage extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      labels.employeeName,
+                      labels!.employeeName,
                       // (("employee_name")),
                       style: datalistStyle(),
                     ),
@@ -446,7 +448,7 @@ class RewardsDetailsPage extends StatelessWidget {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.employeeName),
+                (labels!.employeeName),
                 style: subtitleStyle(),
               ),
             ),

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/purchase_order_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PurchaseOrderDetails extends StatefulWidget {
   @override
@@ -90,7 +92,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     );
                   },
                   child: Text(
-                    labels.approve,
+                    labels!.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -461,7 +463,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     flex: 2,
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Text(labels.categoryName,
+                      child: Text(labels!.categoryName,
                           style: labelPrimaryHightlightTextStyle()),
                     ),
                   ),
@@ -470,7 +472,7 @@ class _PurchaseOrderDetailsState extends State<PurchaseOrderDetails> {
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          labels.productName,
+                          labels!.productName,
                           style: labelPrimaryHightlightTextStyle(),
                         )),
                   ),

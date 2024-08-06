@@ -13,6 +13,7 @@ import '../../localization.dart';
 import '../../my_class/my_app_bar.dart';
 import '../../my_class/my_style.dart';
 import '../../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../leave_detail.dart';
 
@@ -35,7 +36,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels.expenseTravelApprove,
+            labels!.expenseTravelApprove,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -128,7 +129,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
                 controller.approveTravelExpense(
                     controller.travelExpenseApprovedList.value[index].id);
               },
-              text: labels.approve,
+              text: labels!.approve,
               blockButton: true,
               size: GFSize.LARGE,
               color: textFieldTapColor,
@@ -167,11 +168,11 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
           minWidth: 300,
           columns: [
             DataColumn2(
-              label: Text(labels.date,style: maintitleStyle(),),
+              label: Text(labels!.date,style: maintitleStyle(),),
               size: ColumnSize.L,
             ),
             DataColumn2(
-              label: Text(labels.title,style: maintitleStyle(),),
+              label: Text(labels!.title,style: maintitleStyle(),),
               size: ColumnSize.L,
             ),
             DataColumn2(
@@ -383,7 +384,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApprovedDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.name+":",
+                  labels!.name+":",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),

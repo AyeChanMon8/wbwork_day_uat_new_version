@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import '../../controllers/approval_controller.dart';
 import '../../my_class/my_style.dart';
 import '../../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../localization.dart';
 
@@ -31,7 +32,7 @@ class _ApprovedInsuranceDetailsPageState
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.insurance,
+          labels!.insurance,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

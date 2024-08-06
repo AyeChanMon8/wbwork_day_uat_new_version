@@ -13,10 +13,12 @@ import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../constants/globals.dart';
 import '../controllers/attendance_report_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AttendanceReport extends StatelessWidget {
   static final DateTime now = DateTime.now();
@@ -53,7 +55,7 @@ class AttendanceReport extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels.attendanceReport,
+            labels!.attendanceReport,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -175,7 +177,7 @@ class AttendanceReport extends StatelessWidget {
         child: Wrap(
           direction: Axis.horizontal,
           children: <Widget>[
-            specialChar(labels.name),
+            specialChar(labels!.name),
             specialChar(labels.late),
             specialChar(labels.early),
           ],

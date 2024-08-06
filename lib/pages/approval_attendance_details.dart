@@ -15,6 +15,8 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../pages/maintenance_request.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovalAttendanceDetails extends StatefulWidget {
   @override
@@ -60,7 +62,7 @@ class _ApprovalAttendanceDetailsState extends State<ApprovalAttendanceDetails> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),
-                          child: Text(labels.name),
+                          child: Text(labels!.name),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 40, right: 40),

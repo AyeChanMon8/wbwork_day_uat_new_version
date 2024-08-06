@@ -18,12 +18,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../constants/globals.dart';
 import '../controllers/maintenance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/maintenance_product_category_model.dart';
 import '../models/maintenance_request_model.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'leave_detail.dart';
 
@@ -130,7 +132,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.maintenance, '')),
+        child: appbar(context, labels!.maintenance, '')),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -1604,7 +1606,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
   Future<dynamic> showImageDialog(String from, Uint8List bytes) {
     var labels = AppLocalizations.of(context);
     return Get.defaultDialog(
-        title: labels.information,
+        title: labels!.information,
         middleText: labels.wantDeletePhoto,
         actions: [
           ElevatedButton(onPressed: (){
@@ -1623,7 +1625,7 @@ class _MaintenanceDetailPageState extends State<MaintenanceDetailPage> {
             showOptions(maintenanceRequestModel.id,from);
 
           },
-            child: Text(labels.edit,style: TextStyle(color:Colors.white),),
+            child: Text(labels!.edit,style: TextStyle(color:Colors.white),),
             style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                   ),

@@ -4,11 +4,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/insurancemodel.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class EmployeeInsuranceDetailPage extends StatelessWidget {
   ScrollController scrollController = ScrollController();
   @override

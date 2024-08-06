@@ -15,6 +15,8 @@ import '../../my_class/my_app_bar.dart';
 import '../../my_class/my_style.dart';
 import '../../pages/leave_detail.dart';
 import '../../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TravelExpenseApproval extends StatefulWidget {
   @override
@@ -36,7 +38,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            labels.expenseTravelApproval,
+            labels!.expenseTravelApproval,
             style: appbarTextStyle(),
           ),
           backgroundColor: backgroundIconColor,
@@ -136,7 +138,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
                 controller.approveTravelExpense(
                     controller.travelExpenseList.value[index].id);
               },
-              text: labels.approve,
+              text: labels!.approve,
               blockButton: true,
               size: GFSize.LARGE,
               color: textFieldTapColor,
@@ -176,7 +178,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
             child: Container(
               // width: 35,
               child: Text(
-                (labels.expenseDate),
+                (labels!.expenseDate),
                 style: subtitleStyle(),
               ),
             ),
@@ -370,7 +372,7 @@ class _TravelExpenseDetailsState extends State<TravelExpenseApproval> {
             children: [
               Container(
                 child: Text(
-                  labels.name+":",
+                  labels!.name+":",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),

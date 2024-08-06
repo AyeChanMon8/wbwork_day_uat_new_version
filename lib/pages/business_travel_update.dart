@@ -36,6 +36,8 @@ import 'dart:io' as Io;
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import '../utils/app_utils.dart';
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class BusinessTravelUpdate extends StatefulWidget {
   @override
   _BusinessTravelUpdateState createState() => _BusinessTravelUpdateState();
@@ -1350,7 +1352,7 @@ class _BusinessTravelUpdateState extends State<BusinessTravelUpdate> {
               Navigator.of(context).pop();
             } 
           },
-          child: Text((labels.update),
+          child: Text((labels!.update),
               style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ),

@@ -16,7 +16,7 @@ class AuthController extends GetxController {
   final store = GetStorage();
   String get currentLanguage => language.value;
   final RxBool show_loading = false.obs;
-
+  Locale? _locale;
   // AuthController({@required this.authService}) : assert(authService != null);
 
   TextEditingController phoneController = TextEditingController();
@@ -39,46 +39,48 @@ class AuthController extends GetxController {
   }
 
   // Gets current language stored
-  RxString get currentLanguageStore {
-    String currentLang = "";
-    if (store.read('language') == null) {
-      currentLang = "en";
-      updateLanguage(currentLang);
-      language.value = currentLang;
-    } else {}
-    language.value = store.read('language');
-    return language;
-  }
+  // RxString get currentLanguageStore {
+  //   String currentLang = "";
+  //   if (store.read('language') == null) {
+  //     currentLang = "en";
+  //     updateLanguage(currentLang);
+  //     language.value = currentLang;
+  //   } else {}
+  //   language.value = store.read('language');
+  //   return language;
+  // }
 
   // gets the language locale app is set to
-  Locale get getLocale {
-    if ((currentLanguageStore.value == '') ||
-        (currentLanguageStore.value == null)) {
-      language.value = Globals.defaultLanguage;
-      updateLanguage(Globals.defaultLanguage);
-    }
-    // gets the default language key (from the translation language system)
-    Locale _updatedLocal = AppLocalizations.languages.keys.first;
-    if (store.read('language') != null) {
-      language.value = store.read('language');
-    }
-    // looks for matching language key stored and sets to it
-    AppLocalizations.languages.keys.forEach((locale) {
-      if (locale.languageCode == currentLanguage) {
-        _updatedLocal = locale;
-      }
-    });
-    return _updatedLocal;
-  }
+  // Locale get getLocale {
+  //   if ((currentLanguageStore.value == '') ||
+  //       (currentLanguageStore.value == null)) {
+  //     language.value = Globals.defaultLanguage;
+  //     updateLanguage(Globals.defaultLanguage);
+  //   }
+  //   // gets the default language key (from the translation language system)
+  //   Locale _updatedLocal = AppLocalizations.languages.keys.first;
+  //   if (store.read('language') != null) {
+  //     language.value = store.read('language');
+  //   }
+  //   // looks for matching language key stored and sets to it
+  //   AppLocalizations.languages.keys.forEach((locale) {
+  //     if (locale.languageCode == currentLanguage) {
+  //       _updatedLocal = locale;
+  //     }
+  //   });
+  //   return _updatedLocal;
+  // }
 
   // updates the language stored
-  Future<void> updateLanguage(String value) async {
-    language.value = value;
-    await store.write('language', value);
-    Locale loc = getLocale;
-    Get.updateLocale(loc);
-    update();
-  }
+  // Future<void> updateLanguage(String value) async {
+  //   language.value = value;
+  //   await store.write('language', value);
+  //   Locale loc = getLocale;
+  //   Get.updateLocale(loc);
+  //   update();
+  // }
+
+  
 
   @override
   void onReady() async {

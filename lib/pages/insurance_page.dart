@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/insurance.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/insurancemodel.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
@@ -15,6 +15,8 @@ import '../my_class/theme.dart';
 import '../pages/employee_claim_insurance_list_page.dart';
 import '../pages/employee_insurance_list_page.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class InsurancePage extends StatefulWidget {
   @override
@@ -31,7 +33,7 @@ class _InsurancePageState extends State<InsurancePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.insurance, style: appbarTextStyle()),
+              title: Text(labels!.insurance, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

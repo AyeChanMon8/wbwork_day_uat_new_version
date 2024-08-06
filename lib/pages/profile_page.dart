@@ -12,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:open_file/open_file.dart';
 import '../controllers/documentation_controller.dart';
 import '../controllers/user_profile_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/login_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +20,8 @@ import '../pages/pdf_view.dart';
 import '../routes/app_pages.dart';
 import 'package:image_picker/image_picker.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ProfilePage extends StatelessWidget {
   //UserProfileController controller = Get.put(UserProfileController());
@@ -130,7 +132,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundIconColor,
         title: Text(
-          (labels.profile),
+          (labels!.profile),
           style: TextStyle(),
         ),
         bottom: PreferredSize(
@@ -828,7 +830,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.ssbNo,
+                  labels!.ssbNo,
                   style: subtitleStyle(),
                 ),
               ),

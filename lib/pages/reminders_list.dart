@@ -19,12 +19,14 @@ import 'package:wb_workday_uat_new_version/ui/components/textbox.dart';
 import '../constants/globals.dart';
 import '../controllers/announcements_controller.dart';
 import '../controllers/reminder_noti_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/announcements_details.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'leave_detail.dart';
 

@@ -8,10 +8,12 @@ import '../controllers/announcements_controller.dart';
 import '../controllers/approval_controller.dart';
 import '../controllers/reward_controller.dart';
 import '../controllers/warning_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovalPage extends StatefulWidget {
   @override
@@ -42,7 +44,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.approval,
+          labels!.approval,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,
@@ -202,7 +204,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          labels.approval,
+          labels!.approval,
           style: appbarTextStyle(),
         ),
         backgroundColor: backgroundIconColor,

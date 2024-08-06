@@ -9,7 +9,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/approval_controller.dart';
 import '../controllers/leave_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
@@ -17,6 +17,8 @@ import '../my_class/theme.dart';
 import '../pages/maintenance_request.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovalTravelDetails extends StatefulWidget {
   @override
@@ -39,7 +41,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             AppBar(
           backgroundColor: backgroundIconColor,
           title: Text(
-            labels.travelApproval,
+            labels!.travelApproval,
             style: appbarTextStyle(),
           ),
           iconTheme: drawerIconColor,
@@ -157,7 +159,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels.date,
+              labels!.date,
               style: subtitleStyle(),
             ),
           ),
@@ -264,7 +266,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.fromDate,
+                  labels!.fromDate,
                   // ("From Date : "),
                   style: datalistStyle(),
                 ),
@@ -426,7 +428,7 @@ class _ApprovalTravelDetailsState extends State<ApprovalTravelDetails> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.expenseCategory),
+                (labels!.expenseCategory),
                 style: subtitleStyle(),
               ),
             ),

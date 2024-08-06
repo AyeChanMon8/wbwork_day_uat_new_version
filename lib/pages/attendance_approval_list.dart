@@ -11,7 +11,9 @@ import '../models/attandanceuser.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AttendanceApprovalList extends StatefulWidget {
   @override

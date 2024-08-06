@@ -10,8 +10,10 @@ import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../my_class/theme.dart';
 import '../controllers/overtime_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class OverTimeListPage extends StatelessWidget {
   final OverTimeListController controller =Get.find();

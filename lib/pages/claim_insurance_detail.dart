@@ -13,7 +13,9 @@ import '../my_class/my_style.dart';
 import '../pages/pdf_view.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ClaimInsuranceDetailPage extends StatelessWidget {
   @override
@@ -104,7 +106,7 @@ class ClaimInsuranceDetailPage extends StatelessWidget {
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.all(7.0),
-                    child: Text(labels.insuranceType,
+                    child: Text(labels!.insuranceType,
                         style:
                             TextStyle(color: Color.fromRGBO(58, 47, 112, 1))),
                   ),

@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../my_class/my_style.dart';
 import '../pages/bottom_navigation.dart';
 import '../pages/leave_list.dart';
@@ -41,7 +43,7 @@ class _StateLeaveTripTabBar extends State<LeaveTripTabBar> {
       length: travel_request != null ? 2 : 1,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(labels.leaveTravelRequest, style: appbarTextStyle()),
+          title: Text(labels!.leaveTravelRequest, style: appbarTextStyle()),
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,

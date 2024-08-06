@@ -15,8 +15,10 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovedSuspensionDetails extends StatefulWidget {
   @override
@@ -37,7 +39,7 @@ class _ApprovedSuspensionDetailsState extends State<ApprovedSuspensionDetails> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.suspensionDetails,image)),
+        child: appbar(context, labels!.suspensionDetails,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,

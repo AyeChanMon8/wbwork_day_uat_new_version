@@ -11,7 +11,9 @@ import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class EmployeeClaimInsuranceListPage extends StatefulWidget {
   @override
   _EmployeeClaimInsuranceListPageState createState() => _EmployeeClaimInsuranceListPageState();
@@ -57,7 +59,7 @@ class _EmployeeClaimInsuranceListPageState extends State<EmployeeClaimInsuranceL
                           // ],),
                           // SizedBox(height: 10,),
                           Row(children: [
-                            AutoSizeText(labels.insuranceType,style: detailsStyle()),
+                            AutoSizeText(labels!.insuranceType,style: detailsStyle()),
                             AutoSizeText(' : ${insurance.insuranceTypeId.policyType}',style: maintitleStyle()),
                           ],),
                           SizedBox(height: 10,),

@@ -17,7 +17,9 @@ import '../my_class/my_style.dart';
 import '../pages/travel_expense_page/travel_expense_detail.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'leave_detail.dart';
 
 class ApprovedLoanDetails extends StatefulWidget {
@@ -38,7 +40,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
     index = Get.arguments;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.loanDetails,image)),
+        preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels!.loanDetails,image)),
       body: Scrollbar(
         // isAlwaysShown: true,
         controller: scrollController,
@@ -395,7 +397,7 @@ class _ApprovedLoanDetailsState extends State<ApprovedLoanDetails> {
         children: [
           Container(
             child: Text(
-              labels.paymentDate,
+              labels!.paymentDate,
               // ("payment_date"),
               style: subtitleStyle(),
             ),

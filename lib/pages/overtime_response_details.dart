@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/overtime_response_controller.dart';
 import '../controllers/overtime_response_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/employee_id.dart';
 import '../models/overtime_response.dart';
 import '../my_class/my_app_bar.dart';
@@ -13,6 +13,8 @@ import '../utils/app_utils.dart';
 import '../controllers/overtime_list_controller.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'pre_page.dart';
 
@@ -76,7 +78,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name,
+                  labels!.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -232,7 +234,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name,
+                  labels!.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -388,7 +390,7 @@ class OvertimeResponseDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name,
+                  labels!.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -549,7 +551,7 @@ class OvertimeResponseDetails extends StatelessWidget {
                     }
                   },
                   child: Text(
-                    labels.accept,
+                    labels!.accept,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),

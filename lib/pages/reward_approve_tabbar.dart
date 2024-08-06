@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import '../my_class/my_style.dart';
 import '../pages/reward_approval_page.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RewardApproveTabbar extends StatefulWidget {
   @override
   _RewardApproveTabbarState createState() => _RewardApproveTabbarState();
@@ -19,7 +21,7 @@ class _RewardApproveTabbarState extends State<RewardApproveTabbar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.reward, style: appbarTextStyle()),
+              title: Text(labels!.reward, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

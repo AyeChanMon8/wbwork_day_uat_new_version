@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/approval_resignation_list.dart';
 import '../pages/approved_resignation_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class ResignationApprovalTabBar extends StatefulWidget {
@@ -28,7 +30,7 @@ class _StateResignationApprovalTabBar extends State<ResignationApprovalTabBar> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-              title: Text(labels.resignation, style: appbarTextStyle()),
+              title: Text(labels!.resignation, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

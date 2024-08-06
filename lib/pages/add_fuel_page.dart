@@ -14,6 +14,8 @@ import '../models/plan_trip_product.dart';
 import '../models/stock_location.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AddFuelPage extends StatelessWidget {
   //final DayTripExpenseController day_trip_controller = Get.find();
   DayTripPlanTripGeneralController day_trip_controller = Get.put(DayTripPlanTripGeneralController());

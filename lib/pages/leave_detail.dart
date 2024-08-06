@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import '../bindings/leave_request_update_bindings.dart';
 import '../controllers/leave_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/leave_line.dart';
 import '../my_class/my_app_bar.dart';
 import '../pages/leave_request_update.dart';
@@ -18,6 +18,8 @@ import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LeaveDetails extends StatelessWidget {
   LeaveListController controller = Get.find();
@@ -107,7 +109,7 @@ class LeaveDetails extends StatelessWidget {
             margin: EdgeInsets.only(left: 20),
             // width: 80,
             child: Text(
-              labels.startDate,
+              labels!.startDate,
               style: subtitleStyle(),
             ),
           ),
@@ -225,7 +227,7 @@ class LeaveDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.leaveType + " :",
+                  labels!.leaveType + " :",
                   // ("Leave type : "),
                   style: datalistStyle(),
                 ),
@@ -475,7 +477,7 @@ class LeaveDetails extends StatelessWidget {
                     );
                   },
                   child: Text(
-                    labels.approve,
+                    labels!.approve,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),
@@ -618,7 +620,7 @@ class LeaveDetails extends StatelessWidget {
                           controller.leaveList.value[index].id, context);
                     },
                     child: Text(
-                      labels.submit,
+                      labels!.submit,
                       style: TextStyle(color: Colors.white),
                     ))),
           ),

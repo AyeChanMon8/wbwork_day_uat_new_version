@@ -9,11 +9,13 @@ import 'package:intl/intl.dart';
 import '../constants/globals.dart';
 import '../controllers/expense_travel_list/expense_travel_list_controller.dart';
 import '../controllers/travel_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../pages/business_travel_create.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BusinessTravelList extends StatefulWidget {
   @override

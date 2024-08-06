@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../utils/app_utils.dart';
 import '../controllers/overtime_list_controller.dart';
 import '../my_class/my_style.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'pre_page.dart';
 
@@ -66,7 +68,7 @@ class OvertimeDetails extends StatelessWidget {
             margin: EdgeInsets.only(left: 10),
             // width: 80,
             child: Text(
-              labels.employeeName + "/" + labels.employeeMail,
+              labels!.employeeName + "/" + labels.employeeMail,
               // labels?.startDate,
               style: subtitleStyle(),
             ),
@@ -198,7 +200,7 @@ class OvertimeDetails extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.title,
+                  labels!.title,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -327,7 +329,7 @@ class OvertimeDetails extends StatelessWidget {
                         .submitOvertime(controller.otList.value[index].id);
                   },
                   child: Text(
-                    labels.submit,
+                    labels!.submit,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),

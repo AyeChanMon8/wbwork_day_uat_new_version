@@ -9,9 +9,11 @@ import '../constants/globals.dart';
 import '../controllers/auth_controller.dart';
 import '../controllers/forget_password_controller.dart';
 import '../controllers/login_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LoginPage extends StatelessWidget {
   final AuthController controller = Get.put(
@@ -131,7 +133,7 @@ class LoginPage extends StatelessWidget {
                             _loginController.rememberme.value = value!;
                           }),
                       Text(
-                        labels.rememberMe,
+                        labels!.rememberMe,
                         style: TextStyle(fontSize: 16),
                       )
                     ],
@@ -154,7 +156,7 @@ class LoginPage extends StatelessWidget {
                     _loginController.apiLogin();
                   },
                   child: Text(
-                    (labels.login),
+                    (labels!.login),
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),

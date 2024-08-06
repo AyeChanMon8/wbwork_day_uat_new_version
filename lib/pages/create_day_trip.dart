@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
 import '../controllers/day_trip_controller.dart';
 import '../controllers/day_trip_expense_controller.dart';
 import '../controllers/daytrip_plantrip_fuel_advance_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/day_trip_model.dart';
 import '../models/daytrip_expense.dart';
 import '../models/travel_expense/list/travel_line_list_model.dart';
@@ -26,6 +26,8 @@ import '../utils/app_utils.dart';
 
 import 'add_fuel_daytrip_page.dart';
 import 'leave_detail.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreateDayTrip extends StatefulWidget {
   @override
@@ -112,7 +114,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
       resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(labels.dayTrip),
+        title: Text(labels!.dayTrip),
         actions: [
         ],
       ),
@@ -631,7 +633,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                            labels.date,
+                            labels!.date,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -677,7 +679,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                            labels.fromLocation,
+                            labels!.fromLocation,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -1095,7 +1097,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                            labels.lastOdometer,
+                            labels!.lastOdometer,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -1110,7 +1112,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                              labels.currentOdometer,
+                              labels!.currentOdometer,
                               style:
                               pmstitleStyle())),
                       Expanded(
@@ -1343,7 +1345,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                            labels.expenseCategory,
+                            labels!.expenseCategory,
                             style: pmstitleStyle(),
                           )),
                       Expanded(
@@ -1373,7 +1375,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                     children: [
                       Expanded(
                           child: Text(
-                              labels.amount,
+                              labels!.amount,
                               style:
                               pmstitleStyle())),
                       Expanded(
@@ -1565,7 +1567,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                 children: [
                   Expanded(
                       flex : 2,
-                      child: Text(labels.expenseCategory,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.expenseCategory,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 2,
                       child: Padding(
@@ -1578,7 +1580,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                   //     child: Text('Amount',style: TextStyle(color: backgroundIconColor),)),
                   Expanded(
                       flex: 2,
-                      child: Text(labels.totalAmount,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.totalAmount,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 2,
                       child: Padding(
@@ -1645,7 +1647,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.expense,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.expense,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 1,
                       child: Text(labels.description,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
@@ -1750,7 +1752,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                       flex : 2,
                       child: Padding(
                         padding: const EdgeInsets.only(left:5.0),
-                        child: Text(labels.currentOdometer,style: TextStyle(color: backgroundIconColor,fontSize: 11),),
+                        child: Text(labels!.currentOdometer,style: TextStyle(color: backgroundIconColor,fontSize: 11),),
                       )),
                   Expanded(
                       flex: 2,
@@ -1818,12 +1820,12 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(label.date,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(label!.date,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex: 2,
                       child: Padding(
                         padding: EdgeInsets.only(left:5),
-                        child: Text(label.product,style: TextStyle(color: backgroundIconColor,fontSize: 11),),
+                        child: Text(label!.product,style: TextStyle(color: backgroundIconColor,fontSize: 11),),
                       )),
                   Expanded(
                       flex: 1,
@@ -1895,7 +1897,7 @@ class _CreateDayTripState extends State<CreateDayTrip> with SingleTickerProvider
                 children: [
                   Expanded(
                       flex : 1,
-                      child: Text(labels.name,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
+                      child: Text(labels!.name,style: TextStyle(color: backgroundIconColor,fontSize: 11),)),
                   Expanded(
                       flex : 1,
                       child: Padding(
@@ -2069,7 +2071,7 @@ void showFuelAddDialog(int lineID,Consumption_ids? consumption) {
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text(labels.fuelConsumption,style: TextStyle(color: backgroundIconColor,fontSize: 18)),
+                      Text(labels!.fuelConsumption,style: TextStyle(color: backgroundIconColor,fontSize: 18)),
                       Row(
                         children: [
                           Expanded(
@@ -2114,7 +2116,7 @@ void showFuelAddDialog(int lineID,Consumption_ids? consumption) {
                             ),
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              hintText: ((labels.description)),
+                              hintText: ((labels!.description)),
                             ),
                             onChanged: (text) {},
                           ),
@@ -2285,7 +2287,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.expense,
+                                labels!.expense,
                               )),
                           value: controller.selectedExpenseType,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -2329,7 +2331,7 @@ class _ExpenseCreateState extends State<ExpenseCreate> {
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.daytripExpenseForm, image)),
+        child: appbar(context, labels!.daytripExpenseForm, image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),

@@ -9,6 +9,7 @@ import '../my_class/my_style.dart';
 import '../pages/drawer.dart';
 import '../pages/expense_tab.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -70,11 +71,11 @@ class _AdminPageState extends State<AdminPage> {
     }
     if (plan_trip != null) {
       admin
-          .add([FontAwesomeIcons.luggageCart, labels.plantipProduct, Routes.PLAN_TRIP_PAGE]);
+          .add([FontAwesomeIcons.luggageCart, labels!.plantipProduct, Routes.PLAN_TRIP_PAGE]);
     }
     if (plan_trip_waybill != null&&plan_trip_waybill==true) {
       admin
-          .add([FontAwesomeIcons.suitcaseRolling, labels.pantripWaybill, Routes.PLAN_TRIP_WAYBILL_PAGE]);
+          .add([FontAwesomeIcons.suitcaseRolling, labels!.pantripWaybill, Routes.PLAN_TRIP_WAYBILL_PAGE]);
     }
     if (day_trip != null) {
       admin.add(

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../controllers/leave_report_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LeaveTripReport extends StatelessWidget{
   final box = GetStorage();
@@ -33,14 +35,14 @@ class LeaveTripReport extends StatelessWidget{
                 children: [
                   Expanded(
                     flex: 3,
-                    child: Text(labels.employeeName,style: labelPrimaryHightlightTextStyle()),
+                    child: Text(labels!.employeeName,style: labelPrimaryHightlightTextStyle()),
                   ),
 
                   Expanded(
                     flex: 2,
                     child: Align(
                         alignment: Alignment.center,
-                        child: Text(labels.leaveType,style: labelPrimaryHightlightTextStyle(),)),
+                        child: Text(labels!.leaveType,style: labelPrimaryHightlightTextStyle(),)),
                   ),
 
                   Expanded(
@@ -181,7 +183,7 @@ class LeaveTripReport extends StatelessWidget{
     image = box.read('emp_image');
     return Scaffold(
       appBar: AppBar(
-        title: Text(labels.leaveReport,style: appbarTextStyle(),),
+        title: Text(labels!.leaveReport,style: appbarTextStyle(),),
         backgroundColor: backgroundIconColor,
       ),
       body: SingleChildScrollView(

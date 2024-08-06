@@ -1,8 +1,10 @@
 
 
 import 'package:flutter/material.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ExpenseCompleteReport extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class _ExpenseCompleteReportState extends State<ExpenseCompleteReport> {
                   children: [
                     Container(
                       child: Text(
-                        labels.reports,
+                        labels!.reports,
                         // "Reports",
                         style: maintitleStyle(),
                       ),
@@ -34,7 +36,7 @@ class _ExpenseCompleteReportState extends State<ExpenseCompleteReport> {
                       child: Row(
                         children: [
                           Text(
-                            labels.sortBy,
+                            labels!.sortBy,
                             // "Sort By",
                             style: maintitleStyle(),
                           ),

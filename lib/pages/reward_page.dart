@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../constants/globals.dart';
 import '../controllers/reward_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../pages/reward_details_page.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class RewardPage extends StatefulWidget {
   @override

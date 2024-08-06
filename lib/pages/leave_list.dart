@@ -8,10 +8,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../constants/globals.dart';
 import '../controllers/leave_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LeaveListPage extends StatefulWidget {
 

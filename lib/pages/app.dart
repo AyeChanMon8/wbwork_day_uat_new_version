@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../bindings/home_binding.dart';
@@ -14,24 +15,39 @@ import 'login_page.dart';
 
 class App extends StatelessWidget {
   final box = GetStorage();
+    Locale _locale = Locale('en');
+
 
   @override
   Widget build(BuildContext context) {
     // ignore: missing_required_param
     Get.put<AuthController>(AuthController());
-    var supportLocales = AppLocalizations.languages.keys.toList();
+    // var supportLocales = AppLocalizations.languages.keys.toList();
     return GetBuilder<AuthController>(
         builder: (controller) => Loading(
               child: GetMaterialApp(
                 enableLog: true,
-                locale: controller.getLocale,
+                // locale: controller.getLocale,
+                // locale: controller._locale, // Default locale
+
                 defaultTransition: Transition.fade,
                 localizationsDelegates: [
-                  const AppLocalizationsDelegate(), // <- Your custom delegate
+                  // const AppLocalizationsDelegate(), // <- Your custom delegate
+                  AppLocalizations.delegate,
+
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
-                supportedLocales: supportLocales,
+                // supportedLocales: supportLocales,
+                locale: _locale,
+                supportedLocales: [
+                  Locale('en', ''),
+                  Locale('my', ''),
+                ],
+                // supportedLocales: [
+                //   Locale('en', ''), // English
+                //   Locale('my', ''), // Spanish
+                // ],
                 debugShowCheckedModeBanner: false,
                 initialBinding: HomeBinding(),
                 initialRoute: '/',

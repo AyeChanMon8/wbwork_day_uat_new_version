@@ -8,11 +8,13 @@ import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import '../controllers/overtime_request_controller.dart';
 import '../controllers/overtime_response_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/employee_category.dart';
 import '../models/employee_id.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class OverTimeDeclinePage extends StatelessWidget {
   final OverTimeResponseListController controller = Get.find();
@@ -28,7 +30,7 @@ class OverTimeDeclinePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundIconColor,
         title: Text(
-          labels.decline,
+          labels!.decline,
           // ("over_time"),
           style: TextStyle(),
         ),
@@ -112,7 +114,7 @@ class OverTimeDeclinePage extends StatelessWidget {
                     AppUtils.showDialog('Warning!', 'Reason is require.');
                 },
                 child: Text(
-                  labels.decline,
+                  labels!.decline,
                   style: TextStyle(color: Colors.white),
                 ),
               )),

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../controllers/FleetController.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/fleet_insurance.dart';
 import '../models/fleet_model.dart';
 import '../models/fuel_log_model.dart';
@@ -20,6 +20,8 @@ import '../my_class/my_style.dart';
 import '../routes/app_pages.dart';
 import '../ui/components/web_container.dart';
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class FleetPage extends StatefulWidget {
   @override
@@ -42,7 +44,7 @@ class _FleetPageState extends State<FleetPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.fleet,image)),
+        child: appbar(context, labels!.fleet,image)),
       body: SingleChildScrollView(
         child:Obx(()=> controller.fleetModel.value.name !=null ? Card(
           elevation: 0,
@@ -439,7 +441,7 @@ class _FleetPageState extends State<FleetPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AutoSizeText(labels.name+' : ${maintenance_request_model.name}',style: datalistStyle(),),
+                        AutoSizeText(labels!.name+' : ${maintenance_request_model.name}',style: datalistStyle(),),
                         AutoSizeText(labels.maintenanceType+' : ${maintenance_request_model.maintenanceType??''}',style: datalistStyle(),),
                         AutoSizeText(labels.maintenanceTeam+' : ${maintenance_request_model.maintenanceTeamId!.name??''}',style: datalistStyle(),),
                        maintenance_request_model.startDate != null && maintenance_request_model.endDate != null ? AutoSizeText('${AppUtils.changeDateFormat(maintenance_request_model.startDate!)} - ${AppUtils.changeDateFormat(maintenance_request_model.endDate!)}',style: datalistStyle(),) : AutoSizeText('${AppUtils.formatter.format(DateTime.parse(maintenance_request_model.requestDate!))}',style: datalistStyle(),),
@@ -491,7 +493,7 @@ class _FleetPageState extends State<FleetPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             AutoSizeText(labels.sourceDoc,style: datalistStylenotBold(),),
+                             AutoSizeText(labels!.sourceDoc,style: datalistStylenotBold(),),
                               AutoSizeText('${fuelComsumptionModel.source_doc??''}',style: datalistStyle(),),
                           ],
                         ),
@@ -499,7 +501,7 @@ class _FleetPageState extends State<FleetPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             AutoSizeText(labels.consumptionLiter,style: datalistStylenotBold(),),
+                             AutoSizeText(labels!.consumptionLiter,style: datalistStylenotBold(),),
                             AutoSizeText('${fuelComsumptionModel.consumption_liter??''}',style: datalistStyle(),),
                           ],
                         ),
@@ -558,7 +560,7 @@ class _FleetPageState extends State<FleetPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             AutoSizeText(labels.sourceDoc,style: datalistStyle(),),
+                             AutoSizeText(labels!.sourceDoc,style: datalistStyle(),),
                               AutoSizeText('${tyredModel.source_doc??''}',style: datalistStylenotBold(),),
                           ],
                         ), 
@@ -575,7 +577,7 @@ class _FleetPageState extends State<FleetPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             AutoSizeText(labels.usedPoint,style: datalistStylenotBold(),),
+                             AutoSizeText(labels!.usedPoint,style: datalistStylenotBold(),),
                               AutoSizeText('${
                            tyredModel.used_points==null?'':NumberFormat('#,###').format(double.tryParse(tyredModel.used_points.toString()))}',style: datalistStyle(),),
                           ],
@@ -663,7 +665,7 @@ class _FleetPageState extends State<FleetPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Text(labels.fuelType),
+                child: Text(labels!.fuelType),
               ),
               Container(
                 child: Text(controller.fleetModel.value.fuelType??''),
@@ -692,7 +694,7 @@ class _FleetPageState extends State<FleetPage> {
             children: [
               Container(
                 child: Text(
-                  labels.immatriculationDate,
+                  labels!.immatriculationDate,
                 ),
               ),
               Container(

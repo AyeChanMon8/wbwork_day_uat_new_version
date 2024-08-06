@@ -5,10 +5,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/FleetController.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/fleet_model.dart';
 import '../my_class/my_app_bar.dart';
 import '../routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class FleetListPage extends StatelessWidget {
  final FleetController controller = Get.put(FleetController());
@@ -18,7 +20,7 @@ class FleetListPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context,labels.fleet, '')),
+        child: appbar(context,labels!.fleet, '')),
       body: Container(
         child: Obx(()=> ListView.separated(
             itemCount: controller.fleetList.length ,

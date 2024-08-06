@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import '../controllers/approval_controller.dart';
 import '../controllers/overtime_response_controller.dart';
 import '../controllers/overtime_response_list_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/employee_id.dart';
 import '../my_class/my_app_bar.dart';
 import '../routes/app_pages.dart';
@@ -14,6 +14,8 @@ import '../my_class/my_style.dart';
 import 'package:get/get.dart';
 
 import 'pre_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class OvertimeApprovalDetail extends StatelessWidget {
   ApprovalController controller =
@@ -38,7 +40,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
       }
     }
     return Scaffold(
-      appBar: PreferredSize(preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels.overtimeDetails,user_image)),
+      appBar: PreferredSize(preferredSize: const Size.fromHeight(8.0),child: appbar(context, labels!.overtimeDetails,user_image)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +69,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  labels.name,
+                  labels!.name,
                   // labels?.leaveType + " :",
 
                   style: datalistStyle(),
@@ -204,7 +206,7 @@ class OvertimeApprovalDetail extends StatelessWidget {
                     controller.approveOvertime(controller.otcList[index].id);
                   },
                   child: Text(
-                    labels.accept,
+                    labels!.accept,
                     style: TextStyle(color: Colors.white),
                   ),
                 )),

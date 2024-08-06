@@ -15,6 +15,8 @@ import '../models/plantrip_waybill.dart';
 import '../models/stock_location.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AddFuelWayBillPage extends StatelessWidget {
   //final DayTripExpenseController day_trip_controller = Get.find();
   DayTripPlanTripGeneralController day_trip_controller = Get.put(DayTripPlanTripGeneralController());

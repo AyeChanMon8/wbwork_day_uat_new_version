@@ -8,7 +8,9 @@ import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ApprovedRouteDetails extends StatefulWidget {
   @override
@@ -79,7 +81,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
           Container(
             // width: 80,
             child: Text(
-              labels.date,
+              labels!.date,
               style: subtitleStyle(),
             ),
           ),
@@ -182,7 +184,7 @@ class _ApprovedRouteDetailsState extends State<ApprovedRouteDetails> {
             children: [
               Container(
                 child: Text(
-                  labels.duration,
+                  labels!.duration,
                   // ("Duration : "),
                   style: datalistStyle(),
                 ),

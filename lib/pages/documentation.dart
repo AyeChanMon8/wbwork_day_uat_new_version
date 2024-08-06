@@ -19,7 +19,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
 import '../controllers/documentation_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/document.dart';
 import '../my_class/my_app_bar.dart';
 import '../my_class/my_style.dart';
@@ -27,6 +27,8 @@ import '../routes/app_pages.dart';
 import '../utils/app_utils.dart';
 
 import 'pdf_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class Documentation extends StatefulWidget {
   @override
@@ -47,7 +49,7 @@ class _DocumentationState extends State<Documentation> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(8.0),
-        child: appbar(context, labels.documents, image)),
+        child: appbar(context, labels!.documents, image)),
       body: Container(
         child: Obx(
               () => SizedBox(

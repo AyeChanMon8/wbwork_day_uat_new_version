@@ -6,6 +6,8 @@ import '../../localization.dart';
 import '../../my_class/my_style.dart';
 import '../../pages/out_of_pocket_page/approved_outofpocket_list.dart';
 import '../../pages/out_of_pocket_page/toapprove_outofpocket_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class OutOfPocketApprovalTabar extends StatefulWidget {
   @override
   _OutOfPocketApprovalTabarState createState() => _OutOfPocketApprovalTabarState();
@@ -20,7 +22,7 @@ class _OutOfPocketApprovalTabarState extends State<OutOfPocketApprovalTabar> {
       child: Scaffold(
           appBar: AppBar(
             shadowColor: Colors.white,
-              title: Text(labels.outOfPocket, style: appbarTextStyle()),
+              title: Text(labels!.outOfPocket, style: appbarTextStyle()),
               leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,

@@ -13,7 +13,9 @@ import '../controllers/notification_controller.dart';
 import '../my_class/my_app_bar.dart';
 import '../utils/app_utils.dart';
 
-import '../localization.dart';
+// import '../localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NotificationMessageList extends StatefulWidget {
   NotificationMessageList({Key? key}) : super(key: key);
 

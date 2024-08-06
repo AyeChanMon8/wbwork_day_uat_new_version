@@ -21,7 +21,7 @@ import '../constants/globals.dart';
 import '../controllers/busiess_travel_controller.dart';
 import '../controllers/expense_travel_list/expense_travel_list_controller.dart';
 import '../controllers/leave_request_controller.dart';
-import '../localization.dart';
+// import '../localization.dart';
 import '../models/fleet_model.dart';
 import '../models/leave_type.dart';
 import '../models/travel_expense/create/travel_line_model.dart';
@@ -37,6 +37,8 @@ import '../pages/out_of_pocket_create.dart';
 import 'dart:io' as Io;
 
 import '../utils/app_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BusinessTravelCreate extends StatefulWidget {
   @override
@@ -732,7 +734,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(8.0),
-          child: appbar(context, labels.travelExpense, image)),
+          child: appbar(context, labels!.travelExpense, image)),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -954,7 +956,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
                                 .toString()
                                 .isEmpty) {
                               AppUtils.showDialog(
-                                  labels.warning, labels.chooseDate);
+                                  labels!.warning, labels.chooseDate);
                             } else {
                               controller.addTravelLine(image_64);
                               setState(() {
@@ -1060,7 +1062,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.date),
+                (labels!.date),
                 style: subtitleStyle(),
               ),
             ),
@@ -1070,7 +1072,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
             child: Container(
               // width: 80,
               child: Text(
-                (labels.expenseTitle),
+                (labels!.expenseTitle),
                 style: subtitleStyle(),
               ),
             ),
@@ -1235,7 +1237,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
                           hint: Container(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
-                                labels.vehicle,
+                                labels!.vehicle,
                               )),
                           value: controller.selectedVehicle,
                           icon: Icon(Icons.keyboard_arrow_down),
@@ -1424,7 +1426,7 @@ class _BusinessTravelCreateState extends State<BusinessTravelCreate> {
                 Navigator.of(context).pop();
               },
               // textColor: Theme.of(context).primaryColor,
-              child: Text((labels.update),
+              child: Text((labels!.update),
                   style: TextStyle(fontSize: 20, color: Colors.white))),
         ),
       ],
